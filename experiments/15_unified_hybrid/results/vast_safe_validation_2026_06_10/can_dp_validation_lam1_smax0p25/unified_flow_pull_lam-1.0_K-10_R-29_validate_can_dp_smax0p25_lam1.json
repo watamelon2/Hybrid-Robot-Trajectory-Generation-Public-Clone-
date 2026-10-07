@@ -1,0 +1,3136 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "prior_checkpoint": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/08_flow_matching_prior/results/v_theta_dp_tobs2_h16_v3b_ep0199.pt",
+  "lambda_prior": 1.0,
+  "warm_start": true,
+  "mpc_replans": 29,
+  "mpc_chunk_steps": 8,
+  "deterministic_prior_warmstart": true,
+  "n_demos": 0,
+  "n_rollouts": 0,
+  "n_test_rollouts": 1,
+  "test_start_seed": 910000,
+  "train_n": 0,
+  "train_n_succ": 0,
+  "train_succ_rate": 0.0,
+  "test_n": 1,
+  "test_n_succ": 0,
+  "test_succ_rate": 0.0,
+  "n_total": 1,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "params": {
+    "H": 16,
+    "M": 16,
+    "K": 10,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.25,
+    "sigma_min": 0.05,
+    "lambda_schedule": "constant",
+    "score_mode": "pull",
+    "warmstart_noise_sigma": 0.0,
+    "retrieval_beta": 1.0,
+    "action_history_len": 0,
+    "contrastive_encoder_path": null,
+    "task": "can",
+    "prior_bank_size": 0,
+    "prior_bank_dataset": null,
+    "prior_bank_task": null,
+    "goal_perturbation_xyz": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mass_scale": 1.0,
+    "friction_scale": 1.0,
+    "combine_mode": "score",
+    "temper_p": 0.0,
+    "sigma_demo": 0.25,
+    "demo_sigma_mode": "const",
+    "demo_sigma_adapt_beta": 1.0,
+    "sigma_schedule": "decay",
+    "log_gate_diagnostic": false,
+    "save_step_trace": false,
+    "raw_sparse_reward": false,
+    "demo_phase_reward": false,
+    "demo_phase_scale": 10.0
+  },
+  "seed": 0,
+  "wall_s": 744.3954588479828,
+  "per_rollout": [
+    {
+      "demo": "test_seed_910000",
+      "rollout_idx": 0,
+      "rollout_kind": "test",
+      "init_seed": 910000,
+      "lambda_prior": 1.0,
+      "final_reward": 2.6500800531285766,
+      "success": false,
+      "plan_elapsed_s": 744.3863430849742,
+      "total_elapsed_s": 744.3903596540913,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.012570499371466827,
+          "plan_elapsed_s": 26.946726453956217,
+          "init_best_cost": -0.1357947902227701,
+          "final_best_cost": -0.11796634124885878,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.1357947902227701,
+              "mean_cost": -0.0926564297630301,
+              "ess": 15.972477962825169,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.13774650645503797,
+              "mean_cost": -0.09861985582493146,
+              "ess": 15.976994395522997,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.1226662271694171,
+              "mean_cost": -0.0878363613532478,
+              "ess": 15.974261106406187,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.13528728508050056,
+              "mean_cost": -0.098861052836243,
+              "ess": 15.982306638295524,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.13306092459901778,
+              "mean_cost": -0.10893196744978008,
+              "ess": 15.987880672842218,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.1357540034506358,
+              "mean_cost": -0.1009360515183049,
+              "ess": 15.983530521996805,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.13650308244524054,
+              "mean_cost": -0.1014286519388604,
+              "ess": 15.98655680319192,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.11870909140508626,
+              "mean_cost": -0.10383686090897362,
+              "ess": 15.996355690403766,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.11253324727428357,
+              "mean_cost": -0.09980192233593542,
+              "ess": 15.996753138667966,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.11796634124885878,
+              "mean_cost": -0.10223197037609617,
+              "ess": 15.994975577685592,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.046263198593061744,
+          "plan_elapsed_s": 22.89304457511753,
+          "init_best_cost": -0.22062287352816295,
+          "final_best_cost": -0.21150688114088295,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.22062287352816295,
+              "mean_cost": -0.16405430531580512,
+              "ess": 15.934421765236934,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.2712075828242243,
+              "mean_cost": -0.17677070851049234,
+              "ess": 15.897243833471059,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.28193638984927394,
+              "mean_cost": -0.18393787475796647,
+              "ess": 15.841721399914897,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.21309417706165162,
+              "mean_cost": -0.18523672571010083,
+              "ess": 15.972142431058728,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.23431371387648936,
+              "mean_cost": -0.18122424244175345,
+              "ess": 15.958912074255538,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.2205601768336909,
+              "mean_cost": -0.19057812061266227,
+              "ess": 15.981566204998593,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.21518745101165138,
+              "mean_cost": -0.18537818045237298,
+              "ess": 15.987761618353755,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.2110393327219495,
+              "mean_cost": -0.1947308997099189,
+              "ess": 15.991877694619316,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.2112710629096081,
+              "mean_cost": -0.194218945976938,
+              "ess": 15.99332916560928,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.21150688114088295,
+              "mean_cost": -0.19819762051353573,
+              "ess": 15.995643364191784,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.12589355969522786,
+          "plan_elapsed_s": 23.051798197906464,
+          "init_best_cost": -0.5051851441618178,
+          "final_best_cost": -0.4712418033468927,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.5051851441618178,
+              "mean_cost": -0.40777017568290364,
+              "ess": 15.748254408407119,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.5426696429713194,
+              "mean_cost": -0.38360746996365813,
+              "ess": 15.69747006330721,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.5282449168591261,
+              "mean_cost": -0.3969896866152271,
+              "ess": 15.726156349294952,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.5251894947335805,
+              "mean_cost": -0.40125051867952594,
+              "ess": 15.760541259705809,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.5174509565123573,
+              "mean_cost": -0.4153092163768643,
+              "ess": 15.796912235044635,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.4899177378326367,
+              "mean_cost": -0.43317137496302327,
+              "ess": 15.903452548290739,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.535432773291858,
+              "mean_cost": -0.4528734525369634,
+              "ess": 15.921279127945963,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.4714146595445469,
+              "mean_cost": -0.43574609153553273,
+              "ess": 15.972405056592088,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.4850865724543145,
+              "mean_cost": -0.4342824399807399,
+              "ess": 15.95990567508679,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.4712418033468927,
+              "mean_cost": -0.4318227472756406,
+              "ess": 15.96839549222427,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.2670218397504536,
+          "plan_elapsed_s": 23.38993448903784,
+          "init_best_cost": -0.8520626691006168,
+          "final_best_cost": -0.8459039218568349,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.8520626691006168,
+              "mean_cost": -0.6843737069326736,
+              "ess": 15.411100324753457,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.9474543880869597,
+              "mean_cost": -0.6399108631886367,
+              "ess": 14.93732336714431,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.7724492476703545,
+              "mean_cost": -0.6427953774107539,
+              "ess": 15.687519665407956,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.8085072619311914,
+              "mean_cost": -0.6776865721130247,
+              "ess": 15.5345831960354,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.8033818218815965,
+              "mean_cost": -0.6770326101355569,
+              "ess": 15.759783927443236,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.7665634284440672,
+              "mean_cost": -0.6812889734242173,
+              "ess": 15.766664434248602,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.8020695425223958,
+              "mean_cost": -0.6935420473679168,
+              "ess": 15.847425842072624,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.7933301111491694,
+              "mean_cost": -0.7044251185440311,
+              "ess": 15.912590107190308,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.7964718798160714,
+              "mean_cost": -0.7256954827147621,
+              "ess": 15.923979805274334,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.8459039218568349,
+              "mean_cost": -0.7214348387692398,
+              "ess": 15.863248629809371,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.3671596084599449,
+          "plan_elapsed_s": 24.378364400938153,
+          "init_best_cost": -1.046432793760082,
+          "final_best_cost": -0.9565165630209361,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.046432793760082,
+              "mean_cost": -0.7967274292797485,
+              "ess": 15.307878209559865,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.8761094880762851,
+              "mean_cost": -0.7494291141168228,
+              "ess": 15.613227433456325,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.9668694173836399,
+              "mean_cost": -0.792523877699434,
+              "ess": 15.501027110915429,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -1.0478909796362073,
+              "mean_cost": -0.8191020833768178,
+              "ess": 15.340179863290093,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -1.0003693496238475,
+              "mean_cost": -0.7941339874409135,
+              "ess": 15.488669626913499,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.9602086177801548,
+              "mean_cost": -0.8200228786373175,
+              "ess": 15.61030783759635,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.8753097579689113,
+              "mean_cost": -0.8082923888407403,
+              "ess": 15.923981938703426,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.906590895455767,
+              "mean_cost": -0.807885986115578,
+              "ess": 15.818099240551765,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.8921353929663386,
+              "mean_cost": -0.7851136102071836,
+              "ess": 15.826277779068617,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.9565165630209361,
+              "mean_cost": -0.7836685349919384,
+              "ess": 15.763758771470247,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 5,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.32866401200582435,
+          "plan_elapsed_s": 24.092106375144795,
+          "init_best_cost": -0.5438688698986454,
+          "final_best_cost": -0.455103762933588,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.5438688698986454,
+              "mean_cost": -0.40364447608176307,
+              "ess": 15.717599402668704,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.5429535462333923,
+              "mean_cost": -0.4065362418183011,
+              "ess": 15.766901496762928,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.5161440908089944,
+              "mean_cost": -0.4264188776590192,
+              "ess": 15.861158372428546,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.49379732432286727,
+              "mean_cost": -0.39250883454810886,
+              "ess": 15.819568711558086,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.47293255995108374,
+              "mean_cost": -0.38718943571229597,
+              "ess": 15.867492822937344,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.4962276450124492,
+              "mean_cost": -0.389991534754412,
+              "ess": 15.861416596132022,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.4633030779511488,
+              "mean_cost": -0.400252073185432,
+              "ess": 15.950010989546291,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.4499922588007383,
+              "mean_cost": -0.39731892419847015,
+              "ess": 15.963744395851982,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.4304434922659428,
+              "mean_cost": -0.40304430932128277,
+              "ess": 15.964723204514803,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.455103762933588,
+              "mean_cost": -0.3902100377943355,
+              "ess": 15.954374432566865,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 6,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.0692777400177437,
+          "plan_elapsed_s": 24.238841455895454,
+          "init_best_cost": -0.10468666464279297,
+          "final_best_cost": -0.08226855467888419,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.10468666464279297,
+              "mean_cost": -0.07980189708431965,
+              "ess": 15.994297267687058,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.08926610389229099,
+              "mean_cost": -0.07815153853183507,
+              "ess": 15.997184138813001,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0977201746861495,
+              "mean_cost": -0.07891946725090171,
+              "ess": 15.994634689683389,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.09405051344726036,
+              "mean_cost": -0.0777474789047895,
+              "ess": 15.995679386778402,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.08821848472372178,
+              "mean_cost": -0.07539229540356882,
+              "ess": 15.997351335782556,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.08902612672301267,
+              "mean_cost": -0.07656472667971682,
+              "ess": 15.997604511662548,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.08734823793165479,
+              "mean_cost": -0.07647320086870565,
+              "ess": 15.998091898932893,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.08329914373836217,
+              "mean_cost": -0.07496006666089897,
+              "ess": 15.998459375311162,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.08209326666977358,
+              "mean_cost": -0.07569350253611538,
+              "ess": 15.999104761451024,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.08226855467888419,
+              "mean_cost": -0.07555602479750913,
+              "ess": 15.999033628185877,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 7,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.005060508250039952,
+          "plan_elapsed_s": 24.08647687290795,
+          "init_best_cost": -0.007168615259192936,
+          "final_best_cost": -0.006778354057859324,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.007168615259192936,
+              "mean_cost": -0.0063439150226631096,
+              "ess": 15.999973600869412,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0072612446156866475,
+              "mean_cost": -0.006064544551151764,
+              "ess": 15.999966733971696,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.00765128151142994,
+              "mean_cost": -0.006278743688731854,
+              "ess": 15.999965262161258,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0069996368757244696,
+              "mean_cost": -0.006214489074628796,
+              "ess": 15.999980048805883,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.006870203006848564,
+              "mean_cost": -0.006072387383057058,
+              "ess": 15.999992843237344,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.00671870441551523,
+              "mean_cost": -0.006080239967448014,
+              "ess": 15.99998469454517,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.006762181592903593,
+              "mean_cost": -0.006185008336994164,
+              "ess": 15.999993980361191,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.006678981127354335,
+              "mean_cost": -0.006178083628910799,
+              "ess": 15.999995118824085,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0065750292403195625,
+              "mean_cost": -0.0061466210756674945,
+              "ess": 15.999996091612447,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.006778354057859324,
+              "mean_cost": -0.006185697347105374,
+              "ess": 15.99999261558433,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 8,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.0010969607081419475,
+          "plan_elapsed_s": 24.072892476106063,
+          "init_best_cost": -0.0015747037215830375,
+          "final_best_cost": -0.0013941884406659774,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0015747037215830375,
+              "mean_cost": -0.0013597327401943904,
+              "ess": 15.99999943340657,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0017012354502614407,
+              "mean_cost": -0.001315851791323871,
+              "ess": 15.999998042217916,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0016982285101690645,
+              "mean_cost": -0.0013276946358950859,
+              "ess": 15.999997520026188,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.001530816163697002,
+              "mean_cost": -0.0013263972757730348,
+              "ess": 15.999998987753592,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0016629321756822858,
+              "mean_cost": -0.0013374977583671067,
+              "ess": 15.999998919863868,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0014241823715489654,
+              "mean_cost": -0.001264897425057253,
+              "ess": 15.99999919551299,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.001415245887429084,
+              "mean_cost": -0.0012789728490063546,
+              "ess": 15.99999963358031,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0013697572191513905,
+              "mean_cost": -0.0012510203261032415,
+              "ess": 15.999999732188732,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0014551746184778727,
+              "mean_cost": -0.0012707424407346448,
+              "ess": 15.999999535135977,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0013941884406659774,
+              "mean_cost": -0.0012556262716304162,
+              "ess": 15.999999783177692,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 9,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.0004308590341313923,
+          "plan_elapsed_s": 23.993080464890227,
+          "init_best_cost": -0.0018538975846253305,
+          "final_best_cost": -0.0015649730859897072,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0018538975846253305,
+              "mean_cost": -0.0013282278520605714,
+              "ess": 15.999994330697506,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0022716163808271907,
+              "mean_cost": -0.00142531739141704,
+              "ess": 15.999991074109497,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0018252322008104117,
+              "mean_cost": -0.0015175047792518508,
+              "ess": 15.999997579308754,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0018710917310005627,
+              "mean_cost": -0.0014867878247556534,
+              "ess": 15.999996976280155,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0017847961353850143,
+              "mean_cost": -0.0014383706549103191,
+              "ess": 15.999997283908819,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0017104659250485878,
+              "mean_cost": -0.0014233587734022628,
+              "ess": 15.999998956475995,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.001761954642475783,
+              "mean_cost": -0.001432757545328369,
+              "ess": 15.999998834550546,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0015156812064132997,
+              "mean_cost": -0.001416584648065148,
+              "ess": 15.999999623501845,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0016201031293127555,
+              "mean_cost": -0.0013922173656640766,
+              "ess": 15.99999924477018,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0015649730859897072,
+              "mean_cost": -0.001421140436203347,
+              "ess": 15.999999379963477,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 10,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.0013076427790470247,
+          "plan_elapsed_s": 23.998796125873923,
+          "init_best_cost": -0.006560387403714063,
+          "final_best_cost": -0.006318818660259518,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.006560387403714063,
+              "mean_cost": -0.004756729963256148,
+              "ess": 15.999962200958127,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.00781157805870234,
+              "mean_cost": -0.005550199217268249,
+              "ess": 15.999933882111552,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.007803100149698484,
+              "mean_cost": -0.005354220287477502,
+              "ess": 15.999957311918024,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.007003506672672621,
+              "mean_cost": -0.005477982872269852,
+              "ess": 15.999958438955934,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.007121246810059801,
+              "mean_cost": -0.005697174392800014,
+              "ess": 15.999949708426236,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.006707046547274754,
+              "mean_cost": -0.00549158296167237,
+              "ess": 15.999972659133617,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.006711092517077078,
+              "mean_cost": -0.005347996687904805,
+              "ess": 15.99996611731986,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.006173755260003012,
+              "mean_cost": -0.005276577172413342,
+              "ess": 15.999985613449542,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.006524132747654187,
+              "mean_cost": -0.005198820643700772,
+              "ess": 15.9999831297168,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.006318818660259518,
+              "mean_cost": -0.005411235455810908,
+              "ess": 15.999983608788723,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 11,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.005716784826897104,
+          "plan_elapsed_s": 23.9650719629135,
+          "init_best_cost": -0.03601672572319407,
+          "final_best_cost": -0.02798909772130658,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.03601672572319407,
+              "mean_cost": -0.020753499424575217,
+              "ess": 15.997225326633933,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.03334078317466785,
+              "mean_cost": -0.02149977542173626,
+              "ess": 15.998312277753362,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.034208315511565425,
+              "mean_cost": -0.021127964274248325,
+              "ess": 15.997736829957011,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.03236324082906442,
+              "mean_cost": -0.02175240938371619,
+              "ess": 15.999126350228238,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.03022726616464364,
+              "mean_cost": -0.022046928380629646,
+              "ess": 15.999346274015346,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.033738599106371954,
+              "mean_cost": -0.022776456141225178,
+              "ess": 15.99910265467417,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.029021775022923878,
+              "mean_cost": -0.02207384388524648,
+              "ess": 15.999368765187103,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.029138029907443755,
+              "mean_cost": -0.023365743648738387,
+              "ess": 15.999488480472664,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.02951903292937883,
+              "mean_cost": -0.022919194070927483,
+              "ess": 15.99930748911498,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.02798909772130658,
+              "mean_cost": -0.02349323186240234,
+              "ess": 15.99958514953366,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 12,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.016369145721063783,
+          "plan_elapsed_s": 23.954009876120836,
+          "init_best_cost": -0.08566372972765408,
+          "final_best_cost": -0.060816738841202575,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.08566372972765408,
+              "mean_cost": -0.0542045159710956,
+              "ess": 15.988445787282641,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.09575002474477831,
+              "mean_cost": -0.05497169914367292,
+              "ess": 15.985272077691763,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.09794948340415639,
+              "mean_cost": -0.05624067365732936,
+              "ess": 15.981505157172718,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.07718056402655642,
+              "mean_cost": -0.0554964012945786,
+              "ess": 15.993194453521648,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.07088124461423281,
+              "mean_cost": -0.05428696989826709,
+              "ess": 15.995467204593023,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.07623550950047167,
+              "mean_cost": -0.05620588371437174,
+              "ess": 15.994823935103756,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.07755276436584989,
+              "mean_cost": -0.058308582068229364,
+              "ess": 15.995845623123701,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.06737733033960858,
+              "mean_cost": -0.0560256038800806,
+              "ess": 15.998336897950615,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.05938462128719137,
+              "mean_cost": -0.05545768679426329,
+              "ess": 15.999483165844536,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.060816738841202575,
+              "mean_cost": -0.05323101207924543,
+              "ess": 15.998168600974838,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 13,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.04103826437216563,
+          "plan_elapsed_s": 24.07932571019046,
+          "init_best_cost": -0.20913653098797247,
+          "final_best_cost": -0.18652026773009583,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.20913653098797247,
+              "mean_cost": -0.15313079978451863,
+              "ess": 15.906633544686246,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.28608344044391043,
+              "mean_cost": -0.1694656797687426,
+              "ess": 15.834847117735062,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.2188928323867536,
+              "mean_cost": -0.15555723407094152,
+              "ess": 15.928754650966694,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.19788128004775368,
+              "mean_cost": -0.14583462079700477,
+              "ess": 15.943662336984367,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.20535453986720467,
+              "mean_cost": -0.1495361508660102,
+              "ess": 15.956499481263737,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.18138151674164765,
+              "mean_cost": -0.15210155991701102,
+              "ess": 15.973928043667717,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.20639766532249243,
+              "mean_cost": -0.16522665101982686,
+              "ess": 15.980247868075436,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.1919712001637545,
+              "mean_cost": -0.1621476566535383,
+              "ess": 15.981566449852329,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.1814468100942156,
+              "mean_cost": -0.16095948273016142,
+              "ess": 15.989718598525137,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.18652026773009583,
+              "mean_cost": -0.16275776181968846,
+              "ess": 15.988196876321304,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 14,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.08885774141309054,
+          "plan_elapsed_s": 24.02225821116008,
+          "init_best_cost": -0.33423493884637456,
+          "final_best_cost": -0.31620190461374964,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.33423493884637456,
+              "mean_cost": -0.2661580690300514,
+              "ess": 15.888617560498643,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.32494404996156073,
+              "mean_cost": -0.2639318226789877,
+              "ess": 15.918988358517506,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.3380931654338409,
+              "mean_cost": -0.26177110813410975,
+              "ess": 15.875703854073214,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.34571921849974674,
+              "mean_cost": -0.25761658754680844,
+              "ess": 15.871701814600193,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.3047672088849886,
+              "mean_cost": -0.2505301506290962,
+              "ess": 15.960337551953494,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.31783386065759933,
+              "mean_cost": -0.2707288326415133,
+              "ess": 15.951692356693542,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.3095227922924769,
+              "mean_cost": -0.2691462551313814,
+              "ess": 15.971540757208913,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.29645947979457266,
+              "mean_cost": -0.2703097252183314,
+              "ess": 15.990319980997823,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.30102054190612776,
+              "mean_cost": -0.26820341179145507,
+              "ess": 15.979641860759696,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.31620190461374964,
+              "mean_cost": -0.27429756031714636,
+              "ess": 15.981834545322581,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 15,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.14347507991456498,
+          "plan_elapsed_s": 24.051985138095915,
+          "init_best_cost": -0.44862658661097904,
+          "final_best_cost": -0.37677811809269723,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.44862658661097904,
+              "mean_cost": -0.3223920582105653,
+              "ess": 15.804236086845677,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.43919612755965537,
+              "mean_cost": -0.3276425282859354,
+              "ess": 15.830186182807301,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.4239810908759655,
+              "mean_cost": -0.3344191848038101,
+              "ess": 15.891237014295132,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.4129622886309196,
+              "mean_cost": -0.31993025165390737,
+              "ess": 15.885028062741908,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.3828944396057176,
+              "mean_cost": -0.32438877217007767,
+              "ess": 15.894114911297846,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.37490000764578973,
+              "mean_cost": -0.32308961896120547,
+              "ess": 15.943721998543577,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.39984932871229967,
+              "mean_cost": -0.34433510901493103,
+              "ess": 15.965507316813737,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.36459526424248306,
+              "mean_cost": -0.33973961544246367,
+              "ess": 15.985686833796528,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.36754856313181233,
+              "mean_cost": -0.3474706919751477,
+              "ess": 15.99041751407869,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.37677811809269723,
+              "mean_cost": -0.34016662397970443,
+              "ess": 15.983641035876769,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 16,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.17153862711237375,
+          "plan_elapsed_s": 24.08947516302578,
+          "init_best_cost": -0.515612688823111,
+          "final_best_cost": -0.4196741067556524,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.515612688823111,
+              "mean_cost": -0.36913701380300323,
+              "ess": 15.79748702509696,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.524494476946276,
+              "mean_cost": -0.40169067789383606,
+              "ess": 15.66595402466539,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.5093795346334199,
+              "mean_cost": -0.38663855388183294,
+              "ess": 15.788040090456194,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.4931927730963453,
+              "mean_cost": -0.39027513284365856,
+              "ess": 15.83855156034675,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.5034370501582456,
+              "mean_cost": -0.3999289342720525,
+              "ess": 15.833878013568984,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.4324710912129237,
+              "mean_cost": -0.3900304353691748,
+              "ess": 15.956700863689326,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.4490717380280168,
+              "mean_cost": -0.39263352050617506,
+              "ess": 15.950009560694076,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.4402066474840236,
+              "mean_cost": -0.387322508152925,
+              "ess": 15.963642933898857,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.41237633657918826,
+              "mean_cost": -0.394380638971083,
+              "ess": 15.990775993791758,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.4196741067556524,
+              "mean_cost": -0.3966369614710729,
+              "ess": 15.987655747800778,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 17,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.18606187189351314,
+          "plan_elapsed_s": 24.122711861971766,
+          "init_best_cost": -0.5187188625662433,
+          "final_best_cost": -0.4739239821253998,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.5187188625662433,
+              "mean_cost": -0.4000252079143331,
+              "ess": 15.832375276882704,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.5096577369953046,
+              "mean_cost": -0.4011903441672869,
+              "ess": 15.816911043966869,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.5876598087417881,
+              "mean_cost": -0.42058236576834807,
+              "ess": 15.55955516311315,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.5501592508001695,
+              "mean_cost": -0.41138929767292454,
+              "ess": 15.80766255484861,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.4841757163370341,
+              "mean_cost": -0.40371079275694804,
+              "ess": 15.90993013519801,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.5181186567225197,
+              "mean_cost": -0.43886750786648643,
+              "ess": 15.909565857987625,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.47617130117294515,
+              "mean_cost": -0.4208780202533874,
+              "ess": 15.942738432996599,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.449859059310085,
+              "mean_cost": -0.4252613363510806,
+              "ess": 15.990449108409283,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.4607328176650142,
+              "mean_cost": -0.4327434515388578,
+              "ess": 15.984364130408087,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.4739239821253998,
+              "mean_cost": -0.4316312100330356,
+              "ess": 15.979002015139084,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 18,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.19854738535577426,
+          "plan_elapsed_s": 24.145351123064756,
+          "init_best_cost": -0.5426094399844362,
+          "final_best_cost": -0.4819479323531948,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.5426094399844362,
+              "mean_cost": -0.4157072854996521,
+              "ess": 15.74390994345063,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.5391937297400136,
+              "mean_cost": -0.4200042625058298,
+              "ess": 15.81650637443429,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.5187386172697885,
+              "mean_cost": -0.41422450216588647,
+              "ess": 15.726336229094063,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.49566341309010736,
+              "mean_cost": -0.40346261590866134,
+              "ess": 15.826831732391987,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.49538411549434214,
+              "mean_cost": -0.40898151064982946,
+              "ess": 15.853073796270085,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.47524273769140607,
+              "mean_cost": -0.4301925083531202,
+              "ess": 15.947242362687144,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.4843993167037955,
+              "mean_cost": -0.4316008325261327,
+              "ess": 15.962702542942068,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.4679486528717456,
+              "mean_cost": -0.43337286723119717,
+              "ess": 15.98226133975877,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.46662945676743534,
+              "mean_cost": -0.44293959453813503,
+              "ess": 15.988287236689825,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.4819479323531948,
+              "mean_cost": -0.44793330427936856,
+              "ess": 15.9644126889454,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 19,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.16127519001956714,
+          "plan_elapsed_s": 24.246951051987708,
+          "init_best_cost": -0.5084593662380228,
+          "final_best_cost": -0.43500728539438194,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.5084593662380228,
+              "mean_cost": -0.3858113318909151,
+              "ess": 15.788463366444507,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.4500687031902736,
+              "mean_cost": -0.3423029120747667,
+              "ess": 15.837727043024358,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.44203990223454825,
+              "mean_cost": -0.3648401638297174,
+              "ess": 15.86770743653286,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.4685751835062289,
+              "mean_cost": -0.3781970340817105,
+              "ess": 15.896231964833689,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.4567239923181048,
+              "mean_cost": -0.37970950357645444,
+              "ess": 15.882622672556792,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.4357126951890812,
+              "mean_cost": -0.36460345276538886,
+              "ess": 15.938486380034108,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.41784884582349063,
+              "mean_cost": -0.3763892963701343,
+              "ess": 15.968090699169801,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.4076110162257194,
+              "mean_cost": -0.3801406727636866,
+              "ess": 15.978358762158303,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.39992428494064314,
+              "mean_cost": -0.37903659888957736,
+              "ess": 15.980609804635272,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.43500728539438194,
+              "mean_cost": -0.3849658106526701,
+              "ess": 15.97564989682893,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 20,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.12142807683656114,
+          "plan_elapsed_s": 24.32955110887997,
+          "init_best_cost": -0.3496152169473387,
+          "final_best_cost": -0.32093624976350293,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.3496152169473387,
+              "mean_cost": -0.27059342842105627,
+              "ess": 15.874548320767383,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.37085920692545205,
+              "mean_cost": -0.28823820865622685,
+              "ess": 15.901538184657719,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.35593377068827864,
+              "mean_cost": -0.28377694234252193,
+              "ess": 15.817765056959935,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.37166210289436935,
+              "mean_cost": -0.2896943257599739,
+              "ess": 15.846074565935618,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.35373776218076647,
+              "mean_cost": -0.2749128445550645,
+              "ess": 15.92957199958881,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.3203330404716455,
+              "mean_cost": -0.2811315333591769,
+              "ess": 15.960790415687839,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.30435111454331576,
+              "mean_cost": -0.2788697168479458,
+              "ess": 15.972365369261594,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.3386779157048471,
+              "mean_cost": -0.28568211751908534,
+              "ess": 15.972415928324565,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.3226369071404753,
+              "mean_cost": -0.28443482919853813,
+              "ess": 15.981966913424687,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.32093624976350293,
+              "mean_cost": -0.28535642895023106,
+              "ess": 15.982741804318175,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 21,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.07252294812897817,
+          "plan_elapsed_s": 24.40226633590646,
+          "init_best_cost": -0.12748624199432043,
+          "final_best_cost": -0.10808519026713681,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.12748624199432043,
+              "mean_cost": -0.10096085176716688,
+              "ess": 15.986690575331552,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.12111498253806313,
+              "mean_cost": -0.09397226636218256,
+              "ess": 15.98834135397016,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.1252401968036394,
+              "mean_cost": -0.09738072565103958,
+              "ess": 15.981219056999285,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.1355717795020197,
+              "mean_cost": -0.09598971240064261,
+              "ess": 15.981255457503604,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.1174414314990258,
+              "mean_cost": -0.09604718483874565,
+              "ess": 15.991266212172839,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.11240538090610155,
+              "mean_cost": -0.0980852735173452,
+              "ess": 15.996436309585768,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.1088551695573681,
+              "mean_cost": -0.09662299327272389,
+              "ess": 15.996356095892567,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.10776506231240172,
+              "mean_cost": -0.09781481920034141,
+              "ess": 15.997901782010603,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.10289330700739928,
+              "mean_cost": -0.09511181487859838,
+              "ess": 15.999039822008202,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.10808519026713681,
+              "mean_cost": -0.09876089637430933,
+              "ess": 15.99815222493326,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 22,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.009610784905546376,
+          "plan_elapsed_s": 24.39508389797993,
+          "init_best_cost": -0.01465069104419361,
+          "final_best_cost": -0.011914827675202102,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.01465069104419361,
+              "mean_cost": -0.011408872096334947,
+              "ess": 15.999909877860945,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.014514649731073337,
+              "mean_cost": -0.012016888066292893,
+              "ess": 15.999911791925951,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.015678829291063342,
+              "mean_cost": -0.011863469062140603,
+              "ess": 15.999852646234064,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.013709428941206091,
+              "mean_cost": -0.012019281632397398,
+              "ess": 15.999955022929,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0139930340708986,
+              "mean_cost": -0.011602415137682166,
+              "ess": 15.999954842414382,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.014637161757255778,
+              "mean_cost": -0.01170880191376653,
+              "ess": 15.999871948122651,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.012773542734796419,
+              "mean_cost": -0.011566916456540566,
+              "ess": 15.99997786343456,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.012901330384636258,
+              "mean_cost": -0.011731154237027848,
+              "ess": 15.999972257123233,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.012705552427653201,
+              "mean_cost": -0.011580413751134545,
+              "ess": 15.999986961296841,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.011914827675202102,
+              "mean_cost": -0.011314150775688822,
+              "ess": 15.99998852583008,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 23,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.0019809046822921285,
+          "plan_elapsed_s": 24.20363810285926,
+          "init_best_cost": -0.00296486861200973,
+          "final_best_cost": -0.0025042291974325505,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.00296486861200973,
+              "mean_cost": -0.0024542308583384576,
+              "ess": 15.999995428976485,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.002816761197197659,
+              "mean_cost": -0.0023519019557251162,
+              "ess": 15.999996293024482,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.002905629128516185,
+              "mean_cost": -0.0023628970349114558,
+              "ess": 15.999994193886753,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0031397459745294066,
+              "mean_cost": -0.0023775116230376056,
+              "ess": 15.999993999054942,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.002836870564068839,
+              "mean_cost": -0.0024785876236452327,
+              "ess": 15.999996198451736,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0027732159064076667,
+              "mean_cost": -0.0023866709516116975,
+              "ess": 15.999997871569795,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.002648489820199362,
+              "mean_cost": -0.0023521893425878246,
+              "ess": 15.999998071723903,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.002692600953230629,
+              "mean_cost": -0.002369219332114908,
+              "ess": 15.999998546590238,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0026833613851016355,
+              "mean_cost": -0.0024107568496160316,
+              "ess": 15.99999896779646,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0025042291974325505,
+              "mean_cost": -0.0024011666462541376,
+              "ess": 15.9999995467221,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 24,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.0006233890133848118,
+          "plan_elapsed_s": 24.105548654915765,
+          "init_best_cost": -0.006114164722617622,
+          "final_best_cost": -0.0054061584050024035,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.006114164722617622,
+              "mean_cost": -0.004681242374289816,
+              "ess": 15.999973513234377,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.007062911524453619,
+              "mean_cost": -0.004985228707936214,
+              "ess": 15.999933412504632,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.006401097042850579,
+              "mean_cost": -0.005067253233869333,
+              "ess": 15.999975594603752,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.006981769147531835,
+              "mean_cost": -0.004759768103401761,
+              "ess": 15.999951739112293,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0062567451715955565,
+              "mean_cost": -0.004929595805404963,
+              "ess": 15.999979018306464,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.005499541191075541,
+              "mean_cost": -0.004721350768205518,
+              "ess": 15.999988304561116,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.00549152697258689,
+              "mean_cost": -0.004818126958223005,
+              "ess": 15.99999095864996,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.005499136313019448,
+              "mean_cost": -0.00482950328118449,
+              "ess": 15.999988672182342,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.005510613767798056,
+              "mean_cost": -0.004837745456050842,
+              "ess": 15.999993330290012,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0054061584050024035,
+              "mean_cost": -0.00478957049765401,
+              "ess": 15.999990316297554,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 25,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.005636902804089661,
+          "plan_elapsed_s": 24.044443698134273,
+          "init_best_cost": -0.04864844966632854,
+          "final_best_cost": -0.03825515607478127,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.04864844966632854,
+              "mean_cost": -0.03564797184630592,
+              "ess": 15.9969760058235,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.04849374976273993,
+              "mean_cost": -0.0375914625977572,
+              "ess": 15.99680189722265,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.04648514008449888,
+              "mean_cost": -0.03617066022844626,
+              "ess": 15.998086858177185,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.046430089398381724,
+              "mean_cost": -0.03615567778249631,
+              "ess": 15.997651043241513,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.04407377355873749,
+              "mean_cost": -0.035516124576370746,
+              "ess": 15.998726699979233,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.045133897328829824,
+              "mean_cost": -0.03683104780027822,
+              "ess": 15.998929807362211,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.04517360876535979,
+              "mean_cost": -0.03616440959105944,
+              "ess": 15.998637341255794,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.043546713238996886,
+              "mean_cost": -0.03604231367922023,
+              "ess": 15.999573881089397,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.04234725257107885,
+              "mean_cost": -0.03578227643195982,
+              "ess": 15.999259590130215,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.03825515607478127,
+              "mean_cost": -0.034537626707884884,
+              "ess": 15.999845259441075,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 26,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.021595717751017977,
+          "plan_elapsed_s": 23.98155305883847,
+          "init_best_cost": -0.0493166576251156,
+          "final_best_cost": -0.04424603596459015,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0493166576251156,
+              "mean_cost": -0.040409650836886225,
+              "ess": 15.99795489375377,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.04642043706993976,
+              "mean_cost": -0.0401825402954346,
+              "ess": 15.999024299450635,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.05454012493225098,
+              "mean_cost": -0.042098575343339696,
+              "ess": 15.996690241338133,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.051511120900008464,
+              "mean_cost": -0.04069267482626497,
+              "ess": 15.998395534504152,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.04435241540694794,
+              "mean_cost": -0.03877687479147403,
+              "ess": 15.99914277930604,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.05329480307367162,
+              "mean_cost": -0.041296702357386,
+              "ess": 15.998480839605246,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.04712699805745699,
+              "mean_cost": -0.04063351877519961,
+              "ess": 15.999216704587809,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.04945124975384106,
+              "mean_cost": -0.03970076915864517,
+              "ess": 15.99875234014226,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.04502986523197816,
+              "mean_cost": -0.040486081706406205,
+              "ess": 15.99941267756499,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.04424603596459015,
+              "mean_cost": -0.04111459951328002,
+              "ess": 15.999778619492602,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 27,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.02852321926578942,
+          "plan_elapsed_s": 24.10965204797685,
+          "init_best_cost": -0.09034017080834056,
+          "final_best_cost": -0.08267342024268796,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.09034017080834056,
+              "mean_cost": -0.06778536418649846,
+              "ess": 15.990875912750727,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.10240717363897656,
+              "mean_cost": -0.07241070037210168,
+              "ess": 15.992454978894232,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.09920697943358493,
+              "mean_cost": -0.06893143431407056,
+              "ess": 15.989781714621778,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.09950156466698146,
+              "mean_cost": -0.07191189909827428,
+              "ess": 15.985931707005678,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.09990783216232081,
+              "mean_cost": -0.07533057518045125,
+              "ess": 15.990401362277733,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.09951310881607829,
+              "mean_cost": -0.0746331353320737,
+              "ess": 15.99240765113417,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.1011346003466706,
+              "mean_cost": -0.07575729520662618,
+              "ess": 15.992745518092121,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.08673862941511509,
+              "mean_cost": -0.07532307055096055,
+              "ess": 15.997023947584296,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.09293730708025454,
+              "mean_cost": -0.07995333715208561,
+              "ess": 15.996648764610622,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.08267342024268796,
+              "mean_cost": -0.07502084374670558,
+              "ess": 15.998186658757083,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 28,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.05673838227607161,
+          "plan_elapsed_s": 24.112893552985042,
+          "init_best_cost": -0.22410882285719744,
+          "final_best_cost": -0.19667939122406627,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.22410882285719744,
+              "mean_cost": -0.16362493249347843,
+              "ess": 15.927889178044872,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.2429701290461857,
+              "mean_cost": -0.16973786985446265,
+              "ess": 15.893576244085795,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.23233819188977597,
+              "mean_cost": -0.15703663576425245,
+              "ess": 15.945727371422569,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.19619079759209562,
+              "mean_cost": -0.1567648442269456,
+              "ess": 15.959764640307885,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.2114396484546463,
+              "mean_cost": -0.16845942609286785,
+              "ess": 15.954326184360465,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.21005057245893113,
+              "mean_cost": -0.17179222095388025,
+              "ess": 15.97749207624599,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.2043041034129952,
+              "mean_cost": -0.17508452248382766,
+              "ess": 15.980356337256415,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.19692612899207676,
+              "mean_cost": -0.17257030632756876,
+              "ess": 15.992407424301629,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.19026665268915827,
+              "mean_cost": -0.1729759082540857,
+              "ess": 15.99283425990795,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.19667939122406627,
+              "mean_cost": -0.1748445201423059,
+              "ess": 15.990201081440805,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        },
+        {
+          "chunk_idx": 29,
+          "n_chunks": 30,
+          "steps_executed": 8,
+          "chunk_reward": 0.09379320817075229,
+          "plan_elapsed_s": 24.00875546806492,
+          "init_best_cost": -0.33168529175198963,
+          "final_best_cost": -0.31393855747466953,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.33168529175198963,
+              "mean_cost": -0.26420333653697337,
+              "ess": 15.864731246530162,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.3551639531118592,
+              "mean_cost": -0.2612648972459982,
+              "ess": 15.870921611107887,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.36910114878626876,
+              "mean_cost": -0.2890550664699735,
+              "ess": 15.83578495859743,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.33968625321320556,
+              "mean_cost": -0.2828999694384784,
+              "ess": 15.949229182075527,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.347680093032341,
+              "mean_cost": -0.28336856176335773,
+              "ess": 15.865159045430074,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.3331256441992023,
+              "mean_cost": -0.2818963868602776,
+              "ess": 15.949325978921678,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.33382857361733426,
+              "mean_cost": -0.2742096342687894,
+              "ess": 15.959182405616414,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.33364775168160593,
+              "mean_cost": -0.27946268862514423,
+              "ess": 15.96329393982304,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.3108791192346866,
+              "mean_cost": -0.2799903672795923,
+              "ess": 15.975410431624328,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.31393855747466953,
+              "mean_cost": -0.28431322456054925,
+              "ess": 15.982666924191847,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

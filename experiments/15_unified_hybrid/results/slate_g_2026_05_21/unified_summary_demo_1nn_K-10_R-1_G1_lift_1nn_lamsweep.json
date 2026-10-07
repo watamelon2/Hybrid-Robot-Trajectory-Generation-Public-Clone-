@@ -1,0 +1,56 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 33,
+      "success_rate": 0.55,
+      "wall_s": 1463.7212608750015,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_g_2026_05_21/unified_demo_1nn_lam-0.0_K-10_R-1_G1_lift_1nn_lamsweep.json"
+    },
+    {
+      "lambda_prior": 0.5,
+      "n_total": 60,
+      "n_success": 44,
+      "success_rate": 0.7333333333333333,
+      "wall_s": 1499.1388307080015,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_g_2026_05_21/unified_demo_1nn_lam-0.5_K-10_R-1_G1_lift_1nn_lamsweep.json"
+    },
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 60,
+      "success_rate": 1.0,
+      "wall_s": 1555.718159,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_g_2026_05_21/unified_demo_1nn_lam-1.0_K-10_R-1_G1_lift_1nn_lamsweep.json"
+    },
+    {
+      "lambda_prior": 2.0,
+      "n_total": 60,
+      "n_success": 60,
+      "success_rate": 1.0,
+      "wall_s": 1883.5787549170018,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_g_2026_05_21/unified_demo_1nn_lam-2.0_K-10_R-1_G1_lift_1nn_lamsweep.json"
+    },
+    {
+      "lambda_prior": 5.0,
+      "n_total": 60,
+      "n_success": 59,
+      "success_rate": 0.9833333333333333,
+      "wall_s": 1989.0410242500002,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_g_2026_05_21/unified_demo_1nn_lam-5.0_K-10_R-1_G1_lift_1nn_lamsweep.json"
+    },
+    {
+      "lambda_prior": 10.0,
+      "n_total": 60,
+      "n_success": 59,
+      "success_rate": 0.9833333333333333,
+      "wall_s": 2050.195003167002,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_g_2026_05_21/unified_demo_1nn_lam-10.0_K-10_R-1_G1_lift_1nn_lamsweep.json"
+    }
+  ]
+}

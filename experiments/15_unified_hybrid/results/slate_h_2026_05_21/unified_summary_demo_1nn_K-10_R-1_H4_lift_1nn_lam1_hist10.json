@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 59,
+      "success_rate": 0.9833333333333333,
+      "wall_s": 1447.657391124987,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_h_2026_05_21/unified_demo_1nn_lam-1.0_K-10_R-1_H4_lift_1nn_lam1_hist10.json"
+    }
+  ]
+}

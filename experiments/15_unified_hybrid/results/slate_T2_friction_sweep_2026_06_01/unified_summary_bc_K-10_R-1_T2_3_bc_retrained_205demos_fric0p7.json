@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 5.0,
+      "n_total": 30,
+      "n_success": 1,
+      "success_rate": 0.03333333333333333,
+      "wall_s": 713.1372962919995,
+      "output": "/private/tmp/HRTG-wt-t9/experiments/15_unified_hybrid/results/slate_T2_friction_sweep_2026_06_01/unified_bc_lam-5.0_K-10_R-1_T2_3_bc_retrained_205demos_fric0p7.json"
+    }
+  ]
+}

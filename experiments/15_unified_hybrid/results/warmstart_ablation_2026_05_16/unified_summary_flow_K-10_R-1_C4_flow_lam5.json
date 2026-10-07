@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 5.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 1582.6040049580006,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/warmstart_ablation_2026_05_16/unified_flow_lam-5.0_K-10_R-1_C4_flow_lam5.json"
+    }
+  ]
+}

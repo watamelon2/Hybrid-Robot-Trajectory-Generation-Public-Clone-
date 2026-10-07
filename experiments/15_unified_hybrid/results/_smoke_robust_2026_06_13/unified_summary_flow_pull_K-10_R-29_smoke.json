@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 10,
+  "R": 29,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 1,
+      "n_success": 1,
+      "success_rate": 1.0,
+      "wall_s": 409.0370426401496,
+      "output": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/_smoke_robust_2026_06_13/unified_flow_pull_lam-0.0_K-10_R-29_smoke.json"
+    }
+  ]
+}

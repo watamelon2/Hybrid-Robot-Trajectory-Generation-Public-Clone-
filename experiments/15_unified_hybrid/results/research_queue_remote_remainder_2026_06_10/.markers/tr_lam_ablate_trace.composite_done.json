@@ -1,0 +1,8 @@
+{
+  "name": "tr_lam_ablate_trace",
+  "completion_mode": "composite_split_outputs",
+  "lambda_0_original": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/research_queue_remote_remainder_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-0.0_K-10_R-3_tr_lam_ablate_trace.json",
+  "lambda_1_boost": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/tail_boost_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-1.0_K-10_R-3_tr_lam1_trace_boost_nw5.json",
+  "lambda_inf_boost": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/tail_boost_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-inf_K-10_R-3_tr_laminf_trace_boost_nw5.json",
+  "time_utc": "2026-06-11T03:55:54Z"
+}

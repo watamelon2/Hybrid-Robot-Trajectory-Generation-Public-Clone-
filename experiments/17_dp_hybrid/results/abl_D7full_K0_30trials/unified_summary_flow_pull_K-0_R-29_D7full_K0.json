@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 0,
+  "R": 29,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 30,
+      "n_success": 7,
+      "success_rate": 0.23333333333333334,
+      "wall_s": 2613.6099479590193,
+      "output": "experiments/17_dp_hybrid/results/abl_D7full_K0_30trials/unified_flow_pull_lam-0.0_K-0_R-29_D7full_K0.json"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 10,
+  "R": 49,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 17,
+      "success_rate": 0.5666666666666667,
+      "wall_s": 24595.361323041987,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/square_dp_failure_trace_2026_06_09/unified_flow_pull_lam-1.0_K-10_R-49_square_dp_lam1_trace_test30.json"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- Virtual envs (legacy local venv before we moved to conda) ---
+mbd_env/
+mbd_env
+hybrid-traj/
+
+# --- Build / cache outputs ---
+docs/_build/
+.cache/
+.pytest_cache/
+
+# --- Heavy third-party checkouts (keep out of repo) ---
+third_party/
+mujoco_menagerie/
+
+# --- Robomimic / experiment artefacts ---
+experiments/**/results/*.hdf5
+experiments/**/results/**/*.hdf5
+experiments/**/results/*.mp4
+experiments/**/results/**/*.mp4
+experiments/**/results/videos/
+experiments/**/results/videos_*/
+experiments/**/results/*.pt
+experiments/**/results/**/*.pt
+experiments/**/results/cache/
+
+# Bulky derived HDF5 banks for the incremental-adaptation slate; the
+# collect slate (slate_incremental_collect_*) regenerates them from
+# the robomimic dataset in ~10 min.  Cache .npz files alongside them
+# (filename starts with a dot) are also derived.
+experiments/15_unified_hybrid/data/
+
+# Local backup of pre-final smoke runs that we moved aside before
+# rerunning the real sweep. Useful on disk for spot checks, but
+# noisy in `git status` and not worth versioning.
+experiments/**/results/_stale_smoke_backup/
+experiments/**/results/_archive/
+
+# --- Local run logs (per-cell stdout/stderr from scripts/local/*) ---
+# Bulky, run-specific timing data. Not source-of-truth for any result.
+logs/
+
+# --- Local-only notes / draft messages (kept on disk for reference) ---
+scripts/local/charles_pre_pull_message.txt
+
+# --- macOS / editor cruft ---
+.DS_Store
+*.swp
+.idea/
+.vscode/
+.windsurf/
+
+# --- LaTeX build artefacts (docs/) ---
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.vrb
+*.lof
+*.lot
+*.run.xml
+*-blx.bib
+*.bcf
+
+# --- Compiled PDFs (built from LaTeX sources in docs/) ---
+docs/**/*.pdf
+
+# --- Academic paper PDFs (kept locally, not in repo) ---
+docs/papers/*.pdf
+
+# --- Local Zotero helper script (not part of the project) ---
+docs/papers/fix_zotero_keys.js
+
+# --- Progress-report example templates (kept locally for reference) ---
+docs/progress_reports/examples/
+experiments/**/results/_archive_old_bc/
+
+# MuJoCo internal log spew
+MUJOCO_LOG.TXT
+
+# --- macOS iCloud / Finder duplicates ---
+# iCloud's "Optimize Storage" and Finder's Duplicate action create copies
+# named like `foo 2.md`, `done 2`, `pid 2`, etc.  These are never wanted
+# in the repo.  Patterns match: " 2" before any extension, and " 2" at
+# the end of a filename with no extension.
+* 2.*
+* 2
+
+# --- aborted training-run logs ---
+*.partial_early_fire

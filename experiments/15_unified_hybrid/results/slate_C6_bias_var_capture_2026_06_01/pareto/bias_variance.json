@@ -1,0 +1,25 @@
+{
+  "per_method": {
+    "t2_3_bc": {
+      "n_seeds": 3,
+      "n_init_states": 10,
+      "H": 120,
+      "action_dim": 7,
+      "bias_sq_mean": 0.28072914199610893,
+      "variance_mean": 0.22913131009870438,
+      "bias_rms": 0.529838788685869
+    },
+    "t2_1_hybrid": {
+      "n_seeds": 3,
+      "n_init_states": 10,
+      "H": 120,
+      "action_dim": 7,
+      "bias_sq_mean": 0.02639905913420056,
+      "variance_mean": 0.040836305784665496,
+      "bias_rms": 0.16247787275257075
+    }
+  },
+  "pareto_verdicts": [
+    "t2_1_hybrid Pareto-dominates t2_3_bc"
+  ]
+}

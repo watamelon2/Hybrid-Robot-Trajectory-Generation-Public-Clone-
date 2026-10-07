@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 5.0,
+      "n_total": 30,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 986.4841354170348,
+      "output": "/Users/aaronwen/work/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_T2_n200_magnitude_wide_2026_06_01/unified_bc_lam-5.0_K-10_R-1_B_T2_3_bc_retrained_205demos_mass1p7.json"
+    }
+  ]
+}

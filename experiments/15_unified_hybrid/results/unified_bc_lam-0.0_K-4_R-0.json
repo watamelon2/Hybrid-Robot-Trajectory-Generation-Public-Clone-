@@ -1,0 +1,126 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "prior_checkpoint": "/home/snipe/Hybrid_Robot_trajectory-Generation-v2/experiments/03_bc_baseline/results/policy.pt",
+  "lambda_prior": 0.0,
+  "warm_start": true,
+  "mpc_replans": 0,
+  "mpc_chunk_steps": 120,
+  "n_total": 2,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "params": {
+    "H": 120,
+    "M": 16,
+    "K": 4,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.25,
+    "sigma_min": 0.05
+  },
+  "seed": 0,
+  "wall_s": 179.70166614799996,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 21.98535944528596,
+      "success": false,
+      "plan_elapsed_s": 88.41319656700011,
+      "total_elapsed_s": 88.41328417,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 21.98535944528596,
+          "plan_elapsed_s": 84.73719111199989,
+          "init_best_cost": -22.063978511989795,
+          "final_best_cost": -22.791436579205982,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -22.063978511989795,
+              "mean_cost": -3.0413046550465106,
+              "ess": 1.0
+            },
+            {
+              "iter": 1,
+              "sigma": 0.20000000298023224,
+              "best_cost": -22.165670933194683,
+              "mean_cost": -4.359071804393977,
+              "ess": 1.4619759305331987
+            },
+            {
+              "iter": 2,
+              "sigma": 0.09999999403953552,
+              "best_cost": -22.42750343193306,
+              "mean_cost": -8.248829052026974,
+              "ess": 2.223723928303007
+            },
+            {
+              "iter": 3,
+              "sigma": 0.05000000074505806,
+              "best_cost": -22.791436579205982,
+              "mean_cost": -16.75940203812788,
+              "ess": 6.48156253654298
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 23.41549623168223,
+      "success": false,
+      "plan_elapsed_s": 91.28784176700015,
+      "total_elapsed_s": 91.28790136199996,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 23.41549623168223,
+          "plan_elapsed_s": 87.8483669740001,
+          "init_best_cost": -50.912466203395574,
+          "final_best_cost": -49.4777121792154,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -50.912466203395574,
+              "mean_cost": -7.181561261730092,
+              "ess": 1.0
+            },
+            {
+              "iter": 1,
+              "sigma": 0.20000000298023224,
+              "best_cost": -27.206003869021316,
+              "mean_cost": -6.17936699106448,
+              "ess": 1.000077879356276
+            },
+            {
+              "iter": 2,
+              "sigma": 0.09999999403953552,
+              "best_cost": -35.819332701519336,
+              "mean_cost": -9.209245157359291,
+              "ess": 1.0000000000866862
+            },
+            {
+              "iter": 3,
+              "sigma": 0.05000000074505806,
+              "best_cost": -49.4777121792154,
+              "mean_cost": -20.72810086710418,
+              "ess": 1.000251951137775
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

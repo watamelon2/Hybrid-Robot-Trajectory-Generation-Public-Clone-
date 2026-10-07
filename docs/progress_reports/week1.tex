@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+
+\input{usepackage}
+%In case you encounter the following error:
+%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
+%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
+%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
+%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
+%\pdfobjcompresslevel=0
+%\pdfminorversion=4
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\title{\LARGE \bf
+Data-Driven Priors and Physics-Based Corrections: A Hybrid Flow Matching Approach to Safe Robot Motion Planning}
+
+
+\author{ \parbox{3 in}{\centering Zihao Sun \\
+        606466419}
+        \hspace*{ 0.1 in}
+        \parbox{2.5 in}{ \centering Charles Beck \\
+        % GRASP Laboratory \\
+        406045359
+        }
+\thanks{UCLA ECE M237 Spring 2026 Course Project Milestone Reports. Week 1---Project Idea Proposal.}
+}
+
+\begin{document}
+
+
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main Idea}
+
+% Explain the main idea of your project in \textit{one sentence}.
+
+We investigate how to merge an \textbf{offline}-trained flow matching trajectory prior (learned from demonstration data) with an \textbf{online} model-based score correction (computed analytically from the known robot dynamics, cost function, and safety constraints), and study whether the resulting hybrid produces trajectories that are simultaneously diverse, physically feasible, and safe.
+
+\section{Application}
+
+% In \textit{one paragraph}, explain the engineering problem that you want to solve and the (potential) practical applications of your idea.
+
+In robot motion planning, a planner must generate trajectories that are high-quality, physically feasible, and safe. High-quality pathways generally encompass smooth, diverse, and goal-reaching designs. Likewise, the trajectories must respect the robot's specific dynamic limits and avoid collision conditions. Recent diffusion and flow matching methods learn expressive trajectory distributions from expert demonstrations in an \textbf{offline} training phase. By capturing complex multimodal behaviors, these methods remain robust; however, the generated trajectories can violate dynamics constraints and possess no hard safety guarantees, especially in regions poorly covered by the training data. Conversely, model-based trajectory optimization methods like \textit{Model-Based Diffusion} (MBD) \cite{mbd} compute the score function analytically from the dynamics model at test time (\textbf{online}). This approach guarantees physical feasibility, but inherently lacks the distributional richness of fully learned priors. Notably, MBD's foundational paper specifically comments that outside data ``can be naturally integrated'' with their model-based approach, but leaves the exact mode of this integration unformalized. We propose to explicitly study this hybrid architecture. The proposed mechanism combines the learned data-driven score (\textbf{offline}) with the analytical model-based score (\textbf{online}) as a \textit{product-of-experts} formulation:
+$$
+    p^{\mathrm{target}}_t \propto p^{\mathrm{data}}_t \cdot p^{\mathrm{model}}_t
+$$
+at each step of the generation process. We will additionally investigate incorporating safety constraints as an independent online score term derived from \textit{control barrier functions}. These CBFs systematically restrict the control input $u$ such that $\dot{h}(x, u) \ge -\gamma(h(x))$ to maintain system state within a safe set defined by $h(x) \ge 0$. Practical implementations include manipulator motion planning in cluttered environments. For these experiments, we will define configurations in \texttt{MuJoCo} utilizing a 7-DoF Franka Panda setup. The offline trajectory distributions and constraints will be captured using datasets provided by the \texttt{Robomimic} framework. The online model-based score correction utilizes analytical gradients generated dynamically from the state derivatives and cost functions. Validation will be rigorously conducted to probe trajectory success, dynamical smoothness, and obstacle constraint violations relative to pure data-baseline systems like Diffuser. We will further evaluate the framework's robustness to sim-to-real transfer by applying online dynamics corrections (e.g., altered mass or friction) to priors trained purely on kinematic demonstrations, while assessing its stability in contact-rich environments where analytical gradients may become discontinuous.
+
+\section{Novelty}
+
+% Explain why you think your idea is novel in \textit{one paragraph}. If you are familiar with the existing literature, explain how your idea is distinguished from existing work. If you are not yet familiar with the relevant literature, explain why you find your idea novel and appealing. Please feel free to cite relevant work here.
+
+Existing work treats data-driven and model-based trajectory generation as separate paradigms. MBD \cite{mbd} computes the score function analytically from the dynamics model without data; Diffuser \cite{janner2022} and FlowMP \cite{flowmp} learn score functions entirely from demonstrations without a dynamics model; the recent \textit{Behavioral Score Diffusion} (BSD) \cite{bsd} estimates scores from trajectory data via kernel methods, also without a model; and SafeFlow \cite{safeflow} adds safety via control barrier functions but does not incorporate model-based feasibility corrections. No existing work, to our knowledge, formalizes the fusion of a mathematically grounded model-based score with a pure data-driven parameterization for trajectory generation. This proposal specifically models the tradeoff between offline learned velocities and an online analytical score correction, defined mathematically as a state-dependent adaptive relationship:
+\[
+    \nabla \log p^{\mathrm{target}}_t \approx \nabla \log p^{\mathrm{data}}_t + \lambda(x, t) \nabla \log p^{\mathrm{model}}_t
+\]
+By making the scaling weight $\lambda(x, t)$ responsive to epistemic uncertainty---trusting the data prior in high-density regions and relying on the physics model for out-of-distribution states---the sum becomes highly robust. We will explore adapting this combined score function for real-time Receding Horizon Control by warm-starting the ODE solver across timesteps. Furthermore, we conjecture that in the \textit{linear-quadratic} special case, the model-based correction analytically reduces to the \textit{LQR gain}, governed by the continuous-time \textit{Riccati equation}. In effect, this relationship yields a precise bridge between generative distribution modeling schemas and classical optimal control structures (the \textit{LQ--Riccati connection}). Should a formal convergence analysis for the general nonlinear setting (via Probability Flow ODEs standard to flow matching) prove intractable, we will reduce our scope to the linear-quadratic case to explicitly verify this analytical connection. Additionally, we will analyze the theoretical safety guarantees of the CBF score terms, investigating whether the modified vector field ensures recursive feasibility without inducing spurious local minima or deadlocks.
+
+\section{Relevance to Dynamic Programming}
+
+% Explain how your idea is relevant to dynamic programming in \textit{one paragraph}.
+
+The project cleanly instantiates the central course theme of uniting offline prediction methods and online correction methods. The \textbf{offline component} acts as an approximated learned flow matching model trained directly on multi-demonstration data serving as a foundational trajectory distribution schema. This design encapsulates the approximate value functions referenced in fitted value iteration (Lectures 7-8). It inherently encodes initial prior heuristics surrounding favorable trajectories but is limited via extrapolation capabilities. Comparatively, the \textbf{online component} functions dynamically as a purely model-driven mechanism mapping exact cost structures. By representing the gradient $\nabla_x V(x, t)$ of the value function, it mirrors satisfying the Hamilton-Jacobi-Bellman PDE continuous-time limits presented in the continuous counterpart of the Bellman equation (Lecture 4). In linear-quadratic setups, it converges exactly to optimal LQR feedback bounds representing analytical solutions to Riccati equations (Lecture 5). Ultimately, adapting the state-dependent scaling weight $\lambda(x, t)$ within a Receding Horizon Control formulation acts structurally identically to finite terminal controls in general MPC constraints (Lecture 4), functionally blending initial conditions toward pure infinite-horizon exact solutions mathematically. This framework relies heavily on the reachability thresholds and control barrier functions defined in Lectures 11-12 to constrain the trajectory models safely. Overall, these methodologies combat the classic ``curse of dimensionality'' emphasized in the course: high-dimensional continuous DP systems render explicit exact solutions computationally intractable. Employing an offline baseline approximation subsequently corrected by formalized online dynamics directly counters these constraints modeled throughout the course lectures.
+
+\section{Usage of AI}
+
+% If you plan to use AI tools, please disclose how you plan to use them for this course project. There will be no penalty for using AI tools.
+
+We plan to use AI tools (Claude, ChatGPT) for literature search and survey, brainstorming project directions, debugging code, and drafting and editing the written report. All mathematical derivations, proofs, and experimental analysis will be verified independently. AI-generated code will be reviewed and tested before use. The core intellectual contributions---the problem formulation, the conjectured LQ--Riccati connection, and the experimental design---were developed through iterative discussion with AI assistance but reflect our own judgment and understanding of the course material.
+
+\nocite{*} % This forces all references in the .bib file to be displayed even if they are not explicitly cited in the text.
+\bibliographystyle{IEEEtran} % use IEEEtran.bst style
+\bibliography{IEEEabrv,references}
+
+\end{document}

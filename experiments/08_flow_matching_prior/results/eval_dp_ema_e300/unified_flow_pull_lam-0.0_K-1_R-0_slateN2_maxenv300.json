@@ -1,0 +1,932 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "prior_checkpoint": "experiments/08_flow_matching_prior/results/v_theta_v6_unet_xl.pt",
+  "lambda_prior": 0.0,
+  "warm_start": true,
+  "mpc_replans": 0,
+  "mpc_chunk_steps": 120,
+  "deterministic_prior_warmstart": true,
+  "n_total": 30,
+  "n_success": 21,
+  "success_rate": 0.7,
+  "params": {
+    "H": 120,
+    "M": 1,
+    "K": 1,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.05,
+    "sigma_min": 0.01,
+    "lambda_schedule": "constant",
+    "score_mode": "pull",
+    "warmstart_noise_sigma": 0.0,
+    "retrieval_beta": 1.0,
+    "action_history_len": 0,
+    "contrastive_encoder_path": null,
+    "task": "can"
+  },
+  "seed": 0,
+  "wall_s": 95.53930762497475,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 33.63873081892348,
+      "success": true,
+      "plan_elapsed_s": 3.0890868340502493,
+      "total_elapsed_s": 3.0893255419796333,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 33.63873081892348,
+          "plan_elapsed_s": 2.176428458013106,
+          "init_best_cost": -33.5513291093562,
+          "final_best_cost": -33.5513291093562,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -33.5513291093562,
+              "mean_cost": -33.5513291093562,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 26.688438396850106,
+      "success": true,
+      "plan_elapsed_s": 3.0981710830237716,
+      "total_elapsed_s": 3.0983786249998957,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 26.688438396850106,
+          "plan_elapsed_s": 2.243131875002291,
+          "init_best_cost": -26.19382670699866,
+          "final_best_cost": -26.19382670699866,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -26.19382670699866,
+              "mean_cost": -26.19382670699866,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 33.31498244151223,
+      "success": true,
+      "plan_elapsed_s": 3.019939167017583,
+      "total_elapsed_s": 3.020163958950434,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 33.31498244151223,
+          "plan_elapsed_s": 2.1583254170254804,
+          "init_best_cost": -33.719926467795005,
+          "final_best_cost": -33.719926467795005,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -33.719926467795005,
+              "mean_cost": -33.719926467795005,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 35.27469264601875,
+      "success": true,
+      "plan_elapsed_s": 3.003315875015687,
+      "total_elapsed_s": 3.003524459025357,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 35.27469264601875,
+          "plan_elapsed_s": 2.14470879198052,
+          "init_best_cost": -35.50543490665872,
+          "final_best_cost": -35.50543490665872,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -35.50543490665872,
+              "mean_cost": -35.50543490665872,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 2.249126367657474,
+      "success": false,
+      "plan_elapsed_s": 2.9527239160379395,
+      "total_elapsed_s": 2.952925040968694,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.249126367657474,
+          "plan_elapsed_s": 2.106245625007432,
+          "init_best_cost": -2.2547574828291865,
+          "final_best_cost": -2.2547574828291865,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -2.2547574828291865,
+              "mean_cost": -2.2547574828291865,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 34.11754319562942,
+      "success": true,
+      "plan_elapsed_s": 3.016075792023912,
+      "total_elapsed_s": 3.0162764580454677,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 34.11754319562942,
+          "plan_elapsed_s": 2.1488427909789607,
+          "init_best_cost": -34.966476447394186,
+          "final_best_cost": -34.966476447394186,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -34.966476447394186,
+              "mean_cost": -34.966476447394186,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 30.54170432311195,
+      "success": true,
+      "plan_elapsed_s": 2.9925422919914126,
+      "total_elapsed_s": 2.9927810829831287,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 30.54170432311195,
+          "plan_elapsed_s": 2.1307666249922477,
+          "init_best_cost": -30.393212575315296,
+          "final_best_cost": -30.393212575315296,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -30.393212575315296,
+              "mean_cost": -30.393212575315296,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 29.46323029104486,
+      "success": true,
+      "plan_elapsed_s": 3.0517590829986148,
+      "total_elapsed_s": 3.0519795829895884,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 29.46323029104486,
+          "plan_elapsed_s": 2.184898083040025,
+          "init_best_cost": -30.2883269909697,
+          "final_best_cost": -30.2883269909697,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -30.2883269909697,
+              "mean_cost": -30.2883269909697,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 36.85403455262673,
+      "success": true,
+      "plan_elapsed_s": 3.0815262499963865,
+      "total_elapsed_s": 3.0817599589936435,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 36.85403455262673,
+          "plan_elapsed_s": 2.2170829999959096,
+          "init_best_cost": -36.9082731335732,
+          "final_best_cost": -36.9082731335732,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -36.9082731335732,
+              "mean_cost": -36.9082731335732,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 2.1851594992389924,
+      "success": false,
+      "plan_elapsed_s": 3.0759743329836056,
+      "total_elapsed_s": 3.0761832920252346,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.1851594992389924,
+          "plan_elapsed_s": 2.2228303330484778,
+          "init_best_cost": -7.029601101021504,
+          "final_best_cost": -7.029601101021504,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -7.029601101021504,
+              "mean_cost": -7.029601101021504,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 48.2350252214425,
+      "success": true,
+      "plan_elapsed_s": 3.0625875419937074,
+      "total_elapsed_s": 3.0628105000359938,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 48.2350252214425,
+          "plan_elapsed_s": 2.1909872089745477,
+          "init_best_cost": -48.57640922235977,
+          "final_best_cost": -48.57640922235977,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -48.57640922235977,
+              "mean_cost": -48.57640922235977,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 48.55777870781755,
+      "success": true,
+      "plan_elapsed_s": 3.130342333985027,
+      "total_elapsed_s": 3.130576250026934,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 48.55777870781755,
+          "plan_elapsed_s": 2.2345714590046555,
+          "init_best_cost": -48.63677207556681,
+          "final_best_cost": -48.63677207556681,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -48.63677207556681,
+              "mean_cost": -48.63677207556681,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 44.17742493591436,
+      "success": true,
+      "plan_elapsed_s": 3.178593207965605,
+      "total_elapsed_s": 3.178787957993336,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 44.17742493591436,
+          "plan_elapsed_s": 2.2166623750235885,
+          "init_best_cost": -44.05129081734045,
+          "final_best_cost": -44.05129081734045,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -44.05129081734045,
+              "mean_cost": -44.05129081734045,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 45.80747637914996,
+      "success": true,
+      "plan_elapsed_s": 3.221459458989557,
+      "total_elapsed_s": 3.221654957975261,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 45.80747637914996,
+          "plan_elapsed_s": 2.2329185839626007,
+          "init_best_cost": -45.718859043965466,
+          "final_best_cost": -45.718859043965466,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -45.718859043965466,
+              "mean_cost": -45.718859043965466,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 2.175809773159523,
+      "success": false,
+      "plan_elapsed_s": 3.0785753339878283,
+      "total_elapsed_s": 3.078820624970831,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.175809773159523,
+          "plan_elapsed_s": 2.2047790409997106,
+          "init_best_cost": -2.2034271762690576,
+          "final_best_cost": -2.2034271762690576,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -2.2034271762690576,
+              "mean_cost": -2.2034271762690576,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 2.254821431245194,
+      "success": false,
+      "plan_elapsed_s": 3.149942332995124,
+      "total_elapsed_s": 3.1501495839911513,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.254821431245194,
+          "plan_elapsed_s": 2.249540332995821,
+          "init_best_cost": -30.210738924435915,
+          "final_best_cost": -30.210738924435915,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -30.210738924435915,
+              "mean_cost": -30.210738924435915,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 28.010986223712536,
+      "success": false,
+      "plan_elapsed_s": 3.244871290982701,
+      "total_elapsed_s": 3.245104707952123,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 28.010986223712536,
+          "plan_elapsed_s": 2.2975873749819584,
+          "init_best_cost": -28.268419925467562,
+          "final_best_cost": -28.268419925467562,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -28.268419925467562,
+              "mean_cost": -28.268419925467562,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 31.079765784327954,
+      "success": false,
+      "plan_elapsed_s": 3.2145531669957563,
+      "total_elapsed_s": 3.214775957982056,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 31.079765784327954,
+          "plan_elapsed_s": 2.266581999952905,
+          "init_best_cost": -31.04850957546175,
+          "final_best_cost": -31.04850957546175,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -31.04850957546175,
+              "mean_cost": -31.04850957546175,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 37.64746622285145,
+      "success": true,
+      "plan_elapsed_s": 3.2159512079670094,
+      "total_elapsed_s": 3.2161965830018744,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 37.64746622285145,
+          "plan_elapsed_s": 2.2993484170292504,
+          "init_best_cost": -38.42779409383719,
+          "final_best_cost": -38.42779409383719,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -38.42779409383719,
+              "mean_cost": -38.42779409383719,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 40.18125150771436,
+      "success": true,
+      "plan_elapsed_s": 3.2639512920286506,
+      "total_elapsed_s": 3.2641775000374764,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 40.18125150771436,
+          "plan_elapsed_s": 2.3395969580160454,
+          "init_best_cost": -40.22142693132169,
+          "final_best_cost": -40.22142693132169,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -40.22142693132169,
+              "mean_cost": -40.22142693132169,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 40.32515873008765,
+      "success": true,
+      "plan_elapsed_s": 3.278224500012584,
+      "total_elapsed_s": 3.2784705419908278,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 40.32515873008765,
+          "plan_elapsed_s": 2.338201292033773,
+          "init_best_cost": -40.066488411795355,
+          "final_best_cost": -40.066488411795355,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -40.066488411795355,
+              "mean_cost": -40.066488411795355,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 36.986194164345264,
+      "success": true,
+      "plan_elapsed_s": 3.3192808749736287,
+      "total_elapsed_s": 3.3195353749906644,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 36.986194164345264,
+          "plan_elapsed_s": 2.368114041048102,
+          "init_best_cost": -37.06521971404708,
+          "final_best_cost": -37.06521971404708,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -37.06521971404708,
+              "mean_cost": -37.06521971404708,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 35.99879241950221,
+      "success": true,
+      "plan_elapsed_s": 3.3759555830038153,
+      "total_elapsed_s": 3.376205625012517,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 35.99879241950221,
+          "plan_elapsed_s": 2.3893674579449,
+          "init_best_cost": -36.4080108136267,
+          "final_best_cost": -36.4080108136267,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -36.4080108136267,
+              "mean_cost": -36.4080108136267,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 33.914145820982995,
+      "success": true,
+      "plan_elapsed_s": 3.3217601670185104,
+      "total_elapsed_s": 3.32201779197203,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 33.914145820982995,
+          "plan_elapsed_s": 2.3495002500130795,
+          "init_best_cost": -33.8695740254873,
+          "final_best_cost": -33.8695740254873,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -33.8695740254873,
+              "mean_cost": -33.8695740254873,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 29.68391828664607,
+      "success": false,
+      "plan_elapsed_s": 3.389862167008687,
+      "total_elapsed_s": 3.3900957090081647,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 29.68391828664607,
+          "plan_elapsed_s": 2.4351105419918895,
+          "init_best_cost": -29.78461816664024,
+          "final_best_cost": -29.78461816664024,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -29.78461816664024,
+              "mean_cost": -29.78461816664024,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 2.1758735747988727,
+      "success": false,
+      "plan_elapsed_s": 3.348933874978684,
+      "total_elapsed_s": 3.3491673750104383,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.1758735747988727,
+          "plan_elapsed_s": 2.3810486249858513,
+          "init_best_cost": -2.2542829045456836,
+          "final_best_cost": -2.2542829045456836,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -2.2542829045456836,
+              "mean_cost": -2.2542829045456836,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 2.122114115921126,
+      "success": false,
+      "plan_elapsed_s": 3.4026349170017056,
+      "total_elapsed_s": 3.4028640420292504,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.122114115921126,
+          "plan_elapsed_s": 2.379287749994546,
+          "init_best_cost": -1.6977645486450106,
+          "final_best_cost": -1.6977645486450106,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -1.6977645486450106,
+              "mean_cost": -1.6977645486450106,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 0,
+      "lambda_prior": 0.0,
+      "final_reward": 27.63941675836209,
+      "success": true,
+      "plan_elapsed_s": 3.421193749993108,
+      "total_elapsed_s": 3.421386166999582,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 27.63941675836209,
+          "plan_elapsed_s": 2.345637291960884,
+          "init_best_cost": -28.61873497269795,
+          "final_best_cost": -28.61873497269795,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -28.61873497269795,
+              "mean_cost": -28.61873497269795,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 1,
+      "lambda_prior": 0.0,
+      "final_reward": 26.009685347595838,
+      "success": true,
+      "plan_elapsed_s": 3.339350249967538,
+      "total_elapsed_s": 3.339584375033155,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 26.009685347595838,
+          "plan_elapsed_s": 2.320789417019114,
+          "init_best_cost": -25.988261910057386,
+          "final_best_cost": -25.988261910057386,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -25.988261910057386,
+              "mean_cost": -25.988261910057386,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 2,
+      "lambda_prior": 0.0,
+      "final_reward": 30.541787233295526,
+      "success": true,
+      "plan_elapsed_s": 3.1907531669712625,
+      "total_elapsed_s": 3.1909526250092313,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 30.541787233295526,
+          "plan_elapsed_s": 2.2179121670196764,
+          "init_best_cost": -30.00041574371791,
+          "final_best_cost": -30.00041574371791,
+          "used_score_fn": false,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.04999999701976776,
+              "best_cost": -30.00041574371791,
+              "mean_cost": -30.00041574371791,
+              "ess": 1.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

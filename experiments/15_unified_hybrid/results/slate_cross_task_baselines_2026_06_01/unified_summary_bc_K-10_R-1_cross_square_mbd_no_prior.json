@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 19037.98381187499,
+      "output": "/private/tmp/HRTG-wt-t4/experiments/15_unified_hybrid/results/slate_cross_task_baselines_2026_06_01/unified_bc_lam-0.0_K-10_R-1_cross_square_mbd_no_prior.json"
+    }
+  ]
+}

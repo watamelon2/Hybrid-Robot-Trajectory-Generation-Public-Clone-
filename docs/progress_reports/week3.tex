@@ -1,0 +1,172 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Data-Driven Priors and Physics-Based Corrections: A Hybrid Flow
+Matching Approach to Safe Robot Motion Planning}
+
+% No need to put student ID here
+\author{
+  \IEEEauthorblockN{Zihao Sun}
+  \and
+  \IEEEauthorblockN{Charles Beck}
+}
+
+\maketitle
+
+\begin{abstract}
+  UCLA ECE M237 Spring 2026 Course Project Milestone Reports. Week
+  3---Modeling \& Sketch of Method.
+\end{abstract}
+
+% -------------------------------------------------------
+\section{Project Title}
+
+% Provide your project title here.
+
+\noindent Data-Driven Priors and Physics-Based Corrections: A Hybrid
+Flow Matching Approach to Safe Robot Motion Planning.
+
+% -------------------------------------------------------
+\section{Main Idea}
+
+% Explain the main idea of your project in \textit{one sentence}. This
+% can be copied from your previous reports, but also feel free to update
+% it if you have refined your idea.
+
+We investigate how to merge an \textbf{offline}-trained flow matching
+trajectory prior (learned from demonstration data) with an
+\textbf{online} model-based score correction (computed analytically
+from the known dynamics and cost), and study whether the resulting
+hybrid yields trajectories that are simultaneously diverse and
+physically feasible.
+
+% -------------------------------------------------------
+\section{Problem Formulation}
+
+% Describe in \textit{one paragraph} the problem you want to solve. I
+% encourage to use equations to describe your problem.
+
+Let $\tau=(x_0,u_0,\ldots,x_{H-1},u_{H-1},x_H)$ be a trajectory of
+the discrete-time system $x_{k+1}=f(x_k,u_k)$, with running cost
+$J(\tau)=\sum_{k=0}^{H-1}\ell(x_k,u_k)+\ell_H(x_H)$. Given a
+demonstration dataset
+$\mathcal{D}=\{\tau^{(i)}\}_{i=1}^{N}\!\sim\!p^{\mathrm{data}}$, our
+goal is to sample from the product-of-experts target
+$p^{\mathrm{target}}(\tau)\propto p^{\mathrm{data}}(\tau)\,
+[p^{\mathrm{model}}(\tau)]^{\lambda}$, where
+$p^{\mathrm{model}}(\tau)\propto\exp(-J(\tau)/\beta)$ is the
+Boltzmann distribution induced by the known dynamics and cost. At
+each diffusion time $t$ this is equivalent to denoising with the
+composite score
+\begin{equation}
+  \nabla\log p^{\mathrm{target}}_t \approx
+  \nabla\log p^{\mathrm{data}}_t
+  + \lambda(x,t)\,\nabla\log p^{\mathrm{model}}_t,
+  \label{eq:score}
+\end{equation}
+which is the central object our project formalizes and analyzes; a
+CBF safety term $\mu\,\nabla\log p^{\mathrm{safe}}_t$ is an optional
+extension.
+
+% -------------------------------------------------------
+\section{Sketch of Method}
+
+\subsection{Offline Component}
+
+% Describe in \textit{one paragraph} the offline component of your
+% method (for instance, which computes the value function or the
+% policy). Explain why it is suitable for your problem. Discuss the
+% computation complexity.
+
+Offline, we train a flow matching velocity field $v_\theta(\tau_t,t)$
+on $\mathcal{D}$ via the conditional flow matching
+loss~\cite{lipman2023flow}
+$\mathcal{L}_{\mathrm{CFM}}=\mathbb{E}_{t,\tau_0,\tau_1}\|
+v_\theta((1-t)\tau_0+t\tau_1,t)-(\tau_1-\tau_0)\|^2$, with $\tau_t$
+linearly interpolating Gaussian noise and a demonstration. The
+flow--score identity~\cite{song2021score} then yields an implicit
+data-driven score
+$s_\theta\!\approx\!\nabla\log p^{\mathrm{data}}_t$ at inference, in
+line with diffusion-based planners~\cite{flowmp,janner2022}.
+Amortizing the multimodal behavior of demonstrations into a network
+replaces $O(MH)$ rollouts with one $O(|\theta|)$ forward pass per
+step---an offline analogue of fitted value iteration, paid once at
+$O(N\!\cdot\!\text{epochs}\!\cdot\!|\theta|)$.
+
+\subsection{Online Component}
+
+% Describe in \textit{one paragraph} the online component of your
+% method, which will be used for the actual policy execution. Explain
+% why it is suitable for your problem. Discuss why it is necessary or
+% could be helpful in complementing the limitations of the offline
+% part.
+
+At inference we evaluate a model-based correction
+$\nabla\log p^{\mathrm{model}}_t\!\approx\!
+\mathbb{E}_{w(\tau)}[\tau-\tau_t]/\sigma_t^2$ from self-normalized
+importance sampling of cost-weighted rollouts
+$w(\tau)\propto\exp(-J(\tau)/\beta)$, in the spirit of Model-Based
+Diffusion~\cite{mbd}, and add it to $s_\theta$ at every step. This
+is essential because the offline prior is blind to the deployed cost
+and to perturbations of dynamics or environment, and degrades out of
+distribution. MBD itself suffers from high estimator variance over
+long horizons and lacks a data prior; we mitigate both by anchoring
+rollouts at the flow-matching posterior mean and letting
+$\lambda(x,t)$ react to local data density via a Gaussian fit to
+U-Net features. In the LQ case the correction reduces to
+$-P_t x_t$, an LQR-style sanity check we plan to raise with the MBD
+authors at the guest lecture.
+
+% -------------------------------------------------------
+\section{Working Example Modeling}
+
+\subsection{Modeling \& Simulation}
+
+% Describe in \textit{one paragraph} the \textit{model} of the running
+% example system on which you will deploy your method.
+
+We instantiate the framework on a 7-DoF Franka Panda doing tabletop
+reaching in \texttt{MuJoCo}: state
+$x=(q,\dot q)\!\in\!\mathbb{R}^{14}$, torque
+$u\!\in\!\mathbb{R}^{7}$ saturated at $\pm 87$\,Nm, rigid-body
+dynamics $M(q)\ddot q+C(q,\dot q)\dot q+g(q)=u$ at
+$\Delta t=0.02$\,s, and end-effector cost
+$\ell=\|\mathrm{FK}(q)-p_{\mathrm{goal}}\|_Q^2+\|u\|_R^2$ over
+$H\!=\!64$ ($\sim$1.3\,s). Each episode places 2--3 cylindrical
+obstacles on the table and draws $p_{\mathrm{goal}}$ uniformly from
+a $0.4\!\times\!0.4\!\times\!0.2$\,m box, exposing visibly multimodal
+arm postures. Demonstrations are taken from \texttt{Robomimic}'s
+\texttt{can}/\texttt{square} proficient-human splits, retargeted to
+torque control by inverse dynamics. As an analytical companion we
+use a 2D double-integrator $\dot x=Ax+Bu$ with quadratic cost,
+where the DARE solution $-P_t x_t$ is closed-form ground truth for
+the importance-sampling estimator.
+
+\subsection{Plan for Implementation}
+
+% Describe in \textit{one paragraph} how you will implement its
+% simulation and conduct numerical experiments.
+
+Simulation in \texttt{MuJoCo}, learning in PyTorch on a single GPU.
+$v_\theta$ is a 1D temporal U-Net ($\sim$5\,M params) over
+$(q,\dot q,u)$ trajectories with FiLM conditioning on
+$p_{\mathrm{goal}}$, trained with Adam (lr $10^{-4}$, batch 64,
+$\sim$10$^5$ steps) on $N\!\sim\!10^4$ \texttt{Robomimic} trajectories;
+inference uses $T\!=\!50$ denoising steps and $M\!\in\![64,512]$
+batched rollouts per step. Two experiments map the offline--online
+tradeoff: a $\lambda$-sweep with endpoints $\lambda\!=\!0,\infty$
+recovering the data-only~\cite{janner2022,flowmp} and MBD-only
+baselines, and an OOD test with novel goals, obstacles, and $\pm
+30\%$ mass/friction perturbations. We report success rate, mean
+cost, and collision rate over 100 episodes.
+
+% -------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

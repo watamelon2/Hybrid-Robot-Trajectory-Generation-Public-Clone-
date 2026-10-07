@@ -1,0 +1,202 @@
+[
+  {
+    "input": "experiments/04_mbd_baseline/results/can_ph.json",
+    "experiment": "04_mbd_baseline/run_can",
+    "params": {
+      "H": 120,
+      "M": 16,
+      "K": 10,
+      "lambda": 0.5,
+      "sigma_max": 0.5,
+      "sigma_min": 0.05,
+      "action_dim": 7
+    },
+    "n_total": 60,
+    "n_success": 0,
+    "success_rate": 0.0,
+    "counts": {
+      "success": 0,
+      "strong_reach": 18,
+      "partial_reach": 10,
+      "no_reach": 32
+    },
+    "shares": {
+      "success": 0.0,
+      "strong_reach": 0.3,
+      "partial_reach": 0.16666666666666666,
+      "no_reach": 0.5333333333333333
+    },
+    "bc_success": null,
+    "bc_success_rate": null,
+    "mbd_beats_bc_count": null,
+    "mbd_beats_bc_share": null,
+    "strong_reach_to_success_share": 0.0
+  },
+  {
+    "input": "experiments/04_mbd_baseline/results/can_ph_seed0.json",
+    "experiment": "04_mbd_baseline/run_can",
+    "params": {
+      "H": 120,
+      "M": 16,
+      "K": 10,
+      "lambda": 0.5,
+      "sigma_max": 0.5,
+      "sigma_min": 0.05,
+      "action_dim": 7
+    },
+    "n_total": 60,
+    "n_success": 0,
+    "success_rate": 0.0,
+    "counts": {
+      "success": 0,
+      "strong_reach": 21,
+      "partial_reach": 9,
+      "no_reach": 30
+    },
+    "shares": {
+      "success": 0.0,
+      "strong_reach": 0.35,
+      "partial_reach": 0.15,
+      "no_reach": 0.5
+    },
+    "bc_success": null,
+    "bc_success_rate": null,
+    "mbd_beats_bc_count": null,
+    "mbd_beats_bc_share": null,
+    "strong_reach_to_success_share": 0.0
+  },
+  {
+    "input": "experiments/04_mbd_baseline/results/can_ph_seed1.json",
+    "experiment": "04_mbd_baseline/run_can",
+    "params": {
+      "H": 120,
+      "M": 16,
+      "K": 10,
+      "lambda": 0.5,
+      "sigma_max": 0.5,
+      "sigma_min": 0.05,
+      "action_dim": 7
+    },
+    "n_total": 60,
+    "n_success": 0,
+    "success_rate": 0.0,
+    "counts": {
+      "success": 0,
+      "strong_reach": 20,
+      "partial_reach": 13,
+      "no_reach": 27
+    },
+    "shares": {
+      "success": 0.0,
+      "strong_reach": 0.3333333333333333,
+      "partial_reach": 0.21666666666666667,
+      "no_reach": 0.45
+    },
+    "bc_success": null,
+    "bc_success_rate": null,
+    "mbd_beats_bc_count": null,
+    "mbd_beats_bc_share": null,
+    "strong_reach_to_success_share": 0.0
+  },
+  {
+    "input": "experiments/04_mbd_baseline/results/can_ph_seed2.json",
+    "experiment": "04_mbd_baseline/run_can",
+    "params": {
+      "H": 120,
+      "M": 16,
+      "K": 10,
+      "lambda": 0.5,
+      "sigma_max": 0.5,
+      "sigma_min": 0.05,
+      "action_dim": 7
+    },
+    "n_total": 60,
+    "n_success": 0,
+    "success_rate": 0.0,
+    "counts": {
+      "success": 0,
+      "strong_reach": 20,
+      "partial_reach": 13,
+      "no_reach": 27
+    },
+    "shares": {
+      "success": 0.0,
+      "strong_reach": 0.3333333333333333,
+      "partial_reach": 0.21666666666666667,
+      "no_reach": 0.45
+    },
+    "bc_success": null,
+    "bc_success_rate": null,
+    "mbd_beats_bc_count": null,
+    "mbd_beats_bc_share": null,
+    "strong_reach_to_success_share": 0.0
+  },
+  {
+    "input": "experiments/05_hybrid_method/results/can_ph.json",
+    "experiment": "05_hybrid_method/run_can",
+    "params": {
+      "H": 120,
+      "M": 16,
+      "K": 10,
+      "lambda": 0.5,
+      "sigma_max": 0.25,
+      "sigma_min": 0.05,
+      "action_dim": 7
+    },
+    "n_total": 60,
+    "n_success": 1,
+    "success_rate": 0.016666666666666666,
+    "counts": {
+      "success": 1,
+      "strong_reach": 31,
+      "partial_reach": 21,
+      "no_reach": 7
+    },
+    "shares": {
+      "success": 0.016666666666666666,
+      "strong_reach": 0.5166666666666667,
+      "partial_reach": 0.35,
+      "no_reach": 0.11666666666666667
+    },
+    "bc_success": 0,
+    "bc_success_rate": 0.0,
+    "mbd_beats_bc_count": 51,
+    "mbd_beats_bc_share": 0.85,
+    "strong_reach_to_success_share": 0.03125
+  },
+  {
+    "input": "experiments/05_hybrid_method/results/can_ph_mpc.json",
+    "experiment": "05_hybrid_method/run_can",
+    "params": {
+      "H": 120,
+      "M": 16,
+      "K": 10,
+      "lambda": 0.5,
+      "sigma_max": 0.25,
+      "sigma_min": 0.05,
+      "action_dim": 7,
+      "mpc_replans": 1,
+      "mpc_chunk_steps": 60
+    },
+    "n_total": 60,
+    "n_success": 4,
+    "success_rate": 0.06666666666666667,
+    "counts": {
+      "success": 4,
+      "strong_reach": 23,
+      "partial_reach": 31,
+      "no_reach": 2
+    },
+    "shares": {
+      "success": 0.06666666666666667,
+      "strong_reach": 0.38333333333333336,
+      "partial_reach": 0.5166666666666667,
+      "no_reach": 0.03333333333333333
+    },
+    "bc_success": 5,
+    "bc_success_rate": 0.08333333333333333,
+    "mbd_beats_bc_count": 48,
+    "mbd_beats_bc_share": 0.8,
+    "strong_reach_to_success_share": 0.14814814814814814
+  }
+]

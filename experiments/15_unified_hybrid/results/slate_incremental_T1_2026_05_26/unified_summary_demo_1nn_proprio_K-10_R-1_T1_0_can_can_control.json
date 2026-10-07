@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn_proprio",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 20,
+      "success_rate": 0.6666666666666666,
+      "wall_s": 847.3483331670286,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-incremental/experiments/15_unified_hybrid/results/slate_incremental_T1_2026_05_26/unified_demo_1nn_proprio_lam-1.0_K-10_R-1_T1_0_can_can_control.json"
+    }
+  ]
+}

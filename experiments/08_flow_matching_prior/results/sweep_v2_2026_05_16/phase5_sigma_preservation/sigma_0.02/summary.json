@@ -1,0 +1,26 @@
+[
+  {
+    "lambda_prior": 0.0,
+    "n_success": 10,
+    "n_total": 60,
+    "success_rate": 0.16666666666666666,
+    "wall_s": 1023.4287567500724,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase5_sigma_preservation/sigma_0.02/lambda_0.0.json"
+  },
+  {
+    "lambda_prior": 0.1,
+    "n_success": 2,
+    "n_total": 60,
+    "success_rate": 0.03333333333333333,
+    "wall_s": 1043.0083835410187,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase5_sigma_preservation/sigma_0.02/lambda_0.1.json"
+  },
+  {
+    "lambda_prior": 0.5,
+    "n_success": 2,
+    "n_total": 60,
+    "success_rate": 0.03333333333333333,
+    "wall_s": 1027.0031633750768,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase5_sigma_preservation/sigma_0.02/lambda_0.5.json"
+  }
+]

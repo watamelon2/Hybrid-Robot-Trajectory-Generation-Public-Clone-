@@ -1,0 +1,134 @@
+{
+  "config": {
+    "K": 10,
+    "R": 1,
+    "M": 16,
+    "H": 120,
+    "sigma_max": 0.25,
+    "sigma_min": 0.01,
+    "n_demos": 20,
+    "n_rollouts": 3,
+    "seed": 0,
+    "task": "can"
+  },
+  "cells": [
+    {
+      "tag": "Z1",
+      "prior": "demo_1nn",
+      "lambda": 0.0,
+      "n_success": 7,
+      "n_total": 60,
+      "rate": 0.11666666666666667,
+      "wall_s": 1486.7649684999997,
+      "file": "unified_demo_1nn_lam-0.0_K-10_R-1_Z1.json"
+    },
+    {
+      "tag": "Z1",
+      "prior": "demo_1nn",
+      "lambda": 5.0,
+      "n_success": 38,
+      "n_total": 60,
+      "rate": 0.6333333333333333,
+      "wall_s": 1490.2049488330013,
+      "file": "unified_demo_1nn_lam-5.0_K-10_R-1_Z1.json"
+    },
+    {
+      "tag": "Z2",
+      "prior": "demo_knn_k5",
+      "lambda": 0.0,
+      "n_success": 12,
+      "n_total": 60,
+      "rate": 0.2,
+      "wall_s": 1461.249258667005,
+      "file": "unified_demo_knn_k5_lam-0.0_K-10_R-1_Z2.json"
+    },
+    {
+      "tag": "Z2",
+      "prior": "demo_knn_k5",
+      "lambda": 5.0,
+      "n_success": 10,
+      "n_total": 60,
+      "rate": 0.16666666666666666,
+      "wall_s": 1549.5634914159964,
+      "file": "unified_demo_knn_k5_lam-5.0_K-10_R-1_Z2.json"
+    },
+    {
+      "tag": "Z4",
+      "prior": "demo_mean",
+      "lambda": 0.0,
+      "n_success": 0,
+      "n_total": 60,
+      "rate": 0.0,
+      "wall_s": 1558.0121557910024,
+      "file": "unified_demo_mean_lam-0.0_K-10_R-1_Z4.json"
+    },
+    {
+      "tag": "Z4",
+      "prior": "demo_mean",
+      "lambda": 5.0,
+      "n_success": 0,
+      "n_total": 60,
+      "rate": 0.0,
+      "wall_s": 1563.1649882499987,
+      "file": "unified_demo_mean_lam-5.0_K-10_R-1_Z4.json"
+    },
+    {
+      "tag": "Z3",
+      "prior": "demo_random",
+      "lambda": 0.0,
+      "n_success": 0,
+      "n_total": 60,
+      "rate": 0.0,
+      "wall_s": 1565.4996815830018,
+      "file": "unified_demo_random_lam-0.0_K-10_R-1_Z3.json"
+    },
+    {
+      "tag": "Z3",
+      "prior": "demo_random",
+      "lambda": 5.0,
+      "n_success": 0,
+      "n_total": 60,
+      "rate": 0.0,
+      "wall_s": 1557.8229681669982,
+      "file": "unified_demo_random_lam-5.0_K-10_R-1_Z3.json"
+    }
+  ],
+  "existing_reference_cells": {
+    "BC_lam0": {
+      "rate": 0.117,
+      "n_success": 7,
+      "n_total": 60,
+      "src": "warmstart_ablation_2026_05_16/C1"
+    },
+    "BC_lam5": {
+      "rate": 0.375,
+      "n_success": 90,
+      "n_total": 240,
+      "src": "docs/results.md 4-seed pool"
+    },
+    "flow_lam0": {
+      "rate": 0.0,
+      "n_success": 0,
+      "n_total": 60,
+      "src": "warmstart_ablation_2026_05_16/C3"
+    },
+    "flow_lam5": {
+      "rate": 0.0,
+      "n_success": 0,
+      "n_total": 60,
+      "src": "warmstart_ablation_2026_05_16/C4"
+    },
+    "none": {
+      "rate": 0.0,
+      "n_success": 0,
+      "n_total": 60,
+      "src": "exp04 pure MBD"
+    }
+  },
+  "headline": {
+    "new_peak": "demo_1nn + lambda=5 = 63.3% (single seed)",
+    "delta_over_bc_headline": "+25.8pp",
+    "interpretation": "Non-parametric 1-NN retrieval prior outperforms the learned BC-MLP prior by +25.8pp at the full method. BC's MLP earns no headline lift over retrieval; the score-bridge is the load-bearing component."
+  },
+  "context": "Zero-training warm-start priors survey 2026-05-17 (overnight slate); 4 priors x {lambda=0, lambda=5} = 8 cells; exp 15 unified driver; branch feat/zero-train-priors commit 0538c31."
+}

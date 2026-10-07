@@ -1,0 +1,1473 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow",
+  "prior_checkpoint": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-dp/experiments/08_flow_matching_prior/results/v_theta_dp_tobs2_h16_v3b_ep0199.pt",
+  "lambda_prior": 0.5,
+  "warm_start": true,
+  "mpc_replans": 0,
+  "mpc_chunk_steps": 8,
+  "deterministic_prior_warmstart": true,
+  "n_demos": 10,
+  "n_rollouts": 1,
+  "n_test_rollouts": 50,
+  "test_start_seed": 100000,
+  "train_n": 10,
+  "train_n_succ": 0,
+  "train_succ_rate": 0.0,
+  "test_n": 50,
+  "test_n_succ": 0,
+  "test_succ_rate": 0.0,
+  "n_total": 60,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "params": {
+    "H": 16,
+    "M": 16,
+    "K": 0,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.25,
+    "sigma_min": 0.05,
+    "lambda_schedule": "constant",
+    "score_mode": "learned",
+    "warmstart_noise_sigma": 0.0,
+    "retrieval_beta": 1.0,
+    "action_history_len": 0,
+    "contrastive_encoder_path": null,
+    "task": "can",
+    "prior_bank_size": 0
+  },
+  "seed": 0,
+  "wall_s": 68.87070241600304,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.04535703995229531,
+      "success": false,
+      "plan_elapsed_s": 1.1481392919959035,
+      "total_elapsed_s": 1.1501155829973868,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.04535703995229531,
+          "plan_elapsed_s": 1.0666997695807368e-05,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.088760006344638,
+      "success": false,
+      "plan_elapsed_s": 1.1322954999996,
+      "total_elapsed_s": 1.1339646249980433,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.088760006344638,
+          "plan_elapsed_s": 1.06250008684583e-05,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.09120637211828762,
+      "success": false,
+      "plan_elapsed_s": 1.2065454160037916,
+      "total_elapsed_s": 1.2081854580028448,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.09120637211828762,
+          "plan_elapsed_s": 8.499999239575118e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.23698468948854895,
+      "success": false,
+      "plan_elapsed_s": 1.1786913749965606,
+      "total_elapsed_s": 1.1803968750027707,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.23698468948854895,
+          "plan_elapsed_s": 8.208000508602709e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.07630241570149515,
+      "success": false,
+      "plan_elapsed_s": 1.1811193749963422,
+      "total_elapsed_s": 1.1827475000027334,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.07630241570149515,
+          "plan_elapsed_s": 7.499998901039362e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.00951702173825697,
+      "success": false,
+      "plan_elapsed_s": 1.1362624169996707,
+      "total_elapsed_s": 1.1379295840015402,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.00951702173825697,
+          "plan_elapsed_s": 1.0541996743995696e-05,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.06333032316668599,
+      "success": false,
+      "plan_elapsed_s": 1.1319627080010832,
+      "total_elapsed_s": 1.1336353750011767,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.06333032316668599,
+          "plan_elapsed_s": 7.834001735318452e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.023725824661108976,
+      "success": false,
+      "plan_elapsed_s": 1.216166999998677,
+      "total_elapsed_s": 1.217911916995945,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.023725824661108976,
+          "plan_elapsed_s": 1.412499841535464e-05,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.02627592319367023,
+      "success": false,
+      "plan_elapsed_s": 1.1696288329985691,
+      "total_elapsed_s": 1.1713060410038452,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.02627592319367023,
+          "plan_elapsed_s": 7.375005225185305e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 0.5,
+      "final_reward": 0.10784042377308602,
+      "success": false,
+      "plan_elapsed_s": 1.1560275829979219,
+      "total_elapsed_s": 1.1576501250019646,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.10784042377308602,
+          "plan_elapsed_s": 6.582995411008596e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100000",
+      "rollout_idx": 0,
+      "rollout_kind": "test",
+      "init_seed": 100000,
+      "lambda_prior": 0.5,
+      "final_reward": 0.05108869603849501,
+      "success": false,
+      "plan_elapsed_s": 1.142964041995583,
+      "total_elapsed_s": 1.1444086249975953,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.05108869603849501,
+          "plan_elapsed_s": 8.374998287763447e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100001",
+      "rollout_idx": 1,
+      "rollout_kind": "test",
+      "init_seed": 100001,
+      "lambda_prior": 0.5,
+      "final_reward": 0.09423847006628278,
+      "success": false,
+      "plan_elapsed_s": 1.1458756250067381,
+      "total_elapsed_s": 1.1474585000032675,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.09423847006628278,
+          "plan_elapsed_s": 7.667003956157714e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100002",
+      "rollout_idx": 2,
+      "rollout_kind": "test",
+      "init_seed": 100002,
+      "lambda_prior": 0.5,
+      "final_reward": 0.03721146846401236,
+      "success": false,
+      "plan_elapsed_s": 1.1432276250052382,
+      "total_elapsed_s": 1.1446994169964455,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.03721146846401236,
+          "plan_elapsed_s": 6.709000444971025e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100003",
+      "rollout_idx": 3,
+      "rollout_kind": "test",
+      "init_seed": 100003,
+      "lambda_prior": 0.5,
+      "final_reward": 0.04747302122276596,
+      "success": false,
+      "plan_elapsed_s": 1.2200914159984677,
+      "total_elapsed_s": 1.221550666996336,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.04747302122276596,
+          "plan_elapsed_s": 8.66700429469347e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100004",
+      "rollout_idx": 4,
+      "rollout_kind": "test",
+      "init_seed": 100004,
+      "lambda_prior": 0.5,
+      "final_reward": 0.1368747183516541,
+      "success": false,
+      "plan_elapsed_s": 1.18318349999754,
+      "total_elapsed_s": 1.184730082997703,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.1368747183516541,
+          "plan_elapsed_s": 6.624999514315277e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100005",
+      "rollout_idx": 5,
+      "rollout_kind": "test",
+      "init_seed": 100005,
+      "lambda_prior": 0.5,
+      "final_reward": 0.08432892462886632,
+      "success": false,
+      "plan_elapsed_s": 1.192944875001558,
+      "total_elapsed_s": 1.1946409579977626,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.08432892462886632,
+          "plan_elapsed_s": 8.290997357107699e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100006",
+      "rollout_idx": 6,
+      "rollout_kind": "test",
+      "init_seed": 100006,
+      "lambda_prior": 0.5,
+      "final_reward": 0.14386217568170595,
+      "success": false,
+      "plan_elapsed_s": 1.1723683339951094,
+      "total_elapsed_s": 1.1738072079970152,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.14386217568170595,
+          "plan_elapsed_s": 8.541996066924185e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100007",
+      "rollout_idx": 7,
+      "rollout_kind": "test",
+      "init_seed": 100007,
+      "lambda_prior": 0.5,
+      "final_reward": 0.1259418962484254,
+      "success": false,
+      "plan_elapsed_s": 1.1564388330007205,
+      "total_elapsed_s": 1.1578669590016943,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.1259418962484254,
+          "plan_elapsed_s": 6.291003955993801e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100008",
+      "rollout_idx": 8,
+      "rollout_kind": "test",
+      "init_seed": 100008,
+      "lambda_prior": 0.5,
+      "final_reward": 0.07714614920380208,
+      "success": false,
+      "plan_elapsed_s": 1.151362541000708,
+      "total_elapsed_s": 1.1528626669969526,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.07714614920380208,
+          "plan_elapsed_s": 8.792005246505141e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100009",
+      "rollout_idx": 9,
+      "rollout_kind": "test",
+      "init_seed": 100009,
+      "lambda_prior": 0.5,
+      "final_reward": 0.06707243750035731,
+      "success": false,
+      "plan_elapsed_s": 1.1446695839986205,
+      "total_elapsed_s": 1.146185332996538,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.06707243750035731,
+          "plan_elapsed_s": 6.9590023485943675e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100010",
+      "rollout_idx": 10,
+      "rollout_kind": "test",
+      "init_seed": 100010,
+      "lambda_prior": 0.5,
+      "final_reward": 0.16612246278777812,
+      "success": false,
+      "plan_elapsed_s": 1.1558450420052395,
+      "total_elapsed_s": 1.157322250001016,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.16612246278777812,
+          "plan_elapsed_s": 6.374997610691935e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100011",
+      "rollout_idx": 11,
+      "rollout_kind": "test",
+      "init_seed": 100011,
+      "lambda_prior": 0.5,
+      "final_reward": 0.040169787971138446,
+      "success": false,
+      "plan_elapsed_s": 1.1731050419984967,
+      "total_elapsed_s": 1.1745552079955814,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.040169787971138446,
+          "plan_elapsed_s": 6.4159976318478584e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100012",
+      "rollout_idx": 12,
+      "rollout_kind": "test",
+      "init_seed": 100012,
+      "lambda_prior": 0.5,
+      "final_reward": 0.09030921142199505,
+      "success": false,
+      "plan_elapsed_s": 1.138735042004555,
+      "total_elapsed_s": 1.140159834001679,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.09030921142199505,
+          "plan_elapsed_s": 7.374997949227691e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100013",
+      "rollout_idx": 13,
+      "rollout_kind": "test",
+      "init_seed": 100013,
+      "lambda_prior": 0.5,
+      "final_reward": 0.049460548786776526,
+      "success": false,
+      "plan_elapsed_s": 1.1299831249998533,
+      "total_elapsed_s": 1.1314441669965163,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.049460548786776526,
+          "plan_elapsed_s": 6.667003617621958e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100014",
+      "rollout_idx": 14,
+      "rollout_kind": "test",
+      "init_seed": 100014,
+      "lambda_prior": 0.5,
+      "final_reward": 0.008576052699334147,
+      "success": false,
+      "plan_elapsed_s": 1.1554804999977932,
+      "total_elapsed_s": 1.1569446249995963,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.008576052699334147,
+          "plan_elapsed_s": 7.750000804662704e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100015",
+      "rollout_idx": 15,
+      "rollout_kind": "test",
+      "init_seed": 100015,
+      "lambda_prior": 0.5,
+      "final_reward": 0.02074645532123216,
+      "success": false,
+      "plan_elapsed_s": 1.1379873340047197,
+      "total_elapsed_s": 1.1395096659980481,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.02074645532123216,
+          "plan_elapsed_s": 7.708003977313638e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100016",
+      "rollout_idx": 16,
+      "rollout_kind": "test",
+      "init_seed": 100016,
+      "lambda_prior": 0.5,
+      "final_reward": 0.18837870525092545,
+      "success": false,
+      "plan_elapsed_s": 1.1822497920002206,
+      "total_elapsed_s": 1.1836665829978301,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.18837870525092545,
+          "plan_elapsed_s": 6.791000487282872e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100017",
+      "rollout_idx": 17,
+      "rollout_kind": "test",
+      "init_seed": 100017,
+      "lambda_prior": 0.5,
+      "final_reward": 0.12806335589064421,
+      "success": false,
+      "plan_elapsed_s": 1.1813722499937285,
+      "total_elapsed_s": 1.1827603330020793,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.12806335589064421,
+          "plan_elapsed_s": 6.583002686966211e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100018",
+      "rollout_idx": 18,
+      "rollout_kind": "test",
+      "init_seed": 100018,
+      "lambda_prior": 0.5,
+      "final_reward": 0.1257694914509721,
+      "success": false,
+      "plan_elapsed_s": 1.1685624159945291,
+      "total_elapsed_s": 1.1699702919941046,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.1257694914509721,
+          "plan_elapsed_s": 6.624999514315277e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100019",
+      "rollout_idx": 19,
+      "rollout_kind": "test",
+      "init_seed": 100019,
+      "lambda_prior": 0.5,
+      "final_reward": 0.11709026727202365,
+      "success": false,
+      "plan_elapsed_s": 1.1275265000003856,
+      "total_elapsed_s": 1.1290635420009494,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.11709026727202365,
+          "plan_elapsed_s": 6.874994141981006e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100020",
+      "rollout_idx": 20,
+      "rollout_kind": "test",
+      "init_seed": 100020,
+      "lambda_prior": 0.5,
+      "final_reward": 0.037553338337782585,
+      "success": false,
+      "plan_elapsed_s": 1.128709541997523,
+      "total_elapsed_s": 1.1301302499996382,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.037553338337782585,
+          "plan_elapsed_s": 6.583002686966211e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100021",
+      "rollout_idx": 21,
+      "rollout_kind": "test",
+      "init_seed": 100021,
+      "lambda_prior": 0.5,
+      "final_reward": 0.02698805319169102,
+      "success": false,
+      "plan_elapsed_s": 1.1408262499971897,
+      "total_elapsed_s": 1.1422692089981865,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.02698805319169102,
+          "plan_elapsed_s": 8.000002708286047e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100022",
+      "rollout_idx": 22,
+      "rollout_kind": "test",
+      "init_seed": 100022,
+      "lambda_prior": 0.5,
+      "final_reward": 0.21968426954915102,
+      "success": false,
+      "plan_elapsed_s": 1.135485584003618,
+      "total_elapsed_s": 1.1369803339985083,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.21968426954915102,
+          "plan_elapsed_s": 6.667003617621958e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100023",
+      "rollout_idx": 23,
+      "rollout_kind": "test",
+      "init_seed": 100023,
+      "lambda_prior": 0.5,
+      "final_reward": 0.02476937391019897,
+      "success": false,
+      "plan_elapsed_s": 1.1219225829991046,
+      "total_elapsed_s": 1.123326791996078,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.02476937391019897,
+          "plan_elapsed_s": 8.70799703989178e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100024",
+      "rollout_idx": 24,
+      "rollout_kind": "test",
+      "init_seed": 100024,
+      "lambda_prior": 0.5,
+      "final_reward": 0.14107425160968629,
+      "success": false,
+      "plan_elapsed_s": 1.1425647500000196,
+      "total_elapsed_s": 1.1440036249987315,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.14107425160968629,
+          "plan_elapsed_s": 6.832997314631939e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100025",
+      "rollout_idx": 25,
+      "rollout_kind": "test",
+      "init_seed": 100025,
+      "lambda_prior": 0.5,
+      "final_reward": 0.02935054566769011,
+      "success": false,
+      "plan_elapsed_s": 1.1348266249988228,
+      "total_elapsed_s": 1.1363297080024495,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.02935054566769011,
+          "plan_elapsed_s": 8.082999556791037e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100026",
+      "rollout_idx": 26,
+      "rollout_kind": "test",
+      "init_seed": 100026,
+      "lambda_prior": 0.5,
+      "final_reward": 0.10479779936508504,
+      "success": false,
+      "plan_elapsed_s": 1.1259577500022715,
+      "total_elapsed_s": 1.1273892919998616,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.10479779936508504,
+          "plan_elapsed_s": 7.791000825818628e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100027",
+      "rollout_idx": 27,
+      "rollout_kind": "test",
+      "init_seed": 100027,
+      "lambda_prior": 0.5,
+      "final_reward": 0.03981148474621804,
+      "success": false,
+      "plan_elapsed_s": 1.129769541999849,
+      "total_elapsed_s": 1.1312886250016163,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.03981148474621804,
+          "plan_elapsed_s": 6.707996362820268e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100028",
+      "rollout_idx": 28,
+      "rollout_kind": "test",
+      "init_seed": 100028,
+      "lambda_prior": 0.5,
+      "final_reward": 0.05366284546838956,
+      "success": false,
+      "plan_elapsed_s": 1.1185916670001461,
+      "total_elapsed_s": 1.1200621669995598,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.05366284546838956,
+          "plan_elapsed_s": 6.750000466126949e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100029",
+      "rollout_idx": 29,
+      "rollout_kind": "test",
+      "init_seed": 100029,
+      "lambda_prior": 0.5,
+      "final_reward": 0.06752083667161295,
+      "success": false,
+      "plan_elapsed_s": 1.1163273749989457,
+      "total_elapsed_s": 1.1177417080034502,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.06752083667161295,
+          "plan_elapsed_s": 6.624999514315277e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100030",
+      "rollout_idx": 30,
+      "rollout_kind": "test",
+      "init_seed": 100030,
+      "lambda_prior": 0.5,
+      "final_reward": 0.03018210652345752,
+      "success": false,
+      "plan_elapsed_s": 1.1871686250015046,
+      "total_elapsed_s": 1.188629750002292,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.03018210652345752,
+          "plan_elapsed_s": 6.87500141793862e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100031",
+      "rollout_idx": 31,
+      "rollout_kind": "test",
+      "init_seed": 100031,
+      "lambda_prior": 0.5,
+      "final_reward": 0.027835815953908116,
+      "success": false,
+      "plan_elapsed_s": 1.1358292080039973,
+      "total_elapsed_s": 1.13727229199867,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.027835815953908116,
+          "plan_elapsed_s": 6.541005859617144e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100032",
+      "rollout_idx": 32,
+      "rollout_kind": "test",
+      "init_seed": 100032,
+      "lambda_prior": 0.5,
+      "final_reward": 0.04474769329421207,
+      "success": false,
+      "plan_elapsed_s": 1.1326197090020287,
+      "total_elapsed_s": 1.1341200839960948,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.04474769329421207,
+          "plan_elapsed_s": 6.583999493159354e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100033",
+      "rollout_idx": 33,
+      "rollout_kind": "test",
+      "init_seed": 100033,
+      "lambda_prior": 0.5,
+      "final_reward": 0.1316605595620612,
+      "success": false,
+      "plan_elapsed_s": 1.1105587089987239,
+      "total_elapsed_s": 1.1119741250004154,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.1316605595620612,
+          "plan_elapsed_s": 6.790993211325258e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100034",
+      "rollout_idx": 34,
+      "rollout_kind": "test",
+      "init_seed": 100034,
+      "lambda_prior": 0.5,
+      "final_reward": 0.08337992949060885,
+      "success": false,
+      "plan_elapsed_s": 1.1658402079992811,
+      "total_elapsed_s": 1.1672659169998951,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.08337992949060885,
+          "plan_elapsed_s": 8.082999556791037e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100035",
+      "rollout_idx": 35,
+      "rollout_kind": "test",
+      "init_seed": 100035,
+      "lambda_prior": 0.5,
+      "final_reward": 0.2029270294343364,
+      "success": false,
+      "plan_elapsed_s": 1.1218315829974017,
+      "total_elapsed_s": 1.1232867080034339,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.2029270294343364,
+          "plan_elapsed_s": 6.54099858365953e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100036",
+      "rollout_idx": 36,
+      "rollout_kind": "test",
+      "init_seed": 100036,
+      "lambda_prior": 0.5,
+      "final_reward": 0.0294428776289314,
+      "success": false,
+      "plan_elapsed_s": 1.1266214579954976,
+      "total_elapsed_s": 1.128105041992967,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.0294428776289314,
+          "plan_elapsed_s": 7.624999852851033e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100037",
+      "rollout_idx": 37,
+      "rollout_kind": "test",
+      "init_seed": 100037,
+      "lambda_prior": 0.5,
+      "final_reward": 0.03214141734280321,
+      "success": false,
+      "plan_elapsed_s": 1.1374446660047397,
+      "total_elapsed_s": 1.1389166669978295,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.03214141734280321,
+          "plan_elapsed_s": 6.833004590589553e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100038",
+      "rollout_idx": 38,
+      "rollout_kind": "test",
+      "init_seed": 100038,
+      "lambda_prior": 0.5,
+      "final_reward": 0.09922608644748362,
+      "success": false,
+      "plan_elapsed_s": 1.1245675839963951,
+      "total_elapsed_s": 1.1260960420040647,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.09922608644748362,
+          "plan_elapsed_s": 6.4169944380410016e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100039",
+      "rollout_idx": 39,
+      "rollout_kind": "test",
+      "init_seed": 100039,
+      "lambda_prior": 0.5,
+      "final_reward": 0.28933492505815556,
+      "success": false,
+      "plan_elapsed_s": 1.1152942920016358,
+      "total_elapsed_s": 1.116702625004109,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.28933492505815556,
+          "plan_elapsed_s": 6.541995389852673e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100040",
+      "rollout_idx": 40,
+      "rollout_kind": "test",
+      "init_seed": 100040,
+      "lambda_prior": 0.5,
+      "final_reward": 0.03315659424950843,
+      "success": false,
+      "plan_elapsed_s": 1.1103143750005984,
+      "total_elapsed_s": 1.1117234580015065,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.03315659424950843,
+          "plan_elapsed_s": 6.707996362820268e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100041",
+      "rollout_idx": 41,
+      "rollout_kind": "test",
+      "init_seed": 100041,
+      "lambda_prior": 0.5,
+      "final_reward": 0.019431473495600003,
+      "success": false,
+      "plan_elapsed_s": 1.1253067919969908,
+      "total_elapsed_s": 1.1267171669969684,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.019431473495600003,
+          "plan_elapsed_s": 9.125003998633474e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100042",
+      "rollout_idx": 42,
+      "rollout_kind": "test",
+      "init_seed": 100042,
+      "lambda_prior": 0.5,
+      "final_reward": 0.01691162568887622,
+      "success": false,
+      "plan_elapsed_s": 1.115013959002681,
+      "total_elapsed_s": 1.1164732089964673,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.01691162568887622,
+          "plan_elapsed_s": 8.75000114319846e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100043",
+      "rollout_idx": 43,
+      "rollout_kind": "test",
+      "init_seed": 100043,
+      "lambda_prior": 0.5,
+      "final_reward": 0.120698557799146,
+      "success": false,
+      "plan_elapsed_s": 1.1278485000002547,
+      "total_elapsed_s": 1.1292546250042506,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.120698557799146,
+          "plan_elapsed_s": 7.625007128808647e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100044",
+      "rollout_idx": 44,
+      "rollout_kind": "test",
+      "init_seed": 100044,
+      "lambda_prior": 0.5,
+      "final_reward": 0.09892110350027272,
+      "success": false,
+      "plan_elapsed_s": 1.1303300419967854,
+      "total_elapsed_s": 1.1317870000057155,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.09892110350027272,
+          "plan_elapsed_s": 8.499999239575118e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100045",
+      "rollout_idx": 45,
+      "rollout_kind": "test",
+      "init_seed": 100045,
+      "lambda_prior": 0.5,
+      "final_reward": 0.03965461950527227,
+      "success": false,
+      "plan_elapsed_s": 1.1143316669986234,
+      "total_elapsed_s": 1.1157846670030267,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.03965461950527227,
+          "plan_elapsed_s": 8.249997335951775e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100046",
+      "rollout_idx": 46,
+      "rollout_kind": "test",
+      "init_seed": 100046,
+      "lambda_prior": 0.5,
+      "final_reward": 0.030616370145637825,
+      "success": false,
+      "plan_elapsed_s": 1.1098180000044522,
+      "total_elapsed_s": 1.1112612919969251,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.030616370145637825,
+          "plan_elapsed_s": 6.1250029830262065e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100047",
+      "rollout_idx": 47,
+      "rollout_kind": "test",
+      "init_seed": 100047,
+      "lambda_prior": 0.5,
+      "final_reward": 0.021313125406344828,
+      "success": false,
+      "plan_elapsed_s": 1.1136705829994753,
+      "total_elapsed_s": 1.1151257079982315,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.021313125406344828,
+          "plan_elapsed_s": 6.458001735154539e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100048",
+      "rollout_idx": 48,
+      "rollout_kind": "test",
+      "init_seed": 100048,
+      "lambda_prior": 0.5,
+      "final_reward": 0.17124480099093314,
+      "success": false,
+      "plan_elapsed_s": 1.1218272499972954,
+      "total_elapsed_s": 1.1234042500000214,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.17124480099093314,
+          "plan_elapsed_s": 6.541005859617144e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    },
+    {
+      "demo": "test_seed_100049",
+      "rollout_idx": 49,
+      "rollout_kind": "test",
+      "init_seed": 100049,
+      "lambda_prior": 0.5,
+      "final_reward": 0.23857793101693975,
+      "success": false,
+      "plan_elapsed_s": 1.1171526659964002,
+      "total_elapsed_s": 1.1186451670000679,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 16,
+          "chunk_reward": 0.23857793101693975,
+          "plan_elapsed_s": 6.791997293476015e-06,
+          "init_best_cost": NaN,
+          "final_best_cost": NaN,
+          "used_score_fn": true,
+          "iter_curve": []
+        }
+      ]
+    }
+  ]
+}

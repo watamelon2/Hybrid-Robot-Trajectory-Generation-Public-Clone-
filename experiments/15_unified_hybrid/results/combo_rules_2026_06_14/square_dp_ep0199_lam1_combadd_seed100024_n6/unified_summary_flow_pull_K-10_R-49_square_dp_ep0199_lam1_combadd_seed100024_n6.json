@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 10,
+  "R": 49,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 6,
+      "n_success": 4,
+      "success_rate": 0.6666666666666666,
+      "wall_s": 10819.938125693006,
+      "output": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/combo_rules_2026_06_14/square_dp_ep0199_lam1_combadd_seed100024_n6/unified_flow_pull_lam-1.0_K-10_R-49_square_dp_ep0199_lam1_combadd_seed100024_n6.json"
+    }
+  ]
+}

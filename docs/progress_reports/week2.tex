@@ -1,0 +1,123 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Data-Driven Priors and Physics-Based Corrections: A Hybrid Flow
+Matching Approach to Safe Robot Motion Planning}
+
+\author{
+  \IEEEauthorblockN{Zihao Sun}
+  \IEEEauthorblockA{606466419}
+  \and
+  \IEEEauthorblockN{Charles Beck}
+  \IEEEauthorblockA{406045359}
+}
+
+\maketitle
+
+\begin{abstract}
+  UCLA ECE M237 Spring 2026 Course Project Milestone Reports. Week
+  2---Literature Review.
+\end{abstract}
+
+% -------------------------------------------------------
+\section{Main Idea}
+
+We investigate how to merge an offline-trained flow matching trajectory
+prior (learned from demonstration data) with an online model-based score
+correction (computed analytically from the known robot dynamics, cost
+function, and safety constraints), and study whether the resulting
+hybrid produces trajectories that are simultaneously diverse, physically
+feasible, and safe.
+
+% -------------------------------------------------------
+\section{Literature Overview}
+
+Our project sits at the intersection of two primary bodies of
+literature, with a secondary connection to a third.
+The first is \emph{model-based score computation}: Model-Based
+Diffusion (MBD)~\cite{mbd} derives the score analytically from
+known dynamics and cost, guaranteeing feasibility without any learned
+component; its authors note data ``can be naturally integrated'' but
+leave this unformalized---the gap we address.
+The second is \emph{generative trajectory planning}: diffusion-based
+planners such as Diffuser~\cite{janner2022} and flow-matching
+methods such as FlowMP~\cite{flowmp} learn expressive
+multimodal priors from demonstrations but provide no feasibility
+guarantees out of distribution; kernel-based Behavioral Score
+Diffusion~\cite{bsd} offers a training-free data-driven variant.
+As a secondary body of literature, we review work on \emph{safe
+generative control} via CBFs~\cite{safeflow, s2diff},
+which we plan to incorporate as an independent score term for collision
+avoidance.  Further connections include classifier-free guidance as
+policy improvement~\cite{cfgrl} and optimal-control-guided flow
+matching~\cite{ocflow}.
+
+% -------------------------------------------------------
+\section{Highlighted Literature Review}
+
+\subsection{Summary}
+
+Pan et al.~\cite{mbd} propose \emph{Model-Based Diffusion}
+(MBD), a framework that replaces the learned score of standard
+diffusion planners with one computed analytically from the robot's
+dynamics model $x_{k+1}=f(x_k,u_k)$ and cost $J(\tau)$ via Tweedie's
+formula and self-normalized importance sampling.
+Concretely, MBD defines a Boltzmann trajectory distribution
+$p^{\mathrm{mod}}(\tau)\propto\exp(-J(\tau)/\lambda)$, noises it via a
+VP-SDE, and approximates the posterior mean by cost-reweighted samples.
+On Maze2D, Block Push, and Franka manipulation benchmarks, MBD matches
+or outperforms Diffuser~\cite{janner2022} while requiring zero
+demonstration data.
+
+\subsection{Key Idea \& Relevance}
+
+The central insight of MBD is that for systems with known dynamics the
+score $\nabla \log p^{\mathrm{model}}_t$ can be computed exactly by
+differentiating through the dynamics and cost at each sampling step,
+yielding hard feasibility that learned methods cannot guarantee.
+However, MBD's authors note this score ``can be naturally integrated''
+with data-driven priors yet provide no formalization.
+Our project takes this as its central question, proposing to fuse the
+model-based score with a flow matching prior via a product-of-experts:
+\begin{equation}
+  \nabla \log p^{\mathrm{target}}_t \;\approx\;
+  \nabla \log p^{\mathrm{data}}_t
+  + \lambda(x, t)\,\nabla \log p^{\mathrm{model}}_t,
+\end{equation}
+where the state- and time-dependent weight $\lambda(x,t)$ is designed
+to trust the data prior in regions well-covered by the training
+distribution, and to rely on the physics model in out-of-distribution
+states.
+This adaptive weighting mechanism---and the empirical study of the
+tradeoff it governs---is the primary novel contribution of our work.
+We further conjecture that in the linear-quadratic special case the
+model-based correction analytically reduces to the LQR gain
+$-\lambda^{-1}P_k x_k$ governed by the DARE, yielding a formal bridge
+between generative trajectory modeling and classical optimal control.
+
+\subsection{Main Limitations}
+
+MBD relies entirely on the analytical model and therefore cannot capture
+multimodal, demonstration-informed behaviors---producing feasible but
+potentially unnatural trajectories (e.g., ignoring preferred grasps or
+learned obstacle-avoidance heuristics).
+It also assumes a sufficiently accurate dynamics model, which may fail
+under model mismatch, unmodeled contacts, or sim-to-real transfer, and
+its importance-sampling score estimator suffers high variance when
+$\lambda$ is small or trajectory dimension is large.
+Our work targets these limitations: the learned prior restores
+distributional richness, the adaptive $\lambda(x,t)$ weighting remains
+robust under model imperfection, and the data score anchors the
+denoising process to reduce variance.
+MBD also provides no formal collision-avoidance guarantees; we plan to
+add a CBF-derived score term~\cite{safeflow}.
+
+% -------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

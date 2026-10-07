@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 4,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 30,
+      "n_success": 1,
+      "success_rate": 0.03333333333333333,
+      "wall_s": 3976.958450582999,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_square_horizon_diagnostic_2026_06_07/unified_demo_1nn_lam-0.0_K-10_R-4_square_warmstart_h300.json"
+    }
+  ]
+}

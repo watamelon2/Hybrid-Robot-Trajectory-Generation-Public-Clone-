@@ -1,0 +1,64 @@
+[sanity] root=/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/vast_safe_dp_nwfix_2026_06_12  cells=60
+cell                                       task      lam   R   K   n   succ    med_s  flag
+can_dp_ep0199_smax0p10_lam0_seed100000_n6  can       0.0  29  10   6    83%     3494  
+can_dp_ep0199_smax0p10_lam0_seed100006_n6  can       0.0  29  10   6    50%     3529  
+can_dp_ep0199_smax0p10_lam0_seed100012_n6  can       0.0  29  10   6    33%     3614  FAIL lambda0 33% << standalone ref 66% (margin 20%)
+can_dp_ep0199_smax0p10_lam0_seed100018_n6  can       0.0  29  10   6    50%     3520  
+can_dp_ep0199_smax0p10_lam0_seed100024_n6  can       0.0  29  10   6    67%     3441  
+can_dp_ep0199_smax0p10_lam0p5_seed100000_n can       0.5  29  10   6    83%     3528  
+can_dp_ep0199_smax0p10_lam0p5_seed100006_n can       0.5  29  10   6    67%     3509  
+can_dp_ep0199_smax0p10_lam0p5_seed100012_n can       0.5  29  10   6    50%     3481  
+can_dp_ep0199_smax0p10_lam0p5_seed100018_n can       0.5  29  10   6    83%     3623  
+can_dp_ep0199_smax0p10_lam0p5_seed100024_n can       0.5  29  10   6    67%     3564  
+can_dp_ep0199_smax0p10_lam10_seed100000_n6 can      10.0  29  10   6    67%     3578  
+can_dp_ep0199_smax0p10_lam10_seed100006_n6 can      10.0  29  10   6    83%     3433  
+can_dp_ep0199_smax0p10_lam10_seed100012_n6 can      10.0  29  10   6    67%     3578  
+can_dp_ep0199_smax0p10_lam10_seed100018_n6 can      10.0  29  10   6    83%     3481  
+can_dp_ep0199_smax0p10_lam10_seed100024_n6 can      10.0  29  10   6    67%     3510  
+can_dp_ep0199_smax0p10_lam1_seed100000_n6  can       1.0  29  10   6    67%     3462  
+can_dp_ep0199_smax0p10_lam1_seed100006_n6  can       1.0  29  10   6    67%     3596  
+can_dp_ep0199_smax0p10_lam1_seed100012_n6  can       1.0  29  10   6    67%     3498  
+can_dp_ep0199_smax0p10_lam1_seed100018_n6  can       1.0  29  10   6    33%     3343  
+can_dp_ep0199_smax0p10_lam1_seed100024_n6  can       1.0  29  10   6    83%     3422  
+can_dp_ep0199_smax0p10_lam2_seed100000_n6  can       2.0  29  10   6    83%     3531  
+can_dp_ep0199_smax0p10_lam2_seed100006_n6  can       2.0  29  10   6    83%     3409  
+can_dp_ep0199_smax0p10_lam2_seed100012_n6  can       2.0  29  10   6    67%     3614  
+can_dp_ep0199_smax0p10_lam2_seed100018_n6  can       2.0  29  10   6    83%     3579  
+can_dp_ep0199_smax0p10_lam2_seed100024_n6  can       2.0  29  10   6    83%     3540  
+can_dp_ep0199_smax0p10_lam5_seed100000_n6  can       5.0  29  10   6    67%     3575  
+can_dp_ep0199_smax0p10_lam5_seed100006_n6  can       5.0  29  10   6    67%     3475  
+can_dp_ep0199_smax0p10_lam5_seed100012_n6  can       5.0  29  10   6    33%     3367  
+can_dp_ep0199_smax0p10_lam5_seed100018_n6  can       5.0  29  10   6    67%     3450  
+can_dp_ep0199_smax0p10_lam5_seed100024_n6  can       5.0  29  10   6   100%     3568  
+can_dp_ep0199_smax0p25_lam0_seed100000_n6  can       0.0  29  10   6    50%     3459  
+can_dp_ep0199_smax0p25_lam0_seed100006_n6  can       0.0  29  10   6    50%     3390  
+can_dp_ep0199_smax0p25_lam0_seed100012_n6  can       0.0  29  10   6    67%     3494  
+can_dp_ep0199_smax0p25_lam0_seed100018_n6  can       0.0  29  10   6    50%     3356  
+can_dp_ep0199_smax0p25_lam0_seed100024_n6  can       0.0  29  10   6    67%     3379  
+can_dp_ep0199_smax0p25_lam0p5_seed100000_n can       0.5  29  10   6    83%     3542  
+can_dp_ep0199_smax0p25_lam0p5_seed100006_n can       0.5  29  10   6    50%     3416  
+can_dp_ep0199_smax0p25_lam0p5_seed100012_n can       0.5  29  10   6    50%     3356  
+can_dp_ep0199_smax0p25_lam0p5_seed100018_n can       0.5  29  10   6    67%     3475  
+can_dp_ep0199_smax0p25_lam0p5_seed100024_n can       0.5  29  10   6    67%     3412  
+can_dp_ep0199_smax0p25_lam10_seed100000_n6 can      10.0  29  10   6    50%     3484  
+can_dp_ep0199_smax0p25_lam10_seed100006_n6 can      10.0  29  10   6    50%     3274  
+can_dp_ep0199_smax0p25_lam10_seed100012_n6 can      10.0  29  10   6    67%     3459  
+can_dp_ep0199_smax0p25_lam10_seed100018_n6 can      10.0  29  10   6   100%     3483  
+can_dp_ep0199_smax0p25_lam10_seed100024_n6 can      10.0  29  10   6    83%     3469  
+can_dp_ep0199_smax0p25_lam1_seed100000_n6  can       1.0  29  10   6    67%     3505  
+can_dp_ep0199_smax0p25_lam1_seed100006_n6  can       1.0  29  10   6    83%     3346  
+can_dp_ep0199_smax0p25_lam1_seed100012_n6  can       1.0  29  10   6    50%     3400  
+can_dp_ep0199_smax0p25_lam1_seed100018_n6  can       1.0  29  10   6    67%     3284  
+can_dp_ep0199_smax0p25_lam1_seed100024_n6  can       1.0  29  10   6    83%     3259  
+can_dp_ep0199_smax0p25_lam2_seed100000_n6  can       2.0  29  10   6    50%     3398  
+can_dp_ep0199_smax0p25_lam2_seed100006_n6  can       2.0  29  10   6    17%     3465  
+can_dp_ep0199_smax0p25_lam2_seed100012_n6  can       2.0  29  10   6    83%     3408  
+can_dp_ep0199_smax0p25_lam2_seed100018_n6  can       2.0  29  10   6    67%     3327  
+can_dp_ep0199_smax0p25_lam2_seed100024_n6  can       2.0  29  10   6    67%     3320  
+can_dp_ep0199_smax0p25_lam5_seed100000_n6  can       5.0  29  10   6    67%     3526  
+can_dp_ep0199_smax0p25_lam5_seed100006_n6  can       5.0  29  10   6    50%     3369  
+can_dp_ep0199_smax0p25_lam5_seed100012_n6  can       5.0  29  10   6    83%     3403  
+can_dp_ep0199_smax0p25_lam5_seed100018_n6  can       5.0  29  10   6    83%     3472  
+can_dp_ep0199_smax0p25_lam5_seed100024_n6  can       5.0  29  10   6    83%     3410  
+
+[sanity] FAIL=1  SUSPECT=0

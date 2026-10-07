@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 1,
+      "success_rate": 0.03333333333333333,
+      "wall_s": 1124.8196443749475,
+      "output": "/Users/aaronwen/Documents/HRTG/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_incremental_T2_square_hybrid_2026_05_28/unified_demo_1nn_lam-1.0_K-10_R-1_T2_0_square_hybrid_canonical_bank_mass1p3.json"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+[load] 530 (family,seed,lambda) cells from vast_safe_dp_nwfix_2026_06_12
+
+==========================================================================
+FLAGSHIP over-anchoring: matched-seed paired lift vs lambda0
+==========================================================================
+
+[can ep0199 s0.10]
+  lam0 -> lam1 (canonical)           n=15  Delta=+11.1pp  95%CI[ -0.0,+21.1]  sign-p=0.180  (CI includes 0)
+  lam0 -> lam0.75 (empirical peak)   n=15  Delta=+15.6pp  95%CI[ +3.3,+27.8]  sign-p=0.057  *** CI excludes 0
+
+[can ep0199 s0.25]
+  lam0 -> lam1 (canonical)           n=10  Delta=+13.3pp  95%CI[ -0.0,+25.0]  sign-p=0.109  (CI includes 0)
+  lam0 -> lam10 (empirical peak)     n=10  Delta=+16.7pp  95%CI[ -1.7,+36.7]  sign-p=0.453  (CI includes 0)
+
+[square ep0199]
+  lam0 -> lam1 (canonical)           n=15  Delta=+14.4pp  95%CI[ -3.3,+31.1]  sign-p=0.267  (CI includes 0)
+  lam0 -> lam1 (empirical peak)      n=15  Delta=+14.4pp  95%CI[ -2.2,+31.1]  sign-p=0.267  (CI includes 0)
+
+--------------------------------------------------------------------------
+POOLED across the 3 independent flagship curves (the report's claim)
+--------------------------------------------------------------------------
+  lam0 -> canonical lam1             n=40  Delta=+12.9pp  95%CI[ +4.6,+21.2]  sign-p=0.008  *** CI excludes 0
+  lam0 -> empirical peak             n=40  Delta=+15.4pp  95%CI[ +6.2,+24.6]  sign-p=0.009  *** CI excludes 0
+
+==========================================================================
+ROBUSTNESS: matched-seed paired lift (lam1 vs lam0) per shift
+==========================================================================
+
+[can ep0199]
+  nominal                            n=15  Delta=+11.1pp  95%CI[ -0.0,+21.1]  sign-p=0.180  (CI includes 0)
+  mass=1.0 fric=0.5                  n= 5  Delta=+10.0pp  95%CI[-10.0,+30.0]  sign-p=1.000  (CI includes 0)
+  mass=1.0 fric=2.0                  n= 5  Delta=+20.0pp  95%CI[+10.0,+30.0]  sign-p=0.125  *** CI excludes 0
+  mass=1.5 fric=1.0                  n= 5  Delta=+20.0pp  95%CI[ -6.7,+46.7]  sign-p=1.000  (CI includes 0)
+  mass=2.5 fric=1.0                  n= 5  Delta= -3.3pp  95%CI[-10.0, +0.0]  sign-p=1.000  (CI includes 0)
+
+[square ep0199]
+  nominal                            n=15  Delta=+14.4pp  95%CI[ -2.2,+31.1]  sign-p=0.267  (CI includes 0)
+  mass=1.0 fric=0.5                  n= 5  Delta=+23.3pp  95%CI[+10.0,+40.0]  sign-p=0.125  *** CI excludes 0
+  mass=1.0 fric=2.0                  n= 5  Delta= +3.3pp  95%CI[-13.3,+20.0]  sign-p=1.000  (CI includes 0)
+  mass=1.5 fric=1.0                  n= 5  Delta= +3.3pp  95%CI[-13.3,+20.0]  sign-p=1.000  (CI includes 0)
+  mass=2.5 fric=1.0                  n= 5  Delta= +0.0pp  95%CI[ +0.0, +0.0]  sign-p=1.000  (CI includes 0)

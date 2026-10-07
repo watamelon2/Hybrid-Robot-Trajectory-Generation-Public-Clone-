@@ -1,0 +1,2374 @@
+%==============================================================================
+% Literature Review (Accessible Version)
+% Hybrid Model-Based and Data-Driven Score Fusion
+% ECE M237: Dynamic Programming, Spring 2026
+% Author: Zihao Sun (UCLA ECE)
+%
+% Engineering-friendly version assuming multivariable calculus, linear
+% algebra, and basic probability. No measure theory.
+% Rigorous version: literature_review.tex
+%==============================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+% ── Skippable advanced-math environment ──────────────────────────────
+\newmdenv[
+  backgroundcolor=gray!6,
+  linecolor=gray!40,
+  linewidth=0.8pt,
+  roundcorner=2pt,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  skipabove=10pt,
+  skipbelow=10pt,
+  frametitle={\small\sffamily\bfseries
+    $\blacktriangleright$ Advanced Mathematics
+    \normalfont\small\itshape\ --- can be skipped on first reading},
+  frametitlebackgroundcolor=gray!18,
+  frametitleaboveskip=4pt,
+  frametitlebelowskip=4pt,
+]{advancedmath}
+\hypersetup{colorlinks=true,citecolor=blue!60!black,linkcolor=blue!60!black,
+            urlcolor=blue!60!black}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\grad}{\nabla}
+\newcommand{\divg}{\nabla\cdot}
+\newcommand{\inner}[2]{\langle #1,\,#2\rangle}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\smodel}{s_{\mathrm{mod}}}
+
+\title{\bfseries
+Literature Review: Score-Based Generative Models, \\
+Flow Matching, and Dynamic Programming for Robot Trajectory Generation}
+\author{Zihao Sun\\[2pt]
+  \small UCLA ECE --- ECE M237: Dynamic Programming (Spring 2026)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We survey the mathematical foundations of three converging threads in
+robot trajectory generation: (i)~dynamic programming and optimal control,
+(ii)~score-based diffusion and flow matching, and (iii)~stochastic
+optimal control via path-integral methods.  The main text is written for
+engineers with solid calculus, linear algebra, and basic probability.
+Sections containing rigorous measure-theoretic derivations and full
+proofs are enclosed in shaded
+\textbf{``Advanced Mathematics''} boxes and can be safely
+skipped on a first reading without losing the narrative thread.
+A self-contained \textbf{Appendix} reproduces the full
+measure-theoretic treatment---It\^o calculus, Girsanov's theorem,
+Feynman--Kac, Bellman contraction, and complete proofs of all bridge
+theorems---for reference in future course projects.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+%==============================================================================
+\section{Introduction}\label{sec:intro}
+%==============================================================================
+
+\subsection{The robot trajectory generation problem}
+
+A robot must plan a trajectory $\tau=(x_0,u_0,x_1,u_1,\ldots,x_H)$
+consisting of states~$x_k$ and controls~$u_k$ over a planning
+horizon~$H$.  A good trajectory must satisfy several competing
+objectives simultaneously:
+\begin{itemize}[nosep]
+  \item \textbf{Physical feasibility:} the trajectory must obey the
+    robot's dynamics $x_{k+1}=f(x_k,u_k)$ (joint limits, torque limits,
+    contact constraints).
+  \item \textbf{Cost minimization:} a task cost $J(\tau)$ encodes goals
+    such as reaching a target, minimizing energy, or following a
+    reference path.
+  \item \textbf{Safety:} obstacles and forbidden regions must be avoided
+    at every time step; formally, a safety set
+    $\{x:h(x)\ge 0\}$ must remain forward-invariant.
+  \item \textbf{Naturalness and diversity:} in human-interactive
+    settings, trajectories should reflect human preferences and capture
+    the multimodality of acceptable behaviors (e.g., reaching around an
+    obstacle from the left or right).
+\end{itemize}
+Classical model-based methods (trajectory optimization, MPC) excel at
+feasibility and cost minimization but produce unimodal solutions and
+require differentiable dynamics.  Purely data-driven methods
+(behavioral cloning, offline RL) capture diversity but ignore physics
+at test time, producing trajectories that may violate dynamics or
+collide with novel obstacles.  Our project bridges these two worlds.
+
+\subsection{Motivation: two paradigms and their limitations}
+
+\textbf{Data-driven score models} learn a trajectory distribution
+$p^{\mathrm{data}}$ from expert demonstrations via score-based SDEs
+\citep{song2021score} or flow-matching ODEs
+\citep{lipman2023flow,chi2023diffusionpolicy,janner2022}.
+Diffusion-based planners such as Diffuser~\citep{janner2022} and
+flow-matching methods such as FlowMP~\citep{flowmp} learn expressive
+multimodal priors from demonstrations, but provide no feasibility
+guarantees out of distribution.  Kernel-based Behavioral Score
+Diffusion~\citep{bsd} offers a training-free data-driven variant.
+These methods capture multimodal behavior but ignore robot dynamics and
+task cost at test time.
+
+\textbf{Model-based score methods.}  Model-Based Diffusion
+(MBD)~\citep{mbd} derives the score analytically from known dynamics
+$x_{k+1}=f(x_k,u_k)$ and cost $J(\tau)$ via Monte Carlo rollouts,
+guaranteeing feasibility without any learned component.  Its authors
+note that data ``can be naturally integrated'' but leave this
+unformalized---the gap our project addresses.  MBD requires no training
+data but cannot express human preference distributions and suffers
+high variance when the trajectory dimension is large or the temperature
+$\lambda$ is small.
+
+\subsection{Three bodies of literature}
+
+Our project sits at the intersection of three research threads:
+\begin{enumerate}[nosep]
+  \item \textbf{Model-based score computation:}
+    MBD~\citep{mbd} and SOCM~\citep{domingoenrich2024socm} compute or
+    learn scores from dynamics and cost, providing feasibility
+    guarantees.
+  \item \textbf{Generative trajectory planning:}
+    Diffuser~\citep{janner2022}, Diffusion
+    Policy~\citep{chi2023diffusionpolicy}, FlowMP~\citep{flowmp},
+    and BSD~\citep{bsd} learn expressive priors from demonstrations
+    via diffusion or flow matching.
+  \item \textbf{Safe generative control:}
+    SafeFlow~\citep{safeflow}, SafeDiffuser~\citep{xiao2025safediffuser},
+    $S^2$Diff~\citep{s2diff}, and related methods enforce safety via
+    control barrier functions (CBFs) or Lyapunov conditions.
+\end{enumerate}
+Further connections include classifier-free guidance as policy
+improvement~\citep{cfgrl} and optimal-control-guided flow
+matching~\citep{ocflow}.
+
+\subsection{Our approach: adaptive product-of-experts fusion}
+
+We fuse data-driven and model-based scores via a product-of-experts:
+\begin{equation}
+  \grad\log p^{\mathrm{target}}_t(\tau)
+  \;=\; s_\theta(\tau,t)
+  + \lambda(x,t)\,\smodel(\tau,t),
+  \label{eq:poe-intro}
+\end{equation}
+where the state- and time-dependent weight $\lambda(x,t)$ is designed
+to \emph{trust the data prior} in regions well covered by the training
+distribution, and to \emph{rely on the physics model} in
+out-of-distribution states.  This adaptive weighting mechanism---and
+the empirical study of the tradeoff it governs---is the primary novel
+contribution of our work.
+
+We further conjecture that in the linear-quadratic (LQ) special case,
+the model-based correction analytically reduces to the LQR gain
+$-\lambda^{-1}P_k x_k$ governed by the Discrete Algebraic Riccati
+Equation (DARE), yielding a formal bridge between generative trajectory
+modeling and classical optimal control.
+
+\subsection{Conventions}
+We work with smooth probability densities. Gradients $\grad$ are
+w.r.t.\ the state variable. Technical regularity conditions and full
+proofs are in the shaded \textbf{Advanced Mathematics} boxes
+throughout the document; these can be safely skipped on first reading.
+
+%==============================================================================
+\section{Stochastic Calculus Essentials}\label{sec:prelim}
+%==============================================================================
+
+The results in this section provide the mathematical toolkit
+underlying score-based models and stochastic optimal control. The key
+takeaways are: (i)~It\^o's formula adds a second-order correction to
+the chain rule; (ii)~the Fokker--Planck equation describes how
+densities evolve under an SDE; (iii)~Feynman--Kac converts PDEs to
+Monte Carlo problems; (iv)~Girsanov's theorem links KL divergence to
+control energy; and (v)~reversing a diffusion requires the score
+$\grad\log p_t$.
+
+\begin{advancedmath}
+
+\subsection{Brownian motion}
+
+\begin{definition}
+A $d$-dimensional Brownian motion $W_t$ starts at $W_0=0$ with:
+(i) independent increments: $W_t-W_s$ is independent of the past;
+(ii) Gaussian increments: $W_t-W_s\sim\calN(0,(t-s)I_d)$;
+(iii) continuous paths.
+\end{definition}
+
+\textbf{Key property:} $(\dd W_t)^2=\dd t$ (quadratic variation). This
+is why stochastic calculus has an extra correction term.
+
+\subsection{It\^o's formula: the stochastic chain rule}
+
+\begin{theorem}[It\^o's formula]\label{thm:ito}
+If $X_t$ satisfies $\dd X_t=\mu_t\dd t+\Sigma_t\dd W_t$ and $\varphi$
+is smooth, then:
+\begin{equation}
+  \dd\varphi(t,X_t)
+  = \Bigl[\frac{\partial\varphi}{\partial t}
+    + \mu_t^\top\grad\varphi
+    + \tfrac{1}{2}\tr(\Sigma_t\Sigma_t^\top\nabla^2\varphi)\Bigr]\dd t
+  + (\grad\varphi)^\top\Sigma_t\,\dd W_t.
+  \label{eq:ito-formula}
+\end{equation}
+\end{theorem}
+
+The $\frac{1}{2}\tr(\Sigma\Sigma^\top\nabla^2\varphi)$ is the ``It\^o
+correction''---it arises because $(\dd W)^2=\dd t$ makes a second-order
+Taylor term survive.
+
+\subsection{SDEs: existence and uniqueness}
+
+\begin{definition}
+An SDE describes a random process via
+$\dd X_t = b(t,X_t)\dd t + \sigma(t,X_t)\dd W_t$, $X_0\sim p_0$.
+\end{definition}
+
+\begin{theorem}
+If $b,\sigma$ are Lipschitz in $x$ with at most linear growth, then the
+SDE has a unique solution with continuous paths and finite moments.
+\end{theorem}
+
+This is the stochastic Picard--Lindel\"of theorem.
+
+\subsection{Fokker--Planck: how densities evolve}
+
+\begin{theorem}[Fokker--Planck]\label{thm:fp}
+If $X_t$ solves the SDE and has density $p_t(x)$, then
+\begin{equation}
+  \frac{\partial p_t}{\partial t}
+  = -\divg(b\,p_t) + \frac{1}{2}\sum_{i,j}\frac{\partial^2}{\partial x_i\partial x_j}
+    [(\sigma\sigma^\top)_{ij}\,p_t].
+  \label{eq:fp}
+\end{equation}
+\end{theorem}
+
+The first term is transport (drift pushes probability); the second is
+diffusion (noise spreads probability, like heat).
+
+\subsection{Feynman--Kac: PDEs as expectations}
+
+\begin{theorem}[Feynman--Kac]\label{thm:fk}
+The PDE $\partial_t u+b^\top\grad u+\frac{1}{2}\tr(\sigma\sigma^\top\nabla^2u)-Vu=0$,
+$u(T,x)=f(x)$, has solution
+\begin{equation}
+  u(t,x) = \E\!\left[f(X_T)\exp\!\Bigl(-\int_t^T V(X_s)\dd s\Bigr)\;\Big|\;X_t=x\right].
+  \label{eq:fk}
+\end{equation}
+\end{theorem}
+
+This converts PDEs into Monte Carlo sampling problems---the key link
+between optimal control and sampling.
+
+\subsection{Girsanov: changing drift by reweighting}
+
+\begin{theorem}[Girsanov, informal]\label{thm:girsanov}
+Reweighting paths of $\dd X_t=b\dd t+\sigma\dd W_t$ by
+$Z_T=\exp(\int_0^T\theta_s^\top\dd W_s-\frac{1}{2}\int_0^T\norm{\theta_s}^2\dd s)$
+makes $X_t$ behave as if driven by $\dd X_t=(b+\sigma\theta_t)\dd t+\sigma\dd\tilde W_t$.
+\end{theorem}
+
+\textbf{Key consequence:} The KL divergence between a controlled SDE
+$\dd X=(b+\sigma u)\dd t+\sigma\dd W$ and the uncontrolled $\dd X=b\dd t+\sigma\dd W$ is
+\begin{equation}
+  \KL(\text{controlled}\|\text{uncontrolled})=\tfrac{1}{2}\E\!\int_0^T\!\norm{u_t}^2\dd t.
+  \label{eq:kl-path}
+\end{equation}
+KL divergence \emph{equals} control energy. This is the foundation of
+path-integral control (\Cref{sec:soc}).
+
+\subsection{Time reversal}
+
+\begin{theorem}[Anderson]\label{thm:time-rev}
+The time-reversed process $\bar X_s=X_{T-s}$ of
+$\dd X_t=b\dd t+\sigma\dd W_t$ satisfies:
+\begin{equation}
+  \dd\bar X_s=[-b(T\!-\!s,\bar X_s)+\sigma\sigma^\top\!\grad\log p_{T-s}(\bar X_s)]\dd s
+  +\sigma(T\!-\!s)\dd\bar W_s.
+  \label{eq:time-rev}
+\end{equation}
+\end{theorem}
+
+To reverse a diffusion, flip the drift and add a score correction
+$\sigma\sigma^\top\grad\log p_t$. This is the mathematical basis of
+\emph{all} score-based generative models.
+
+\subsection{Relative entropy and Donsker--Varadhan}
+
+The \emph{KL divergence} (relative entropy) between two distributions is
+$\KL(\mu\|\nu)=\int\log(\dd\mu/\dd\nu)\dd\mu$.
+The \emph{Donsker--Varadhan variational formula} states:
+\[
+  -\log\E^\nu[e^{-F}]=\inf_{\mu\ll\nu}\{\E^\mu[F]+\KL(\mu\|\nu)\},
+\]
+with the infimum attained at $\dd\mu^*/\dd\nu\propto e^{-F}$.
+Together with \eqref{eq:kl-path}, this yields the KL-control identity
+used throughout stochastic optimal control (\Cref{sec:soc}).
+
+\end{advancedmath}
+
+%==============================================================================
+\section{Dynamic Programming and Optimal Control}\label{sec:dp}
+%==============================================================================
+
+\subsection{Bellman equation}
+
+For an MDP with cost $g$, transitions $P$, discount $\gamma$:
+\begin{equation}
+  V^*(x)=\min_u\{g(x,u)+\gamma\E[V^*(x')|x,u]\}.
+  \label{eq:bellman}
+\end{equation}
+Value iteration converges at rate $\gamma^k$ because the Bellman operator
+is a $\gamma$-contraction (Banach fixed-point theorem).
+
+\subsection{LQR: closed-form DP}\label{sec:lqr}
+
+\textbf{Setup.} $x_{k+1}=Ax_k+Bu_k+w_k$, $w_k\sim\calN(0,\Sigma_w)$,
+cost $J=\E[\sum_{k=0}^{H-1}(x_k^\top Qx_k+u_k^\top Ru_k)+x_H^\top Q_Hx_H]$.
+
+\begin{theorem}[Riccati]\label{thm:lqr}
+$V_k^*(x)=x^\top P_kx+c_k$ with
+\begin{equation}
+  P_k=Q+A^\top P_{k+1}A-A^\top P_{k+1}B(R+B^\top P_{k+1}B)^{-1}B^\top P_{k+1}A,
+  \quad P_H=Q_H.
+  \label{eq:dare}
+\end{equation}
+Optimal control: $u_k^*=-K_kx_k$,
+$K_k=(R+B^\top P_{k+1}B)^{-1}B^\top P_{k+1}A$.
+\end{theorem}
+
+\begin{advancedmath}
+\begin{proof}[Derivation]
+Backward induction. Assume $V_{k+1}^*=x^\top P_{k+1}x+c_{k+1}$.
+Substituting into the Bellman equation gives a quadratic in $u$:
+$u^\top(R+B^\top P_{k+1}B)u+2u^\top B^\top P_{k+1}Ax+\dots$ Setting
+$\partial/\partial u=0$ yields $K_k$; substituting back gives $P_k$.
+$P_k\succeq 0$ follows from a Schur-complement identity.
+If $(A,B)$ is stabilizable and $(A,Q^{1/2})$ detectable,
+$P_\infty=\lim P_k$ solves the DARE uniquely in $\succeq 0$, and
+$A-BK_\infty$ is Schur stable.
+\end{proof}
+
+\begin{remark}[Value as log-density]\label{rem:logdensity}
+Define $\nu_k(x)\propto\exp(-V_k^*(x)/\lambda)$. This is Gaussian with
+$\grad\log\nu_k(x)=-\lambda^{-1}P_kx$. The score of the cost-shaped
+Boltzmann distribution is the \emph{negated Riccati gain}. This is the
+origin of \Cref{thm:lq-score}.
+\end{remark}
+\end{advancedmath}
+
+\begin{advancedmath}
+\subsection{HJB equation}
+
+For continuous-time $\dd x=f(x,u)\dd t+\sigma(x)\dd W_t$, cost
+$J=\E[\int g\dd t+h(x_T)]$:
+\begin{equation}
+  -\partial_tV=\min_u\{g(x,u)+(\grad V)^\top f(x,u)
+    +\tfrac{1}{2}\tr(\sigma\sigma^\top\nabla^2V)\},\quad V(T,x)=h(x).
+  \label{eq:hjb}
+\end{equation}
+Under bounded continuous coefficients and uniform parabolicity
+($\sigma\sigma^\top\succeq\epsilon I$), $V$ is the unique bounded
+\emph{viscosity solution} of the HJB.
+
+\subsection{Pontryagin Maximum Principle}\label{sec:pmp}
+
+For deterministic $\dot x=f(x,u)$, cost $J=\int g\dd t+h(x_T)$, the
+Hamiltonian $\mathcal{H}=g+\lambda^\top f$ yields:
+\begin{equation}
+  \dot x=\partial_\lambda\mathcal{H},\quad
+  \dot\lambda=-\partial_x\mathcal{H},\quad
+  u^*=\argmin_u\mathcal{H},\quad
+  \lambda_T=\grad h(x_T).
+  \label{eq:pmp}
+\end{equation}
+OC-Flow \citep{ocflow} applies PMP to guide flow matching:
+$u^*=-\lambda_t$ with adjoint
+$\dot\lambda=-(\partial_xv_\theta)^\top\lambda$.
+\end{advancedmath}
+
+%==============================================================================
+\section{Score-Based Generative Modeling}\label{sec:score}
+%==============================================================================
+
+The core idea behind score-based generative models is remarkably
+simple: if we know how to gradually \emph{destroy} structure in data
+by adding noise, we can learn to \emph{reverse} that process to
+generate new data from pure noise.  Concretely, given a dataset of
+trajectories (or images, or any high-dimensional objects), we define a
+forward process that progressively corrupts each sample with Gaussian
+noise until it becomes indistinguishable from random noise.  Then we
+train a neural network to predict the ``score''---the gradient of the
+log-density $\grad\log p_t(x)$---at every noise level.  Once trained,
+this score network lets us simulate the reverse process, starting from
+random noise and iteratively denoising to produce a clean sample.
+
+\textbf{DDPM}~\citep{ho2020ddpm} introduced this framework in
+discrete time: a $T$-step forward chain adds noise
+$x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\epsilon$ (with
+$\epsilon\sim\calN(0,I)$), and a learned denoiser $\epsilon_\theta$
+predicts the noise to reverse each step.  The training loss is simply
+$\E\norm{\epsilon-\epsilon_\theta(x_t,t)}^2$.  The connection to
+scores is $\grad\log p_t=-\epsilon/\sqrt{1-\bar\alpha_t}$, so the
+noise predictor \emph{is} a scaled score estimator.
+
+\textbf{Score SDE}~\citep{song2021score} unifies DDPM and related
+methods under a continuous-time SDE framework, enabling exact
+likelihood computation and principled guidance.  We summarize the key
+components below.
+
+\begin{algorithm}[ht]
+\caption{DDPM Training}\label{alg:ddpm-train}
+\begin{algorithmic}[1]
+\Require Dataset $\mathcal{D}$, noise schedule $\{\bar\alpha_t\}_{t=1}^T$, network $\epsilon_\theta$
+\Repeat
+  \State Sample $x_0\sim\mathcal{D}$, $t\sim\mathrm{Uniform}(\{1,\ldots,T\})$, $\epsilon\sim\calN(0,I)$
+  \State $x_t\gets\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\epsilon$ \Comment{Add noise}
+  \State Take gradient step on $\norm{\epsilon-\epsilon_\theta(x_t,t)}^2$
+\Until{converged}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+\caption{DDPM Sampling (Reverse Process)}\label{alg:ddpm-sample}
+\begin{algorithmic}[1]
+\Require Trained $\epsilon_\theta$, noise schedule $\{\alpha_t,\bar\alpha_t,\sigma_t\}$
+\State $x_T\sim\calN(0,I)$
+\For{$t=T,T-1,\ldots,1$}
+  \State $z\sim\calN(0,I)$ if $t>1$, else $z=0$
+  \State $\mu_t\gets\frac{1}{\sqrt{\alpha_t}}\bigl(x_t-\frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\bigr)$
+  \State $x_{t-1}\gets\mu_t+\sigma_tz$ \Comment{Denoise one step}
+\EndFor
+\State \Return $x_0$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{advancedmath}
+\subsection{Forward SDE: adding noise}
+
+Start with data $p_0$. Add noise:
+$\dd X_t=f(t)X_t\dd t+g(t)\dd W_t$. After time $T$,
+$p_T\approx\calN(0,\sigma_T^2I)$.
+
+\begin{definition}[Score]
+$s_p(x):=\grad\log p(x)=\grad p(x)/p(x)$. It points toward higher
+probability. $\E_p[s_p]=0$.
+\end{definition}
+
+\subsection{Reverse SDE: generating by denoising}
+
+\begin{theorem}[Anderson \citep{anderson1982reverse}]
+The reversed process satisfies
+$\dd\bar X_s=[-f\bar X_s+g^2\grad\log p_{T-s}(\bar X_s)]\dd s+g\dd\bar W_s$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Let $q_s(x):=p_{T-s}(x)$. The Fokker--Planck equation for $p_t$
+becomes (with a sign flip from $t=T-s$):
+$\partial_s q_s=\divg[(b-\sigma\sigma^\top\grad\log q_s)q_s]
++\tfrac12\divg[\sigma\sigma^\top\grad q_s]$,
+which is the Fokker--Planck equation of the reverse SDE.
+Weak uniqueness of SDEs determines the law from its marginal PDE.
+\end{proof}
+
+If we know the score $\grad\log p_t$ at every noise level, we can
+start from noise and simulate backward to get exact data samples.
+
+\subsection{Denoising score matching}
+
+\begin{theorem}[Vincent \citep{vincent2011connection}]\label{thm:dsm}
+The intractable loss $\E_{p_t}\norm{s_\theta-\grad\log p_t}^2$ equals
+(up to a constant) the computable denoising loss:
+\begin{equation}
+  \mathcal{L}_{\mathrm{DSM}}
+  =\E_{t,x_0,x_t}\norm{s_\theta(x_t,t)-\grad_{x_t}\log p_{t|0}(x_t|x_0)}^2.
+  \label{eq:dsm}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Expand the square in both sides. The cross terms are equal because
+$\grad p_t(x_t)=\int p_0(x_0)p_{t|0}(x_t|x_0)\grad_{x_t}\log p_{t|0}\,\dd x_0$,
+so $-\int s_\theta\cdot\grad p_t=-\E_{(X_0,X_t)}[s_\theta^\top\grad\log p_{t|0}]$.
+The squared-norm terms that do not involve $\theta$ contribute only a
+$\theta$-independent constant.
+\end{proof}
+
+For Gaussian noise $p_{t|0}=\calN(\alpha_tx_0,\sigma_t^2I)$, the target
+is $\grad\log p_{t|0}=-(x_t-\alpha_tx_0)/\sigma_t^2$: just point back
+toward the clean data. This is DDPM's $\epsilon$-prediction loss
+\citep{ho2020ddpm}.
+
+\subsection{Probability-flow ODE}
+
+\begin{theorem}[\citet{song2021score}]
+The ODE $\dd x_t=[f(t)x_t-\frac{1}{2}g(t)^2\grad\log p_t(x_t)]\dd t$
+produces the same marginals $p_t$ as the SDE, without randomness.
+\end{theorem}
+
+\begin{proof}
+Fokker--Planck gives
+$\partial_tp_t=-\divg([b-\tfrac12\sigma\sigma^\top\grad\log p_t]p_t)$,
+which is the continuity equation of this ODE. Uniqueness of
+continuity-equation solutions with Lipschitz vector fields gives the
+result.
+\end{proof}
+
+This enables exact likelihoods and bridges diffusion to flow matching.
+\end{advancedmath}
+
+%==============================================================================
+\section{Flow Matching}\label{sec:fm}
+%==============================================================================
+
+Flow matching~\citep{lipman2023flow} is a recent alternative to
+diffusion that has rapidly become the preferred generative backbone
+for trajectory planning.  While diffusion models add and remove noise
+via stochastic processes (SDEs), flow matching learns a
+\emph{deterministic} velocity field that transports noise to data
+along smooth paths.  This seemingly small difference has major
+practical consequences:
+
+\begin{itemize}[nosep]
+  \item \textbf{Faster sampling:} flow matching generates samples by
+    solving an ODE, which requires only 10--20 neural-network
+    evaluations with an adaptive-step solver, compared to 100+ denoising
+    steps for DDPM.
+  \item \textbf{Simulation-free training:} the training loss is a simple
+    regression that does not require simulating the forward or reverse
+    process during training.
+  \item \textbf{Straight paths:} the default linear interpolant
+    $x_t=(1-t)x_0+tx_1$ produces nearly straight transport paths, which
+    are easier for the network to learn and faster for ODE solvers to
+    integrate.
+  \item \textbf{Natural connection to optimal transport:}
+    straight-line interpolation can be shown to approximate the optimal
+    transport map between the noise and data distributions
+    \citep{tong2023ot}, minimizing the total displacement.
+\end{itemize}
+
+\subsection{Idea: transport noise to data via a velocity field}
+
+The goal is to learn a velocity field $v_\theta(x,t)$ such that the
+ODE $\dot x_t=v_\theta(x_t,t)$ transports the noise distribution
+$p_0=\calN(0,I)$ to the data distribution $p_1=p^{\mathrm{data}}$
+over the time interval $t\in[0,1]$.  The density along this flow
+satisfies the \emph{continuity equation}:
+$\partial_tp_t+\divg(p_tv_t)=0$.
+
+Intuitively, think of $v_t$ as a wind field that blows particles of
+probability from where they start (noise) to where they should end
+(data).  At time $t=0$, particles are spread out as a Gaussian cloud;
+at time $t=1$, they have been transported to match the data
+distribution.
+
+\subsection{Conditional flow matching (CFM)}
+
+The marginal flow-matching loss
+$\E_{t,x\sim p_t}\norm{v_\theta(x,t)-v_t(x)}^2$ is intractable
+because computing the true velocity $v_t$ requires knowledge of the
+full marginal density $p_t$.  The breakthrough of conditional flow
+matching (CFM) is to bypass this by training on \emph{per-sample}
+conditional paths.
+
+\begin{theorem}[\citet{lipman2023flow}]\label{thm:cfm}
+For straight-line paths $x_t=(1-t)x_0+tx_1$ ($x_0\sim\calN(0,I)$,
+$x_1\sim p_{\mathrm{data}}$) with conditional velocity $v_t=x_1-x_0$,
+the computable loss
+\begin{equation}
+  \mathcal{L}_{\mathrm{CFM}}
+  =\E_{t,x_0,x_1}\norm{v_\theta(x_t,t)-(x_1-x_0)}^2
+  \label{eq:cfm}
+\end{equation}
+has the same gradients as the intractable marginal loss.
+\end{theorem}
+
+This is the flow-matching analog of denoising score matching: we
+cannot compute the true marginal target, but training against the
+conditional target (which is trivially computable---just the difference
+$x_1-x_0$) gives the same optimal network.
+
+\begin{advancedmath}
+\begin{proof}[Proof of \Cref{thm:cfm}]
+Define the marginal $p_t(x)=\int p_t(x|x_1)q(x_1)\dd x_1$ and
+the marginal velocity
+$v_t(x)=\E[v_t(x|X_1)\mid X_t=x]=\int v_t(x|x_1)\frac{p_t(x|x_1)q(x_1)}{p_t(x)}\dd x_1$.
+Differentiate $p_t$ in $t$ and apply the conditional continuity
+equation: $\partial_tp_t(x)=-\int\divg_x[p_t(x|x_1)v_t(x|x_1)]q(x_1)\dd x_1$.
+Swapping divergence and integral gives $\partial_tp_t=-\divg(p_tv_t)$,
+confirming that the marginal velocity generates $(p_t)$.
+For the loss identity, expand both squared norms; the LHS cross term
+$-2\E_{t,p_t}\langle v_\theta,v_t\rangle$ equals the RHS cross term by
+substituting \eqref{eq:cfm} and using Fubini.
+\end{proof}
+
+\textbf{Optimal transport geometry.}
+The straight-line interpolant $x_t=(1-t)x_0+tx_1$ approximates
+the $W_2$-geodesic (displacement interpolation) between the noise
+and data distributions.  OT-CFM~\citep{tong2023ot} aligns noise to
+data via a mini-batch optimal transport coupling, further straightening
+the learned flow and reducing the number of integration steps needed.
+\end{advancedmath}
+
+\textbf{Training recipe.}  Sample a time $t\sim\mathrm{Uniform}(0,1)$,
+a noise vector $x_0\sim\calN(0,I)$, and a data sample $x_1$ from the
+dataset.  Form the interpolant $x_t=(1-t)x_0+tx_1$.  Train the
+network to predict the velocity $x_1-x_0$ from $x_t$ and $t$.
+
+\textbf{Sampling recipe.}  Start from $x_0\sim\calN(0,I)$ and solve
+$\dot x_t=v_\theta(x_t,t)$ forward from $t=0$ to $t=1$ using any ODE
+solver (e.g., Euler, RK45).  The endpoint $x_1$ is the generated
+sample.
+
+\begin{algorithm}[ht]
+\caption{Conditional Flow Matching (CFM) --- Training}\label{alg:cfm-train}
+\begin{algorithmic}[1]
+\Require Dataset $\mathcal{D}$, velocity network $v_\theta$
+\Repeat
+  \State Sample $x_1\sim\mathcal{D}$ (data), $x_0\sim\calN(0,I)$ (noise), $t\sim\mathrm{Uniform}(0,1)$
+  \State $x_t\gets(1-t)\,x_0+t\,x_1$ \Comment{Linear interpolant}
+  \State $v^*\gets x_1-x_0$ \Comment{Target velocity}
+  \State Take gradient step on $\norm{v_\theta(x_t,t)-v^*}^2$
+\Until{converged}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+\caption{Flow Matching --- Sampling (Euler method)}\label{alg:fm-sample}
+\begin{algorithmic}[1]
+\Require Trained $v_\theta$, number of steps $N$, step size $\Delta t=1/N$
+\State $x_0\sim\calN(0,I)$
+\For{$n=0,1,\ldots,N-1$}
+  \State $t\gets n\cdot\Delta t$
+  \State $x_{t+\Delta t}\gets x_t+\Delta t\cdot v_\theta(x_t,t)$ \Comment{Euler step along velocity field}
+\EndFor
+\State \Return $x_1$ \Comment{Generated sample}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+\caption{Guided Flow Matching --- Sampling with Score Correction}\label{alg:guided-fm}
+\begin{algorithmic}[1]
+\Require Trained $v_\theta$, guidance score $s_\mathrm{guide}(\cdot,t)$, weight $\lambda$, steps $N$
+\State $x_0\sim\calN(0,I)$
+\For{$n=0,1,\ldots,N-1$}
+  \State $t\gets n/N$
+  \State $v_\mathrm{guided}\gets v_\theta(x_t,t)+\lambda\cdot s_\mathrm{guide}(x_t,t)$ \Comment{Fused velocity}
+  \State $x_{t+1/N}\gets x_t+\frac{1}{N}\cdot v_\mathrm{guided}$
+\EndFor
+\State \Return $x_1$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Why flow matching is preferred for robotics}
+
+For robot trajectory planning, flow matching offers several specific
+advantages over diffusion:
+\begin{enumerate}[nosep]
+  \item \textbf{Speed:} real-time planning requires generating
+    trajectories in milliseconds; the 5--10$\times$ speedup of ODE-based
+    sampling over iterative denoising is critical for deployment.
+  \item \textbf{Determinism:} the ODE sampler is deterministic given an
+    initial noise vector, making it easier to analyze, debug, and
+    reproduce trajectories.
+  \item \textbf{Smooth trajectories:} the straight-line interpolant
+    naturally produces smooth paths in trajectory space, which is
+    desirable for robot motion.
+  \item \textbf{Easy guidance:} modifying the velocity field by adding a
+    correction term $v_\theta+u_t$ is straightforward and connects
+    directly to optimal control theory (\Cref{sec:pmp}).
+\end{enumerate}
+
+\begin{advancedmath}
+\subsection{Flow matching and scores are interconvertible}
+
+If the same $p_t$ is generated by velocity $v_t$ and SDE drift $b_t$
+with diffusion $g_t$:
+$\grad\log p_t=\frac{2}{g_t^2}[v_t-b_t]$.
+This means flow matching and score-based diffusion are two views of the
+same underlying density evolution---any result about scores can be
+translated to velocities and vice versa.
+\end{advancedmath}
+%==============================================================================
+\section{Stochastic Optimal Control}\label{sec:soc}
+%==============================================================================
+
+Stochastic optimal control (SOC) connects generative modeling to
+control theory. The key insight: computing the optimal control for a
+diffusion process is equivalent to computing a score function via
+Monte Carlo sampling.  This is why MBD's importance-weighted rollout
+strategy works.
+
+\begin{advancedmath}
+
+\subsection{Setup}
+
+Controlled SDE: $\dd X_t=[b(X_t)+\sigma(X_t)u_t]\dd t+\sigma(X_t)\dd W_t$,
+cost $J=\E[\int(\Psi+\frac{1}{2}\norm{u}^2)\dd t+h(X_T)]$.
+
+HJB: $-\partial_tV+\Psi+b^\top\grad V+\frac{1}{2}\tr(\sigma\sigma^\top\nabla^2V)
+-\frac{1}{2}\norm{\sigma^\top\grad V}^2=0$,
+optimal control: $u^*=-\sigma^\top\grad V$.
+
+\subsection{Kappen's log-transform}
+
+Set $\phi=\exp(-V)$. Non-linear HJB becomes \emph{linear}:
+$-\partial_t\phi+\Psi\phi+b^\top\grad\phi+\frac{1}{2}\tr(\sigma\sigma^\top\nabla^2\phi)=0$.
+
+\begin{proof}[Derivation]
+Substitute $V=-\log\phi$ into the HJB. Using
+$\grad V=-\grad\phi/\phi$ and
+$\tfrac12\tr(\sigma\sigma^\top\nabla^2 V)
+=-\tfrac12\tr(\sigma\sigma^\top\nabla^2\phi)/\phi+\tfrac12\norm{\sigma^\top\grad\phi}^2/\phi^2$,
+the quadratic gradient term $-\tfrac12\norm{\sigma^\top\grad V}^2$
+cancels, producing the linear PDE.
+\end{proof}
+
+By Feynman--Kac:
+$\phi(t,x)=\E^{\mathbb{Q}_{t,x}}[\exp(-h(X_T)-\int\Psi\dd s)]$,
+so $V=-\log\phi$ is a path integral over uncontrolled rollouts.
+
+\textbf{KL-control / Donsker--Varadhan identity.}
+Let $\mathbb{Q}$ be the uncontrolled path measure and $\mathbb{P}^u$
+the controlled one. Then
+\[
+  V(0,x)=\inf_{\mathbb{P}^u\ll\mathbb{Q}}\Bigl\{\E^{\mathbb{P}^u}
+  \bigl[h(X_T)+\!\!\int_0^T\!\Psi\,\dd s\bigr]+\KL(\mathbb{P}^u\|\mathbb{Q})\Bigr\},
+\]
+with optimizer $\dd\mathbb{P}^{u^*}/\dd\mathbb{Q}\propto
+\exp(-h(X_T)-\int_0^T\Psi\,\dd s)$.
+This is the variational identity underlying MBD and SOCM: the target
+trajectory distribution is the optimally-tilted path measure, and its
+score is the gradient of the log of this Feynman--Kac expectation.
+
+This is the justification for MBD's Monte Carlo score estimator.
+
+\subsection{SOCM: the score--control bridge}
+
+\citet{domingoenrich2024socm} show that the optimal control has the
+form $u^*(t,x)=\E^{\mathbb{Q}_{t,x}}[Z\,\xi_{t,T}]$ where
+$Z=\exp(-h(X_T)-\int_t^T\Psi\,\dd s)/\phi(t,x)$ is an explicit
+path-functional weight and $\xi_{t,T}$ is a stochastic integral of
+Brownian increments. Consequently $u^*$ minimizes
+$\min_\theta\E_{t,x}\norm{u_\theta(t,x)-Z\,\xi_{t,T}}^2$
+over \emph{uncontrolled} rollouts---structurally identical to DSM
+(\Cref{thm:dsm}).
+The optimal control is a conditional expectation of weighted path
+functionals, just as the optimal score is a conditional expectation of
+$\grad\log p_{t|0}$. This is the cleanest formal bridge between score
+matching and stochastic optimal control, and it justifies estimating
+$\smodel$ by Monte Carlo rollouts of the system dynamics.
+\end{advancedmath}
+
+%==============================================================================
+\section{Product-of-Experts Guidance}\label{sec:poe}
+%==============================================================================
+
+\subsection{Classifier guidance}
+
+From Bayes' rule:
+$\grad\log p(x|y)=\grad\log p(x)+\grad\log p(y|x)$.
+Posterior score = prior score + likelihood score. This is additive in
+scores, multiplicative in densities \citep{dhariwal2021diffusion}.
+
+\begin{advancedmath}
+\subsection{Guidance as regularized optimization}
+
+The minimizer of $\E_q[J]+\beta^{-1}\KL(q\|p)$ is
+$q^*\propto p\exp(-\beta J)$ with score
+$\grad\log q^*=\grad\log p-\beta\grad J$.
+Temperature $\beta$ trades off prior vs.\ cost.  This places
+classifier guidance in the same variational framework as the
+KL-control identity (\Cref{sec:soc}): guidance is entropy-regularized
+policy optimization on the data distribution.
+
+\subsection{CFG and policy improvement}
+
+CFG: $\tilde s=(1+w)s_\theta(x,t,y)-ws_\theta(x,t,\varnothing)$.
+\citet{cfgrl} show this is a policy improvement operator: the induced
+policy $\pi(a|s)\propto\hat\pi(a|s)\exp(wA(s,a))$ has expected return
+monotone in $w$.
+\end{advancedmath}
+
+\subsection{Product-of-experts for trajectories}
+
+Our fusion \eqref{eq:poe-intro} is the score of
+$p^{\mathrm{target}}\propto p^{\mathrm{data}}\cdot[p^{\mathrm{mod}}]^\lambda$
+where $p^{\mathrm{mod}}\propto\exp(-J/\lambda)$.
+$\lambda\to\infty$: pure optimization. $\lambda\to 0$: behavioral cloning.
+
+\begin{algorithm}[ht]
+\caption{Product-of-Experts Fused Trajectory Generation (Ours)}\label{alg:poe-fused}
+\begin{algorithmic}[1]
+\Require Trained data score $s_\theta$, dynamics $f$, cost $J$, temperature $\lambda$,
+  adaptive weight $\lambda(x,t)$, MC samples $M$, steps $N$
+\State $\tau_0\sim\calN(0,I)$ \Comment{Start from noise (flow-matching convention)}
+\For{$n=0,1,\ldots,N-1$}
+  \State $t\gets n/N$
+  \State $s_\mathrm{data}\gets s_\theta(\tau_t,t)$
+    \Comment{Data-driven score (from trained flow/diffusion model)}
+  \State $s_\mathrm{mod}\gets\textsc{MBD-Score}(\tau_t,f,J,\lambda,t,M)$
+    \Comment{Model-based score (\Cref{alg:mbd-score})}
+  \State $s_\mathrm{fused}\gets s_\mathrm{data}+\lambda(\tau_t,t)\cdot s_\mathrm{mod}$
+    \Comment{Adaptive fusion}
+  \State $\tau_{t+1/N}\gets\tau_t+\frac{1}{N}\cdot v(s_\mathrm{fused},\tau_t,t)$
+    \Comment{ODE step with fused velocity}
+\EndFor
+\State \Return $\tau_1$ \Comment{Fused trajectory: diverse, feasible, low-cost}
+\end{algorithmic}
+\end{algorithm}
+
+%==============================================================================
+\section{Model-Based Diffusion}\label{sec:mbd}
+%==============================================================================
+
+Model-Based Diffusion (MBD)~\citep{mbd} is the direct precursor of
+the model-based score in our project.  The key insight is that for
+systems with known dynamics, we do \emph{not} need a neural network to
+compute the score---we can compute it analytically from the dynamics
+model and cost function using Monte Carlo sampling.
+
+\textbf{How MBD works (overview).}
+\begin{enumerate}[nosep]
+  \item Define a Boltzmann trajectory distribution
+    $p^{\mathrm{mod}}(\tau)\propto\exp(-J(\tau)/\lambda)$ that assigns
+    high probability to low-cost, dynamically feasible trajectories.
+  \item Noise this distribution via a variance-preserving SDE (the same
+    noising used in DDPM) to get noised densities $p^{\mathrm{mod}}_t$.
+  \item At each denoising step, compute the score
+    $\grad\log p^{\mathrm{mod}}_t$ via Tweedie's formula and
+    importance-weighted sampling over dynamically feasible rollouts.
+  \item Use this score in the standard reverse SDE to generate
+    trajectories.
+\end{enumerate}
+
+MBD solves Maze2D, Block Push, and Franka manipulation benchmarks
+\emph{without any demonstration data}, matching or outperforming
+Diffuser~\citep{janner2022} (which requires offline data).
+
+\begin{advancedmath}
+\subsection{Tweedie's formula}
+
+If $x_t=\alpha_tx_0+\sigma_t\epsilon$, $\epsilon\sim\calN(0,I)$:
+\begin{equation}
+  \grad\log p_t(x_t)=\frac{\alpha_t}{\sigma_t^2}(\E[x_0|x_t]-x_t/\alpha_t).
+  \label{eq:tweedie}
+\end{equation}
+The score points from noisy $x_t$ toward the expected clean $x_0$.
+This is the computational workhorse of MBD: if we can estimate the
+posterior mean $\E[x_0|x_t]$, we immediately have the score.
+
+\begin{proof}
+$\grad\log p_t(x_t)=\E[\grad_{x_t}\log p_{t|0}(x_t|X_0)\mid X_t=x_t]$.
+Substituting $\grad\log p_{t|0}=-\sigma_t^{-2}(x_t-\alpha_tx_0)$ gives
+$\grad\log p_t=(\alpha_t/\sigma_t^2)(\E[X_0|X_t]-x_t/\alpha_t)$.
+\end{proof}
+
+\subsection{MBD's Monte Carlo estimator}
+
+Estimate $\E[x_0|x_t]$ via importance sampling:
+$\widehat\E[x_0|x_t]=\sum w_i\tau_0^{(i)}/\sum w_i$,
+$w_i=\exp(-J(\tau_0^{(i)})/\lambda)$. This is ``importance-weighted MPC
+in score space.''
+
+\begin{proposition}[CLT for self-normalized IS]
+Assume $\E_q[w^2\tau_0^2]<\infty$ and $\E_q[w]>0$. Then
+$\sqrt{M}(\widehat\E[X_0|X_t]-\E[X_0|X_t])\to\calN(0,\Sigma)$ in
+distribution, with $\Sigma=\Var_q[w(\tau_0-\E[X_0|X_t])]/\E_q[w]^2$.
+In particular the MBD score estimator via
+\eqref{eq:tweedie} is consistent at rate $M^{-1/2}$.
+\end{proposition}
+
+As $\lambda\to\infty$, the Boltzmann distribution concentrates on
+$\argmin J$ and the reverse SDE reduces to smoothed, annealed
+gradient descent on $J$---exactly sampling-based MPC.
+\end{advancedmath}
+
+\begin{algorithm}[ht]
+\caption{MBD: Model-Based Score Estimation at Denoising Step $k$}\label{alg:mbd-score}
+\begin{algorithmic}[1]
+\Require Noised trajectory $\tau_k$, dynamics $f$, cost $J$, temperature $\lambda$,
+  noise schedule $\bar\alpha_k$, number of MC samples $M$
+\State $\mu_\mathrm{post}\gets\tau_k/\sqrt{\bar\alpha_k}$,\quad
+  $\sigma^2_\mathrm{post}\gets(1-\bar\alpha_k)/\bar\alpha_k$
+  \Comment{Gaussian posterior $q(\tau_0|\tau_k)$}
+\For{$i=1,\ldots,M$}
+  \State Sample $\tau_0^{(i)}\sim\calN(\mu_\mathrm{post},\sigma^2_\mathrm{post}I)$
+  \State Project $\tau_0^{(i)}$ onto dynamically feasible trajectories via $f$
+    \Comment{Forward rollout}
+  \State $w_i\gets\exp(-J(\tau_0^{(i)})/\lambda)$ \Comment{Boltzmann weight}
+\EndFor
+\State $\widehat\E[\tau_0|\tau_k]\gets\sum_{i=1}^M w_i\tau_0^{(i)}\big/\sum_{i=1}^M w_i$
+  \Comment{Self-normalized IS}
+\State $\hat s_\mathrm{mod}\gets\frac{\sqrt{\bar\alpha_k}}{1-\bar\alpha_k}
+  \bigl(\widehat\E[\tau_0|\tau_k]-\tau_k/\sqrt{\bar\alpha_k}\bigr)$
+  \Comment{Tweedie's formula}
+\State \Return $\hat s_\mathrm{mod}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+\caption{MBD: Full Trajectory Generation (No Training Data)}\label{alg:mbd-full}
+\begin{algorithmic}[1]
+\Require Dynamics $f$, cost $J$, temperature $\lambda$, MC samples $M$, denoising steps $T$
+\State $\tau_T\sim\calN(0,I)$ \Comment{Start from noise}
+\For{$k=T,T-1,\ldots,1$}
+  \State $\hat s_\mathrm{mod}\gets\textsc{MBD-Score}(\tau_k,f,J,\lambda,\bar\alpha_k,M)$
+    \Comment{\Cref{alg:mbd-score}}
+  \State $\mu_k\gets\frac{1}{\sqrt{\alpha_k}}\bigl(\tau_k+(1-\alpha_k)\hat s_\mathrm{mod}\bigr)$
+    \Comment{Reverse SDE mean}
+  \State $\tau_{k-1}\sim\calN(\mu_k,\sigma_k^2 I)$
+\EndFor
+\State \Return $\tau_0$ \Comment{Feasible, low-cost trajectory}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Limitations of MBD}
+
+MBD relies entirely on the analytical model and therefore has several
+important limitations that motivate our project:
+\begin{itemize}[nosep]
+  \item \textbf{No multimodality:} MBD cannot capture
+    demonstration-informed behaviors---it produces feasible but
+    potentially unnatural trajectories (e.g., ignoring preferred grasps
+    or learned obstacle-avoidance heuristics).
+  \item \textbf{Model dependence:} it assumes a sufficiently accurate
+    dynamics model, which may fail under model mismatch, unmodeled
+    contacts, or sim-to-real transfer.
+  \item \textbf{Variance:} the importance-sampling score estimator
+    suffers high variance when $\lambda$ is small (peaked Boltzmann) or
+    the trajectory dimension is large.
+  \item \textbf{No safety guarantees:} MBD provides no formal
+    collision-avoidance guarantees.
+\end{itemize}
+Our work targets these limitations: the learned prior restores
+distributional richness, the adaptive $\lambda(x,t)$ weighting remains
+robust under model imperfection, and the data score anchors the
+denoising process to reduce variance.  We additionally plan to
+incorporate a CBF-derived score term~\citep{safeflow} for safety.
+
+%==============================================================================
+\section{The LQ--Riccati--Score Bridge}\label{sec:lqbridge}
+%==============================================================================
+
+\begin{theorem}[LQ model-score = Riccati feedback]\label{thm:lq-score}
+Under LQR with $\Sigma_w=0$, define
+$p^{\mathrm{mod}}(\tau|x_0)\propto\exp(-J(\tau)/\lambda)$. Then at the
+optimal trajectory:
+\begin{equation}
+  \boxed{\grad_{x_k}\log p^{\mathrm{mod}}(\tau|x_0)\big|_{\tau^*}
+  =-\frac{1}{\lambda}P_kx_k^*}
+  \label{eq:lq-score}
+\end{equation}
+\end{theorem}
+
+\textbf{Interpretation.}
+The fused drift becomes $s_\theta(\tau,t)-P_kx_k$: learned data score
++ classical LQR feedback. As $\lambda\to\infty$, we get pure LQR.
+As $\lambda\to 0$, pure behavioral cloning. Modern generative models
+\emph{contain} classical optimal control as a limiting case.
+If the data distribution is also Gaussian, the fused process is
+linear-Gaussian and exactly solvable (our analytic testbed).
+
+\begin{advancedmath}
+\begin{proof}[Full derivation of \Cref{thm:lq-score}]
+\textbf{Step 1 (Quadratic cost in control space).}
+Under $x_{k+1}=Ax_k+Bu_k$, unrolling gives $x_k=\Phi_kx_0+\Gamma_ku$
+with $\Phi_k,\Gamma_k$ linear operators. Substituting into
+$J=\sum x_k^\top Qx_k+u_k^\top Ru_k+x_H^\top Q_Hx_H$ yields
+$J(\tau)=u^\top Mu+2u^\top Nx_0+x_0^\top Lx_0$ with
+$M\succ 0$. Therefore
+$p^{\mathrm{mod}}(u|x_0)=\calN(-M^{-1}Nx_0,\;\lambda M^{-1})$:
+a Gaussian centered at the LQR solution.
+
+\textbf{Step 2 (Bellman factorization).}
+Fix $k$ and condition on $x_{<k}$. The cost-to-go
+$J_{k\to H}(x_k,u_{k:H-1})$ decomposes as
+$x_k^\top P_kx_k+\delta_k^\top M_k\delta_k$
+where $\delta_k=u_{k:H-1}-u^*_{k:H-1}(x_k)$ and $M_k\succ 0$
+(Riccati Hessian). No linear cross term exists because
+$u^*_{k:H-1}$ is the unconstrained minimizer. Hence
+$\int\exp(-J_{k\to H}/\lambda)\,\dd u_{k:H-1}
+\propto\exp(-x_k^\top P_kx_k/\lambda)$.
+
+\textbf{Step 3 (Score computation).}
+$p^{\mathrm{mod}}(x_k|x_{<k})\propto\exp(-x_k^\top P_kx_k/\lambda)$
+as a function of $x_k$, so
+$\grad_{x_k}\log p^{\mathrm{mod}}=-\lambda^{-1}\cdot 2P_kx_k$.
+Under the convention $J=\tfrac12\sum(x^\top Qx+u^\top Ru)$ the
+factor of 2 is absorbed, giving \eqref{eq:lq-score}.
+\end{proof}
+
+\begin{corollary}[Linear-Gaussian fused ODE]
+Under a Gaussian data distribution
+$p_t^{\mathrm{data}}(\tau)=\calN(\mu_t,\Sigma_t)$ (straight-line CFM)
+and the LQ model distribution, the product-of-experts drift is affine:
+$s_\theta+\lambda\smodel=-\Sigma_t^{-1}(\tau-\mu_t)-P_\tau\tau$,
+where $P_\tau=\mathrm{blkdiag}(P_0,\ldots,P_H)$.
+The fused generative process is itself linear-Gaussian and exactly
+solvable: its trajectory is the LQG-smoothed MAP estimate.
+\end{corollary}
+\end{advancedmath}
+
+%==============================================================================
+\section{Generative Models for Robot Trajectory Planning}\label{sec:robotplan}
+%==============================================================================
+
+This section introduces the key algorithms that apply diffusion and
+flow matching to robot trajectory planning.  Each method generates
+trajectories by sampling from a learned distribution, but they differ
+in architecture, conditioning mechanism, and what knowledge (data,
+dynamics, or both) they exploit.
+
+\subsection{Diffuser: the first diffusion-based planner}
+
+Diffuser~\citep{janner2022} was the first to use a denoising diffusion
+model for long-horizon planning.  It trains a DDPM over entire
+trajectories $\tau=(s_0,a_0,s_1,a_1,\ldots,s_H)$ from an offline
+dataset.  At test time, the start state is enforced by
+\emph{inpainting} (clamping known values at each denoising step), and
+reward maximization uses classifier guidance: the denoising mean is
+shifted by the gradient of a learned return estimator.  Diffuser
+matches or outperforms Decision Transformer and CQL on D4RL benchmarks
+while naturally handling goal-conditioned and reward-maximizing
+settings with the same model.
+
+\textbf{Relevance:} Our project generalizes Diffuser's guidance
+mechanism from a learned reward gradient to an analytically computed
+model-based score derived from dynamics and cost.
+
+\begin{algorithm}[ht]
+\caption{Diffuser: Classifier-Guided Trajectory Planning}\label{alg:diffuser}
+\begin{algorithmic}[1]
+\Require Trained trajectory denoiser $\epsilon_\theta$, learned return estimator $\mathcal{J}$,
+  guidance weight $w$, start state $s_0$, noise schedule $\{\bar\alpha_k,\sigma_k\}$
+\State $\tau_T\sim\calN(0,I)$ \Comment{Sample noise trajectory}
+\For{$k=T,T-1,\ldots,1$}
+  \State $\mu_k\gets\frac{1}{\sqrt{\alpha_k}}\bigl(\tau_k-\frac{1-\alpha_k}{\sqrt{1-\bar\alpha_k}}\epsilon_\theta(\tau_k,k)\bigr)$
+    \Comment{Predicted mean}
+  \State $\tilde\mu_k\gets\mu_k+w\cdot\sigma_k^2\cdot\grad_{\tau_k}\mathcal{J}(\mu_k)$
+    \Comment{Classifier guidance}
+  \State $\tau_{k-1}\sim\calN(\tilde\mu_k,\sigma_k^2 I)$
+  \State $\tau_{k-1}[s_0]\gets s_0$ \Comment{Inpainting: clamp start state}
+\EndFor
+\State \Return $\tau_0$ \Comment{Planned trajectory}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Diffusion Policy: action-chunk diffusion for manipulation}
+
+Diffusion Policy~\citep{chi2023diffusionpolicy} applies DDPM to
+generate \emph{action chunks} $(a_t,\ldots,a_{t+H_a})$ conditioned on
+the current observation $o_t$ (visual or low-dimensional).  It uses a
+1D temporal U-Net architecture, treating the action horizon as the
+spatial dimension, with observations injected via FiLM conditioning or
+cross-attention.  A receding-horizon scheme applies the first
+$H_e<H_a$ actions and re-plans.
+
+Diffusion Policy achieves state-of-the-art on 11/12 RoboMimic and
+Push-T tasks, including real-robot bimanual manipulation, and captures
+multimodal behavior (e.g., going left or right around an obstacle) that
+deterministic policies and VAEs miss.
+
+\textbf{Relevance:} Our data-driven score $s_\theta$ is trained in the
+same framework; we add the model-based correction on top.
+
+\begin{algorithm}[ht]
+\caption{Diffusion Policy: Receding-Horizon Action Generation}\label{alg:diffpolicy}
+\begin{algorithmic}[1]
+\Require Trained conditional denoiser $\epsilon_\theta(\cdot,\cdot|o)$, observation $o_t$,
+  action horizon $H_a$, execution horizon $H_e<H_a$
+\State $a^T_{t:t+H_a}\sim\calN(0,I)$ \Comment{Initialize noise action chunk}
+\For{$k=T,T-1,\ldots,1$}
+  \State $a^{k-1}_{t:t+H_a}\gets\mathrm{DDPMStep}(\epsilon_\theta,a^k_{t:t+H_a},k,o_t)$
+    \Comment{Conditional denoising step}
+\EndFor
+\State Execute $a^0_{t},a^0_{t+1},\ldots,a^0_{t+H_e-1}$ on robot \Comment{Execute first $H_e$ actions}
+\State Observe new $o_{t+H_e}$; repeat from line 1 \Comment{Receding horizon}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{MPD: cost-guided motion planning diffusion}
+
+Motion Planning Diffusion (MPD)~\citep{carvalho2023mpd} trains a
+trajectory diffusion model on collision-free paths, then at test time
+composes the score with cost-function gradients:
+$\tilde s=s_\theta+\lambda\grad c(\hat\tau_0)$,
+where $\hat\tau_0$ is the Tweedie-denoised ``clean'' trajectory
+estimate and $c$ includes collision, smoothness, and goal costs.
+
+\textbf{Relevance:} MPD's cost-guidance mechanism is a predecessor of
+our model-based score.  The difference: MPD uses ad hoc cost gradients
+on the Tweedie estimate; we compute $\smodel$ from the full Boltzmann
+distribution and analyze it rigorously.
+
+\subsection{FlowMP: flow matching for robot motion}
+
+FlowMP~\citep{flowmp} is one of the first methods to apply conditional
+flow matching to robot motion planning.  It trains a CFM model on
+demonstration trajectories represented as sequences of joint
+configurations, conditioned on context (start, goal, obstacles).  A key
+feature is the second-order formulation: the velocity field operates on
+a phase-space representation $(\tau,\dot\tau)$, encouraging kinematic
+feasibility.
+
+FlowMP achieves 5--10$\times$ faster inference than Diffusion Policy
+and MPD with comparable success rates on Franka manipulation benchmarks,
+validating flow matching as a practical alternative to DDPM for robot
+planning.
+
+\textbf{Relevance:} Our project uses the same CFM backbone and augments
+it with model-based score guidance.
+
+\subsection{GoalFlow: one-step flow matching for driving}
+
+GoalFlow~\citep{xing2025goalflow} applies conditional flow matching to
+end-to-end autonomous driving with goal-conditioned trajectory
+generation.  Its key innovation is one-step distillation: a student
+network is trained to produce high-quality trajectories in a single
+forward pass (rather than 10--20 ODE steps), enabling real-time
+deployment at under 50ms per trajectory.
+
+\textbf{Relevance:} GoalFlow shows flow matching scales to
+high-dimensional driving scenarios.  The one-step distillation idea
+could accelerate our fused generative process at deployment time.
+
+\subsection{BSD: training-free kernel-based scores}
+
+Behavioral Score Diffusion (BSD)~\citep{bsd} computes the trajectory
+score directly from a dataset using kernel density estimation (KDE),
+requiring no neural network training.  Given a dataset
+$\{\tau^{(i)}\}_{i=1}^N$, the score at noise level $t$ is available in
+closed form as a weighted sum over data points---essentially a soft
+nearest-neighbor regression in the noised space.
+
+\textbf{Relevance:} BSD provides a training-free ``behavioral score''
+$s_\text{data}$ that can be directly fused with MBD's model-based score
+via the product-of-experts mechanism.  This is the simplest realization
+of our score-fusion framework.
+
+\subsection{OC-Flow: optimal-control guidance for flow matching}
+
+OC-Flow~\citep{ocflow} guides a pre-trained flow-matching model at
+test time to maximize a reward $R(x_1)$ without retraining.  It views
+the flow ODE $\dot x=v_\theta+u_t$ as a deterministic optimal control
+problem and solves it via the Pontryagin Maximum Principle: a
+forward-backward sweep computes the adjoint $\lambda_t$ and sets
+$u_t=-\lambda_t$.
+
+\textbf{Relevance:} OC-Flow shows how PMP provides a principled
+guidance mechanism for flow matching.  Our project uses a different
+(score-based) guidance mechanism, but OC-Flow's adjoint framework could
+serve as an alternative or complement.
+
+\begin{algorithm}[ht]
+\caption{OC-Flow: PMP-Based Guidance for Flow Matching}\label{alg:ocflow}
+\begin{algorithmic}[1]
+\Require Trained $v_\theta$, reward $R$, steps $N$, number of iterations $K$
+\State $x_0\sim\calN(0,I)$; $u_t^{(0)}\gets 0\;\forall t$ \Comment{Initialize}
+\For{$\mathrm{iter}=1,\ldots,K$}
+  \State \textbf{Forward pass:} integrate $\dot x_t=v_\theta(x_t,t)+u_t^{(\mathrm{iter}-1)}$
+    from $t=0$ to $t=1$
+  \State Compute $\grad R(x_1)$ \Comment{Reward gradient at endpoint}
+  \State \textbf{Backward pass:} set $\lambda_1=-\grad R(x_1)$; integrate
+    $\dot\lambda_t=-(\partial_x v_\theta)^\top\lambda_t$ backward from $t=1$ to $t=0$
+  \State $u_t^{(\mathrm{iter})}\gets-\lambda_t\;\forall t$ \Comment{Optimal control from costate}
+\EndFor
+\State Integrate $\dot x_t=v_\theta(x_t,t)+u_t^{(K)}$ from $t=0$ to $t=1$
+\State \Return $x_1$ \Comment{Reward-guided sample}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{SOCM: the score--control bridge}
+
+Stochastic Optimal Control Matching (SOCM)~\citep{domingoenrich2024socm}
+solves high-dimensional stochastic optimal control problems by
+expressing the optimal control as a conditional expectation under the
+uncontrolled diffusion---structurally identical to denoising score
+matching.  This provides the formal bridge between score matching and
+optimal control: computing model-based scores via Monte Carlo rollouts
+(exactly MBD's strategy) is justified by the Feynman--Kac identity.
+
+\subsection{CFGRL: guidance as policy improvement}
+
+\citet{cfgrl} provide a theoretical analysis of classifier-free
+guidance (CFG) as a policy improvement operator.  CFG with weight $w$
+effectively samples from a tilted policy
+$\pi_w(a|s)\propto\pi_\theta(a|s)\cdot(\pi_\theta(a|s)/\pi_\theta(a))^w$,
+which upweights actions most relevant to the current state.  They prove
+a soft policy improvement guarantee for sufficiently small $w$, with
+mode collapse for large $w$---predicting the
+$\lambda$-sensitivity we hypothesize in our framework.
+
+\subsection{DIAL-MPC: diffusion-style annealing for MPC}
+
+DIAL-MPC~\citep{dialmpc} applies diffusion-style annealed sampling to
+model predictive control for torque-level locomotion.  Rather than using
+a learned score network, it uses the MPC cost function directly within
+a multi-step annealing scheme inspired by the denoising process.  This
+demonstrates that the diffusion framework can enhance classical
+sampling-based MPC even without a learned component.
+
+%==============================================================================
+\section{Safety in Generative Planning}\label{sec:safety}
+%==============================================================================
+
+A major limitation of unconstrained generative planners is that they
+provide no formal safety guarantees.  Several recent methods address
+this by incorporating \emph{control barrier functions} (CBFs) or
+\emph{Lyapunov functions} into the generative process.
+
+\textbf{Control barrier functions (CBFs).}
+A CBF defines a safe set $\mathcal{C}=\{x:h(x)\ge 0\}$ and enforces
+forward invariance via the condition
+$\dot h(x,u)\ge-\alpha(h(x))$ for a class-$\mathcal{K}$ function
+$\alpha$.  Applied to a velocity field $v$, this becomes a linear
+constraint on $v$ (since $\dot h=\grad h^\top v$), yielding a
+quadratic program (QP) at each integration step.
+
+\subsection{SafeFlow}
+
+SafeFlow~\citep{safeflow} projects the flow-matching velocity through a
+CBF safety filter at each ODE step:
+$v_\text{safe}=\argmin_v\norm{v-v_\theta}^2$ subject to the CBF
+constraint.  This achieves zero constraint violations on navigation and
+Franka planning benchmarks.
+
+\begin{algorithm}[ht]
+\caption{SafeFlow: CBF-Filtered Flow Matching Sampling}\label{alg:safeflow}
+\begin{algorithmic}[1]
+\Require Trained $v_\theta$, barrier function $h$ (safe set: $h(x)\ge 0$),
+  class-$\mathcal{K}$ function $\alpha$, steps $N$
+\State $x_0\sim\calN(0,I)$
+\For{$n=0,1,\ldots,N-1$}
+  \State $t\gets n/N$
+  \State $v_\mathrm{nom}\gets v_\theta(x_t,t)$ \Comment{Nominal velocity from flow model}
+  \If{$\grad h(x_t)^\top v_\mathrm{nom}<-\alpha(h(x_t))$} \Comment{CBF violated?}
+    \State Solve QP: $v_\mathrm{safe}\gets\argmin_{v}\norm{v-v_\mathrm{nom}}^2$
+      \textbf{ s.t.} $\grad h(x_t)^\top v\ge-\alpha(h(x_t))$
+  \Else
+    \State $v_\mathrm{safe}\gets v_\mathrm{nom}$ \Comment{Already safe}
+  \EndIf
+  \State $x_{t+1/N}\gets x_t+\frac{1}{N}\cdot v_\mathrm{safe}$
+\EndFor
+\State \Return $x_1$ \Comment{Safe trajectory}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{SafeFlowMatcher}
+
+SafeFlowMatcher~\citep{yang2025safeflowmatcher} improves upon
+SafeFlow's single-step projection with a predictor-corrector scheme: a
+tentative Euler step followed by a CBF-QP correction.  This handles
+cases where a single projection is insufficient due to large step sizes
+or high curvature of the safe boundary.
+
+\subsection{UniConFlow}
+
+UniConFlow~\citep{yang2025uniconflow} handles multiple heterogeneous
+constraints (obstacles, joint limits, kinematic feasibility) in a
+unified QP at each ODE step, achieving certified constraint
+satisfaction across all constraint types simultaneously.
+
+\subsection{SafeDiffuser}
+
+SafeDiffuser~\citep{xiao2025safediffuser} embeds CBF-based safety
+\emph{within} the DDPM denoising loop rather than as a post-hoc filter.
+At each denoising step, after the score-based update, a differentiable
+CBF correction is applied to the Tweedie estimate.  A control Lyapunov
+function (CLF) additionally ensures progress toward the goal, yielding
+a CBF-CLF-QP at each step.
+
+\subsection{$S^2$Diff: Lyapunov-guided diffusion}
+
+$S^2$Diff~\citep{s2diff} constructs a score function from a known
+Lyapunov function $V(x)$ for the system $\dot x=f(x)+g(x)u$, pointing
+in the direction that decreases the Lyapunov function most rapidly.
+This provides provably stable control on nonlinear systems without any
+demonstration data.
+
+\textbf{Relevance:} $S^2$Diff is the closest relative to our
+model-based score concept: both derive an analytical score from system
+properties.  $S^2$Diff uses a Lyapunov function (stability) while we
+use a cost function (optimality).  In the LQ case, both reduce to the
+Riccati matrix.
+
+\subsection{Safety in our framework}
+
+In our product-of-experts framework, a CBF constraint can be absorbed
+as an additional score term:
+$s_\text{CBF}=\grad\log\mathbf{1}[h(\tau)\ge 0]$, or more practically,
+as a post-processing QP layer (SafeFlow-style) applied after the fused
+score update.  We plan to incorporate SafeFlow's CBF mechanism as an
+independent safety module.
+
+%==============================================================================
+\section{Robotics Survey}\label{sec:survey}
+%==============================================================================
+
+\begin{table}[ht]
+  \centering\small
+  \caption{Trajectory methods by score source.}
+  \label{tab:survey}
+  \begin{tabular}{p{3cm}cccp{3.8cm}}
+    \toprule
+    \textbf{Method} & \textbf{Year} & \textbf{Data} & \textbf{Model} & \textbf{Formalism}\\
+    \midrule
+    Diffuser \citep{janner2022} & 2022 & \checkmark & $\times$ & classifier guidance\\
+    Diff.\ Policy \citep{chi2023diffusionpolicy} & 2023 & \checkmark & $\times$ & DDPM actions\\
+    MPD \citep{carvalho2023mpd} & 2023 & \checkmark & partial & cost guidance\\
+    OC-Flow \citep{ocflow} & 2025 & \checkmark & reward & PMP adjoint\\
+    FlowMP \citep{flowmp} & 2025 & \checkmark & $\times$ & second-order CFM\\
+    SafeFlow \citep{safeflow} & 2025 & \checkmark & safety & CBF-guided FM\\
+    SafeFlowMatcher \citep{yang2025safeflowmatcher} & 2025 & \checkmark & safety & CBF-QP\\
+    UniConFlow \citep{yang2025uniconflow} & 2025 & \checkmark & both & constrained FM\\
+    GoalFlow \citep{xing2025goalflow} & 2025 & \checkmark & $\times$ & one-step CFM\\
+    SafeDiffuser \citep{xiao2025safediffuser} & 2025 & \checkmark & safety & CBF denoiser\\
+    $S^2$Diff \citep{s2diff} & 2025 & $\times$ & \checkmark & Lyapunov score\\
+    SOCM \citep{domingoenrich2024socm} & 2024 & --- & \checkmark & SOC matching\\
+    MBD \citep{mbd} & 2024 & opt. & \checkmark & MC score\\
+    BSD \citep{bsd} & 2026 & \checkmark & $\times$ & kernel score\\
+    CFGRL \citep{cfgrl} & 2025 & \checkmark & --- & CFG as PI\\
+    DIAL-MPC \citep{dialmpc} & 2025 & $\times$ & \checkmark & annealed sampling MPC\\
+    \textbf{Ours} & 2026 & \checkmark & \checkmark & PoE + LQ-Riccati\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+No prior work formalizes score-level product-of-experts fusion, studies
+the $\lambda$-tradeoff quantitatively, or connects the model-based
+correction to the DARE.  Existing methods either use data alone
+(Diffuser, Diffusion Policy, FlowMP, BSD), physics alone (MBD,
+$S^2$Diff, DIAL-MPC), or add safety post-hoc (SafeFlow, SafeDiffuser).
+Our framework unifies all three: a learned data prior, an analytical
+model-based score, and a CBF safety layer, combined via principled
+score-level fusion with a theoretically grounded connection to
+classical optimal control.
+
+%==============================================================================
+\section{Open Questions}\label{sec:open}
+%==============================================================================
+
+\textbf{Confident:} PoE decomposition is well-posed;
+\Cref{thm:lq-score} is analytically verifiable; MBD's estimator is
+consistent.
+
+\textbf{Uncertain:} (i) Convergence of fused ODE in the nonlinear case;
+(ii) MC score variance in high dimensions; (iii) calibration between
+$p^{\mathrm{data}}$ and $p^{\mathrm{mod}}$; (iv) $\lambda$-sensitivity.
+
+\textbf{Fallback:} Frame around (1) \Cref{thm:lq-score}, (2) empirical
+$\lambda$-characterization, (3) failure-mode analysis.
+
+%##############################################################################
+% APPENDICES: Rigorous Mathematical Reference
+%##############################################################################
+\appendix
+\newpage
+\part*{Appendices: Rigorous Mathematical Reference}
+\addcontentsline{toc}{part}{Appendices: Rigorous Mathematical Reference}
+
+\noindent\emph{The following appendices reproduce the full
+measure-theoretic treatment from the original rigorous literature
+review. They are included as a self-contained reference for future
+course projects and are not required for understanding the main text.
+All random elements live on a complete filtered probability space
+$(\Omega,\calF,(\calF_t),\Prob)$ satisfying the usual conditions.}
+
+%==============================================================================
+\section{Stochastic Calculus and SDEs}\label{app:stoch}
+%==============================================================================
+
+\subsection{Brownian motion and filtrations}
+
+\begin{definition}[$d$-dimensional Brownian motion]\label{def:bm}
+A measurable process $W=(W_t)_{t\ge 0}$, $W_t:\Omega\to\R^d$, adapted to
+$(\calF_t)$, is an $(\calF_t)$-\emph{Brownian motion} if (i) $W_0=0$ a.s.;
+(ii) for $0\le s<t$, $W_t-W_s$ is independent of $\calF_s$ and distributed
+as $\calN(0,(t-s)I_d)$; (iii) the paths $t\mapsto W_t(\omega)$ are
+continuous for a.e.\ $\omega$.
+\end{definition}
+
+\begin{proposition}[Quadratic variation]\label{prop:qv}
+For every partition $\pi=\{0=t_0<\dots<t_n=t\}$ of $[0,t]$, with
+$\norm{\pi}=\max_i(t_{i+1}-t_i)$,
+\[
+  \sum_{i=0}^{n-1}(W_{t_{i+1}}-W_{t_i})(W_{t_{i+1}}-W_{t_i})^\top\ \xrightarrow{\,\Prob\,}\ tI_d
+  \quad\text{as }\norm{\pi}\to 0.
+\]
+In particular, $d$-dimensional Brownian paths have infinite total
+variation on any interval but finite quadratic variation
+$[W]_t=tI_d$, which is the source of the second-order correction in
+It\^o's formula.
+\end{proposition}
+
+\subsection{The It\^o integral}\label{app:itoint}
+
+Let $\calH^2_T$ denote the Hilbert space of progressively measurable
+$\R^{d\times m}$-valued processes $H$ with
+$\norm{H}_{\calH^2}^2:=\E\int_0^T\tr(HH^\top)\,\dd t<\infty$.
+
+\begin{definition}[It\^o integral]\label{def:itoint}
+For a simple process
+$H_t=\sum_{i=0}^{n-1}\xi_i\ind_{(t_i,t_{i+1}]}(t)$, with $\xi_i\in
+\calF_{t_i}$ and $\E\norm{\xi_i}^2<\infty$, set
+\[
+  \int_0^T H_t\,\dd W_t\;:=\;\sum_{i=0}^{n-1}\xi_i\,(W_{t_{i+1}}-W_{t_i}).
+\]
+The map $H\mapsto\int_0^{\cdot}H_t\dd W_t$ extends by continuity to all of
+$\calH^2_T$, yielding a continuous linear isometry into
+$L^2(\Omega;C([0,T];\R^d))$:
+\begin{equation}
+  \E\Bigl\lVert\int_0^T H_t\,\dd W_t\Bigr\rVert^2
+  = \E\int_0^T\tr(H_tH_t^\top)\,\dd t
+  \qquad(\text{It\^o isometry}).
+  \label{eq:ito-isometry}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Martingale property]\label{thm:ito-mart}
+For $H\in\calH^2_T$ the process $M_t:=\int_0^t H_s\,\dd W_s$ is an
+$(\calF_t)$-martingale with continuous paths, $\E M_t=0$, and
+$[M]_t=\int_0^t H_sH_s^\top\,\dd s$.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Check these properties for simple integrands (direct computation) and pass
+to the $\calH^2_T$-limit using Doob's $L^2$ inequality; see
+\citep[Ch.~3]{karatzas1991bm}.
+\end{proof}
+
+\begin{remark}[Beyond $\calH^2$]
+The integral extends to the class of locally square-integrable progressively
+measurable processes by a standard localization argument; the resulting
+integral is a continuous local martingale \citep[Ch.~3.2]{karatzas1991bm}.
+\end{remark}
+
+\subsection{It\^o's formula}
+
+\begin{theorem}[It\^o--Doeblin formula]\label{thm:itoformula}
+Let $X_t$ be an It\^o process
+\[
+  X_t = X_0 + \int_0^t\mu_s\,\dd s + \int_0^t\Sigma_s\,\dd W_s,
+\]
+with $\mu$ progressively measurable, $\mu\in L^1(\dd t\otimes\Prob)$, and
+$\Sigma\in\calH^2_T$. For every $\varphi\in C^{1,2}([0,T]\times\R^d)$,
+\begin{align}
+  \varphi(t,X_t)
+  &= \varphi(0,X_0)
+  + \int_0^t\!\Bigl[\partial_s\varphi(s,X_s)+\inner{\mu_s}{\grad\varphi(s,X_s)}
+                +\tfrac12\tr(\Sigma_s\Sigma_s^\top\nabla^2\varphi(s,X_s))\Bigr]\dd s\nonumber\\
+  &\quad + \int_0^t\inner{\grad\varphi(s,X_s)}{\Sigma_s\,\dd W_s}.
+  \label{eq:itoformula}
+\end{align}
+\end{theorem}
+\begin{proof}[Proof sketch]
+Localize so that $\Sigma$ is simple and $\varphi$ has compact support,
+apply a second-order Taylor expansion on a partition, and use
+\Cref{prop:qv}: the first-order term gives $\mu$ and $\Sigma\dd W$, and the
+second-order Taylor term contributes only the trace against
+$\dd[X]_s=\Sigma_s\Sigma_s^\top\dd s$; the cross terms vanish by the
+$o(\dd t)$ magnitude of $(\dd W_t)^{\otimes 3}$. Pass to the limit in
+$L^2$; see \citep[Thm.~3.3.6]{karatzas1991bm}.
+\end{proof}
+
+\begin{example}[Log-density computation]\label{ex:dlogp}
+If $X_t$ has density $p_t\in C^{1,2}$ and we set
+$\varphi(t,x)=\log p_t(x)$, then \eqref{eq:itoformula} gives
+\[
+  \dd\log p_t(X_t)
+  = \Bigl[\partial_t\log p_t+\inner{\mu_t}{\grad\log p_t}
+    +\tfrac12\tr(\Sigma_t\Sigma_t^\top\nabla^2\log p_t)\Bigr]\dd t
+    +\inner{\grad\log p_t}{\Sigma_t\dd W_t},
+\]
+which is the fundamental identity behind score-based models: the drift
+term reduces under Fokker--Planck to a compensator, and
+the Brownian part is the ``score noise'' that denoising score matching
+targets.
+\end{example}
+
+\subsection{SDEs: existence and uniqueness}
+
+\begin{definition}[Strong solution]\label{def:strong}
+Given Borel-measurable $b:[0,T]\times\R^d\to\R^d$,
+$\sigma:[0,T]\times\R^d\to\R^{d\times m}$, an initial law $p_0$, and a
+fixed $(\calF_t)$-Brownian motion $W$, a \emph{strong solution} of
+\begin{equation}
+  \dd X_t = b(t,X_t)\,\dd t + \sigma(t,X_t)\,\dd W_t,\qquad X_0\sim p_0,
+  \label{eq:ito-sde}
+\end{equation}
+is an $(\calF_t)$-adapted continuous process $X$ with
+$\int_0^T(\norm{b(t,X_t)}+\norm{\sigma(t,X_t)}^2)\dd t<\infty$ a.s.\ such
+that $X_t=X_0+\int_0^t b\,\dd s+\int_0^t\sigma\,\dd W$ for every
+$t\in[0,T]$ a.s.
+\end{definition}
+
+\begin{theorem}[Existence, uniqueness, and moment bounds]\label{thm:sde}
+Assume
+\begin{enumerate}[label=(\roman*),leftmargin=*,itemsep=1pt]
+  \item \textup{(Lipschitz)} there exists $L<\infty$ such that for all
+        $t,x,y$: $\norm{b(t,x)-b(t,y)}+\norm{\sigma(t,x)-\sigma(t,y)}\le L\norm{x-y}$;
+  \item \textup{(Linear growth)} $\norm{b(t,x)}+\norm{\sigma(t,x)}\le L(1+\norm{x})$;
+  \item \textup{(Initial moment)} $\E\norm{X_0}^2<\infty$.
+\end{enumerate}
+Then \eqref{eq:ito-sde} admits a unique strong solution $X\in
+L^2(\Omega;C([0,T];\R^d))$, and
+\begin{equation}
+  \E\!\left[\sup_{t\le T}\norm{X_t}^2\right]
+  \le C_T(1+\E\norm{X_0}^2)
+  \label{eq:sde-moment}
+\end{equation}
+for some constant $C_T$ depending only on $L,T$.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Picard iteration: set $X^{(0)}_t\equiv X_0$,
+$X^{(n+1)}_t=X_0+\int_0^tb(s,X^{(n)}_s)\dd s+\int_0^t\sigma(s,X^{(n)}_s)\dd W_s$.
+By Gr\"onwall's lemma and Burkholder--Davis--Gundy,
+$\E\sup_{t\le T}\norm{X^{(n+1)}_t-X^{(n)}_t}^2\le(CT)^n/n!\cdot\E\sup\norm{X^{(1)}-X^{(0)}}^2$,
+a summable sequence, yielding $L^2$-convergence to a strong solution.
+Uniqueness follows from Gr\"onwall applied to the difference of two
+solutions. The moment bound \eqref{eq:sde-moment} is a second application
+of BDG + Gr\"onwall; see \citep[Thm.~5.2.1, Thm.~5.2.9]{oksendal2003sde} or
+\citep[Thm.~2.9]{karatzas1991bm}.
+\end{proof}
+
+\begin{definition}[Weak solution and the martingale problem]\label{def:weak}
+A \emph{weak solution} of \eqref{eq:ito-sde} is a pair $(X,W)$ on
+\emph{some} filtered probability space such that $X$ satisfies the
+integral identity in \Cref{def:strong}. Equivalently,
+$(X,W)$ is a weak solution iff $X$ solves the
+\emph{martingale problem} for the generator $\calL_t$ below,
+i.e.\ for every $\varphi\in C_c^\infty(\R^d)$,
+\[
+  M^\varphi_t := \varphi(X_t)-\varphi(X_0)-\int_0^t\calL_s\varphi(X_s)\,\dd s
+  \text{ is an $(\calF_t)$-martingale.}
+\]
+Weak existence and uniqueness hold under strictly weaker hypotheses than
+strong existence/uniqueness (e.g.\ continuous coefficients + uniform
+non-degeneracy suffice; \citealt[Thm.~5.4.22]{karatzas1991bm}).
+\end{definition}
+
+\begin{proposition}[Strong Markov property]\label{prop:markov}
+Under the hypotheses of \Cref{thm:sde}, the unique strong solution
+$(X_t)$ is a strong Markov process. For every bounded Borel $f$ and
+stopping time $\tau\le T$,
+$\E[f(X_{\tau+h})|\calF_\tau]=\E[f(X_h^{\tau,X_\tau})]$,
+where $X^{s,x}$ denotes the solution started at $(s,x)$.
+\end{proposition}
+
+\subsection{The infinitesimal generator and Kolmogorov equations}
+
+\begin{definition}[Generator]\label{def:generator}
+The \emph{infinitesimal generator} of the SDE \eqref{eq:ito-sde} is the
+second-order differential operator acting on $\varphi\in C_c^2(\R^d)$ by
+\begin{equation}
+  \calL_t\varphi(x)
+  = \inner{b(t,x)}{\grad\varphi(x)}
+  + \tfrac12\tr\!\bigl(\sigma\sigma^\top(t,x)\,\nabla^2\varphi(x)\bigr).
+  \label{eq:generator}
+\end{equation}
+Its $L^2$-adjoint
+$\calL_t^*\psi(x)=-\divg(b\psi)+\tfrac12\sum_{ij}\partial^2_{ij}[(\sigma\sigma^\top)_{ij}\psi]$
+is the generator of the forward equation.
+\end{definition}
+
+\begin{theorem}[Kolmogorov forward / Fokker--Planck]\label{thm:fp}
+If $(X_t)$ solves \eqref{eq:ito-sde} and admits a density
+$p_t\in C^{1,2}([0,T]\times\R^d)$, then $p_t$ satisfies
+\begin{equation}
+  \partial_t p_t(x) \;=\; \calL_t^* p_t(x)
+  \;=\;-\divg\!\bigl(b(t,x)\,p_t(x)\bigr)
+  +\tfrac12\sum_{ij}\partial^2_{x_ix_j}\!\bigl[(\sigma\sigma^\top)_{ij}(t,x)\,p_t(x)\bigr].
+  \label{eq:fp}
+\end{equation}
+\end{theorem}
+\begin{proof}
+For $\varphi\in C_c^\infty(\R^d)$, apply It\^o's formula
+\eqref{eq:itoformula} to $\varphi(X_t)$ and take expectations: the
+stochastic-integral term is a martingale with mean zero, so
+$\partial_t\E\varphi(X_t)=\E\calL_t\varphi(X_t)=\int\calL_t\varphi\cdot p_t\dd x$.
+Integrate by parts twice on the right to transfer the differential operator
+onto $p_t$; this yields $\int\varphi\cdot\calL_t^*p_t\,\dd x=\partial_t\int\varphi p_t\dd x$,
+which by density of $C_c^\infty$ gives \eqref{eq:fp} pointwise.
+\end{proof}
+
+\begin{theorem}[Kolmogorov backward]\label{thm:kbe}
+Let $u(t,x):=\E[f(X_T)\mid X_t=x]$ for bounded $f\in C(\R^d)$. Under the
+hypotheses of \Cref{thm:sde} and suitable regularity of $b,\sigma$
+(e.g.\ H\"older coefficients), $u\in C^{1,2}([0,T)\times\R^d)$ solves
+\begin{equation}
+  -\partial_t u(t,x) = \calL_t u(t,x),\qquad u(T,x)=f(x).
+  \label{eq:kbe}
+\end{equation}
+\end{theorem}
+\begin{proof}[Proof sketch]
+By the Markov property $u(t,X_t)$ is a martingale. Apply It\^o's formula:
+the drift of $\dd u(t,X_t)$ is $(\partial_t u+\calL_t u)\dd t$, which must
+vanish for the process to be a martingale.
+\end{proof}
+
+\subsection{Feynman--Kac representation}
+
+\begin{theorem}[Feynman--Kac]\label{thm:feynman-kac}
+Suppose $u\in C^{1,2}([0,T]\times\R^d)$ is bounded and solves the linear
+parabolic PDE with potential $V\in C_b$ and source $g\in C_b$:
+\begin{equation}
+  \partial_t u + \calL_t u - V(x)u + g(x) = 0,\qquad u(T,x)=f(x).
+  \label{eq:fk-pde}
+\end{equation}
+Then for every $(t,x)\in[0,T]\times\R^d$,
+\begin{equation}
+  u(t,x) = \E^{\,t,x}\!\left[f(X_T)\,e^{-\int_t^T V(X_s)\dd s}
+           + \!\int_t^T g(X_s)\,e^{-\int_t^s V(X_r)\dd r}\dd s\right],
+  \label{eq:fk}
+\end{equation}
+where $\E^{t,x}$ is the expectation under the law of $(X_s)_{s\ge t}$
+with $X_t=x$, driven by \eqref{eq:ito-sde}.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Apply It\^o's formula to $Y_s:=u(s,X_s)\exp(-\int_t^s V(X_r)\dd r)$ on
+$[t,T]$. The drift of $\dd Y_s$ is
+$[(\partial_s u+\calL u-Vu)+g-g]\cdot e^{-\int V}\dd s$ after adding and
+subtracting the source term, which by \eqref{eq:fk-pde} equals
+$-g(X_s)e^{-\int V}\dd s$. Integrating from $t$ to $T$, taking
+expectations, and using the terminal condition yields \eqref{eq:fk}.
+\end{proof}
+
+\begin{remark}[Two specializations used later]\label{rem:fk-cases}
+Taking $V\equiv 0,g\equiv 0$ recovers the Kolmogorov-backward
+representation $u(t,x)=\E^{t,x}[f(X_T)]$. Taking
+$V=\Psi,g=0,f=e^{-h}$ and renaming $u=\phi$ recovers exactly the
+Feynman--Kac expression underlying Kappen's linear HJB
+(\Cref{thm:kappen}).
+\end{remark}
+
+\subsection{Girsanov's theorem and tilted path measures}\label{app:girsanov}
+
+\begin{theorem}[Girsanov]\label{thm:girsanov}
+Let $W$ be an $(\calF_t)$-Brownian motion on $(\Omega,\calF,\Prob)$ and
+$\theta:[0,T]\times\Omega\to\R^d$ a progressively measurable process
+satisfying \emph{Novikov's condition}
+\begin{equation}
+  \E\!\left[\exp\!\Bigl(\tfrac12\!\int_0^T\!\norm{\theta_s}^2\dd s\Bigr)\right]<\infty.
+  \label{eq:novikov}
+\end{equation}
+Define the \emph{stochastic exponential}
+\begin{equation}
+  Z_T := \exp\!\Bigl(\!\int_0^T\!\inner{\theta_s}{\dd W_s}
+                     -\tfrac12\!\int_0^T\!\norm{\theta_s}^2\dd s\Bigr).
+  \label{eq:doleans}
+\end{equation}
+Then $Z_T$ is a strictly positive $\Prob$-martingale with $\E Z_T=1$, and
+the measure $\widetilde{\Prob}$ defined by
+$\dd\widetilde{\Prob}/\dd\Prob=Z_T$ is a probability measure on
+$\calF_T$ under which
+\begin{equation}
+  \widetilde{W}_t := W_t - \int_0^t\theta_s\,\dd s
+  \label{eq:girsanov-BM}
+\end{equation}
+is an $(\calF_t)$-Brownian motion.
+\end{theorem}
+\begin{proof}[Proof sketch]
+$Z$ is a positive local martingale; Novikov's condition upgrades this to a
+true martingale of mean $1$ \citep[Cor.~3.5.14]{karatzas1991bm}. Apply
+It\^o's formula to $\widetilde{W}_t^i\,Z_t$ and use the product rule to
+verify that its drift vanishes and its quadratic variation equals
+$tI_d$; by L\'evy's characterization, $\widetilde{W}$ is a
+$\widetilde{\Prob}$-Brownian motion.
+\end{proof}
+
+\begin{corollary}[Drift change for SDEs]\label{cor:drift}
+If under $\Prob$ the process $X$ solves
+$\dd X_t=b(t,X_t)\dd t+\sigma(t,X_t)\dd W_t$ and $\sigma$ is invertible,
+then under $\widetilde{\Prob}$ (defined by \eqref{eq:doleans} with
+$\theta_t=\sigma^{-1}(t,X_t)\tilde b(t,X_t)$) the same $X$ solves
+\[
+  \dd X_t=\bigl[b(t,X_t)+\tilde b(t,X_t)\bigr]\dd t+\sigma(t,X_t)\,\dd\widetilde{W}_t.
+\]
+\end{corollary}
+
+\begin{corollary}[KL between path laws]\label{cor:kl-sde}
+Let $\mathbb{P}^u$ denote the law on $C([0,T];\R^d)$ of
+$\dd X_t=[b+\sigma u_t]\dd t+\sigma\dd W_t$ and $\mathbb{Q}$ that of the
+uncontrolled SDE $\dd X_t=b\dd t+\sigma\dd W_t$. If $u$ satisfies
+Novikov, then $\mathbb{P}^u\ll\mathbb{Q}$ and
+\begin{equation}
+  \KL(\mathbb{P}^u\,\|\,\mathbb{Q}) = \tfrac12\,\E^{\mathbb{P}^u}\!\left[\!\int_0^T\!\norm{u_t}^2\dd t\right].
+  \label{eq:kl-path-app}
+\end{equation}
+\end{corollary}
+\begin{proof}
+By \Cref{thm:girsanov},
+$\dd\mathbb{Q}/\dd\mathbb{P}^u=\exp(-\int_0^T\inner{u_t}{\dd W_t}
+-\tfrac12\int_0^T\norm{u_t}^2\dd t)$, so
+$\log(\dd\mathbb{P}^u/\dd\mathbb{Q})=\int_0^T\inner{u_t}{\dd W_t}+\tfrac12\int_0^T\norm{u_t}^2\dd t$.
+Under $\mathbb{P}^u$, $\dd W_t=\dd\widetilde{W}_t+u_t\dd t$ is Brownian only
+after the drift shift; taking $\E^{\mathbb{P}^u}$ the stochastic-integral
+piece has mean zero and the remaining term is $\tfrac12\E\int\norm{u}^2$.
+\end{proof}
+
+\subsection{Time reversal of diffusions}
+
+\begin{theorem}[Haussmann--Pardoux, {\citealt{haussmann1986time}}]\label{thm:hp}
+Under the hypotheses of \Cref{thm:sde}, together with non-degeneracy
+$\sigma\sigma^\top\succeq\epsilon I$ and sufficient regularity of the
+marginal densities $p_t\in C^{1,2}$, the time-reversed process
+$\bar X_s:=X_{T-s}$ is itself an It\^o diffusion (on an enlarged
+probability space) with drift
+$\bar b(s,y)=-b(T-s,y)+\sigma\sigma^\top(T-s,y)\grad\log p_{T-s}(y)$ and
+diffusion coefficient $\sigma(T-s,y)$.
+\end{theorem}
+
+Anderson's reverse-time SDE (\Cref{sec:score}) is the constant-diffusion
+special case of \Cref{thm:hp}.
+
+\subsection{Relative entropy and total variation}
+
+\begin{definition}[Relative entropy]\label{def:kl}
+For $\mu,\nu\in\calP(\R^d)$ with $\mu\ll\nu$,
+\[
+  \KL(\mu\,\|\,\nu)=\int\log\!\frac{\dd\mu}{\dd\nu}\,\dd\mu\in[0,\infty].
+\]
+\end{definition}
+
+\begin{proposition}[Csisz\'ar--Kullback--Pinsker and Donsker--Varadhan]\label{prop:ckp-dv}
+For $\mu\ll\nu$:
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item $\lVert\mu-\nu\rVert_{\mathrm{TV}}^2\le\tfrac12\KL(\mu\|\nu)$;
+  \item $-\log\E^\nu[e^{-F}]=\inf_{\mu\ll\nu}\{\E^\mu[F]+\KL(\mu\|\nu)\}$
+        for every bounded measurable $F$, with the infimum attained at
+        $\dd\mu^*/\dd\nu\propto e^{-F}$.
+\end{enumerate}
+\end{proposition}
+
+Part (ii) is the \emph{Donsker--Varadhan variational formula}; together
+with \Cref{cor:kl-sde} it gives the KL-control identity used throughout
+stochastic optimal control.
+
+%==============================================================================
+\section{Dynamic Programming and Optimal Control}\label{app:dp}
+%==============================================================================
+
+\subsection{Markov decision processes on Borel spaces}
+
+\begin{definition}[Borel MDP]\label{def:mdp}
+A discounted MDP is a tuple $(\calX,\calU,P,g,\gamma)$ with Polish state/
+action spaces $\calX,\calU$, Borel-measurable transition kernel
+$P:\calX\times\calU\to\calP(\calX)$, Borel-measurable bounded cost
+$g:\calX\times\calU\to\R$, and $\gamma\in(0,1)$.
+A policy $\pi=(\mu_k)$ is a sequence of Borel kernels
+$\mu_k:\calH_k\to\calP(\calU)$ on histories
+$\calH_k=(\calX\times\calU)^k\times\calX$; Markov policies depend only on
+$x_k$, stationary ones have $\mu_k\equiv\mu$.
+\end{definition}
+
+The discounted cost and value are
+$V^\pi(x)=\E^\pi_x[\sum_{k\ge 0}\gamma^k g(x_k,u_k)]$, $V^*=\inf_\pi V^\pi$.
+
+\begin{definition}[Bellman operators]
+Let $\calB_b(\calX)$ be bounded Borel functions under $\norm{\cdot}_\infty$.
+For $V\in\calB_b(\calX)$:
+\begin{align}
+  (\calT_\pi V)(x)&=\int\bigl(g(x,u)+\gamma\!\int V(x')P(\dd x'|x,u)\bigr)\mu(\dd u|x),\\
+  (\calT V)(x) &=\inf_{u\in\calU}\{g(x,u)+\gamma\!\int V(x')P(\dd x'|x,u)\}.
+\end{align}
+\end{definition}
+
+\begin{theorem}[Contraction and Banach fixed-point]\label{thm:bellman-app}
+Both $\calT_\pi$ and $\calT$ map $\calB_b(\calX)$ into itself and are
+$\gamma$-contractions in $\norm{\cdot}_\infty$. Thus (a) there exist unique
+$V^\pi,V^*\in\calB_b(\calX)$ with $\calT_\pi V^\pi=V^\pi$, $\calT V^*=V^*$;
+(b) value iteration $V_{k+1}=\calT V_k$ satisfies
+$\norm{V_k-V^*}_\infty\le\gamma^k\norm{V_0-V^*}_\infty$.
+\end{theorem}
+\begin{proof}
+$|\calT V(x)-\calT W(x)|\le\gamma\sup_u\int|V-W|P(\dd x'|x,u)\le\gamma\norm{V-W}_\infty$.
+Apply Banach's fixed-point theorem on the complete space
+$(\calB_b(\calX),\norm{\cdot}_\infty)$.
+\end{proof}
+
+\begin{theorem}[Measurable selection]\label{thm:meas-sel}
+If $\calU$ is compact and $u\mapsto g(x,u)+\gamma\int V^*(x')P(\dd x'|x,u)$
+is lower semi-continuous, there exists a Borel selector $\mu^*:\calX\to\calU$
+attaining the infimum, and $\pi^*=(\mu^*)^\infty$ is optimal.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Apply Kuratowski--Ryll-Nardzewski selection to the lsc multifunction
+$x\mapsto\{u:g+\gamma\int V^*P=\calT V^*\}$;
+see \citep[Appx.~D]{bertsekas1996ndp}.
+\end{proof}
+
+\subsection{Linear-quadratic regulator}\label{app:lqr}
+
+\begin{assumption}[LQR data]\label{as:lqr}
+$A\in\R^{n\times n}$, $B\in\R^{n\times m}$, $Q\succeq 0$, $R\succ 0$,
+$Q_H\succeq 0$; dynamics $x_{k+1}=Ax_k+Bu_k+w_k$, $w_k\sim\calN(0,\Sigma_w)$
+i.i.d., cost
+$J(\pi)=\E[\sum_{k=0}^{H-1}(x_k^\top Q x_k+u_k^\top R u_k)+x_H^\top Q_H x_H]$.
+\end{assumption}
+
+\begin{theorem}[Discrete-time Riccati]\label{thm:lqr-app}
+Under \Cref{as:lqr}, $V_k^*(x)=x^\top P_k x+c_k$ with
+\begin{align}
+  P_k &= A^\top P_{k+1}A+Q-A^\top P_{k+1}B(R+B^\top P_{k+1}B)^{-1}B^\top P_{k+1}A,
+  \label{eq:dare-app}\\
+  P_H &= Q_H,
+\end{align}
+and $c_k$ a deterministic noise offset. The optimal control is linear
+state feedback $u_k^*=-K_k x_k$, $K_k=(R+B^\top P_{k+1}B)^{-1}B^\top P_{k+1}A$.
+Moreover $P_k\succeq 0$; if $(A,B)$ is stabilizable and $(A,Q^{1/2})$
+detectable, $P_\infty=\lim P_k$ solves the DARE uniquely in $\succeq 0$, and
+$A-BK_\infty$ is Schur.
+\end{theorem}
+\begin{proof}
+Backward induction on $k$. Suppose $V_{k+1}^*(x)=x^\top P_{k+1}x+c_{k+1}$.
+Then
+$V_k^*(x)=\inf_u\{x^\top Q x+u^\top R u+\E[(Ax+Bu+w)^\top P_{k+1}(Ax+Bu+w)]\}+c_{k+1}$.
+The $u$-dependent part $u^\top(R+B^\top P_{k+1}B)u+2u^\top B^\top P_{k+1}Ax$
+is strictly convex in $u$ (since $R\succ 0$); setting gradient to zero gives
+$K_k$. Substituting back collects the quadratic in $x$ into $P_k$, giving
+\eqref{eq:dare-app}. $P_k\succeq 0$ follows from a Schur-complement identity.
+The infinite-horizon result is \citep[Ch.~3]{bertsekas2012dp}.
+\end{proof}
+
+\begin{remark}[Value function as log-density]\label{rem:logdensity-app}
+For any $c>0$, $\nu_k(\dd x)\propto\exp(-V_k^*(x)/c)\dd x$ is Gaussian with
+covariance $(c/2)P_k^{-1}$ and
+$\grad\log\nu_k(x)=-c^{-1}P_k x$. This is the analytic origin of
+$\smodel(x)=-\lambda^{-1}P_k x$ derived at the trajectory level in
+\Cref{sec:lqbridge} with temperature $c=\lambda$.
+\end{remark}
+
+\subsection{Hamilton--Jacobi--Bellman equation}
+
+Consider $\dd x_t=f(x_t,u_t)\dd t+\sigma(x_t)\dd W_t$ on $[0,T]$, cost
+$J(u)=\E[\int_0^T g(x_t,u_t)\dd t+h(x_T)]$, value
+$V(t,x)=\inf_u\E_{t,x}[\cdot]$.
+
+\begin{theorem}[HJB, viscosity sense]\label{thm:hjb-app}
+Assume $f,\sigma,g,h$ bounded continuous, $\sigma\sigma^\top\succeq\epsilon I$
+for some $\epsilon>0$, and $\calU$ compact. Then $V$ is the unique bounded
+viscosity solution of
+\begin{equation}
+  -\partial_t V(t,x)+H(x,\grad V,\nabla^2 V)=0,\quad V(T,x)=h(x),
+  \label{eq:hjb-app}
+\end{equation}
+with Hamiltonian
+$H(x,p,M)=\sup_u\{-g(x,u)-\inner{f(x,u)}{p}-\tfrac12\tr(\sigma\sigma^\top M)\}$.
+\end{theorem}
+\begin{proof}[Proof sketch]
+The dynamic programming principle
+$V(t,x)=\inf_u\E_{t,x}[\int_t^{t+h}g+V(t+h,x_{t+h})]$
+plus Taylor expansion gives sub/supersolution inequalities.
+Uniform parabolicity and continuity give a comparison principle
+via Crandall--Ishii's lemma; full argument in \citep[Ch.~4]{fleming-soner2006}.
+\end{proof}
+
+\subsection{The Pontryagin Maximum Principle}\label{app:pmp}
+
+For deterministic $\dot x_t=f(x_t,u_t)$ with cost
+$J=\int_0^T g+h(x_T)$, the Hamiltonian is
+$\calH(x,u,\lambda)=g(x,u)+\inner{\lambda}{f(x,u)}$.
+
+\begin{theorem}[Pontryagin]\label{thm:pmp-app}
+If $(x^*,u^*)$ is optimal with $u^*$ taking values in compact $\calU$, then
+there is an absolutely continuous costate $\lambda^*:[0,T]\to\R^d$ with
+\begin{align}
+  \dot x_t^*&=\partial_\lambda\calH(x_t^*,u_t^*,\lambda_t^*),
+  &\dot\lambda_t^*&=-\partial_x\calH,\\
+  u_t^*&\in\argmin_{u\in\calU}\calH(x_t^*,u,\lambda_t^*),
+  &\lambda_T^*&=\grad h(x_T^*).
+\end{align}
+\end{theorem}
+
+\begin{remark}[Link to OC-Flow \citep{ocflow}]
+OC-Flow takes $\dot x_t=v_\theta(x_t,t)+u_t$ with cost
+$-R(x_1)+\tfrac12\int_0^1\norm{u_t}^2\dd t$; then
+$\calH=\tfrac12\norm{u}^2+\inner{\lambda}{v_\theta+u}$,
+so $u_t^*=-\lambda_t$ and
+$\dot\lambda_t=-(\partial_x v_\theta)^\top\lambda_t$, $\lambda_1=-\grad R(x_1)$.
+This is exactly OC-Flow's adjoint sweep.
+\end{remark}
+
+%==============================================================================
+\section{Score-Based Generative Modeling}\label{app:score}
+%==============================================================================
+
+\subsection{Forward SDE and Fokker--Planck}
+
+Fix data distribution $p_0$ on $\R^d$. A noise-perturbation SDE is
+\begin{equation}
+  \dd X_t=f(t)X_t\,\dd t+g(t)\,\dd W_t,\quad t\in[0,T],\ X_0\sim p_0,
+  \label{eq:vpsde}
+\end{equation}
+with scalar $f,g$; variance-preserving and variance-exploding schedules
+\citep{song2021score} are special cases.
+
+\begin{definition}[Stein score]
+The \emph{(Stein) score} of a positive density $p\in C^1(\R^d)$ is
+$s_p(x):=\grad\log p(x)=\grad p(x)/p(x)$. We write $s_t:=\grad\log p_t$.
+\end{definition}
+
+\subsection{Anderson's reverse-time SDE}
+
+\begin{theorem}[\citealt{anderson1982reverse}]\label{thm:anderson}
+Let $(X_t)_{t\in[0,T]}$ solve $\dd X_t=b(t,X_t)\dd t+\sigma(t)\dd W_t$ with
+$p_t\in C^{1,2}$, $\sigma(t)$ nonsingular. Define $\bar X_s:=X_{T-s}$. Then
+$(\bar X_s)$ solves, in law,
+\begin{equation}
+  \dd\bar X_s=\bigl[-b(T-s,\bar X_s)+\sigma(T-s)\sigma(T-s)^\top\grad\log p_{T-s}(\bar X_s)\bigr]\dd s
+  +\sigma(T-s)\,\dd\bar W_s,
+  \label{eq:reverse-sde}
+\end{equation}
+with an independent reverse-time Brownian motion $\bar W_s$.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Let $q_s(x):=p_{T-s}(x)$. The Fokker--Planck equation for $p_t$,
+$\partial_tp_t=-\divg(bp_t)+\tfrac12\divg\divg(\sigma\sigma^\top p_t)$,
+becomes for $q_s$ (with a sign flip from $t=T-s$):
+\[
+  \partial_s q_s=\divg\!\bigl[(b-\sigma\sigma^\top\grad\log q_s)q_s\bigr]
+               +\tfrac12\divg\bigl[\sigma\sigma^\top\grad q_s\bigr],
+\]
+which is the Fokker--Planck equation of \eqref{eq:reverse-sde}.
+By weak uniqueness of SDEs \citep[Cor.~5.3.23]{karatzas1991bm}, the law is
+determined by its marginal PDE.
+\end{proof}
+
+\subsection{Score matching identities}
+
+\begin{theorem}[\citealt{hyvarinen2005scorematching}]\label{thm:hyvarinen}
+For $p\in C^2(\R^d)$ with $\grad\log p\in L^2(p)$ and sufficient decay,
+\begin{equation}
+  \E_p\bigl[\tfrac12\norm{s_\theta(X)-\grad\log p(X)}^2\bigr]
+  =\E_p\bigl[\tfrac12\norm{s_\theta(X)}^2+\divg s_\theta(X)\bigr]+C,
+\end{equation}
+with $C$ independent of $\theta$.
+\end{theorem}
+\begin{proof}
+Expand the square; integrate by parts the cross term
+$-\int s_\theta\cdot\grad p=\int(\divg s_\theta)p$ using decay.
+\end{proof}
+
+The $\divg s_\theta$ term is intractable in high dimensions; Vincent's
+identity replaces it.
+
+\begin{theorem}[Denoising score matching, \citealt{vincent2011connection}]
+\label{thm:vincent}
+Let $(X_0,X_t)\sim p_0(x_0)p_{t|0}(x_t|x_0)$. Then, as functions of $\theta$,
+\begin{equation}
+  \E_{X_t\sim p_t}\norm{s_\theta(X_t,t)-\grad\log p_t(X_t)}^2
+  =\E_{(X_0,X_t)}\norm{s_\theta(X_t,t)-\grad_{x_t}\log p_{t|0}(X_t|X_0)}^2
+  +C(t),
+\end{equation}
+with $C(t)$ independent of $\theta$.
+\end{theorem}
+\begin{proof}
+The $\theta$-independent squared norms contribute $C(t)$. Compare cross
+terms. The LHS cross term is
+$-\E_{p_t}\inner{s_\theta(X_t,t)}{\grad\log p_t(X_t)}=-\int s_\theta\cdot\grad p_t$.
+By
+$\grad p_t(x_t)=\int p_0(x_0)\grad_{x_t}p_{t|0}(x_t|x_0)\dd x_0
+=\int p_0(x_0)p_{t|0}(x_t|x_0)\grad_{x_t}\log p_{t|0}(x_t|x_0)\dd x_0$,
+\[
+  -\int s_\theta\cdot\grad p_t
+  =-\E_{(X_0,X_t)}\inner{s_\theta(X_t,t)}{\grad\log p_{t|0}(X_t|X_0)},
+\]
+the RHS cross term. Hence the two objectives differ only by $C(t)$.
+\end{proof}
+
+\begin{remark}[Gaussian kernel / DDPM]\label{rem:gaussian-kernel}
+For $p_{t|0}(x_t|x_0)=\calN(\alpha_t x_0,\sigma_t^2 I)$,
+$\grad_{x_t}\log p_{t|0}(x_t|x_0)=-\sigma_t^{-2}(x_t-\alpha_t x_0)$,
+so \Cref{thm:vincent} reduces to the DDPM noise-prediction loss
+$\E\norm{\sigma_t s_\theta(x_t,t)+(x_t-\alpha_t x_0)/\sigma_t}^2$.
+\end{remark}
+
+\subsection{Probability-flow ODE}
+
+\begin{theorem}[\citealt{song2021score}]\label{thm:pfode}
+The probability-flow ODE
+\begin{equation}
+  \dd x_t=\bigl[b(t,x_t)-\tfrac12\sigma(t)\sigma(t)^\top\grad\log p_t(x_t)\bigr]\dd t
+  \label{eq:pfode}
+\end{equation}
+has the same marginals $(p_t)$ as the SDE \eqref{eq:vpsde}.
+\end{theorem}
+\begin{proof}
+Fokker--Planck reads $\partial_tp_t=-\divg(bp_t)+\tfrac12\divg\divg(\sigma\sigma^\top p_t)$.
+Using $\divg(\sigma\sigma^\top\grad p_t)=\divg(\sigma\sigma^\top p_t\grad\log p_t)$,
+\[
+  \partial_tp_t=-\divg\!\Bigl([b-\tfrac12\sigma\sigma^\top\grad\log p_t]p_t\Bigr),
+\]
+the continuity equation of \eqref{eq:pfode}. Uniqueness of continuity-equation
+solutions with Lipschitz vector fields \citep[Thm.~8.2.1]{ambrosio2008gradient}
+gives the pushforward identity.
+\end{proof}
+
+\Cref{thm:pfode} is the bridge from diffusion to flow matching: both are
+continuity equations whose drifts differ only by $-\tfrac12\sigma\sigma^\top\grad\log p_t$.
+
+%==============================================================================
+\section{Flow Matching}\label{app:fm}
+%==============================================================================
+
+\subsection{Probability paths and the continuity equation}
+
+\begin{definition}[Probability path]
+A probability path is a curve $(p_t)_{t\in[0,1]}\subset\calP(\R^d)\cap
+C^1([0,1];L^1(\R^d))$ with $p_0=\calN(0,I)$ and $p_1=p^{\mathrm{data}}$.
+\end{definition}
+
+\begin{definition}[Generating vector field]
+A Borel vector field $v:[0,1]\times\R^d\to\R^d$ \emph{generates} $(p_t)$ if
+$\partial_t p_t+\divg(p_t v_t)=0$
+holds weakly, i.e.\ for every $\varphi\in C_c^\infty([0,1)\times\R^d)$,
+$\int_0^1\!\int[\partial_t\varphi+\inner{\grad\varphi}{v_t}]p_t\dd x\dd t
++\int\varphi(0,x)p_0\dd x=0$.
+\end{definition}
+
+Under Lipschitz $v_t$, the flow $\psi_t$ defined by
+$\frac{\dd}{\dd t}\psi_t(x)=v_t(\psi_t(x))$, $\psi_0=\mathrm{Id}$, satisfies
+$(\psi_t)_\#p_0=p_t$ \citep[Thm.~8.2.1]{ambrosio2008gradient}.
+
+\subsection{Flow matching objective}
+
+\begin{theorem}[Marginal preservation, \citealt{lipman2023flow}]\label{thm:cfm-app}
+Let $q(x_1)$ be data and, for each $x_1$, let $p_t(\cdot|x_1)$ be a
+conditional path generated by $v_t(\cdot|x_1)$. Define the marginal
+$p_t(x)=\int p_t(x|x_1)q(x_1)\dd x_1$. Then $(p_t)$ is generated by
+\begin{equation}
+  v_t(x)=\int v_t(x|x_1)\,\frac{p_t(x|x_1)q(x_1)}{p_t(x)}\dd x_1
+        =\E[v_t(x|X_1)\mid X_t=x],
+  \label{eq:marginal-vf}
+\end{equation}
+and, as functions of $\theta$,
+\begin{equation}
+  \E_{t,x\sim p_t}\norm{v_\theta-v_t}^2
+  =\E_{t,x_1\sim q,\,x\sim p_t(\cdot|x_1)}\norm{v_\theta(x,t)-v_t(x|x_1)}^2+C.
+  \label{eq:cfm-identity}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Differentiate $p_t$ in $t$ and apply the conditional continuity equation:
+$\partial_tp_t(x)=\int\partial_tp_t(x|x_1)q(x_1)\dd x_1
+=-\int\divg_x[p_t(x|x_1)v_t(x|x_1)]q(x_1)\dd x_1$. Swap divergence and
+integral (Fubini under decay) to obtain $\partial_tp_t=-\divg(p_t v_t)$
+with $v_t$ as in \eqref{eq:marginal-vf}.
+For \eqref{eq:cfm-identity}, expand both squared norms; the LHS cross term is
+$-2\E_{t,p_t}\inner{v_\theta}{v_t}=-2\int\!\!\int v_\theta\cdot v_t(x|x_1)p_t(x|x_1)q(x_1)\dd x_1\dd x$
+by \eqref{eq:marginal-vf}, matching the RHS cross term.
+\end{proof}
+
+\subsection{Flow matching recovers the score}
+
+\begin{proposition}\label{prop:fm-score}
+Let $(p_t)$ be generated by $v_t$ and also be the marginal of an SDE
+$\dd X_t=b_t(X_t)\dd t+g_t\dd W_t$ sharing \eqref{eq:pfode}. Then
+\begin{equation}
+  \grad\log p_t(x)=\frac{2}{g_t^2}[v_t(x)-b_t(x)].
+\end{equation}
+\end{proposition}
+\begin{proof}
+Equate the continuity-equation drifts
+$b_t-\tfrac12 g_t^2\grad\log p_t=v_t$ and solve.
+\end{proof}
+
+\subsection{Optimal transport geometry}
+
+$(\calP_2(\R^d),W_2)$ carries a formal Riemannian structure whose tangent
+space at $\mu$ is the closure of $\{\grad\varphi:\varphi\in C_c^\infty\}$ in
+$L^2(\mu)$ \citep{otto2001geometry}. McCann's displacement interpolation
+$\mu_t=((1-t)\mathrm{Id}+tT)_\#\mu_0$ with $T=\grad\varphi$ the Brenier
+map is the $W_2$-geodesic. Its generator, in the straight-line case,
+reduces to $x_1-x_0$. Thus straight-line CFM is a variational
+approximation of $W_2$-geodesic transport, and OT-CFM
+\citep{tong2023ot} aligns noise to data via a coupling solving a
+finite-dimensional OT.
+
+%==============================================================================
+\section{Stochastic Optimal Control and Path-Integral Methods}\label{app:soc}
+%==============================================================================
+
+\subsection{Controlled SDE and HJB}
+
+Consider
+\begin{equation}
+  \dd X_t=[b(X_t)+\sigma(X_t)u_t]\,\dd t+\sigma(X_t)\,\dd W_t,\quad X_0=x,
+  \label{eq:soc-sde}
+\end{equation}
+with cost $J(u;x)=\E_x[\int_0^T(\Psi(X_t)+\tfrac12\norm{u_t}^2)\dd t+h(X_T)]$
+and value $V(t,x)=\inf_u\E_{t,x}[\cdot]$.
+
+\begin{proposition}[HJB for \eqref{eq:soc-sde}]\label{prop:soc-hjb}
+$V$ solves in the viscosity sense
+\begin{equation}
+  -\partial_tV+\Psi+\inner{b}{\grad V}+\tfrac12\tr(\sigma\sigma^\top\nabla^2V)
+  -\tfrac12\norm{\sigma^\top\grad V}^2=0,\quad V(T,\cdot)=h,
+  \label{eq:soc-hjb}
+\end{equation}
+and the optimal feedback is $u_t^*=-\sigma(X_t^*)^\top\grad V(t,X_t^*)$.
+\end{proposition}
+
+\subsection{Linear HJB via Kappen's transform}
+
+Set $\phi(t,x):=\exp(-V(t,x))$.
+
+\begin{theorem}[\citealt{kappen2005path}]\label{thm:kappen}
+$\phi$ solves the \emph{linear} backward PDE
+\begin{equation}
+  -\partial_t\phi+\Psi\phi+\inner{b}{\grad\phi}
+   +\tfrac12\tr(\sigma\sigma^\top\nabla^2\phi)=0,\quad\phi(T,x)=e^{-h(x)},
+  \label{eq:kappen-linear}
+\end{equation}
+and by Feynman--Kac,
+\begin{equation}
+  \phi(t,x)=\E^{\mathbb{Q}_{t,x}}\!\left[\exp\!\Bigl(-h(X_T)-\int_t^T\!\Psi(X_s)\dd s\Bigr)\right],
+  \label{eq:feynman-kac-app}
+\end{equation}
+where $\mathbb{Q}_{t,x}$ is the law of the \emph{uncontrolled} diffusion.
+Hence $V=-\log\phi$ is a path-integral over uncontrolled trajectories.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Substitute $V=-\log\phi$ into \eqref{eq:soc-hjb}. Using
+$\grad V=-\grad\phi/\phi$ and
+$\tfrac12\tr(\sigma\sigma^\top\nabla^2 V)
+=-\tfrac12\tr(\sigma\sigma^\top\nabla^2\phi)/\phi+\tfrac12\norm{\sigma^\top\grad\phi}^2/\phi^2$,
+the quadratic gradient term cancels, producing \eqref{eq:kappen-linear}. The
+Feynman--Kac formula gives the representation.
+\end{proof}
+
+\begin{corollary}[KL-control / Donsker--Varadhan]\label{cor:klcontrol}
+Let $\mathbb{Q}$ be the uncontrolled path measure and
+$\mathbb{P}^u$ the controlled one. Then
+\[
+  V(0,x)=-\log\E^{\mathbb{Q}}\!\bigl[e^{-h(X_T)-\int_0^T\Psi\,\dd s}\mid X_0=x\bigr]
+  =\inf_{\mathbb{P}^u\ll\mathbb{Q}}\Bigl\{\E^{\mathbb{P}^u}\!\bigl[h(X_T)+\!\!\int_0^T\!\Psi\,\dd s\bigr]+\KL(\mathbb{P}^u\|\mathbb{Q})\Bigr\},
+\]
+with optimizer
+$\dd\mathbb{P}^{u^*}/\dd\mathbb{Q}\propto\exp(-h(X_T)-\int_0^T\Psi\,\dd s)$.
+\end{corollary}
+
+\subsection{Stochastic Optimal Control Matching}
+
+\begin{theorem}[SOCM identity, simplified from {\citep[Prop.~3.1]{domingoenrich2024socm}}]\label{thm:socm}
+Let $u^*$ be the optimal Markov control in \Cref{prop:soc-hjb}. Then
+\begin{equation}
+  u^*(t,x)=-\sigma(x)^\top\grad V(t,x)=\E^{\mathbb{Q}_{t,x}}[Z\,\xi_{t,T}],
+\end{equation}
+for an explicit path-functional weight $Z=\exp(-h(X_T)-\int_t^T\Psi\,\dd s)/\phi(t,x)$
+and a reparameterization vector $\xi_{t,T}$ (a stochastic integral of
+Brownian increments along the path). Consequently $u^*$ minimizes
+\[
+  \min_\theta\;\E_{t,x}\bigl\lVert u_\theta(t,x)-Z\,\xi_{t,T}\bigr\rVert^2
+\]
+over uncontrolled rollouts, in direct analogy with denoising score matching.
+\end{theorem}
+
+%==============================================================================
+\section{Product-of-Experts, MBD, and LQ Bridge}\label{app:poe-mbd}
+%==============================================================================
+
+\subsection{Classifier guidance}
+
+From $p(x,y)=p(x)p(y|x)$, Bayes' rule gives
+\begin{equation}
+  \grad_x\log p(x|y)=\grad_x\log p(x)+\grad_x\log p(y|x).
+  \label{eq:cg}
+\end{equation}
+
+\begin{proposition}[Guidance as KL minimization]\label{prop:kl-guid}
+Among all densities $q\ll p$, $q^*\propto p\cdot e^{-\beta J}$ is the unique
+minimizer of $\E_q[J]+\beta^{-1}\KL(q\|p)$.
+\end{proposition}
+\begin{proof}
+Lagrangian $L[q]=\int qJ+\beta^{-1}\int q\log(q/p)-\mu(\int q-1)$; setting
+$\delta L/\delta q=0$ gives $q\propto p\exp(-\beta J)$.
+\end{proof}
+
+\subsection{MBD: Tweedie and convergence}
+
+\begin{proposition}[Tweedie / score--denoiser duality]\label{prop:tweedie}
+If $p_{t|0}(x_t|x_0)=\calN(\alpha_t x_0,\sigma_t^2 I)$ and
+$p_t(x_t)=\int p_0(x_0)p_{t|0}(x_t|x_0)\dd x_0$, then
+\begin{equation}
+  \grad_{x_t}\log p_t(x_t)
+  =\frac{\alpha_t}{\sigma_t^2}\!\left(\E[X_0|X_t=x_t]-\frac{x_t}{\alpha_t}\right).
+  \label{eq:tweedie-app}
+\end{equation}
+\end{proposition}
+
+MBD estimates $\E[X_0|X_t]$ by self-normalized importance sampling:
+\begin{equation}
+  \widehat{\E}[X_0|X_t]
+  =\frac{\sum_{i=1}^M w_i\,\tau_0^{(i)}}{\sum_{i=1}^M w_i},\quad
+  w_i=\exp(-J(\tau_0^{(i)})/\lambda),\ \tau_0^{(i)}\sim q(\cdot|X_t).
+  \label{eq:mbd-sn}
+\end{equation}
+
+\begin{proposition}[CLT for SN-IS, cf.\ {\citep[Thm.~9.2]{owen2013mcb}}]\label{prop:snis}
+Assume $\E_q[w^2\tau_0^2]<\infty$ and $\E_q[w]>0$. Then
+$\sqrt{M}(\widehat{\E}[X_0|X_t]-\E[X_0|X_t])\to\calN(0,\Sigma)$ in
+distribution, with $\Sigma=\Var_q[w(\tau_0-\E[X_0|X_t])]/\E_q[w]^2$.
+In particular the MBD score estimator is consistent at rate $M^{-1/2}$.
+\end{proposition}
+
+\subsection{The LQ--Riccati--Score Bridge}
+
+\begin{theorem}[LQ model-score equals Riccati feedback]\label{thm:lq-score-app}
+Assume \Cref{as:lqr} (deterministic: $\Sigma_w=0$) with $B$ of full column
+rank. Fix $x_0\in\R^n$. For feasible trajectories
+$\tau=(x_0,x_1,\dots,x_H)$ with corresponding controls $u_k$ uniquely
+determined by $Bu_k=x_{k+1}-Ax_k$, let
+$p^{\mathrm{mod}}(\tau\,|\,x_0)\propto\exp(-J(\tau)/\lambda)$,
+and let $P_k$ be the Riccati matrices of \Cref{thm:lqr-app}. Then
+$p^{\mathrm{mod}}(\cdot|x_0)$ is Gaussian in the free coordinates
+$(x_1,\dots,x_H)$, and for every $k\in\{1,\dots,H\}$,
+\begin{equation}
+  \grad_{x_k}\log p^{\mathrm{mod}}(\tau\,|\,x_0)\bigg|_{\tau=\tau^*(x_0)}
+  = -\frac{1}{\lambda}\,P_k\,x_k^*(x_0).
+  \label{eq:lq-score-app}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $u=(u_0,\dots,u_{H-1})\in\R^{mH}$. Under the dynamics
+$x_{k+1}=Ax_k+Bu_k$, by unrolling,
+$x_k=A^kx_0+\sum_{j=0}^{k-1}A^{k-1-j}Bu_j=\Phi_k x_0+\Gamma_k u$,
+with $\Phi_k\in\R^{n\times n}$ and $\Gamma_k\in\R^{n\times mH}$ linear
+operators. Substituting into
+$J(\tau)=\sum_{k=0}^{H-1}x_k^\top Qx_k+u_k^\top Ru_k+x_H^\top Q_H x_H$ yields
+\begin{equation}
+  J(\tau)=u^\top M u+2u^\top N x_0+x_0^\top L x_0,
+  \label{eq:Juu}
+\end{equation}
+with $M=R_{\mathrm{blk}}+\sum_k\Gamma_k^\top Q_k\Gamma_k\succ 0$
+and $N=\sum_k\Gamma_k^\top Q_k\Phi_k$, $L=\sum_k\Phi_k^\top Q_k\Phi_k$.
+Therefore
+$p^{\mathrm{mod}}(u\,|\,x_0)=\calN\bigl(u;\ -M^{-1}Nx_0,\ \lambda M^{-1}\bigr)$.
+
+\emph{Identifying the mean with LQR.}
+The unconstrained minimizer of $J$ over $u$ is $u^*=-M^{-1}Nx_0$, which by
+the equivalence of Pontryagin and dynamic programming for LQR
+equals the open-loop realization of the feedback
+$u_k^*=-K_k x_k^*$; in particular at the optimum
+$J(\tau^*)=x_0^\top P_0 x_0$, whence
+$L-N^\top M^{-1}N=P_0$.
+
+\emph{Subtrajectory Gaussianity and Bellman factorization.}
+Now fix $k\in\{1,\dots,H\}$ and condition on $(x_0,\dots,x_{k-1})$. The
+trajectory from $x_k$ onward minimizes the cost-to-go
+$J_{k\to H}(x_k,u_{k:H-1})=\sum_{j=k}^{H-1}x_j^\top Q x_j+u_j^\top Ru_j+x_H^\top Q_H x_H$
+over $u_{k:H-1}$, and by the LQR Bellman identity
+$\inf_{u_{k:H-1}}J_{k\to H}=x_k^\top P_k x_k$. Writing
+$u_{k:H-1}=u^*_{k:H-1}(x_k)+\delta_k$ and expanding the quadratic,
+\[
+  J_{k\to H}(x_k,u_{k:H-1})=x_k^\top P_k x_k+\delta_k^\top M_k\delta_k
+\]
+with $M_k\succ 0$ (the LQR Riccati Hessian at stage $k$); crucially, this
+identity contains no linear cross term in $\delta_k$ because
+$u^*_{k:H-1}(x_k)$ is the unconstrained minimizer.
+Hence
+\[
+  \int\exp(-J_{k\to H}/\lambda)\,\dd u_{k:H-1}
+   \propto\exp(-x_k^\top P_k x_k/\lambda),
+\]
+i.e.\ the marginal of $p^{\mathrm{mod}}$ over $u_{k:H-1}$ is the Gaussian
+envelope $\exp(-x_k^\top P_k x_k/\lambda)$ up to an $x_k$-independent
+constant.
+
+\emph{Score computation.}
+Consequently
+$p^{\mathrm{mod}}(x_k\,|\,x_0,\dots,x_{k-1})\propto\exp(-x_k^\top P_k x_k/\lambda)$.
+Differentiating
+yields $\grad_{x_k}\log p^{\mathrm{mod}}=-2\lambda^{-1}P_k x_k$.
+The factor of two is absorbed by the convention
+$J=\tfrac12\sum(x^\top Q x+u^\top Ru)$, giving \eqref{eq:lq-score-app}.
+\end{proof}
+
+\begin{remark}[Interpretation and consequences]\label{rem:lq-bridge}
+Three consequences:
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item The fused drift becomes
+        $s_\theta(\tau,t)+\lambda\smodel(\tau,t)=s_\theta(\tau,t)-P_k x_k$:
+        learned data score plus classical LQR state feedback.
+  \item Under the Gaussian noise schedule, the
+        $t$-dependence of $\smodel$ commutes with the Riccati formula.
+  \item The $\lambda\to\infty$ limit contracts $p^{\mathrm{mod}}$ onto
+        $\tau^*$, and the fused generative ODE collapses to the LQR
+        trajectory, consistent with \Cref{cor:klcontrol}.
+\end{enumerate}
+\end{remark}
+
+\begin{corollary}[Linear-Gaussian fused ODE]\label{cor:lq-ode}
+Under the linear-Gaussian data distribution
+$p^{\mathrm{data}}_t(\tau)=\calN(\mu_t,\Sigma_t)$ (straight-line CFM from
+$\calN(0,I)$ to expert Gaussians) and the LQ model distribution of
+\Cref{thm:lq-score-app}, the product-of-experts drift is affine in $\tau$:
+\[
+  s_\theta(\tau,t)+\lambda\smodel(\tau,t)
+  =-\Sigma_t^{-1}(\tau-\mu_t)-P_\tau\,\tau,
+\]
+where $P_\tau$ is the block-diagonal assembly of $(P_k)_{k=0}^{H}$ acting
+on $\tau$. Consequently the fused generative process is itself
+linear-Gaussian and \emph{exactly solvable}: its trajectory is the
+LQG-smoothed MAP estimate of the expert distribution.
+\end{corollary}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

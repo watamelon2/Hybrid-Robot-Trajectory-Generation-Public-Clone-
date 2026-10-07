@@ -1,0 +1,65 @@
+{
+  "0": {
+    "n_perturbed": 0,
+    "label": "T2.0 (canonical only)",
+    "n_success": 21,
+    "n_total": 30,
+    "rate": 0.7,
+    "wall_s": 824.3274778750492,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_demo_1nn_K-10_R-1_T2_0_hybrid_canonical_bank_mass1p3.json"
+  },
+  "1": {
+    "n_perturbed": 1,
+    "label": "1 perturbed demo",
+    "n_success": 20,
+    "n_total": 30,
+    "rate": 0.6666666666666666,
+    "wall_s": 1038.0889746669563,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_democount_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_1demo_mass1p3.json"
+  },
+  "2": {
+    "n_perturbed": 2,
+    "label": "2 perturbed demos",
+    "n_success": 20,
+    "n_total": 30,
+    "rate": 0.6666666666666666,
+    "wall_s": 1037.1514482079656,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_democount_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_2demo_mass1p3.json"
+  },
+  "3": {
+    "n_perturbed": 3,
+    "label": "3 perturbed demos",
+    "n_success": 21,
+    "n_total": 30,
+    "rate": 0.7,
+    "wall_s": 1035.3650612079655,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_democount_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_3demo_mass1p3.json"
+  },
+  "5": {
+    "n_perturbed": 5,
+    "label": "T2.1 (5 perturbed)",
+    "n_success": 22,
+    "n_total": 30,
+    "rate": 0.7333333333333333,
+    "wall_s": 849.4967049999395,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_5demo_adapted_mass1p3.json"
+  },
+  "10": {
+    "n_perturbed": 10,
+    "label": "10 perturbed demos",
+    "n_success": 18,
+    "n_total": 30,
+    "rate": 0.6,
+    "wall_s": 1037.4986302499892,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_democount_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_10demo_mass1p3.json"
+  },
+  "20": {
+    "n_perturbed": 20,
+    "label": "T2.4 (20 perturbed)",
+    "n_success": 21,
+    "n_total": 30,
+    "rate": 0.7,
+    "wall_s": 843.6898203749442,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_demo_1nn_K-10_R-1_T2_4_hybrid_20demo_saturation_mass1p3.json"
+  }
+}

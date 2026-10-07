@@ -1,0 +1,736 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ECE M237: Dynamic Programming -- Course Project
+% Topic Introduction & Literature Review
+% Hybrid Model-Based and Data-Driven Score Fusion for Robot Trajectory Generation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper, 10pt, conference]{ieeeconf}
+
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+\usepackage{times}
+\usepackage{color, colortbl, xcolor}
+
+\let\proof\relax
+\let\endproof\relax
+\let\example\relax
+\let\endexample\relax
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cases}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{nicefrac}
+
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{cleveref}
+\usepackage[pdftex]{graphicx}
+\usepackage{cancel}
+\let\labelindent\relax
+\usepackage{enumitem}
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{array}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+% Convenience macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\KL}{\mathrm{KL}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\score}{\nabla_{\tau_t}\log p_t}
+\newcommand{\scoredata}{s_\theta(\tau_t,t)}
+\newcommand{\scoremodel}{\nabla_{\tau_t}\log p_t^{\mathrm{model}}(\tau_t)}
+
+\title{\LARGE \bf
+Hybrid Model-Based and Data-Driven Score Fusion\\
+for Robot Trajectory Generation}
+
+\author{%
+  \parbox{3in}{\centering Zihao Sun\\
+               UCLA ECE, UID: 706-467-647}
+  \thanks{ECE M237: Dynamic Programming, Spring 2026 --- Topic Introduction \& Literature Review.}
+}
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+We investigate the fusion of two complementary sources of information for robot
+trajectory generation: (1) a \emph{data-driven score} learned from expert
+demonstrations via flow matching, and (2) a \emph{model-based score} computed
+analytically from the robot's dynamics and cost function.  We formalize this
+combination as a \emph{product-of-experts} decomposition and study the resulting
+trajectory distribution.  In the linear-quadratic (LQ) special case, we conjecture
+that the model-based correction reduces exactly to the LQR Riccati gain---an
+elegant bridge between generative modeling and classical dynamic programming.
+This document provides the theoretical background, literature survey, and a
+roadmap for our project.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Big Picture}
+\label{sec:bigpicture}
+
+In robot motion planning, two complementary information sources are often available:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Data:} a dataset of expert demonstrations encoding diverse,
+        multimodal behaviors.
+  \item \textbf{Physics:} a dynamics model $x_{k+1} = f(x_k, u_k)$ together
+        with a cost $J(\tau)$ encoding the task objective.
+\end{itemize}
+Recent generative models---diffusion models and flow matching---have shown
+impressive results learning trajectory distributions from data~\cite{janner2022,chi2023diffusionpolicy}.
+Separately, Model-Based Diffusion (MBD)~\cite{mbd} computes the score
+function analytically from the dynamics model, without any data.  These two
+paradigms have remained disjoint.
+
+\textbf{Our project:} can we \emph{fuse} the data-driven score (capturing
+multimodal demonstrations) with the model-based score (guaranteeing feasibility
+and optimality) to obtain the best of both?  Does this fusion connect to
+classical optimal control---specifically, does the model-based correction
+reduce to the LQR Riccati gain in the LQ case?  This is centrally a question
+about \textbf{merging offline and online methods}---the theme of ECE M237.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Theoretical Background}
+\label{sec:theory}
+
+This section develops the mathematical foundations underlying our project:
+(i) optimal control theory and dynamic programming,
+(ii) score-based and flow matching generative models, and
+(iii) reinforcement learning and approximate dynamic programming.
+
+%---------------------------------------------------------------------
+\subsection{Optimal Control and Dynamic Programming}
+\label{sec:oc}
+
+\subsubsection{Problem Formulation}
+Consider a discrete-time dynamical system
+\begin{equation}
+  x_{k+1} = f(x_k, u_k), \quad x_0 \in \R^n,\; u_k \in \mathcal{U} \subseteq \R^m,
+  \label{eq:dynamics}
+\end{equation}
+and a finite-horizon cost functional
+\begin{equation}
+  J(\pi) = \E\!\left[\sum_{k=0}^{H-1} g(x_k, u_k) + V_H(x_H)\right],
+  \label{eq:cost}
+\end{equation}
+where $g:\R^n\times\R^m\to\R$ is the stage cost and $V_H$ is the terminal cost.
+The goal is to find a \emph{policy} $\pi = \{\mu_0,\ldots,\mu_{H-1}\}$, with
+$u_k = \mu_k(x_k)$, that minimizes $J(\pi)$.
+
+\subsubsection{Principle of Optimality and Bellman Equation}
+Bellman's Principle of Optimality states that every sub-policy of an optimal
+policy is itself optimal with respect to the sub-problem originating at that
+point~\cite{bertsekas2012dp}.  This gives rise to the \emph{Bellman equation}
+(backward recursion):
+\begin{equation}
+  V_k(x) = \min_{u \in \mathcal{U}}\Bigl[g(x,u) + V_{k+1}(f(x,u))\Bigr],\quad
+  V_H(x) \text{ given},
+  \label{eq:bellman}
+\end{equation}
+where $V_k:\R^n\to\R$ is the \emph{value function} (optimal cost-to-go) at
+stage $k$.  The optimal policy is recovered as
+$\mu_k^*(x) = \arg\min_{u}[g(x,u) + V_{k+1}(f(x,u))]$.
+
+\subsubsection{Linear Quadratic Regulator (LQR)}
+For linear dynamics $x_{k+1} = Ax_k + Bu_k$ and quadratic cost
+$g(x,u) = x^\top Q x + u^\top R u$ (with $Q \succeq 0$, $R \succ 0$,
+$V_H(x) = x^\top Q_H x$), the Bellman equation admits a closed-form solution.
+Assuming $V_k(x) = x^\top P_k x$, substituting into
+\eqref{eq:bellman} and minimizing over $u$ gives the
+\emph{discrete-time Riccati difference equation} (DARE):
+\begin{align}
+  P_k &= A^\top P_{k+1} A + Q
+         - A^\top P_{k+1} B\bigl(R + B^\top P_{k+1} B\bigr)^{-1}
+           B^\top P_{k+1} A,
+  \label{eq:riccati}\\
+  K_k &= \bigl(R + B^\top P_{k+1} B\bigr)^{-1}B^\top P_{k+1} A,
+  \label{eq:gain}
+\end{align}
+with terminal condition $P_H = Q_H$.  The optimal control law is the linear
+state-feedback $u_k^* = -K_k x_k$.  For infinite-horizon problems with stable
+$(A,B)$, the sequence $P_k$ converges to the unique positive definite solution
+$P_\infty$ of the \emph{algebraic Riccati equation}
+$P = A^\top P A + Q - A^\top P B(R+B^\top P B)^{-1}B^\top P A$.
+
+\begin{remark}[Connection to Score Functions]
+  A key conjecture of our project is that, for LQ systems, the gradient of the
+  model-based log-density satisfies
+  $\scoremodel = -P_k x$,
+  where $P_k$ is the Riccati solution \eqref{eq:riccati}.  This would mean the
+  model-based score correction in the generative process \emph{is} the LQR
+  feedback gain.
+\end{remark}
+
+\subsubsection{Hamilton--Jacobi--Bellman Equation (Continuous Time)}
+In continuous time, let $\dot{x} = f(x,u)$ with cost
+$J = \int_0^T g(x,u)\,\dd t + V_T(x(T))$.  The value function
+$V(x,t) = \min_u J$ satisfies the \emph{HJB PDE}:
+\begin{equation}
+  -\frac{\partial V}{\partial t}(x,t)
+  = \min_{u\in\mathcal{U}}\Bigl[g(x,u) + \nabla_x V(x,t)^\top f(x,u)\Bigr],
+  \label{eq:hjb}
+\end{equation}
+with terminal condition $V(x,T) = V_T(x)$.  For stochastic dynamics
+$\dd x = f(x,u)\,\dd t + \sigma\,\dd W_t$, the HJB equation acquires a
+diffusion term $\frac{\sigma^2}{2}\Delta_x V$, where $\Delta_x$ is the
+Laplacian.  Solving the HJB equation is subject to the \emph{curse of
+dimensionality}: the state space grows exponentially in dimension, motivating
+the approximate methods discussed in Section~\ref{sec:rl}.
+
+\subsubsection{Contraction Mapping and Value Iteration}
+The Bellman operator $\mathcal{T}[V](x) = \min_u[g(x,u) + V(f(x,u))]$ is a
+$\gamma$-contraction in the $\sup$-norm (for discounted problems with discount
+factor $\gamma < 1$) by Banach's Fixed-Point Theorem.  \emph{Value iteration}
+$V_{k+1} \leftarrow \mathcal{T}[V_k]$ therefore converges geometrically to
+the unique fixed point $V^*$.  \emph{Policy iteration}---alternating between
+policy evaluation (solving the Bellman equation for a fixed policy) and policy
+improvement (one-step greedy update)---converges in a finite number of steps
+for finite MDPs and achieves superlinear convergence~\cite{bertsekas2012dp}.
+
+%---------------------------------------------------------------------
+\subsection{Score-Based Generative Models and Flow Matching}
+\label{sec:fm}
+
+\subsubsection{Score Functions and Diffusion Models}
+Let $p_0$ be a data distribution over trajectories $\tau\in\R^d$.  A diffusion
+model defines a \emph{forward SDE} that gradually corrupts $\tau$ toward
+Gaussian noise:
+\begin{equation}
+  \dd\tau_t = f_t(\tau_t)\,\dd t + g_t\,\dd W_t,\quad t\in[0,T],
+  \label{eq:forward_sde}
+\end{equation}
+and a \emph{reverse SDE} (Anderson 1982) that generates samples by denoising:
+\begin{equation}
+  \dd\tau_t = \bigl[f_t(\tau_t) - g_t^2\score(\tau_t)\bigr]\dd t
+              + g_t\,\dd\bar{W}_t,
+  \label{eq:reverse_sde}
+\end{equation}
+where $\score = \nabla_{\tau_t}\log p_t(\tau_t)$ is the \emph{score function}
+of the marginal $p_t$~\cite{song2021score}.  In standard diffusion models, a
+neural network $s_\theta(\tau_t,t)$ approximates the score via
+\emph{denoising score matching}~\cite{ho2020ddpm}:
+\begin{equation}
+  \mathcal{L}_{\mathrm{DSM}}(\theta)
+  = \E_{t,\tau_0,\tau_t}\!\bigl[\norm{s_\theta(\tau_t,t)
+    - \nabla_{\tau_t}\log p_{t|0}(\tau_t|\tau_0)}^2\bigr].
+  \label{eq:dsm}
+\end{equation}
+Classifier guidance~\cite{dhariwal2021diffusion} augments the score with the
+gradient of a cost function $c(\tau_t)$:
+$\tilde{s}(\tau_t,t) = s_\theta(\tau_t,t) + \lambda\nabla_{\tau_t}\log c(\tau_t),$
+enabling conditional generation without retraining.
+
+\subsubsection{Flow Matching}
+Flow Matching (FM)~\cite{lipman2023flow} replaces the stochastic SDE with a
+deterministic ODE
+\begin{equation}
+  \dot{x}_t = v_\theta(x_t,t),\quad x_0\sim\mathcal{N}(0,I),\; t\in[0,1].
+  \label{eq:fm_ode}
+\end{equation}
+The \emph{conditional flow matching} (CFM) objective regresses the velocity
+field on simple conditional paths (typically linear interpolants
+$x_t = (1-t)x_0 + tx_1$):
+\begin{equation}
+  \mathcal{L}_{\mathrm{CFM}}(\theta)
+  = \E_{t,(x_0,x_1)}\!\bigl[\norm{v_\theta(x_t,t) - (x_1-x_0)}^2\bigr].
+  \label{eq:cfm}
+\end{equation}
+FM has several advantages over diffusion for robotics: deterministic
+generation (same noise $\Rightarrow$ same trajectory), faster inference (single
+ODE integration), and compatibility with optimal control theory since the ODE
+has a clean variational interpretation.
+
+\subsubsection{Guided Flow Matching via Optimal Control}
+\textit{OC-Flow}~\cite{ocflow} casts guided generation as an optimal
+control problem: starting from a pre-trained FM prior $v_\theta$, find a
+\emph{control signal} $u_t$ that minimizes a terminal reward $R(x_1)$ while
+penalizing deviation from the prior:
+\begin{equation}
+  \min_{u_t} \;-R(x_1) + \tfrac{1}{2}\int_0^1\norm{u_t}^2\,\dd t,\quad
+  \dot{x}_t = v_\theta(x_t,t) + u_t.
+  \label{eq:ocflow}
+\end{equation}
+The necessary optimality conditions (Pontryagin Maximum Principle) give the
+co-state $\lambda_t$ satisfying $\dot{\lambda}_t = -(\partial v_\theta/\partial x_t)^\top\lambda_t$,
+and the optimal control $u_t^* = \lambda_t$.  This framework provides a
+principled, training-free way to guide flow matching with an arbitrary
+differentiable cost.
+
+\subsubsection{Stochastic Optimal Control and Score Matching}
+SOCM~\cite{domingoenrich2024socm} reveals a deep connection: the optimal
+\emph{stochastic} control that steers the SDE \eqref{eq:forward_sde} from a
+prior to a target distribution is intimately related to score matching.
+Specifically, the optimal control $u^*$ can be learned by minimizing a
+least-squares objective analogous to the denoising score matching loss
+\eqref{eq:dsm}, with the path-wise reparameterization trick reducing variance.
+This unifies score-based generative modeling and stochastic optimal control
+under a single mathematical umbrella.
+
+%---------------------------------------------------------------------
+\subsection{Reinforcement Learning and Approximate Dynamic Programming}
+\label{sec:rl}
+
+\subsubsection{Markov Decision Processes}
+A \emph{Markov Decision Process} (MDP) is a tuple
+$(\mathcal{S},\mathcal{A},P,r,\gamma)$ where $\mathcal{S}$ is the state space,
+$\mathcal{A}$ the action space, $P(s'|s,a)$ the transition kernel,
+$r(s,a)$ the reward function, and $\gamma\in(0,1)$ the discount factor.
+The optimal \emph{action-value function} $Q^*(s,a)$ satisfies the
+\emph{Bellman optimality equation}:
+\begin{equation}
+  Q^*(s,a) = r(s,a) + \gamma\sum_{s'}P(s'|s,a)\max_{a'}Q^*(s',a').
+  \label{eq:bellman_q}
+\end{equation}
+For continuous state spaces, \eqref{eq:bellman_q} cannot be solved exactly,
+motivating function approximation.
+
+\subsubsection{Value Function Approximation and Fitted Methods}
+\emph{Linear function approximation} represents $V^\pi(s)\approx\phi(s)^\top w$
+with feature vector $\phi(s)$.  \emph{Least-squares policy evaluation} (LSPE)
+solves the projected Bellman equation exactly in the feature subspace.
+\emph{Fitted value iteration} replaces the tabular update with supervised
+regression: given a dataset $\{(s_i,a_i,r_i,s_i')\}$, fit
+$V_{\theta}\leftarrow\arg\min_\theta\sum_i(V_\theta(s_i) - [r_i + \gamma\max_{a'}V_\theta(s_i')])^2$.
+Similarly, \emph{fitted Q-iteration} (FQI) fits the Q-function.
+
+\subsubsection{Deep Reinforcement Learning}
+\textbf{DQN}~\cite{mnih2015dqn} parametrizes $Q^*(s,a)$ with a deep neural
+network and stabilizes training via (i) a \emph{replay buffer} to break temporal
+correlations and (ii) a \emph{target network} that provides stable regression
+targets.  This enabled superhuman performance on Atari games directly from pixels.
+
+\textbf{Actor-Critic Methods} maintain both a \emph{critic} $V_\theta(s)$ (or
+$Q_\theta(s,a)$) and an \emph{actor} $\pi_\phi(a|s)$.  The actor is updated
+via policy gradient:
+$\nabla_\phi J(\phi) = \E_{\pi_\phi}[Q_\theta(s,a)\nabla_\phi\log\pi_\phi(a|s)].$
+\textbf{Soft Actor-Critic (SAC)}~\cite{haarnoja2018sac} augments the reward
+with an entropy bonus $\alpha\mathcal{H}(\pi(\cdot|s))$, yielding a maximum
+entropy policy that is robust to model errors and hyperparameter choices.
+
+\textbf{Policy Gradient / PPO}~\cite{schulman2017ppo} directly optimizes
+$J(\phi)=\E_\pi[\sum_t r_t]$ by gradient ascent.  Proximal Policy
+Optimization (PPO) constrains policy updates via a clipped surrogate
+objective, providing sample efficiency and stability.
+
+\subsubsection{Exploration and Exploitation}
+The exploration--exploitation dilemma is fundamental in RL~\cite{suttbarto2018rl}.
+In our project, the blending weight $\lambda$ plays an analogous role:
+$\lambda=0$ exploits the data prior (offline, no exploration); $\lambda\to\infty$
+explores via the model (online, potentially unimodal).  This connection is made
+precise in Section~\ref{sec:proposal}.
+
+\subsubsection{Online Search: Rollout and MPC}
+\emph{Rollout} improves a base policy $\mu$ by one-step look-ahead: at each
+state, evaluate several candidate actions by simulating $\mu$ forward and
+take the best.  \emph{Model Predictive Control} (MPC) solves a
+finite-horizon optimization at each step and executes only the first action
+(receding horizon).  MBD~\cite{mbd} can be interpreted as
+sampling-based MPC in score space, and adding the data prior corresponds to
+warm-starting MPC with an offline policy.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background: Diffusion and Flow Matching for Trajectories}
+\label{sec:diffusion_background}
+
+%---------------------------------------------------------------------
+\subsection{Diffusion Models for Trajectory Planning}
+
+A diffusion model for trajectory planning treats each expert trajectory
+$\tau = (q_0,q_1,\ldots,q_H)$ as a high-dimensional data point.  The forward
+process \eqref{eq:forward_sde} corrupts $\tau$ over time $t\in[0,T]$ toward a
+Gaussian prior.  The reverse process \eqref{eq:reverse_sde} generates new
+trajectories by starting from Gaussian noise and iteratively denoising with
+the learned score $s_\theta(\tau_t,t)$.
+
+\textbf{Diffuser}~\cite{janner2022}: the foundational work. Models the
+joint state-action trajectory as a high-dimensional ``image'' using a temporal
+U-Net, and uses classifier guidance for goal-conditioning. Demonstrated on D4RL
+offline RL benchmarks (maze navigation, locomotion). No dynamics awareness.
+
+\textbf{Diffusion Policy}~\cite{chi2023diffusionpolicy}: applies diffusion to
+action-space policy learning for manipulation. FiLM conditioning on observations.
+Limitation: action-space diffusion lacks trajectory-level feasibility guarantees.
+
+\textbf{MPD}~\cite{carvalho2023mpd}: learns a trajectory prior, then samples
+the posterior conditioned on cost guidance during denoising. B-spline
+parameterization for smoothness. Closest data-driven precedent to our work, but
+does not use the dynamics model for score computation.
+
+%---------------------------------------------------------------------
+\subsection{Flow Matching for Robot Motion Planning}
+
+\textbf{FlowMP}~\cite{flowmp}: extends FM to second-order trajectory
+dynamics (acceleration), producing smooth, physically executable motions.
+Achieves $2\times$ faster inference than MPD. Purely data-driven.
+
+\textbf{SafeFlow}~\cite{safeflow}: integrates FM with \emph{flow
+matching barrier functions} (FMBF), enabling training-free safety enforcement
+at test time. 100\% safety rate on 2D navigation and 7-DoF Panda manipulation.
+Limitation: safety $\ne$ dynamics feasibility.
+
+\textbf{SafeFlowMatcher}~\cite{yang2025safeflowmatcher}: a two-phase
+prediction-correction integrator. Prediction integrates the FM flow; correction
+refines with a CBF-based QP. Achieves faster, smoother, safer paths than diffusion baselines.
+
+\textbf{UniConFlow}~\cite{yang2025uniconflow}: unified constrained FM enforcing
+both equality and inequality constraints via prescribed-time zeroing functions
+and QP-based guidance. State of the art on certified motion planning metrics.
+
+\textbf{GoalFlow}~\cite{xing2025goalflow}: goal-driven FM for autonomous
+driving. Single denoising step, state-of-the-art on the NAVSIM benchmark.
+
+%---------------------------------------------------------------------
+\subsection{The Limitation: No Dynamics Awareness}
+
+All methods above learn the score or velocity field \emph{entirely from data}.
+Generated trajectories can violate dynamics constraints, degrade under
+distribution shift, and have no formal connection to the optimal control
+solution. This gap is exactly what MBD and our project address.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model-Based Diffusion (MBD)}
+\label{sec:mbd}
+
+%---------------------------------------------------------------------
+\subsection{Core Idea}
+
+MBD~\cite{mbd} takes the opposite approach: it \emph{computes} the score
+analytically from the dynamics model instead of learning it.  Given a trajectory
+optimization problem $\min_\tau J(\tau)$ subject to $q_{k+1} = f(q_k,u_k)$, MBD
+defines the target distribution
+\begin{equation}
+  p_0(\tau) \propto \exp\!\bigl(-J(\tau)/\lambda\bigr)\cdot\mathbf{1}[\tau\text{ is dynamically feasible}],
+  \label{eq:mbd_target}
+\end{equation}
+and estimates the score $\nabla_\tau\log p_0(\tau)$ via \emph{importance-weighted
+Monte Carlo rollouts}: sample many perturbations of the current trajectory,
+roll them through the dynamics model, weight by $\exp(-J(\tau)/\lambda)$, and
+average the directions. This is sampling-based trajectory optimization in score space.
+
+%---------------------------------------------------------------------
+\subsection{Strengths and Limitations}
+
+\textbf{Strengths:} No training data required; generalizes to new tasks and
+robots without retraining; guarantees dynamic feasibility by construction;
+outperforms PPO by 59\% on MuJoCo locomotion.
+
+\textbf{Limitations:} Cannot capture multimodal trajectory distributions (no
+data prior); computationally expensive (many MC rollouts); the paper
+(Section~4.3) mentions that data ``can be naturally integrated'' but
+\emph{does not formalize this integration}---no product-of-experts
+decomposition, no convergence analysis, no tradeoff bound.  This informal
+mention is \textbf{exactly the gap our project fills}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Score Function and Its Two Sources}
+\label{sec:scores}
+
+%---------------------------------------------------------------------
+\subsection{Data-Driven Score}
+
+Learned from demonstrations via a neural network:
+$\scoredata \approx \nabla_{\tau_t}\log p_t^{\mathrm{data}}(\tau_t).$
+\textit{Knows:} multimodal expert behavior, implicit constraints.
+\textit{Does not know:} robot dynamics, new-environment costs.
+
+%---------------------------------------------------------------------
+\subsection{Model-Based Score}
+
+Computed from dynamics and cost:
+$\scoremodel.$
+\textit{Knows:} physics, feasibility, optimality.
+\textit{Does not know:} demonstration distribution, multimodal behaviors.
+
+%---------------------------------------------------------------------
+\subsection{Product-of-Experts Fusion}
+
+Can we combine them?
+\begin{equation}
+  \nabla_{\tau_t}\log p_t^{\mathrm{target}}
+  = \underbrace{\scoredata}_{\text{offline, from data}}
+  + \lambda\underbrace{\scoremodel}_{\text{online, from dynamics}}.
+  \label{eq:poe_score}
+\end{equation}
+This is a \emph{product-of-experts} decomposition:
+\begin{equation}
+  p_t^{\mathrm{target}}(\tau_t)
+  \propto p_t^{\mathrm{data}}(\tau_t)\cdot
+  \bigl[p_t^{\mathrm{model}}(\tau_t)\bigr]^\lambda.
+  \label{eq:poe}
+\end{equation}
+The weight $\lambda$ controls the offline--online tradeoff:
+$\lambda=0$ (pure data), $\lambda=1$ (equal weight), $\lambda\to\infty$ (pure model).
+This is mathematically analogous to classifier guidance~\cite{dhariwal2021diffusion}
+and CFGRL~\cite{cfgrl}, but with an analytically computed
+model-based score instead of a learned classifier.
+
+%---------------------------------------------------------------------
+\subsection{Behavioral Score Diffusion (Opposite Direction)}
+
+BSD~\cite{bsd} goes the \emph{opposite} direction from MBD: it estimates
+scores entirely from data via kernel-weighted Nadaraya-Watson estimation,
+with no dynamics model. Triple-kernel weighting (diffusion proximity, state
+context, goal relevance). Achieves 98.5\% of MBD's reward without a model.
+\textbf{BSD confirms the field has split into model-only vs.\ data-only camps;
+nobody occupies the middle ground.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Gap}
+\label{sec:gap}
+
+Table~\ref{tab:gap} summarizes the landscape.
+
+\begin{table}[h]
+  \centering
+  \caption{Landscape of trajectory generation methods by score source.}
+  \label{tab:gap}
+  \small
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Method} & \textbf{Year} & \textbf{Data?} & \textbf{Model?} \\
+    \midrule
+    Diffuser~\cite{janner2022}            & 2022 & \checkmark & $\times$ \\
+    Diffusion Policy~\cite{chi2023diffusionpolicy}& 2023 & \checkmark & $\times$ \\
+    MPD~\cite{carvalho2023mpd}                    & 2024 & \checkmark & partial \\
+    MBD~\cite{mbd}                         & 2024 & optional*  & \checkmark \\
+    FlowMP~\cite{flowmp}                & 2025 & \checkmark & $\times$ \\
+    SafeFlow~\cite{safeflow}               & 2025 & \checkmark & safety only \\
+    OC-Flow~\cite{ocflow}                 & 2025 & \checkmark & reward only \\
+    S$^2$Diff~\cite{s2diff}              & 2025 & $\times$   & \checkmark \\
+    BSD~\cite{bsd}                          & 2026 & \checkmark & $\times$ \\
+    \textbf{Ours (proposed)}                      & 2026 & \checkmark & \checkmark \\
+    \bottomrule
+  \end{tabular}
+  \\[4pt]
+  \footnotesize *MBD mentions data integration informally; does not formalize it.
+\end{table}
+
+The gap is clear: nobody has formalized the product-of-experts fusion, studied
+the $\lambda$-tradeoff, or connected the model-based correction to the Riccati
+equation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Our Proposal: Product-of-Experts Score Fusion}
+\label{sec:proposal}
+
+%---------------------------------------------------------------------
+\subsection{The Algorithm}
+
+At each step of the reverse flow ODE, we use the composite score
+\eqref{eq:poe_score}.  $s_\theta$ is the learned flow matching score
+from the offline-trained model; $\scoremodel$ is computed online via Monte Carlo
+rollouts (nonlinear systems) or analytically (LQ systems); $\lambda\geq 0$
+is the blending weight.  Optionally, safety is incorporated as a third term:
+\begin{equation}
+  \nabla_{\tau_t}\log p_t^{\mathrm{target}}
+  = s_\theta + \lambda_{\mathrm{model}}\cdot\scoremodel
+    + \lambda_{\mathrm{safe}}\cdot\nabla\log p_t^{\mathrm{safe}},
+  \label{eq:three_score}
+\end{equation}
+where $\nabla\log p_t^{\mathrm{safe}}$ encodes collision avoidance via CBFs,
+connecting to SafeFlow~\cite{safeflow} and
+S$^2$Diff~\cite{s2diff}.
+
+%---------------------------------------------------------------------
+\subsection{The LQ Special Case: Conjectured Riccati Connection}
+
+For linear dynamics $x_{k+1} = Ax_k + Bu_k$ and quadratic cost
+$J = \sum_k(x_k^\top Qx_k + u_k^\top Ru_k)$, we conjecture:
+\begin{equation}
+  \scoremodel = -P_k x_t,
+  \label{eq:riccati_score}
+\end{equation}
+where $P_k$ satisfies the DARE \eqref{eq:riccati}.  If this holds,
+the model-based correction in the generative model is \emph{exactly the LQR
+optimal feedback gain}---the object derived via dynamic programming in the
+course.  This is a surprising and elegant bridge between generative modeling
+and classical control.
+
+%---------------------------------------------------------------------
+\subsection{Plan of Work}
+
+\textbf{Theory:} (1) Verify the LQ-Riccati connection analytically.
+(2) If tractable, prove convergence of the hybrid ODE in the LQ case.
+(3) Characterize the $\lambda$-tradeoff: how does blending affect cost vs.
+feasibility?
+
+\textbf{Implementation:} (1) Train a flow matching model on expert trajectories
+(2D navigation + manipulator). (2) Implement the model-based score (analytical
+for LQ, Monte Carlo for nonlinear). (3) Implement the hybrid algorithm with
+tunable $\lambda$. (4) Run experiments: feasibility comparison, $\lambda$-sweep
+tradeoff curve, robustness to distribution shift, LQR ablation.
+
+\textbf{Fallback:} empirical $\lambda$-tradeoff characterization + LQ-Riccati
+connection as the main theoretical observation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Connection to Dynamic Programming and Course Material}
+\label{sec:dp_connection}
+
+\begin{table}[h]
+  \centering
+  \caption{Connections to ECE M237 lecture topics.}
+  \label{tab:dp}
+  \small
+  \begin{tabular}{p{0.8cm}p{3.0cm}p{3.5cm}}
+    \toprule
+    \textbf{Lec} & \textbf{Topic} & \textbf{Connection} \\
+    \midrule
+    3 & System models, Lyapunov stability
+      & Dynamics model defines $p^{\mathrm{model}}$; Lyapunov certifies stability. \\
+    4 & Bellman, value/policy iteration, curse of dimensionality
+      & Model-based score $=$ gradient of value function; curse of dimensionality motivates learned prior. \\
+    5 & LQR, Riccati, HJB PDE
+      & \textbf{Deepest connection.} Model-based score $= -P_k x$ (Riccati gain); HJB governs continuous-time model score. \\
+    6 & Exploration-exploitation
+      & $\lambda$ is the exploration-exploitation tradeoff weight. \\
+    7--8 & Approx.\ DP, deep RL
+      & FM model = function approximator for trajectory distribution; fitted value iteration $\approx$ training FM on rollout data. \\
+    9--10 & MPC, rollout, MCTS
+      & MBD MC score estimation $=$ sampling-based MPC in score space; data prior $=$ warm-starting MPC. \\
+    11--12 & Safety, reachability, CBFs
+      & Safety enters as third score term $\nabla\log p^{\mathrm{safe}}$. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Literature Review}
+\label{sec:litreview}
+
+%---------------------------------------------------------------------
+\subsection{Foundational Works: Diffusion for Planning}
+
+\textbf{DDPM}~\cite{ho2020ddpm} introduced the denoising diffusion probabilistic
+model framework, connecting diffusion probabilistic models to denoising score
+matching with Langevin dynamics.  This is the theoretical bedrock for all
+diffusion-based planners.
+
+\textbf{Score SDE}~\cite{song2021score} unified all noise perturbation processes
+under a single SDE framework, providing continuous-time score matching and
+enabling deterministic (ODE-based) sampling.  This formulation is critical for
+connecting diffusion models to optimal control.
+
+\textbf{Diffuser}~\cite{janner2022}: first to apply diffusion to
+trajectory planning. Temporal U-Net, classifier guidance for goal-conditioning.
+D4RL benchmarks. No dynamics awareness.
+
+\textbf{Diffusion Policy}~\cite{chi2023diffusionpolicy}: action-space diffusion
+for manipulation; spawned a large ecosystem. Lacks trajectory-level feasibility.
+
+\textbf{MPD}~\cite{carvalho2023mpd}: MAP formulation with cost guidance during
+denoising, B-spline smoothness. Closest data-driven precedent; no dynamics-based
+score.
+
+%---------------------------------------------------------------------
+\subsection{Model-Based Score Computation}
+
+\textbf{MBD}~\cite{mbd}: computes score analytically from dynamics via
+Monte Carlo importance sampling. Target distribution \eqref{eq:mbd_target}.
+Outperforms PPO by 59\% on MuJoCo; mentions data integration informally.
+\textbf{The gap our project fills.}
+
+\textbf{BSD}~\cite{bsd}: kernel-weighted Nadaraya-Watson score estimation
+from data only; no dynamics model. Achieves 98.5\% of MBD with 1,000
+trajectories; proves pointwise consistency of kernel score estimate.
+\textbf{Confirms field has split into model-only vs.\ data-only.}
+
+%---------------------------------------------------------------------
+\subsection{Flow Matching for Robot Planning}
+
+\textbf{Flow Matching}~\cite{lipman2023flow}: the foundational FM framework.
+Simulation-free CNF training via conditional probability paths. Outperforms
+diffusion paths on ImageNet.
+
+\textbf{FlowMP}~\cite{flowmp}: second-order FM for robot motion.
+
+\textbf{SafeFlow}~\cite{safeflow}: flow matching barrier functions.
+Training-free safety at test time.
+
+\textbf{SafeFlowMatcher}~\cite{yang2025safeflowmatcher}: prediction-correction
+integrator with CBF-QP.
+
+\textbf{UniConFlow}~\cite{yang2025uniconflow}: unified equality/inequality
+constraint enforcement in FM.
+
+%---------------------------------------------------------------------
+\subsection{Guided Generation via Optimal Control}
+
+\textbf{OC-Flow}~\cite{ocflow}: training-free guided FM via optimal
+control (PMP-based co-state equations). Applied to image and molecule generation.
+Open-source. Our model-based score is a special case of OC guidance derived
+from dynamics rather than a terminal reward.
+
+\textbf{SOCM}~\cite{domingoenrich2024socm}: IDO technique for SOC via
+least-squares matching; path-wise reparameterization trick; lower error than
+existing IDO methods.
+
+%---------------------------------------------------------------------
+\subsection{Safety in Generative Planning}
+
+\textbf{SafeDiffuser}~\cite{xiao2025safediffuser}: CBFs integrated into
+denoising; evaluated on maze, legged locomotion, 3D manipulation.
+
+\textbf{S$^2$Diff}~\cite{s2diff}: Lyapunov-guided diffusion model for
+safe and stable control. Discovers theoretical link between diffusion sampling
+and Almost Lyapunov theory. Eliminates reliance on complex solvers and
+control-affine structures. NeurIPS 2025.
+
+%---------------------------------------------------------------------
+\subsection{Hybrid and Compositional Approaches}
+
+\textbf{Classifier Guidance}~\cite{dhariwal2021diffusion}: the original
+score-level product-of-experts for conditional generation.
+$\nabla\log p(x_t|y) = \nabla\log p(x_t) + \nabla\log p(y|x_t).$
+Conceptual ancestor of our approach.
+
+\textbf{CFGRL}~\cite{cfgrl}: classifier-free guidance as policy
+improvement operator. $\pi(a|s)\propto\hat{\pi}(a|s)\cdot f(A(s,a))$.
+Same product-of-experts math in action space; confirms generality of the
+composition principle.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Open Questions and Risks}
+\label{sec:openquestions}
+
+\textbf{Fairly confident:}
+The product-of-experts score decomposition is well-defined;
+the LQ-Riccati connection is verifiable analytically;
+the $\lambda$-sweep experiment will produce interpretable results;
+MBD's Monte Carlo score estimation works (NeurIPS 2024).
+
+\textbf{Uncertain:}
+Whether the hybrid ODE converges to the correct product distribution in the
+nonlinear case (may require hard-to-verify regularity conditions);
+whether Monte Carlo score estimation is accurate enough in high dimensions;
+whether the product-of-experts assumption is appropriate (calibration between
+data and model distributions may be off);
+sensitivity to $\lambda$ (may require per-task tuning).
+
+\textbf{Fallback plan:}
+If general theory is intractable, frame around (1) the LQ-Riccati connection,
+(2) empirical $\lambda$-tradeoff characterization, and (3) failure mode analysis.
+This remains a complete, publishable-quality course project.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,references}
+
+\end{document}

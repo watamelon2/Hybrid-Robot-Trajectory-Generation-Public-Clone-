@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 3371.8473347909894,
+      "output": "/private/tmp/HRTG-wt-followups/experiments/15_unified_hybrid/results/slate_K_hardtask_baselines_2026_06_03/unified_demo_1nn_lam-0.0_K-10_R-1_baseline_purembd_tool_hang.json"
+    }
+  ]
+}

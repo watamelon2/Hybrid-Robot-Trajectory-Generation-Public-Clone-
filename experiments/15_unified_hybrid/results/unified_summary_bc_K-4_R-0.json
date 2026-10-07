@@ -1,0 +1,24 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 4,
+  "R": 0,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 2,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 179.70166614799996,
+      "output": "/home/snipe/Hybrid_Robot_trajectory-Generation-v2/experiments/15_unified_hybrid/results/unified_bc_lam-0.0_K-4_R-0.json"
+    },
+    {
+      "lambda_prior": 1.0,
+      "n_total": 2,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 178.03808763899997,
+      "output": "/home/snipe/Hybrid_Robot_trajectory-Generation-v2/experiments/15_unified_hybrid/results/unified_bc_lam-1.0_K-4_R-0.json"
+    }
+  ]
+}

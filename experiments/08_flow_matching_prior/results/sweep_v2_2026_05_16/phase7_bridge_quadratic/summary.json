@@ -1,0 +1,26 @@
+[
+  {
+    "lambda_prior": 0.1,
+    "n_success": 4,
+    "n_total": 60,
+    "success_rate": 0.06666666666666667,
+    "wall_s": 865.73182141711,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase7_bridge_quadratic/lambda_flow[quadratic]_0.1.json"
+  },
+  {
+    "lambda_prior": 0.5,
+    "n_success": 2,
+    "n_total": 60,
+    "success_rate": 0.03333333333333333,
+    "wall_s": 823.2735155001283,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase7_bridge_quadratic/lambda_flow[quadratic]_0.5.json"
+  },
+  {
+    "lambda_prior": 1.0,
+    "n_success": 1,
+    "n_total": 60,
+    "success_rate": 0.016666666666666666,
+    "wall_s": 799.1428881250322,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase7_bridge_quadratic/lambda_flow[quadratic]_1.0.json"
+  }
+]

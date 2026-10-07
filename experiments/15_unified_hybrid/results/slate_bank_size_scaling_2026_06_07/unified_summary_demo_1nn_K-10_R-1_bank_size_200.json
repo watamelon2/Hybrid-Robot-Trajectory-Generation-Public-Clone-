@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 41,
+      "success_rate": 0.6833333333333333,
+      "wall_s": 1376.196638207999,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_bank_size_scaling_2026_06_07/unified_demo_1nn_lam-1.0_K-10_R-1_bank_size_200.json"
+    }
+  ]
+}

@@ -1,0 +1,549 @@
+% ============================================================
+% References for: Hybrid Model-Based and Data-Driven Score
+%   Fusion for Robot Trajectory Generation
+% ECE M237 Course Project
+% ============================================================
+
+% -------------------------------------------------------
+% Foundational: Diffusion Models
+% -------------------------------------------------------
+
+@inproceedings{ho2020ddpm,
+  title     = {Denoising Diffusion Probabilistic Models},
+  author    = {Ho, Jonathan and Jain, Ajay and Abbeel, Pieter},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {33},
+  pages     = {6840--6851},
+  year      = {2020},
+  eprint    = {2006.11239},
+  archiveprefix = {arXiv},
+  file      = {DDPM_DenoisingDiffusion_NeurIPS2020.pdf}
+}
+
+@inproceedings{song2021score,
+  title     = {Score-Based Generative Modeling through Stochastic Differential Equations},
+  author    = {Song, Yang and Sohl-Dickstein, Jascha and Kingma, Diederik P and Kumar, Abhishek and Ermon, Stefano and Poole, Ben},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2021},
+  eprint    = {2011.13456},
+  archiveprefix = {arXiv},
+  file      = {ScoreBasedSDE_Song_ICLR2021.pdf}
+}
+
+@inproceedings{dhariwal2021diffusion,
+  title     = {Diffusion Models Beat {GAN}s on Image Synthesis},
+  author    = {Dhariwal, Prafulla and Nichol, Alexander},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {34},
+  pages     = {8780--8794},
+  year      = {2021},
+  eprint    = {2105.05233},
+  archiveprefix = {arXiv},
+  file      = {ClassifierGuidance_DiffusionBeatGANs_NeurIPS2021.pdf}
+}
+
+% -------------------------------------------------------
+% Flow Matching
+% -------------------------------------------------------
+
+@inproceedings{lipman2023flow,
+  title     = {Flow Matching for Generative Modeling},
+  author    = {Lipman, Yaron and Chen, Ricky T. Q. and Ben-Hamu, Heli and Nickel, Maximilian and Le, Matt},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2023},
+  eprint    = {2210.02747},
+  archiveprefix = {arXiv},
+  file      = {FlowMatching_Lipman_ICLR2023.pdf}
+}
+
+% -------------------------------------------------------
+% Diffusion for Trajectory Planning and Robotics
+% -------------------------------------------------------
+
+@inproceedings{janner2022,
+  title     = {Planning with Diffusion for Flexible Behavior Synthesis},
+  author    = {Janner, Michael and Du, Yilun and Tenenbaum, Joshua B and Levine, Sergey},
+  booktitle = {International Conference on Machine Learning},
+  pages     = {9902--9915},
+  year      = {2022},
+  organization = {PMLR},
+  eprint    = {2205.09991},
+  archiveprefix = {arXiv},
+  file      = {Diffuser_Planning_ICML2022.pdf}
+}
+
+@inproceedings{chi2023diffusionpolicy,
+  title     = {Diffusion Policy: Visuomotor Policy Learning via Action Diffusion},
+  author    = {Chi, Cheng and Feng, Siyuan and Du, Yilun and Xu, Zhenjia and Cousineau, Eric and Burchfiel, Benjamin and Tedrake, Russ and Song, Shuran},
+  booktitle = {Proceedings of Robotics: Science and Systems},
+  year      = {2023},
+  eprint    = {2303.04137},
+  archiveprefix = {arXiv},
+  file      = {DiffusionPolicy_RSS2023.pdf}
+}
+
+@inproceedings{carvalho2023mpd,
+  title     = {Motion Planning Diffusion: Learning and Planning of Robot Motions with Diffusion Models},
+  author    = {Carvalho, Jo{\~a}o and Le, An T and Baierl, Mark and Koert, Dorothea and Peters, Jan},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2023},
+  eprint    = {2308.01557},
+  archiveprefix = {arXiv},
+  file      = {MPD_MotionPlanningDiffusion_IROS2023.pdf}
+}
+
+% -------------------------------------------------------
+% Model-Based Diffusion
+% -------------------------------------------------------
+
+@inproceedings{mbd,
+  title     = {Model-Based Diffusion for Trajectory Optimization},
+  author    = {Pan, Chaoyi and Yi, Zeji and Shi, Guanya and Qu, Guannan},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2024},
+  eprint    = {2410.02873},
+  archiveprefix = {arXiv},
+  file      = {MBD_Model_Based_Diffusion_NeurIPS2024.pdf}
+}
+
+% -------------------------------------------------------
+% Flow Matching for Robotics
+% -------------------------------------------------------
+
+@article{flowmp,
+  title     = {{FlowMP}: Learning Motion Fields for Robot Planning with Conditional Flow Matching},
+  author    = {Nguyen, Thien and others},
+  journal   = {arXiv preprint arXiv:2503.06135},
+  year      = {2025},
+  eprint    = {2503.06135},
+  archiveprefix = {arXiv},
+  file      = {FlowMP_ConditionalFlowMatching_2025.pdf}
+}
+
+@article{safeflow,
+  title     = {{SafeFlow}: Safe Robot Motion Planning with Flow Matching via Control Barrier Functions},
+  author    = {Dai, Xiaobing and others},
+  journal   = {arXiv preprint arXiv:2504.08661},
+  year      = {2025},
+  eprint    = {2504.08661},
+  archiveprefix = {arXiv},
+  file      = {SafeFlow_FlowMatching_CBF_2025.pdf}
+}
+
+@article{yang2025safeflowmatcher,
+  title     = {{SafeFlowMatcher}: Safe and Fast Planning using Flow Matching with Control Barrier Functions},
+  author    = {Yang, Jeongyong and others},
+  journal   = {arXiv preprint arXiv:2509.24243},
+  year      = {2025},
+  eprint    = {2509.24243},
+  archiveprefix = {arXiv},
+  file      = {SafeFlowMatcher_2025.pdf}
+}
+
+@article{yang2025uniconflow,
+  title     = {{UniConFlow}: A Unified Constrained Flow-Matching Framework for Certified Motion Planning},
+  author    = {Yang, Jeongyong and Dai, Xiaobing and others},
+  journal   = {arXiv preprint arXiv:2506.02955},
+  year      = {2025},
+  eprint    = {2506.02955},
+  archiveprefix = {arXiv},
+  file      = {UniConFlow_ConstrainedFlowMatching_2025.pdf}
+}
+
+@inproceedings{xing2025goalflow,
+  title     = {{GoalFlow}: Goal-Driven Flow Matching for Multimodal Trajectories Generation in End-to-End Autonomous Driving},
+  author    = {Xing, Zebin and Zhang, Xingyu and Hu, Yang and Jiang, Bo and He, Tong and Zhang, Qian and Long, Xiaoxiao and Yin, Wei},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2025},
+  eprint    = {2503.17674},
+  archiveprefix = {arXiv},
+  file      = {GoalFlow_CVPR2025.pdf}
+}
+
+% -------------------------------------------------------
+% Optimal Control + Flow Matching
+% -------------------------------------------------------
+
+@inproceedings{ocflow,
+  title     = {Training Free Guided Flow Matching with Optimal Control},
+  author    = {Wang, Luran and Cheng, Chaoran and Liao, Yizhen and Qu, Yanru and Liu, Ge},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2025},
+  eprint    = {2410.12427},
+  archiveprefix = {arXiv},
+  file      = {OC-Flow_Guided_FlowMatching_ICLR2025.pdf}
+}
+
+@inproceedings{domingoenrich2024socm,
+  title     = {Stochastic Optimal Control Matching},
+  author    = {Domingo-Enrich, Carles and Han, Jiequn and Amos, Brandon and Bruna, Joan and Chen, Ricky T.~Q.},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2024},
+  eprint    = {2312.02027},
+  archiveprefix = {arXiv},
+  file      = {SOCM_StochasticOptimalControl_NeurIPS2024.pdf}
+}
+
+% -------------------------------------------------------
+% Behavioral Score Diffusion
+% -------------------------------------------------------
+
+@article{bsd,
+  title     = {Behavioral Score Diffusion: Model-Free Trajectory Planning via Kernel-Based Score Estimation from Data},
+  author    = {Li, others},
+  journal   = {arXiv preprint arXiv:2604.00391},
+  year      = {2026},
+  eprint    = {2604.00391},
+  archiveprefix = {arXiv},
+  file      = {BSD_BehavioralScoreDiffusion_2026.pdf}
+}
+
+% -------------------------------------------------------
+% Safety in Generative Planning
+% -------------------------------------------------------
+
+@inproceedings{xiao2025safediffuser,
+  title     = {{SafeDiffuser}: Safe Planning with Diffusion Probabilistic Models},
+  author    = {Xiao, Wei and Wang, Johnson Tsun-Hsuan and Gan, Chuang and Hasani, Ramin and Lechner, Mathias and Rus, Daniela},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2025},
+  eprint    = {2306.00148},
+  archiveprefix = {arXiv},
+  file      = {SafeDiffuser_ICLR2025.pdf}
+}
+
+% -------------------------------------------------------
+% Guided Generation / Policy Improvement
+% -------------------------------------------------------
+
+@article{cfgrl,
+  title     = {Diffusion Guidance Is a Controllable Policy Improvement Operator},
+  author    = {Frans, Kevin and Park, Seohong and Abbeel, Pieter and Levine, Sergey},
+  journal   = {arXiv preprint arXiv:2505.23458},
+  year      = {2025},
+  eprint    = {2505.23458},
+  archiveprefix = {arXiv},
+  file      = {CFGRL_DiffusionGuidance_PolicyImprovement_2025.pdf}
+}
+
+% -------------------------------------------------------
+% Safety + Lyapunov + Diffusion
+% -------------------------------------------------------
+
+@inproceedings{s2diff,
+  title     = {Safe and Stable Control via {Lyapunov}-Guided Diffusion Models},
+  author    = {Cheng, Xiaoyuan and Tang, Xiaohang and Yang, Yiming},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2025},
+  eprint    = {2509.25375},
+  archiveprefix = {arXiv},
+  file      = {S2Diff_Lyapunov_Diffusion_2025.pdf}
+}
+
+% -------------------------------------------------------
+% Reinforcement Learning Foundations
+% -------------------------------------------------------
+
+@book{bertsekas2012dp,
+  title     = {Dynamic Programming and Optimal Control, Vol.~{II}},
+  author    = {Bertsekas, Dimitri P.},
+  publisher = {Athena Scientific},
+  year      = {2012},
+  edition   = {4th}
+}
+
+@book{suttbarto2018rl,
+  title     = {Reinforcement Learning: An Introduction},
+  author    = {Sutton, Richard S. and Barto, Andrew G.},
+  publisher = {MIT Press},
+  year      = {2018},
+  edition   = {2nd}
+}
+
+@inproceedings{mnih2015dqn,
+  title     = {Human-Level Control through Deep Reinforcement Learning},
+  author    = {Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and others},
+  booktitle = {Nature},
+  volume    = {518},
+  pages     = {529--533},
+  year      = {2015},
+  eprint    = {1312.5602},
+  archiveprefix = {arXiv},
+  file      = {DQN_HumanLevelControl_Nature2015.pdf}
+}
+
+@article{schulman2017ppo,
+  title     = {Proximal Policy Optimization Algorithms},
+  author    = {Schulman, John and Wolski, Filip and Dhariwal, Prafull and Radford, Alec and Klimov, Oleg},
+  journal   = {arXiv preprint arXiv:1707.06347},
+  year      = {2017},
+  eprint    = {1707.06347},
+  archiveprefix = {arXiv},
+  file      = {PPO_ProximalPolicyOptimization_2017.pdf}
+}
+
+@inproceedings{haarnoja2018sac,
+  title     = {Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor},
+  author    = {Haarnoja, Tuomas and Zhou, Aurick and Abbeel, Pieter and Levine, Sergey},
+  booktitle = {International Conference on Machine Learning},
+  pages     = {1861--1870},
+  year      = {2018},
+  organization = {PMLR},
+  eprint    = {1801.01290},
+  archiveprefix = {arXiv},
+  file      = {SAC_SoftActorCritic_ICML2018.pdf}
+}
+
+% -------------------------------------------------------
+% Optimal Control Theory
+% -------------------------------------------------------
+
+@book{kirk2004optimal,
+  title     = {Optimal Control Theory: An Introduction},
+  author    = {Kirk, Donald E.},
+  publisher = {Dover Publications},
+  year      = {2004}
+}
+
+@book{lewis2012optimal,
+  title     = {Optimal Control},
+  author    = {Lewis, Frank L. and Vrabie, Draguna L. and Syrmos, Vassilis L.},
+  publisher = {John Wiley \& Sons},
+  year      = {2012},
+  edition   = {3rd}
+}
+
+% -------------------------------------------------------
+% Rigorous background references (SDEs, viscosity, OT, etc.)
+% -------------------------------------------------------
+
+@book{oksendal2003sde,
+  title     = {Stochastic Differential Equations: An Introduction with Applications},
+  author    = {{\O}ksendal, Bernt},
+  publisher = {Springer},
+  year      = {2003},
+  edition   = {6th}
+}
+
+@book{karatzas1991bm,
+  title     = {Brownian Motion and Stochastic Calculus},
+  author    = {Karatzas, Ioannis and Shreve, Steven E.},
+  publisher = {Springer},
+  year      = {1991},
+  edition   = {2nd}
+}
+
+@book{fleming-soner2006,
+  title     = {Controlled {M}arkov Processes and Viscosity Solutions},
+  author    = {Fleming, Wendell H. and Soner, Halil Mete},
+  publisher = {Springer},
+  year      = {2006},
+  edition   = {2nd}
+}
+
+@book{bertsekas1996ndp,
+  title     = {Stochastic Optimal Control: The Discrete-Time Case},
+  author    = {Bertsekas, Dimitri P. and Shreve, Steven E.},
+  publisher = {Athena Scientific},
+  year      = {1996}
+}
+
+@book{ambrosio2008gradient,
+  title     = {Gradient Flows in Metric Spaces and in the Space of Probability Measures},
+  author    = {Ambrosio, Luigi and Gigli, Nicola and Savar{\'e}, Giuseppe},
+  publisher = {Birkh{\"a}user},
+  year      = {2008},
+  edition   = {2nd}
+}
+
+@article{otto2001geometry,
+  title     = {The Geometry of Dissipative Evolution Equations: The Porous Medium Equation},
+  author    = {Otto, Felix},
+  journal   = {Communications in Partial Differential Equations},
+  volume    = {26},
+  number    = {1-2},
+  pages     = {101--174},
+  year      = {2001}
+}
+
+@article{tong2023ot,
+  title     = {Improving and Generalizing Flow-Based Generative Models with Minibatch Optimal Transport},
+  author    = {Tong, Alexander and Fatras, Kilian and Malkin, Nikolay and Huguet, Guillaume and Zhang, Yanlei and Rector-Brooks, Jarrid and Wolf, Guy and Bengio, Yoshua},
+  journal   = {Transactions on Machine Learning Research},
+  year      = {2023},
+  eprint    = {2302.00482},
+  archiveprefix = {arXiv},
+  file      = {OT-CFM_MinibatchOT_TMLR2023.pdf}
+}
+
+@article{anderson1982reverse,
+  title     = {Reverse-Time Diffusion Equation Models},
+  author    = {Anderson, Brian D.~O.},
+  journal   = {Stochastic Processes and their Applications},
+  volume    = {12},
+  number    = {3},
+  pages     = {313--326},
+  year      = {1982}
+}
+
+@article{haussmann1986time,
+  title     = {Time Reversal of Diffusions},
+  author    = {Haussmann, U.~G. and Pardoux, {\'E}.},
+  journal   = {The Annals of Probability},
+  volume    = {14},
+  number    = {4},
+  pages     = {1188--1205},
+  year      = {1986}
+}
+
+@article{hyvarinen2005scorematching,
+  title     = {Estimation of Non-Normalized Statistical Models by Score Matching},
+  author    = {Hyv{\"a}rinen, Aapo},
+  journal   = {Journal of Machine Learning Research},
+  volume    = {6},
+  pages     = {695--709},
+  year      = {2005},
+  url       = {https://jmlr.org/papers/v6/hyvarinen05a.html},
+  file      = {Hyvarinen_ScoreMatching_JMLR2005.pdf}
+}
+
+@article{vincent2011connection,
+  title     = {A Connection Between Score Matching and Denoising Autoencoders},
+  author    = {Vincent, Pascal},
+  journal   = {Neural Computation},
+  volume    = {23},
+  number    = {7},
+  pages     = {1661--1674},
+  year      = {2011},
+  file      = {Vincent_DenoisingScoreMatching_2011.pdf}
+}
+
+@article{kappen2005path,
+  title     = {Path Integrals and Symmetry Breaking for Optimal Control Theory},
+  author    = {Kappen, Hilbert J.},
+  journal   = {Journal of Statistical Mechanics: Theory and Experiment},
+  volume    = {2005},
+  number    = {11},
+  pages     = {P11011},
+  year      = {2005},
+  eprint    = {physics/0505066},
+  archiveprefix = {arXiv},
+  file      = {Kappen_PathIntegrals_JSTAT2005.pdf}
+}
+
+@book{owen2013mcb,
+  title     = {Monte Carlo Theory, Methods and Examples},
+  author    = {Owen, Art B.},
+  year      = {2013},
+  note      = {Book draft, \url{https://artowen.su.domains/mc/}}
+}
+
+@book{pontryagin1962,
+  title     = {The Mathematical Theory of Optimal Processes},
+  author    = {Pontryagin, L.~S. and Boltyanskii, V.~G. and Gamkrelidze, R.~V. and Mishchenko, E.~F.},
+  publisher = {Interscience Publishers},
+  year      = {1962}
+}
+
+% -------------------------------------------------------
+% Diffusion-Style MPC
+% -------------------------------------------------------
+
+@inproceedings{dialmpc,
+  author    = {Xue, Hao and Pan, Chaoyi and Yi, Zeji and Qu, Guannan and Shi, Guanya},
+  title     = {Full-Order Sampling-Based MPC for Torque-Level Locomotion Control via Diffusion-Style Annealing},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2025},
+  eprint    = {2409.10733},
+  archiveprefix = {arXiv},
+  file      = {DIALMPC_DiffusionAnnealing_ICRA2025.pdf}
+}
+
+% -------------------------------------------------------
+% Backward-compatible aliases (old cite keys → same data)
+% These ensure older .tex files still compile correctly.
+% Canonical keys are above; these are kept for any file
+% that still references the old names.
+% -------------------------------------------------------
+
+@inproceedings{janner2022diffuser,
+  title     = {Planning with Diffusion for Flexible Behavior Synthesis},
+  author    = {Janner, Michael and Du, Yilun and Tenenbaum, Joshua B and Levine, Sergey},
+  booktitle = {International Conference on Machine Learning},
+  pages     = {9902--9915},
+  year      = {2022},
+  organization = {PMLR},
+  eprint    = {2205.09991},
+  archiveprefix = {arXiv},
+  file      = {Diffuser_Planning_ICML2022.pdf}
+}
+
+@inproceedings{pan2024mbd,
+  title     = {Model-Based Diffusion for Trajectory Optimization},
+  author    = {Pan, Chaoyi and Yi, Zeji and Shi, Guanya and Qu, Guannan},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2024},
+  eprint    = {2410.02873},
+  archiveprefix = {arXiv},
+  file      = {MBD_Model_Based_Diffusion_NeurIPS2024.pdf}
+}
+
+@article{nguyen2025flowmp,
+  title     = {{FlowMP}: Learning Motion Fields for Robot Planning with Conditional Flow Matching},
+  author    = {Nguyen, Thien and others},
+  journal   = {arXiv preprint arXiv:2503.06135},
+  year      = {2025},
+  eprint    = {2503.06135},
+  archiveprefix = {arXiv},
+  file      = {FlowMP_ConditionalFlowMatching_2025.pdf}
+}
+
+@article{dai2025safeflow,
+  title     = {{SafeFlow}: Safe Robot Motion Planning with Flow Matching via Control Barrier Functions},
+  author    = {Dai, Xiaobing and others},
+  journal   = {arXiv preprint arXiv:2504.08661},
+  year      = {2025},
+  eprint    = {2504.08661},
+  archiveprefix = {arXiv},
+  file      = {SafeFlow_FlowMatching_CBF_2025.pdf}
+}
+
+@inproceedings{wang2025ocflow,
+  title     = {Training Free Guided Flow Matching with Optimal Control},
+  author    = {Wang, Luran and Cheng, Chaoran and Liao, Yizhen and Qu, Yanru and Liu, Ge},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2025},
+  eprint    = {2410.12427},
+  archiveprefix = {arXiv},
+  file      = {OC-Flow_Guided_FlowMatching_ICLR2025.pdf}
+}
+
+@article{frans2025cfgrl,
+  title     = {Diffusion Guidance Is a Controllable Policy Improvement Operator},
+  author    = {Frans, Kevin and Park, Seohong and Abbeel, Pieter and Levine, Sergey},
+  journal   = {arXiv preprint arXiv:2505.23458},
+  year      = {2025},
+  eprint    = {2505.23458},
+  archiveprefix = {arXiv},
+  file      = {CFGRL_DiffusionGuidance_PolicyImprovement_2025.pdf}
+}
+
+@inproceedings{cheng2025s2diff,
+  title     = {Safe and Stable Control via {Lyapunov}-Guided Diffusion Models},
+  author    = {Cheng, Xiaoyuan and Tang, Xiaohang and Yang, Yiming},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2025},
+  eprint    = {2509.25375},
+  archiveprefix = {arXiv},
+  file      = {S2Diff_Lyapunov_Diffusion_2025.pdf}
+}
+
+@article{li2026bsd,
+  title     = {Behavioral Score Diffusion: Model-Free Trajectory Planning via Kernel-Based Score Estimation from Data},
+  author    = {Li, others},
+  journal   = {arXiv preprint arXiv:2604.00391},
+  year      = {2026},
+  eprint    = {2604.00391},
+  archiveprefix = {arXiv},
+  file      = {BSD_BehavioralScoreDiffusion_2026.pdf}
+}

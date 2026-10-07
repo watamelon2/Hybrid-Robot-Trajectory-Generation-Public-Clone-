@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 2,
+  "per_lambda": [
+    {
+      "lambda_prior": 2.0,
+      "n_total": 60,
+      "n_success": 26,
+      "success_rate": 0.43333333333333335,
+      "wall_s": 10757.69327164907,
+      "output": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/tail_boost_2026_06_10/static_offload/bc_lambda_sweep_split/unified_bc_lam-2.0_K-10_R-2_bc_k10_r2_lam2_boost_nw6.json"
+    }
+  ]
+}

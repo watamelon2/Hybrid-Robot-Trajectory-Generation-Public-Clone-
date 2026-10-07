@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 10,
+  "R": 29,
+  "per_lambda": [
+    {
+      "lambda_prior": 2.0,
+      "n_total": 6,
+      "n_success": 3,
+      "success_rate": 0.5,
+      "wall_s": 3335.1290071085095,
+      "output": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/vast_safe_dp_nwfix_2026_06_12/can_dp_ep0199_smax0p25_lam2_seed100048_n6/unified_flow_pull_lam-2.0_K-10_R-29_can_dp_ep0199_smax0p25_lam2_seed100048_n6.json"
+    }
+  ]
+}

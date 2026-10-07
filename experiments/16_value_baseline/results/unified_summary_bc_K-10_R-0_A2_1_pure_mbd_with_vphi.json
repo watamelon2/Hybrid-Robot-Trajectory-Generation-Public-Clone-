@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 0,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 3558.5275471660425,
+      "output": "/Users/aaronwen/work/Hybrid-Robot-Trajectory-Generation/experiments/16_value_baseline/results/unified_bc_lam-0.0_K-10_R-0_A2_1_pure_mbd_with_vphi.json"
+    }
+  ]
+}

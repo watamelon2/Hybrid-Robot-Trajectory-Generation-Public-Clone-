@@ -1,0 +1,66 @@
+[
+  {
+    "lambda_prior": 0.0,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1122.0986366249854,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_0.0.json"
+  },
+  {
+    "lambda_prior": 0.1,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1123.797926542,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_0.1.json"
+  },
+  {
+    "lambda_prior": 0.5,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1056.0665096250596,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_0.5.json"
+  },
+  {
+    "lambda_prior": 1.0,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1053.279495207942,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_1.0.json"
+  },
+  {
+    "lambda_prior": 2.0,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1037.1571812919574,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_2.0.json"
+  },
+  {
+    "lambda_prior": 5.0,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1027.2801484169904,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_5.0.json"
+  },
+  {
+    "lambda_prior": 10.0,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1006.0297052089591,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_10.0.json"
+  },
+  {
+    "lambda_prior": 20.0,
+    "n_success": 0,
+    "n_total": 60,
+    "success_rate": 0.0,
+    "wall_s": 1025.2333914589835,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase1_lambda_sweep_warmstart/lambda_20.0.json"
+  }
+]

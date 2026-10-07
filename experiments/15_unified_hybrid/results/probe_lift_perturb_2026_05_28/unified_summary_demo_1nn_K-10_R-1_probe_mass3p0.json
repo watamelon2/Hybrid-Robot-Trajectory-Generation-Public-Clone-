@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 10,
+      "n_success": 10,
+      "success_rate": 1.0,
+      "wall_s": 348.56844029199965,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-incremental/experiments/15_unified_hybrid/results/probe_lift_perturb_2026_05_28/unified_demo_1nn_lam-1.0_K-10_R-1_probe_mass3p0.json"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_v3",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 2086.9507274579955,
+      "output": "experiments/08_flow_matching_prior/results/v4_transformer_eval/unified_flow_v3_lam-1.0_K-10_R-1.json"
+    }
+  ]
+}

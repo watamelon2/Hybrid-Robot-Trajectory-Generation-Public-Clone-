@@ -1,0 +1,32 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 3,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 5,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 5418.793248500035,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/research_queue_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-0.0_K-10_R-3_th_lam_ablate_trace.json"
+    },
+    {
+      "lambda_prior": 1.0,
+      "n_total": 5,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 4970.95985754201,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/research_queue_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-1.0_K-10_R-3_th_lam_ablate_trace.json"
+    },
+    {
+      "lambda_prior": Infinity,
+      "n_total": 5,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 5612.21104508295,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/research_queue_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-inf_K-10_R-3_th_lam_ablate_trace.json"
+    }
+  ]
+}

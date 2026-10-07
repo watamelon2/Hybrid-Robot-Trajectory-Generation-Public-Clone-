@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 10,
+  "R": 29,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 19,
+      "success_rate": 0.6333333333333333,
+      "wall_s": 3260.979517083004,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/17_dp_hybrid/results/ep0199_checkpoint_correction_2026_06_09/unified_flow_pull_lam-1.0_K-10_R-29_D1_ep0199_lam1_K10_smax10.json"
+    }
+  ]
+}

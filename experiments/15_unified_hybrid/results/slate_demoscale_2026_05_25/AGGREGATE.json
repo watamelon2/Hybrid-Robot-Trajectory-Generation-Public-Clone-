@@ -1,0 +1,186 @@
+{
+  "slate": "slate_demoscale_2026_05_25",
+  "task": "can",
+  "prior": "demo_1nn",
+  "operating_point": {
+    "lambda_prior": 1.0,
+    "sigma_max": 0.25,
+    "sigma_min": 0.01,
+    "K": 10,
+    "M": 16,
+    "H": 120,
+    "n_demos": 20,
+    "n_rollouts_per_demo": 3,
+    "seed": 0,
+    "mpc_replans": 1,
+    "mpc_chunk_steps": 60
+  },
+  "canonical_pool_reference": {
+    "source": "slate_e_2026_05_19",
+    "n_seeds": 4,
+    "n_total": 240,
+    "rate": 0.7375,
+    "ci95": [
+      0.678,
+      0.789
+    ]
+  },
+  "cells": [
+    {
+      "n_b": 5,
+      "json_file": "unified_demo_1nn_lam-1.0_K-10_R-1_Nb5.json",
+      "n_total": 60,
+      "n_success": 12,
+      "success_rate": 0.2,
+      "ci95_lo": 0.11828389736858964,
+      "ci95_hi": 0.3178204609181701,
+      "in_bank": {
+        "n_total": 15,
+        "n_success": 12,
+        "rate": 0.8,
+        "ci95_lo": 0.5481406466534955,
+        "ci95_hi": 0.9295257935638959
+      },
+      "out_of_bank": {
+        "n_total": 45,
+        "n_success": 0,
+        "rate": 0.0,
+        "ci95_lo": 0.0,
+        "ci95_hi": 0.07865426194064076
+      },
+      "mean_reward": 9.098659425091899,
+      "median_reward": 1.049560913752365,
+      "wall_s": 2145.9388337500277
+    },
+    {
+      "n_b": 10,
+      "json_file": "unified_demo_1nn_lam-1.0_K-10_R-1_Nb10.json",
+      "n_total": 60,
+      "n_success": 21,
+      "success_rate": 0.35,
+      "ci95_lo": 0.24167601723815488,
+      "ci95_hi": 0.4763761619052249,
+      "in_bank": {
+        "n_total": 30,
+        "n_success": 18,
+        "rate": 0.6,
+        "ci95_lo": 0.42320052498273836,
+        "ci95_hi": 0.7540960567391659
+      },
+      "out_of_bank": {
+        "n_total": 30,
+        "n_success": 3,
+        "rate": 0.1,
+        "ci95_lo": 0.03459925995971615,
+        "ci95_hi": 0.25621441315266624
+      },
+      "mean_reward": 18.717258577490757,
+      "median_reward": 24.423607534274097,
+      "wall_s": 2023.4677936669905
+    },
+    {
+      "n_b": 20,
+      "json_file": "unified_demo_1nn_lam-1.0_K-10_R-1_Nb20.json",
+      "n_total": 60,
+      "n_success": 41,
+      "success_rate": 0.6833333333333333,
+      "ci95_lo": 0.5576599505698345,
+      "ci95_hi": 0.7869429415882567,
+      "in_bank": {
+        "n_total": 60,
+        "n_success": 41,
+        "rate": 0.6833333333333333,
+        "ci95_lo": 0.5576599505698345,
+        "ci95_hi": 0.7869429415882567
+      },
+      "out_of_bank": {
+        "n_total": 0,
+        "n_success": 0,
+        "rate": null,
+        "ci95_lo": null,
+        "ci95_hi": null
+      },
+      "mean_reward": 35.732798089230755,
+      "median_reward": 35.074071500285555,
+      "wall_s": 1988.872870000021
+    },
+    {
+      "n_b": 50,
+      "json_file": "unified_demo_1nn_lam-1.0_K-10_R-1_Nb50.json",
+      "n_total": 60,
+      "n_success": 41,
+      "success_rate": 0.6833333333333333,
+      "ci95_lo": 0.5576599505698345,
+      "ci95_hi": 0.7869429415882567,
+      "in_bank": {
+        "n_total": 60,
+        "n_success": 41,
+        "rate": 0.6833333333333333,
+        "ci95_lo": 0.5576599505698345,
+        "ci95_hi": 0.7869429415882567
+      },
+      "out_of_bank": {
+        "n_total": 0,
+        "n_success": 0,
+        "rate": null,
+        "ci95_lo": null,
+        "ci95_hi": null
+      },
+      "mean_reward": 36.00600547053996,
+      "median_reward": 34.6547497647866,
+      "wall_s": 2355.082488999993
+    },
+    {
+      "n_b": 100,
+      "json_file": "unified_demo_1nn_lam-1.0_K-10_R-1_Nb100.json",
+      "n_total": 60,
+      "n_success": 41,
+      "success_rate": 0.6833333333333333,
+      "ci95_lo": 0.5576599505698345,
+      "ci95_hi": 0.7869429415882567,
+      "in_bank": {
+        "n_total": 60,
+        "n_success": 41,
+        "rate": 0.6833333333333333,
+        "ci95_lo": 0.5576599505698345,
+        "ci95_hi": 0.7869429415882567
+      },
+      "out_of_bank": {
+        "n_total": 0,
+        "n_success": 0,
+        "rate": null,
+        "ci95_lo": null,
+        "ci95_hi": null
+      },
+      "mean_reward": 34.64440800299996,
+      "median_reward": 33.90741864353464,
+      "wall_s": 1900.2820223330054
+    },
+    {
+      "n_b": 200,
+      "json_file": "unified_demo_1nn_lam-1.0_K-10_R-1_Nb200.json",
+      "n_total": 60,
+      "n_success": 48,
+      "success_rate": 0.8,
+      "ci95_lo": 0.6821795390818299,
+      "ci95_hi": 0.8817161026314104,
+      "in_bank": {
+        "n_total": 60,
+        "n_success": 48,
+        "rate": 0.8,
+        "ci95_lo": 0.6821795390818299,
+        "ci95_hi": 0.8817161026314104
+      },
+      "out_of_bank": {
+        "n_total": 0,
+        "n_success": 0,
+        "rate": null,
+        "ci95_lo": null,
+        "ci95_hi": null
+      },
+      "mean_reward": 38.09655175017754,
+      "median_reward": 36.8630905596775,
+      "wall_s": 1810.8147812499665
+    }
+  ]
+}

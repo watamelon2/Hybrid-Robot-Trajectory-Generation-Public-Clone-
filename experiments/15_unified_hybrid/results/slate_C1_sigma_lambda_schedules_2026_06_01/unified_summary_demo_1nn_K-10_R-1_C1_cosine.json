@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 2.0,
+      "n_total": 30,
+      "n_success": 21,
+      "success_rate": 0.7,
+      "wall_s": 1542.0802738749771,
+      "output": "/tmp/HRTG-wt-c1/experiments/15_unified_hybrid/results/slate_C1_sigma_lambda_schedules_2026_06_01/unified_demo_1nn_lam-2.0_K-10_R-1_C1_cosine.json"
+    }
+  ]
+}

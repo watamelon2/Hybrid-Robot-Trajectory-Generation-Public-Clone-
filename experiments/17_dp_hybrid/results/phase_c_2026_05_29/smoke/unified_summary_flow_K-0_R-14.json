@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow",
+  "K": 0,
+  "R": 14,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.5,
+      "n_total": 2,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 68.40983791596955,
+      "output": "/Users/aaronwen/Documents/HRTG/Hybrid-Robot-Trajectory-Generation/experiments/17_dp_hybrid/results/phase_c_2026_05_29/smoke/unified_flow_lam-0.5_K-0_R-14.json"
+    }
+  ]
+}

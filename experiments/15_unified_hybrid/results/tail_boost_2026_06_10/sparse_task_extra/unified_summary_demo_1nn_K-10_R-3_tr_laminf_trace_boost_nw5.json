@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 3,
+  "per_lambda": [
+    {
+      "lambda_prior": Infinity,
+      "n_total": 5,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 5660.1741807309445,
+      "output": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/tail_boost_2026_06_10/sparse_task_extra/unified_demo_1nn_lam-inf_K-10_R-3_tr_laminf_trace_boost_nw5.json"
+    }
+  ]
+}

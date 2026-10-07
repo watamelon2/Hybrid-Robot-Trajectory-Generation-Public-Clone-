@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow",
+  "K": 10,
+  "R": 49,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.1,
+      "n_total": 30,
+      "n_success": 18,
+      "success_rate": 0.6,
+      "wall_s": 17287.781041584007,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-dp/experiments/17_dp_hybrid/results/phase_d_2026_05_30/q2q3_local/F_lam0p1_ep0149/unified_flow_lam-0.1_K-10_R-49.json"
+    }
+  ]
+}

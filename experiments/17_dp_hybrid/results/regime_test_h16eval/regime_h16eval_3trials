@@ -1,0 +1,47 @@
+{
+  "experiment": "standalone_dp",
+  "task": "can",
+  "prior_checkpoint": "experiments/08_flow_matching_prior/results/v_theta_dp_tobs2_h120_v2b_best_val.pt",
+  "prior_arch": "dp_unet1d",
+  "prior_backbone": "n/a",
+  "n_demos": 3,
+  "n_rollouts": 1,
+  "n_action_steps": 8,
+  "max_env_steps": 240,
+  "n_sample_steps": 100,
+  "sigma_min": 0.05,
+  "sigma_max": 0.25,
+  "n": 3,
+  "n_succ": 0,
+  "succ_rate": 0.0,
+  "wall_s": 50.99904195801355,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "final_reward": 1.924675970986694,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 31,
+      "elapsed_s": 17.512843916076235
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "final_reward": 1.4437358168148082,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 31,
+      "elapsed_s": 16.102914541959763
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 0,
+      "final_reward": 0.4171719488278568,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 31,
+      "elapsed_s": 17.383190875058062
+    }
+  ]
+}

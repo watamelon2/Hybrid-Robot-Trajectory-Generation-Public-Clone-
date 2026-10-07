@@ -1,0 +1,174 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+\input{usepackage}
+
+\title{\LARGE \bf
+Week 6--7: Data-Driven Priors and Physics-Based Corrections
+for Robot Manipulation}
+
+\author{ \parbox{3 in}{\centering Zihao Sun}
+        \hspace*{ 0.1 in}
+        \parbox{2.5 in}{ \centering Charles Beck}
+\thanks{UCLA ECE M237 Spring 2026 Course Project Milestone Reports.
+Week 6--7.}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Summary of Initial Idea and Results}
+
+We combine an offline generative trajectory prior with the
+analytical score of model-based diffusion (MBD)~\cite{mbd}
+via the composite score $\nabla\log p^{\rm data}_t
++\lambda(\sigma_t)\nabla\log p^{\rm model}_t$, where
+$p^{\rm model}\!\propto\!\exp(-J(\tau)/\beta)$ and $J$ is a
+hand-designed cost. \textbf{Central question}: can a learned
+demonstration prior cross the binary-success threshold on
+robomimic manipulation, where neither MBD nor behaviour
+cloning (BC) succeeds alone? Week-4 baselines on
+\texttt{PickPlaceCan} ($N\!=\!60$): demo replay $\mathbf{0.90}$,
+BC $\mathbf{0.067}$, MBD alone $\mathbf{0.00}$, and a
+\emph{warm-start ablation} $\mathbf{0.017}$ in which BC sets
+only the first denoising sample then plays no further role.
+Behavioural readouts (no-reach $53\%\!\to\!12\%$; hybrid beat
+BC on $85\%$ of paired seeds) showed the prior was influencing
+search; Week 6--7 asks whether per-step prior injection crosses
+the threshold.
+
+\section{Summary of Feedback from Peer Reviews and Grade}
+
+The Week-5 reviewer asked us to (i)~cite Diffusion
+Policy~\cite{dp} and rectified flow~\cite{rectflow},
+(ii)~narrow scope to ``learned prior $+$ MBD vs MBD/BC alone'',
+(iii)~note the project was overly ambitious, (iv)~consider
+contact-aware grasp costs, and (v)~reframe the warm-start row
+as an ablation. The instructor flagged the prior writing as
+jargon-heavy. This revision adds the citations inline; scopes
+the evaluation to one 4-family ablation (Table~\ref{tab:priors})
+by \textbf{cutting the safety / CBF-constraint component}; and
+replaces internal lab labels with explicit definitions.
+
+\section{Updated Method}
+
+We evaluate one update rule: each of $M$ perturbed trajectories
+$\tau_t^{(m)}$ receives a Gaussian pull
+$-\lambda(\sigma_t)(\tau_t^{(m)}-\tau^{\rm prior})/\sigma_t^2$
+toward the prior at \emph{every} MBD iteration $t$, \emph{before}
+the usual Boltzmann reweighting against $J$ ($\lambda\!=\!0$
+recovers MBD; $\lambda\!\to\!\infty$ recovers prior-only
+denoising). Four prior families share this rule: (a)~BC; (b)~flow-matching
+$v_\theta$~\cite{rectflow} (raw v1, $\sigma$-perturbed v2);
+(c)~zero-train 1-NN retrieval against the demonstration bank,
+with soft-NN $w_i\!\propto\!\exp(-\beta d_i^2)$ (large $\beta$
+selects a single demonstration \emph{mode}); (d)~trained
+diffusion policy $v_\theta$~\cite{dp}, a UNet trained 350
+epochs on action-chunk denoising conditioned on 2-step obs
+history (7 checkpoints, weakly- to over-trained).
+\textbf{Infrastructure fix}: the standard chunk-boundary
+\texttt{env.reset()+set\_sim\_state()} wipes robosuite's OSC
+state, dropping the $\lambda\!=\!0$ MBD-only sanity gate to
+$0/50$; gating the reset on $K\!>\!0$ restores it to $8/10$.
+
+\section{Updated Example}
+
+Two tracks at the canonical operating point $K\!=\!10$,
+$M\!=\!16$, $\sigma_{\max}\!=\!0.25$, $N\!=\!60$\,rollouts/cell
+(see appendix for symbols). \textbf{Track A} (cross-task):
+retrieval prior on four robomimic-\texttt{ph} tasks at
+$\lambda\!=\!1$. \textbf{Track B} (prior-quality $\times$
+MBD-budget grid, trained DP on \texttt{can}): 7 checkpoints
+$\times K\!\in\!\{5,10,20\}$ at $\lambda\!=\!0.5$ plus a
+$\lambda$-sweep at the weakest. A cell is a \emph{lift} iff
+its Wilson CI lower bound exceeds the same-checkpoint
+prior-only CI upper bound by $\geq 6$ pp (pre-registered).
+
+\section{Results}
+
+\begin{table}[h]
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{0.95}
+\caption{Best operating point per prior family on
+\texttt{PickPlaceCan} (\texttt{ph}). Wilson 95\%\,CI in
+brackets; $n$ in parentheses.}
+\label{tab:priors}
+\begin{tabular}{@{}lll@{}}
+\hline
+Prior family & best cell & succ \\
+\hline
+BC alone (Wk-4)                      & --                                & 0.067 (60) \\
+BC $+$ MBD                            & $\sigma\!=\!0.05$, $M\!=\!64$     & 0.500 (60); pool 0.375 (240) \\
+Flow-matching v1 / v2                & v2, $\sigma\!=\!0.02$             & 0.000 / 0.167 (60 ea) \\
+Retrieval (1-NN), 4-seed pool        & $\lambda\!=\!1,\sigma\!=\!0.25$   & \textbf{0.738} [0.68,0.79] (240) \\
+Trained DP, $K\!=\!10$ (best ckpt)    & ckpt at epoch 149                 & 0.733 [0.61,0.83] (60) \\
+\textbf{Trained DP, $K\!=\!20$ (lift)}& ckpt at epoch 149, $\lambda\!=\!0.5$ & \textbf{0.833} [0.66,0.93] (30) \\
+\hline
+\end{tabular}
+\end{table}
+
+Track A: retrieval gives $\mathbf{0.738}$ on \texttt{can}
+(4-seed pool $n\!=\!240$), $\mathbf{1.000}$ on \texttt{lift},
+$\mathbf{0.083}$ on \texttt{square} (raw observations cannot
+disambiguate contact-similar phases), $0/40$ on
+\texttt{tool\_hang} (now-patched sparse-reward bug). Track B:
+the hybrid matches every standalone DP checkpoint at $K\!=\!10$;
+the only cell clearing the pre-registered rule is moderate-prior
+$+$ larger budget (epoch 149, $K\!=\!20$, $\mathbf{0.833}$,
+$+10$ pp lift). \textbf{Adaptation (bank-size scaling)}: sweeping
+$N_b\!\in\!\{5,10,20,50,100,200\}$ on \texttt{can} gives
+$20\%\!\to\!35\%$ at $N_b\!\le\!10$, then a flat $\mathbf{68.3\%}$
+plateau across $N_b\!\in\![20,100]$: the prior is
+coverage-limited, not size-limited, ruling out a
+``more data'' explanation for \texttt{square}'s ceiling.
+\textbf{Mechanism}: MBD lifts the prior iff (a)~its score is
+informative at the operating noise level and (b)~it has not
+saturated the task; flow fails (a), BC clears (a) only with the
+bridge, retrieval and moderate-DP clear both.
+
+\section{Remaining Steps}
+
+In progress (no results yet): 4-seed pool $+$ 2-D
+(checkpoint,$K$) heatmap at the lift cell; trained-DP cross-task
+on \texttt{square}/\texttt{tool\_hang}/\texttt{transport};
+contrastive-encoder retrieval for \texttt{square}; cost-time
+$+$ dynamics adaptation slates with a Pareto bias--variance
+analysis; GPU-accelerated MJX rollouts (pending L4 quota).
+
+\section*{Appendix: Hyperparameter Glossary}
+
+$K$ = MBD denoising iterations per planning step.
+$M$ = perturbed trajectories sampled per iteration (Monte-Carlo
+budget for the Boltzmann reweighting).
+$\sigma_t$ = noise std at iteration $t$, following a cosine
+schedule from $\sigma_{\max}\!=\!0.25$ to $\sigma_{\min}\!=\!0.01$.
+$\lambda(\sigma_t)$ = weight on the prior-pull term in the
+composite-score update; $\lambda\!=\!0$ recovers MBD, large
+$\lambda$ recovers prior-only denoising.
+$\beta$ = inverse-temperature in soft-NN retrieval
+($w_i\!\propto\!\exp(-\beta d_i^2)$); large $\beta$ selects a
+single demonstration mode, small $\beta$ averages across
+demonstrations.
+$N$ = number of evaluation rollouts per cell ($N\!=\!60$ unless
+noted; 4-seed pools quote $n\!=\!240$).
+$R$ = MPC replans per rollout ($R\!=\!1$).
+$N_b$ = retrieval bank size (demos available to the 1-NN
+lookup); the canonical operating point uses $N_b\!=\!200$.
+
+{\footnotesize
+\renewcommand{\baselinestretch}{0.95}\selectfont
+\begin{thebibliography}{9}\itemsep -1pt
+\bibitem{mbd} C.\ Pan, Z.\ Yi, G.\ Shi, and G.\ Qu, ``Model-based diffusion for trajectory optimization,'' \textit{NeurIPS}, 2024.
+\bibitem{dp} C.\ Chi \textit{et al.}, ``Diffusion policy: Visuomotor policy learning via action diffusion,'' \textit{RSS}, 2023.
+\bibitem{rectflow} X.\ Liu, C.\ Gong, and Q.\ Liu, ``Flow straight and fast: Learning to generate and transfer data with rectified flow,'' \textit{ICLR}, 2023.
+\end{thebibliography}}
+
+\end{document}

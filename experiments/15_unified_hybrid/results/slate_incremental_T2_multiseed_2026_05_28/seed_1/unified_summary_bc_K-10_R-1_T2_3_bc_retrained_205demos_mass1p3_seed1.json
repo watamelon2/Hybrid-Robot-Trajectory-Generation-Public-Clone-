@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 5.0,
+      "n_total": 30,
+      "n_success": 4,
+      "success_rate": 0.13333333333333333,
+      "wall_s": 765.8571745420013,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-multiseed/experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_1/unified_bc_lam-5.0_K-10_R-1_T2_3_bc_retrained_205demos_mass1p3_seed1.json"
+    }
+  ]
+}

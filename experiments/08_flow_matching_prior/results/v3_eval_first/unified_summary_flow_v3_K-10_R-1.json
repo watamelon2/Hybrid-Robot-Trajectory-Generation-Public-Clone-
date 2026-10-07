@@ -1,0 +1,32 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_v3",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 1426.8241826249869,
+      "output": "experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-0.0_K-10_R-1.json"
+    },
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 1429.322624250024,
+      "output": "experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-1.0_K-10_R-1.json"
+    },
+    {
+      "lambda_prior": 5.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 1423.8315658330102,
+      "output": "experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-5.0_K-10_R-1.json"
+    }
+  ]
+}

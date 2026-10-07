@@ -1,0 +1,4203 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "prior_checkpoint": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/03_bc_baseline/results/policy.pt",
+  "lambda_prior": 5.0,
+  "warm_start": true,
+  "mpc_replans": 0,
+  "mpc_chunk_steps": 120,
+  "deterministic_prior_warmstart": true,
+  "n_demos": 20,
+  "n_rollouts": 3,
+  "n_test_rollouts": 0,
+  "test_start_seed": 100000,
+  "train_n": 60,
+  "train_n_succ": 21,
+  "train_succ_rate": 0.35,
+  "test_n": 0,
+  "test_n_succ": 0,
+  "test_succ_rate": 0.0,
+  "n_total": 60,
+  "n_success": 21,
+  "success_rate": 0.35,
+  "params": {
+    "H": 120,
+    "M": 16,
+    "K": 5,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.25,
+    "sigma_min": 0.05,
+    "lambda_schedule": "constant",
+    "score_mode": "learned",
+    "warmstart_noise_sigma": 0.0,
+    "retrieval_beta": 1.0,
+    "action_history_len": 0,
+    "contrastive_encoder_path": null,
+    "task": "can",
+    "prior_bank_size": 0,
+    "prior_bank_dataset": null,
+    "prior_bank_task": null,
+    "goal_perturbation_xyz": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mass_scale": 1.0,
+    "friction_scale": 1.0,
+    "combine_mode": "score",
+    "temper_p": 0.0,
+    "sigma_demo": 0.25,
+    "demo_sigma_mode": "const",
+    "demo_sigma_adapt_beta": 1.0,
+    "sigma_schedule": "decay",
+    "log_gate_diagnostic": false,
+    "save_step_trace": false,
+    "raw_sparse_reward": false,
+    "demo_phase_reward": false,
+    "demo_phase_scale": 10.0
+  },
+  "seed": 0,
+  "wall_s": 2223.908783745952,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 35.90875217388384,
+      "total_elapsed_s": 35.93028539000079,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 32.459575017914176,
+          "init_best_cost": -46.01832936639854,
+          "final_best_cost": -47.26488107888697,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -46.01832936639854,
+              "mean_cost": -4.338423277750851,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -45.73582123436252,
+              "mean_cost": -8.944526670073706,
+              "ess": 1.0000020577686664,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -46.96882322468991,
+              "mean_cost": -21.297077840388383,
+              "ess": 4.099959530945842,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -47.068099797488486,
+              "mean_cost": -32.42458030079003,
+              "ess": 5.550638029374427,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -47.26488107888697,
+              "mean_cost": -43.59521802208731,
+              "ess": 7.726133722463355,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 35.0857919359114,
+      "total_elapsed_s": 35.09832326020114,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 31.607500205980614,
+          "init_best_cost": -45.70479219780553,
+          "final_best_cost": -47.56631726794092,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -45.70479219780553,
+              "mean_cost": -9.48842390509392,
+              "ess": 1.8572279619984355,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -46.802601971941925,
+              "mean_cost": -11.193748904372525,
+              "ess": 1.7052325786936677,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -47.706862798947725,
+              "mean_cost": -21.6032454051788,
+              "ess": 3.3814131024948004,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -47.35084815080956,
+              "mean_cost": -30.199163482585767,
+              "ess": 7.848344796458496,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -47.56631726794092,
+              "mean_cost": -41.47723488809007,
+              "ess": 10.98721025910502,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.601031349356552,
+      "success": false,
+      "plan_elapsed_s": 34.257659893948585,
+      "total_elapsed_s": 34.26890960102901,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.601031349356552,
+          "plan_elapsed_s": 31.020138224121183,
+          "init_best_cost": -5.929922291723856,
+          "final_best_cost": -6.705153510262301,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -5.929922291723856,
+              "mean_cost": -2.3715459068198808,
+              "ess": 1.1619007871475138,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -12.133663054630492,
+              "mean_cost": -3.3654217004971247,
+              "ess": 1.0000102189563496,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -9.394985472997329,
+              "mean_cost": -3.7937294162600077,
+              "ess": 1.0012898329576025,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -11.649475997502929,
+              "mean_cost": -4.3818671804799,
+              "ess": 1.0000194758260992,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -6.705153510262301,
+              "mean_cost": -4.695665376566106,
+              "ess": 1.714835279333337,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.011628699420598921,
+      "success": false,
+      "plan_elapsed_s": 33.03760149003938,
+      "total_elapsed_s": 33.05293952510692,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.011628699420598921,
+          "plan_elapsed_s": 29.83176709804684,
+          "init_best_cost": -1.5356515712856558,
+          "final_best_cost": -0.9934588141708739,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.5356515712856558,
+              "mean_cost": -1.0209958857068828,
+              "ess": 12.412455638104785,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -1.2287880290905577,
+              "mean_cost": -0.8543584763813907,
+              "ess": 13.93941914016629,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -1.2366604893130433,
+              "mean_cost": -0.936745448003045,
+              "ess": 14.853027339971375,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -1.0741297738760216,
+              "mean_cost": -0.9512098390681587,
+              "ess": 15.693964603308306,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.9934588141708739,
+              "mean_cost": -0.9510187743307168,
+              "ess": 15.953064564222402,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 34.47998392395675,
+      "total_elapsed_s": 34.49081393308006,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 30.919151631183922,
+          "init_best_cost": -50.59426694785594,
+          "final_best_cost": -53.194820351701644,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -50.59426694785594,
+              "mean_cost": -7.61138022679822,
+              "ess": 1.2654286515057187,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -51.50966011473011,
+              "mean_cost": -14.057739130887146,
+              "ess": 1.2051150071951946,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -52.362388567776776,
+              "mean_cost": -17.83087687301738,
+              "ess": 2.01877520739541,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -53.8950313536221,
+              "mean_cost": -36.647989121664864,
+              "ess": 2.0853759289654548,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -53.194820351701644,
+              "mean_cost": -33.255483861669646,
+              "ess": 3.725283314382353,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.5592376145320522,
+      "success": false,
+      "plan_elapsed_s": 34.245207571890205,
+      "total_elapsed_s": 34.261230954900384,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.5592376145320522,
+          "plan_elapsed_s": 30.881575125968084,
+          "init_best_cost": -2.742794904994307,
+          "final_best_cost": -3.1140412771407813,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.742794904994307,
+              "mean_cost": -1.7514017392249734,
+              "ess": 6.195102880022031,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.39884264301399,
+              "mean_cost": -1.7555040429932016,
+              "ess": 10.288986171648924,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -3.0295542796656543,
+              "mean_cost": -2.2381114860020004,
+              "ess": 9.800006175811129,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -3.131066631475719,
+              "mean_cost": -2.4553493437628653,
+              "ess": 10.088151187691878,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -3.1140412771407813,
+              "mean_cost": -2.4709582919370394,
+              "ess": 10.245555170226186,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 4.6682114036449605,
+      "success": false,
+      "plan_elapsed_s": 34.035849924897775,
+      "total_elapsed_s": 34.04711177200079,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 4.6682114036449605,
+          "plan_elapsed_s": 30.811393758049235,
+          "init_best_cost": -6.822947024703161,
+          "final_best_cost": -5.201911896042483,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -6.822947024703161,
+              "mean_cost": -4.227620979128929,
+              "ess": 2.7153972670647066,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -7.534774151198487,
+              "mean_cost": -4.476932117616032,
+              "ess": 2.862246519222682,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -7.846268570547306,
+              "mean_cost": -5.22419611492117,
+              "ess": 3.5869706397856698,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -7.3422786291409095,
+              "mean_cost": -5.57543023993664,
+              "ess": 4.435709262829736,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -5.201911896042483,
+              "mean_cost": -4.741295115184105,
+              "ess": 12.847792617840081,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.04276951084114284,
+      "success": false,
+      "plan_elapsed_s": 33.30650368286297,
+      "total_elapsed_s": 33.3220820480492,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.04276951084114284,
+          "plan_elapsed_s": 29.891648640157655,
+          "init_best_cost": -2.2379092583657765,
+          "final_best_cost": -1.5186806148886511,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.2379092583657765,
+              "mean_cost": -1.233458957631092,
+              "ess": 6.4914385033032405,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -4.716342383137462,
+              "mean_cost": -1.5808789956605127,
+              "ess": 1.0450247184118475,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -1.8327661664829014,
+              "mean_cost": -1.441948167654711,
+              "ess": 13.626946958939874,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -1.8835187492024597,
+              "mean_cost": -1.430406858575552,
+              "ess": 14.104957511392117,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -1.5186806148886511,
+              "mean_cost": -1.4245853334933107,
+              "ess": 15.825940201085647,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 5.2240435996004955,
+      "success": false,
+      "plan_elapsed_s": 34.723838072037324,
+      "total_elapsed_s": 34.73489375994541,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 5.2240435996004955,
+          "plan_elapsed_s": 31.38245244207792,
+          "init_best_cost": -5.930937827067776,
+          "final_best_cost": -7.4036747470014745,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -5.930937827067776,
+              "mean_cost": -3.9992188464304634,
+              "ess": 2.817143492645497,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -6.7468914594387845,
+              "mean_cost": -4.3685966318191305,
+              "ess": 3.6597035094016386,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -7.870587257989916,
+              "mean_cost": -5.82559188301331,
+              "ess": 4.242742071582568,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -7.547246152484567,
+              "mean_cost": -5.851531509412574,
+              "ess": 3.8288366319516576,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -7.4036747470014745,
+              "mean_cost": -6.257355287506233,
+              "ess": 7.121045267761965,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 1.2789409568490573,
+      "success": false,
+      "plan_elapsed_s": 32.92683802708052,
+      "total_elapsed_s": 32.94189877202734,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 1.2789409568490573,
+          "plan_elapsed_s": 29.790277361869812,
+          "init_best_cost": -3.6139717567536818,
+          "final_best_cost": -2.8139437613864913,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.6139717567536818,
+              "mean_cost": -1.8109673966259088,
+              "ess": 2.244535873113193,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.816771006984371,
+              "mean_cost": -1.8550629431721946,
+              "ess": 7.526922222272938,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -21.262163754434425,
+              "mean_cost": -3.2759937480260914,
+              "ess": 1.0000000000000013,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.978720240139877,
+              "mean_cost": -1.9338083851052583,
+              "ess": 5.85785576814867,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.8139437613864913,
+              "mean_cost": -1.767065147489189,
+              "ess": 6.0129253230983775,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.004731615980274506,
+      "success": false,
+      "plan_elapsed_s": 34.410934798186645,
+      "total_elapsed_s": 34.42209583497606,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.004731615980274506,
+          "plan_elapsed_s": 31.176694022957236,
+          "init_best_cost": -18.74402005293644,
+          "final_best_cost": -5.560359752624813,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -18.74402005293644,
+              "mean_cost": -3.5025051481072036,
+              "ess": 1.0000000000692628,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -19.534215440920317,
+              "mean_cost": -4.122524336710461,
+              "ess": 1.0000000000113727,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -4.272653945052413,
+              "mean_cost": -2.637283011506233,
+              "ess": 2.5135304243005914,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -5.405417415390402,
+              "mean_cost": -3.439431909516449,
+              "ess": 4.055261412749368,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -5.560359752624813,
+              "mean_cost": -4.054385266111772,
+              "ess": 6.279629842272591,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.08196512891202837,
+      "success": false,
+      "plan_elapsed_s": 35.4843301740475,
+      "total_elapsed_s": 35.49493436398916,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.08196512891202837,
+          "plan_elapsed_s": 32.08919703401625,
+          "init_best_cost": -2.597406792065661,
+          "final_best_cost": -0.7809835115948229,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.597406792065661,
+              "mean_cost": -0.9672392903730527,
+              "ess": 2.329760096249804,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -1.1329494128103867,
+              "mean_cost": -0.8299476351352584,
+              "ess": 14.219314622317158,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -1.0340813420889559,
+              "mean_cost": -0.7693173525015176,
+              "ess": 14.703951240989626,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -0.873861943789988,
+              "mean_cost": -0.6750685452718654,
+              "ess": 15.56070702296093,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.7809835115948229,
+              "mean_cost": -0.6633074086287846,
+              "ess": 15.81716650946837,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.021621453777926146,
+      "success": false,
+      "plan_elapsed_s": 32.121193737955764,
+      "total_elapsed_s": 32.132564234081656,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.021621453777926146,
+          "plan_elapsed_s": 28.94185449788347,
+          "init_best_cost": -16.280225359627345,
+          "final_best_cost": -2.3379621603646155,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -16.280225359627345,
+              "mean_cost": -2.843295820494154,
+              "ess": 1.000000000022375,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -18.433357980433772,
+              "mean_cost": -5.901144872481387,
+              "ess": 1.819632923723298,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -5.246727672662535,
+              "mean_cost": -2.286923399702506,
+              "ess": 1.2736713766482302,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -3.6913892396786463,
+              "mean_cost": -2.1371365604585932,
+              "ess": 2.409072232562377,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.3379621603646155,
+              "mean_cost": -2.0930473359943393,
+              "ess": 15.13886120214201,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.01769948146354618,
+      "success": false,
+      "plan_elapsed_s": 33.266692423960194,
+      "total_elapsed_s": 33.27819699887186,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.01769948146354618,
+          "plan_elapsed_s": 30.050518206087872,
+          "init_best_cost": -1.8671819230192106,
+          "final_best_cost": -1.7841560150685316,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.8671819230192106,
+              "mean_cost": -1.3202730745941746,
+              "ess": 11.399538000013129,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -4.441479822644368,
+              "mean_cost": -1.5369474496626072,
+              "ess": 1.0705860416096231,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -1.7755942050476754,
+              "mean_cost": -1.4652536254204453,
+              "ess": 14.093700137666568,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -3.6098316684133915,
+              "mean_cost": -1.7505795125819406,
+              "ess": 2.425220180837954,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -1.7841560150685316,
+              "mean_cost": -1.5424529568773075,
+              "ess": 15.44056549949005,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.018951366383669687,
+      "success": false,
+      "plan_elapsed_s": 33.05791325913742,
+      "total_elapsed_s": 33.07305143610574,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.018951366383669687,
+          "plan_elapsed_s": 29.93347067711875,
+          "init_best_cost": -1.8940222664120479,
+          "final_best_cost": -1.9639523587517589,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.8940222664120479,
+              "mean_cost": -1.3482085196823546,
+              "ess": 11.682954478405975,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.2258139381731596,
+              "mean_cost": -1.569587518761877,
+              "ess": 9.396194153712527,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -5.36846329816073,
+              "mean_cost": -2.0242384504491078,
+              "ess": 1.8253347303489376,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.6844378126993957,
+              "mean_cost": -1.6972169421393641,
+              "ess": 6.698609119646862,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -1.9639523587517589,
+              "mean_cost": -1.715114745797406,
+              "ess": 15.449596400778661,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.0007922193530007336,
+      "success": false,
+      "plan_elapsed_s": 33.915910640964285,
+      "total_elapsed_s": 33.92710589594208,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.0007922193530007336,
+          "plan_elapsed_s": 30.79638940282166,
+          "init_best_cost": -0.974639680158187,
+          "final_best_cost": -1.1407971842188722,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.974639680158187,
+              "mean_cost": -0.664667366295461,
+              "ess": 14.388721254143553,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -33.82131171688208,
+              "mean_cost": -2.8675757676923506,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -1.1970850408958706,
+              "mean_cost": -0.9073340008085191,
+              "ess": 14.41269706687345,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -1.1607181717649722,
+              "mean_cost": -1.0384715117217636,
+              "ess": 15.637746833615338,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -1.1407971842188722,
+              "mean_cost": -1.0571340529701732,
+              "ess": 15.689472657777447,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 2.875402391924905,
+      "success": false,
+      "plan_elapsed_s": 33.34760138601996,
+      "total_elapsed_s": 33.35841996106319,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.875402391924905,
+          "plan_elapsed_s": 30.159244677983224,
+          "init_best_cost": -17.73738551860878,
+          "final_best_cost": -18.091743072546773,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -17.73738551860878,
+              "mean_cost": -4.323818064968883,
+              "ess": 1.0000005932301488,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -4.798014169176703,
+              "mean_cost": -3.277986765357748,
+              "ess": 3.8273411786167486,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -17.423112078986698,
+              "mean_cost": -4.775453812637852,
+              "ess": 1.0000000028463822,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -6.308391170543569,
+              "mean_cost": -4.361133709014409,
+              "ess": 1.708503387040163,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -18.091743072546773,
+              "mean_cost": -7.933310848024535,
+              "ess": 1.1115755674670553,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 4.870112457854495,
+      "success": false,
+      "plan_elapsed_s": 34.81488152989186,
+      "total_elapsed_s": 34.827014670940116,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 4.870112457854495,
+          "plan_elapsed_s": 31.15906306100078,
+          "init_best_cost": -19.83957789919993,
+          "final_best_cost": -18.890879784455166,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -19.83957789919993,
+              "mean_cost": -4.8296646571258925,
+              "ess": 1.3572656591331786,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -12.26083781350123,
+              "mean_cost": -3.465288191817062,
+              "ess": 1.0000005427042067,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -18.977409745106417,
+              "mean_cost": -7.028845565647584,
+              "ess": 2.24809258007122,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -19.184666786220227,
+              "mean_cost": -6.727862666400728,
+              "ess": 1.0067782702485453,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -18.890879784455166,
+              "mean_cost": -8.424730960144082,
+              "ess": 2.540004872460563,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 35.6256817530375,
+      "total_elapsed_s": 35.641963173868135,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 32.08772143605165,
+          "init_best_cost": -27.45175555968802,
+          "final_best_cost": -33.93192672080418,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -27.45175555968802,
+              "mean_cost": -8.129762794889857,
+              "ess": 1.8706332819320337,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -28.088696572484125,
+              "mean_cost": -9.83193132945324,
+              "ess": 2.7815884837006224,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -32.79049896223182,
+              "mean_cost": -12.303429991058806,
+              "ess": 1.0365932239582927,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -33.73337776630896,
+              "mean_cost": -29.196879944046547,
+              "ess": 8.790877036095004,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -33.93192672080418,
+              "mean_cost": -33.23179104116772,
+              "ess": 9.822065748721025,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 34.930391550989064,
+      "success": false,
+      "plan_elapsed_s": 35.23875612602569,
+      "total_elapsed_s": 35.25367250107229,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 34.930391550989064,
+          "plan_elapsed_s": 31.708438880974427,
+          "init_best_cost": -4.272468963233971,
+          "final_best_cost": -24.792984628728956,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -4.272468963233971,
+              "mean_cost": -3.1231380094684074,
+              "ess": 5.853202828232192,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -23.901902035804174,
+              "mean_cost": -5.947733830371083,
+              "ess": 1.0001427346010625,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -24.030523178902317,
+              "mean_cost": -9.076679990142575,
+              "ess": 3.77217375394082,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -24.82893641068488,
+              "mean_cost": -23.663727477508928,
+              "ess": 12.252266476279816,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -24.792984628728956,
+              "mean_cost": -22.23931592108272,
+              "ess": 9.196694999336911,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 35.678229118930176,
+      "total_elapsed_s": 35.69028905010782,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 32.273844457929954,
+          "init_best_cost": -32.37715459067905,
+          "final_best_cost": -35.852414231467435,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -32.37715459067905,
+              "mean_cost": -5.619394677446342,
+              "ess": 1.0005479031417717,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -34.044806445233135,
+              "mean_cost": -8.822182600119461,
+              "ess": 1.0000049207054476,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -35.79248637799138,
+              "mean_cost": -13.625952414797926,
+              "ess": 2.512999585301612,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -36.26116526644108,
+              "mean_cost": -28.630636733258825,
+              "ess": 4.446345362909364,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -35.852414231467435,
+              "mean_cost": -35.31919105559016,
+              "ess": 12.479331678080014,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.003726555254913988,
+      "success": false,
+      "plan_elapsed_s": 33.224119192920625,
+      "total_elapsed_s": 33.23648035386577,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.003726555254913988,
+          "plan_elapsed_s": 30.08158168499358,
+          "init_best_cost": -1.0355723530724823,
+          "final_best_cost": -0.590027463595078,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.0355723530724823,
+              "mean_cost": -0.4954625844045018,
+              "ess": 12.244586794783459,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -1.1286842198465297,
+              "mean_cost": -0.5956504572391267,
+              "ess": 11.115246251879327,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -0.8848066852134486,
+              "mean_cost": -0.5325465786925738,
+              "ess": 14.544420437960987,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -0.6607730036919556,
+              "mean_cost": -0.518146296191582,
+              "ess": 15.724166312371594,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.590027463595078,
+              "mean_cost": -0.5190905406731559,
+              "ess": 15.891681734882315,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 2.2528675225927697,
+      "success": false,
+      "plan_elapsed_s": 33.60625630104914,
+      "total_elapsed_s": 33.619780007051304,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.2528675225927697,
+          "plan_elapsed_s": 30.34616375598125,
+          "init_best_cost": -3.1919107180522044,
+          "final_best_cost": -4.570162823189839,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.1919107180522044,
+              "mean_cost": -2.246717063778932,
+              "ess": 8.160690652559747,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -3.6361164806259167,
+              "mean_cost": -2.334486119112106,
+              "ess": 5.36387504754396,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -4.538605211060218,
+              "mean_cost": -2.9854751890712334,
+              "ess": 4.062300302823433,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -4.44764592699308,
+              "mean_cost": -3.6158356194391588,
+              "ess": 9.083536914901053,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -4.570162823189839,
+              "mean_cost": -3.6533256151568465,
+              "ess": 7.790227958029864,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 116.6816186510269,
+      "success": true,
+      "plan_elapsed_s": 33.08724058698863,
+      "total_elapsed_s": 33.09821040020324,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 116.6816186510269,
+          "plan_elapsed_s": 29.96248195809312,
+          "init_best_cost": -21.964376770557763,
+          "final_best_cost": -22.93881852119445,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -21.964376770557763,
+              "mean_cost": -3.0109237506503455,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -20.52836190862044,
+              "mean_cost": -3.2435014860333187,
+              "ess": 1.0000000003131166,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -22.58191783653546,
+              "mean_cost": -7.874307103024758,
+              "ess": 1.628206292058286,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -21.951355843793216,
+              "mean_cost": -10.481489602248814,
+              "ess": 4.012585069231268,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -22.93881852119445,
+              "mean_cost": -18.372587001371578,
+              "ess": 5.412026167343096,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.00016754308538149393,
+      "success": false,
+      "plan_elapsed_s": 32.94304990302771,
+      "total_elapsed_s": 32.95480161299929,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.00016754308538149393,
+          "plan_elapsed_s": 29.709790038876235,
+          "init_best_cost": -1.3243459553419947,
+          "final_best_cost": -28.894805627817654,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.3243459553419947,
+              "mean_cost": -0.969751912453436,
+              "ess": 13.120375909089077,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -1.4967466947870385,
+              "mean_cost": -0.9883371665598668,
+              "ess": 12.70583455362316,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -29.269722287681326,
+              "mean_cost": -6.486921846488561,
+              "ess": 1.7574926131984439,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -30.030488415290463,
+              "mean_cost": -11.007288687579349,
+              "ess": 1.865553259617102,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -28.894805627817654,
+              "mean_cost": -9.940239180539166,
+              "ess": 3.0771560025812335,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.00012286707559259208,
+      "success": false,
+      "plan_elapsed_s": 32.787521705031395,
+      "total_elapsed_s": 32.79937931499444,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.00012286707559259208,
+          "plan_elapsed_s": 29.594472719123587,
+          "init_best_cost": -30.116369206600726,
+          "final_best_cost": -37.57966579496978,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -30.116369206600726,
+              "mean_cost": -2.8798234370809124,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -29.543418704729255,
+              "mean_cost": -2.9208917644708916,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -32.94634519515609,
+              "mean_cost": -9.03353644141793,
+              "ess": 1.9385951622509658,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -38.610059084498786,
+              "mean_cost": -3.7572863193676502,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -37.57966579496978,
+              "mean_cost": -6.019821570174726,
+              "ess": 1.5269508621424182,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.03184053687319006,
+      "success": false,
+      "plan_elapsed_s": 33.15192501503043,
+      "total_elapsed_s": 33.167623994871974,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.03184053687319006,
+          "plan_elapsed_s": 30.004277758998796,
+          "init_best_cost": -1.5488249612016898,
+          "final_best_cost": -19.432973250279424,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.5488249612016898,
+              "mean_cost": -0.9652988843480746,
+              "ess": 10.647250937738427,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.0386111092515793,
+              "mean_cost": -1.3254657499281148,
+              "ess": 9.712237286952162,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -3.288812061055827,
+              "mean_cost": -1.3925620590816807,
+              "ess": 1.657380726757611,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -27.96368317697199,
+              "mean_cost": -6.101162354435928,
+              "ess": 1.1689124780215896,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -19.432973250279424,
+              "mean_cost": -4.452246540065396,
+              "ess": 1.0000011101614559,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 33.67421718197875,
+      "total_elapsed_s": 33.68508653412573,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 30.39805630594492,
+          "init_best_cost": -22.07347640009243,
+          "final_best_cost": -47.363693157345736,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -22.07347640009243,
+              "mean_cost": -4.130257406594348,
+              "ess": 1.2695188928569658,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -46.54434196241242,
+              "mean_cost": -10.54289785947628,
+              "ess": 1.068996862828271,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -46.55579931758651,
+              "mean_cost": -14.024873638431666,
+              "ess": 2.7424387492593834,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -46.74394044650278,
+              "mean_cost": -26.909287067693274,
+              "ess": 6.601592067754219,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -47.363693157345736,
+              "mean_cost": -35.50023901003187,
+              "ess": 7.3614379739553195,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 34.60629988997243,
+      "total_elapsed_s": 34.620715762954205,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 31.233642373001203,
+          "init_best_cost": -45.59938474970737,
+          "final_best_cost": -45.45203769299553,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -45.59938474970737,
+              "mean_cost": -10.618075271629857,
+              "ess": 1.0853474836322494,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.091083925510005,
+              "mean_cost": -1.5647453744790398,
+              "ess": 11.158306653527822,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -45.92235540760072,
+              "mean_cost": -13.357433104467843,
+              "ess": 1.4363565978777484,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -45.57817868501217,
+              "mean_cost": -33.95175943216437,
+              "ess": 5.116278308753103,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -45.45203769299553,
+              "mean_cost": -36.86836046538418,
+              "ess": 9.341975029839807,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 36.604748741025105,
+      "total_elapsed_s": 36.62058075121604,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 33.166455646045506,
+          "init_best_cost": -16.961815073821004,
+          "final_best_cost": -49.247524908349654,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -16.961815073821004,
+              "mean_cost": -2.536353803289906,
+              "ess": 1.0000000000015885,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -44.4137900372535,
+              "mean_cost": -5.484369635667977,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -19.36331074814567,
+              "mean_cost": -4.047097071385536,
+              "ess": 1.789037418766228,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -48.651304678525236,
+              "mean_cost": -8.778770190504973,
+              "ess": 1.5061832107272866,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -49.247524908349654,
+              "mean_cost": -25.3232586539667,
+              "ess": 5.046026495350672,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_10",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 36.87135866517201,
+      "total_elapsed_s": 36.88772777188569,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 33.321458572056144,
+          "init_best_cost": -23.220159487470674,
+          "final_best_cost": -47.4647822392601,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -23.220159487470674,
+              "mean_cost": -2.799833257330773,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -43.103141575741006,
+              "mean_cost": -3.8980886923071543,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -47.77491735909908,
+              "mean_cost": -23.841235892459906,
+              "ess": 1.728255956318611,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -47.300075767446764,
+              "mean_cost": -29.8347133805171,
+              "ess": 6.104567525045694,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -47.4647822392601,
+              "mean_cost": -38.39650121294865,
+              "ess": 9.008743455752297,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_10",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 37.70645958906971,
+      "total_elapsed_s": 37.71903861593455,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 34.091216017026454,
+          "init_best_cost": -28.41879406484891,
+          "final_best_cost": -41.227843497128205,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -28.41879406484891,
+              "mean_cost": -3.0916873259536306,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.5135579838897057,
+              "mean_cost": -1.6836217399648208,
+              "ess": 8.431959618917736,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -41.035874760023745,
+              "mean_cost": -15.429907051972624,
+              "ess": 2.5850401344228398,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -40.72682086191754,
+              "mean_cost": -25.621850676543495,
+              "ess": 6.183051201407972,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -41.227843497128205,
+              "mean_cost": -28.550829767086924,
+              "ess": 6.791966412194925,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_10",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.009948313171710254,
+      "success": false,
+      "plan_elapsed_s": 38.143461445113644,
+      "total_elapsed_s": 38.160969249904156,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.009948313171710254,
+          "plan_elapsed_s": 34.336667807074264,
+          "init_best_cost": -26.869973494700442,
+          "final_best_cost": -33.3045448620103,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -26.869973494700442,
+              "mean_cost": -3.17325732766502,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.2483661513438435,
+              "mean_cost": -1.3838031957912544,
+              "ess": 8.50100355940292,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -2.0789410439314424,
+              "mean_cost": -1.739078940435601,
+              "ess": 13.836686322424473,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -33.14338858306768,
+              "mean_cost": -8.465105584429523,
+              "ess": 1.5702354086481558,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -33.3045448620103,
+              "mean_cost": -10.047168909039975,
+              "ess": 1.9984609243616713,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_11",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 30.08497487404556,
+      "success": false,
+      "plan_elapsed_s": 39.333153415005654,
+      "total_elapsed_s": 39.34539146302268,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 30.08497487404556,
+          "plan_elapsed_s": 35.52645190199837,
+          "init_best_cost": -28.062967659959984,
+          "final_best_cost": -28.89925963336585,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -28.062967659959984,
+              "mean_cost": -5.9877297914766014,
+              "ess": 1.0000000000816898,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -27.13355691541601,
+              "mean_cost": -9.627815403172928,
+              "ess": 2.309659767166252,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -29.073795653282183,
+              "mean_cost": -21.73497498999935,
+              "ess": 5.211321272479856,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -28.618089027654612,
+              "mean_cost": -20.447443685903668,
+              "ess": 5.23138765645502,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -28.89925963336585,
+              "mean_cost": -27.11321812800942,
+              "ess": 9.691722184688707,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_11",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.0018945124300190793,
+      "success": false,
+      "plan_elapsed_s": 38.56553791789338,
+      "total_elapsed_s": 38.57864073198289,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.0018945124300190793,
+          "plan_elapsed_s": 34.89394023315981,
+          "init_best_cost": -3.494068029090395,
+          "final_best_cost": -3.1166673619723206,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.494068029090395,
+              "mean_cost": -2.639111039834398,
+              "ess": 7.978761873559538,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -16.53262035401045,
+              "mean_cost": -4.567881083539882,
+              "ess": 1.0028069660559222,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -13.393883631445432,
+              "mean_cost": -3.7971663586107955,
+              "ess": 1.0000025017291858,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -3.085136021548658,
+              "mean_cost": -2.6280898378235182,
+              "ess": 12.860258839228964,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -3.1166673619723206,
+              "mean_cost": -2.6822827908377334,
+              "ess": 13.016486634755507,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_11",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 4.168539713195613,
+      "success": false,
+      "plan_elapsed_s": 39.75042604794726,
+      "total_elapsed_s": 39.764220271026716,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 4.168539713195613,
+          "plan_elapsed_s": 35.90585667616688,
+          "init_best_cost": -29.89845499543367,
+          "final_best_cost": -30.578525745474632,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -29.89845499543367,
+              "mean_cost": -7.0475336391432055,
+              "ess": 1.000000000032864,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -30.02500127406145,
+              "mean_cost": -9.247966435552264,
+              "ess": 2.7184347692523416,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -30.002596634571216,
+              "mean_cost": -12.027290479707638,
+              "ess": 2.2252456789302357,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -30.337306991613612,
+              "mean_cost": -18.667048270865504,
+              "ess": 5.914513076354744,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -30.578525745474632,
+              "mean_cost": -20.45963431176127,
+              "ess": 6.315632813687854,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_12",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 41.631159903947264,
+      "total_elapsed_s": 41.64341715211049,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 37.49842877895571,
+          "init_best_cost": -37.02348255101418,
+          "final_best_cost": -36.69323465590266,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -37.02348255101418,
+              "mean_cost": -8.317971989634446,
+              "ess": 1.647832732543165,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -36.81948740280842,
+              "mean_cost": -4.310553643256816,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -36.70399923775024,
+              "mean_cost": -13.075720982891688,
+              "ess": 3.5803090450854143,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -36.95012507676165,
+              "mean_cost": -31.76219255656853,
+              "ess": 6.915340193184559,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -36.69323465590266,
+              "mean_cost": -36.24774188262583,
+              "ess": 12.47982360804257,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_12",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.54922777111642,
+      "total_elapsed_s": 39.56266412488185,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.802370665129274,
+          "init_best_cost": -20.300377121547847,
+          "final_best_cost": -40.31724396545572,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -20.300377121547847,
+              "mean_cost": -2.9182077843379797,
+              "ess": 1.0000000000000036,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -39.7520544551932,
+              "mean_cost": -6.314373396663761,
+              "ess": 1.0039603866586124,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -40.40389100288628,
+              "mean_cost": -21.805216783109422,
+              "ess": 3.2378219586611965,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -40.22030229395236,
+              "mean_cost": -30.422495297436793,
+              "ess": 9.508650792147645,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -40.31724396545572,
+              "mean_cost": -39.88274472828434,
+              "ess": 12.954529544590272,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_12",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.74681409797631,
+      "total_elapsed_s": 39.76592284697108,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.99364902707748,
+          "init_best_cost": -38.798324818526325,
+          "final_best_cost": -40.896547658202905,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -38.798324818526325,
+              "mean_cost": -5.229075297740792,
+              "ess": 1.0000000000000568,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -40.19616566120611,
+              "mean_cost": -8.841172140701813,
+              "ess": 2.1157134941501785,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -40.78240698806246,
+              "mean_cost": -25.08286627767844,
+              "ess": 4.790338187427449,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -40.71269569231539,
+              "mean_cost": -40.386152105501914,
+              "ess": 13.733802221716036,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -40.896547658202905,
+              "mean_cost": -40.388413064001234,
+              "ess": 12.727450647098802,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_13",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 1.1469654603028532,
+      "success": false,
+      "plan_elapsed_s": 39.457724660867825,
+      "total_elapsed_s": 39.47487381310202,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 1.1469654603028532,
+          "plan_elapsed_s": 35.67514209402725,
+          "init_best_cost": -1.91526386212404,
+          "final_best_cost": -36.65144508702458,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.91526386212404,
+              "mean_cost": -1.2577746930007132,
+              "ess": 11.075053972778688,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -29.488297000109874,
+              "mean_cost": -6.579625213969051,
+              "ess": 1.7935733825209563,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -32.77351595583417,
+              "mean_cost": -12.349186442334357,
+              "ess": 1.0094368660067337,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -39.67504159938689,
+              "mean_cost": -29.18781605399225,
+              "ess": 1.9208460984980122,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -36.65144508702458,
+              "mean_cost": -31.291588990435763,
+              "ess": 2.23787468011355,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_13",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 40.61710477480665,
+      "total_elapsed_s": 40.634766935836524,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 36.6800222650636,
+          "init_best_cost": -2.252108615251345,
+          "final_best_cost": -40.08718619599658,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.252108615251345,
+              "mean_cost": -1.6144451766002226,
+              "ess": 10.17382196860971,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -38.910220107358754,
+              "mean_cost": -10.622567766749391,
+              "ess": 1.8823728725157394,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -39.69289906917405,
+              "mean_cost": -21.745785794384226,
+              "ess": 3.235638093108845,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -39.74793280310992,
+              "mean_cost": -32.2005199566616,
+              "ess": 6.13480757136253,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -40.08718619599658,
+              "mean_cost": -36.94150679712617,
+              "ess": 9.097634505325333,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_13",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 2.723795466020023,
+      "success": false,
+      "plan_elapsed_s": 42.361713405000046,
+      "total_elapsed_s": 42.37405533110723,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.723795466020023,
+          "plan_elapsed_s": 38.13385423878208,
+          "init_best_cost": -29.381682904154424,
+          "final_best_cost": -31.46920970679928,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -29.381682904154424,
+              "mean_cost": -5.41242095433331,
+              "ess": 1.0085495016344797,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -29.11994009387869,
+              "mean_cost": -5.210223637313427,
+              "ess": 1.0046924896504217,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -29.049638405719175,
+              "mean_cost": -14.20416132141719,
+              "ess": 4.14031152157594,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -31.686511250780672,
+              "mean_cost": -27.901201544610203,
+              "ess": 5.036737457852355,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -31.46920970679928,
+              "mean_cost": -28.74418435656303,
+              "ess": 2.9564566149914873,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_14",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.308559712953866,
+      "total_elapsed_s": 39.32113085803576,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.424901749938726,
+          "init_best_cost": -33.24264295459594,
+          "final_best_cost": -33.83666354084819,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -33.24264295459594,
+              "mean_cost": -7.499575478553075,
+              "ess": 1.5893903181404756,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -34.76208619703931,
+              "mean_cost": -9.610749779208316,
+              "ess": 1.2531379680364638,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -35.4882139603678,
+              "mean_cost": -17.324752209761822,
+              "ess": 1.14351492982405,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -33.94533777220056,
+              "mean_cost": -28.02049791887534,
+              "ess": 7.083475686399512,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -33.83666354084819,
+              "mean_cost": -29.273796101306722,
+              "ess": 8.927489499052825,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_14",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 2.240186726130285,
+      "success": false,
+      "plan_elapsed_s": 41.475981547962874,
+      "total_elapsed_s": 41.48788294498809,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 2.240186726130285,
+          "plan_elapsed_s": 37.57955497596413,
+          "init_best_cost": -4.151026888439248,
+          "final_best_cost": -28.316160442326392,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -4.151026888439248,
+              "mean_cost": -2.474400964283679,
+              "ess": 3.251212613500045,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -27.967069270410555,
+              "mean_cost": -8.39334401462777,
+              "ess": 1.931010815247896,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -28.29076316238035,
+              "mean_cost": -11.495316283118399,
+              "ess": 2.21023748193778,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -28.003466115131012,
+              "mean_cost": -19.406314325300123,
+              "ess": 5.792393583235064,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -28.316160442326392,
+              "mean_cost": -17.212673544014923,
+              "ess": 6.112022589798674,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_14",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 3.4586161063554497e-06,
+      "success": false,
+      "plan_elapsed_s": 39.56090495106764,
+      "total_elapsed_s": 39.57316924701445,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 3.4586161063554497e-06,
+          "plan_elapsed_s": 35.72901522507891,
+          "init_best_cost": -22.815036712523526,
+          "final_best_cost": -21.720812892788093,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -22.815036712523526,
+              "mean_cost": -5.33143472856603,
+              "ess": 1.002053386868444,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -23.896525622705195,
+              "mean_cost": -7.3531944155801385,
+              "ess": 1.021997551494933,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -22.007062118766473,
+              "mean_cost": -9.896200784105456,
+              "ess": 3.0020394945442677,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -23.370640140747092,
+              "mean_cost": -17.141119822922736,
+              "ess": 1.192475749557645,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -21.720812892788093,
+              "mean_cost": -16.599819985098094,
+              "ess": 2.88144568461532,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_15",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.006300784628558541,
+      "success": false,
+      "plan_elapsed_s": 40.5855169321876,
+      "total_elapsed_s": 40.59700583014637,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.006300784628558541,
+          "plan_elapsed_s": 36.77342625404708,
+          "init_best_cost": -3.1188912495911825,
+          "final_best_cost": -3.232266553157428,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.1188912495911825,
+              "mean_cost": -2.1386195631656157,
+              "ess": 7.539222980363656,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -3.167374563092771,
+              "mean_cost": -2.395001616275492,
+              "ess": 9.676235624665656,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -4.082359999425357,
+              "mean_cost": -2.779362381918726,
+              "ess": 4.724179877859426,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -3.202731326599212,
+              "mean_cost": -2.669201238784248,
+              "ess": 11.868043613310647,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -3.232266553157428,
+              "mean_cost": -2.7149514861405715,
+              "ess": 12.021652559603476,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_15",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.512030232930556,
+      "total_elapsed_s": 39.52539616590366,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.51195603888482,
+          "init_best_cost": -41.83758837295926,
+          "final_best_cost": -42.57126910319358,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -41.83758837295926,
+              "mean_cost": -10.664847526216336,
+              "ess": 1.737905467052701,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -42.27582945267211,
+              "mean_cost": -9.40571638589112,
+              "ess": 1.1032671243001853,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -43.325566202893995,
+              "mean_cost": -22.417189242497074,
+              "ess": 2.813537540130347,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -42.965832101842516,
+              "mean_cost": -42.27279844482413,
+              "ess": 10.147267122820512,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -42.57126910319358,
+              "mean_cost": -42.25852303353728,
+              "ess": 13.725261407156456,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_15",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.0023849476160846535,
+      "success": false,
+      "plan_elapsed_s": 38.59930232912302,
+      "total_elapsed_s": 38.61782548809424,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.0023849476160846535,
+          "plan_elapsed_s": 34.752394679002464,
+          "init_best_cost": -2.9305388172767697,
+          "final_best_cost": -2.318051846202573,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.9305388172767697,
+              "mean_cost": -2.02162106876425,
+              "ess": 7.45972512536493,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.7158679577049614,
+              "mean_cost": -1.925214306074405,
+              "ess": 8.79478561663696,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -2.3426896590057833,
+              "mean_cost": -1.8589575750472014,
+              "ess": 12.826264746780332,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.3469410555732684,
+              "mean_cost": -1.9025946596091434,
+              "ess": 12.850632081410831,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.318051846202573,
+              "mean_cost": -1.8578342731741766,
+              "ess": 12.519463265570455,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_16",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.547574405092746,
+      "total_elapsed_s": 39.560042049968615,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.80427149287425,
+          "init_best_cost": -25.99466942679413,
+          "final_best_cost": -40.965002413394664,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -25.99466942679413,
+              "mean_cost": -3.004596970599027,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -24.402743014233668,
+              "mean_cost": -2.969798012620267,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -40.78800009774365,
+              "mean_cost": -18.362399271194825,
+              "ess": 2.2148160865536757,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -40.92770379782455,
+              "mean_cost": -31.356847519000162,
+              "ess": 4.612644317620792,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -40.965002413394664,
+              "mean_cost": -37.45421157017794,
+              "ess": 5.261992648363785,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_16",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 40.231668000109494,
+      "total_elapsed_s": 40.24437638511881,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 36.05907514505088,
+          "init_best_cost": -28.366133502279492,
+          "final_best_cost": -35.45511916565988,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -28.366133502279492,
+              "mean_cost": -3.0809868104626243,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -34.91692844891551,
+              "mean_cost": -13.437575065723987,
+              "ess": 1.0000114641374394,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -35.470870094705504,
+              "mean_cost": -15.146926376343504,
+              "ess": 2.249249725262038,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -35.69065763323953,
+              "mean_cost": -29.341247020565064,
+              "ess": 6.484026496492875,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -35.45511916565988,
+              "mean_cost": -34.79493725160983,
+              "ess": 11.072409323544813,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_16",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.17353969113901,
+      "total_elapsed_s": 39.185299918055534,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.3669749670662,
+          "init_best_cost": -28.034453013755204,
+          "final_best_cost": -33.61277756792937,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -28.034453013755204,
+              "mean_cost": -3.2932117979046414,
+              "ess": 1.0,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -28.521566737017157,
+              "mean_cost": -8.321076503963493,
+              "ess": 3.1057295973113406,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -33.8836125249008,
+              "mean_cost": -12.914262114276541,
+              "ess": 2.0919923128303455,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -34.1572587357911,
+              "mean_cost": -32.58995245968231,
+              "ess": 5.4963103201927135,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -33.61277756792937,
+              "mean_cost": -33.31984988939304,
+              "ess": 13.437427047638916,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_17",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 120.0,
+      "success": true,
+      "plan_elapsed_s": 39.36413132213056,
+      "total_elapsed_s": 39.38075006613508,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 120.0,
+          "plan_elapsed_s": 35.5909730901476,
+          "init_best_cost": -2.5814647173582954,
+          "final_best_cost": -45.60420088565918,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.5814647173582954,
+              "mean_cost": -1.411215862823315,
+              "ess": 5.508470076321478,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -44.426564594149,
+              "mean_cost": -7.626065648243623,
+              "ess": 1.0000000000000666,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -45.80605572465411,
+              "mean_cost": -22.78465230510902,
+              "ess": 4.473026946980993,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -45.98441480233508,
+              "mean_cost": -36.408119860585145,
+              "ess": 3.6260770024705447,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -45.60420088565918,
+              "mean_cost": -36.66231360869367,
+              "ess": 5.836936141848553,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_17",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.008220629199642804,
+      "success": false,
+      "plan_elapsed_s": 38.78040242800489,
+      "total_elapsed_s": 38.79597056400962,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.008220629199642804,
+          "plan_elapsed_s": 35.03683630307205,
+          "init_best_cost": -3.4965002722947673,
+          "final_best_cost": -2.8201211147336624,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.4965002722947673,
+              "mean_cost": -2.1037099453005794,
+              "ess": 3.7393524515339753,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -3.649925453178535,
+              "mean_cost": -1.8080199612310288,
+              "ess": 2.1833316257447684,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -3.5386698234599034,
+              "mean_cost": -2.177159016640556,
+              "ess": 3.5957203259421937,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.8340903020936614,
+              "mean_cost": -2.5592523636004394,
+              "ess": 14.120387917296867,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.8201211147336624,
+              "mean_cost": -2.641038914864478,
+              "ess": 15.180831750049203,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_17",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.0020872607518450546,
+      "success": false,
+      "plan_elapsed_s": 41.83431675285101,
+      "total_elapsed_s": 41.84608879988082,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.0020872607518450546,
+          "plan_elapsed_s": 37.73679992603138,
+          "init_best_cost": -16.96633942032016,
+          "final_best_cost": -2.6767157580292076,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -16.96633942032016,
+              "mean_cost": -2.774246951231399,
+              "ess": 1.0000000000075997,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -3.998864759383669,
+              "mean_cost": -2.0125695829609445,
+              "ess": 1.7208836853853668,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -3.0457552784973796,
+              "mean_cost": -2.0619544229882303,
+              "ess": 7.057220053180603,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.6787367220579346,
+              "mean_cost": -2.310500929644701,
+              "ess": 13.28652560873105,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.6767157580292076,
+              "mean_cost": -2.403246121258447,
+              "ess": 14.507314148136611,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_18",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.0061079288326109414,
+      "success": false,
+      "plan_elapsed_s": 38.76933704712428,
+      "total_elapsed_s": 38.78093321505003,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.0061079288326109414,
+          "plan_elapsed_s": 35.007711776997894,
+          "init_best_cost": -2.712499140566105,
+          "final_best_cost": -3.0445334298332862,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.712499140566105,
+              "mean_cost": -1.8640001300107976,
+              "ess": 8.057091229793839,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -3.088269180846093,
+              "mean_cost": -2.1415492505553386,
+              "ess": 7.326822491839402,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -3.0723919832713773,
+              "mean_cost": -2.4691186208582847,
+              "ess": 11.644544088410406,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.752796904874297,
+              "mean_cost": -2.2303946462343376,
+              "ess": 12.239021882964611,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -3.0445334298332862,
+              "mean_cost": -2.408580463435353,
+              "ess": 11.06561652493147,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_18",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.036703080006496865,
+      "success": false,
+      "plan_elapsed_s": 39.11190861999057,
+      "total_elapsed_s": 39.129095010925084,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.036703080006496865,
+          "plan_elapsed_s": 35.249152404023334,
+          "init_best_cost": -3.2135764184524414,
+          "final_best_cost": -1.983555426209839,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.2135764184524414,
+              "mean_cost": -1.6740187167565812,
+              "ess": 3.2295843988031594,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -3.5876139180198923,
+              "mean_cost": -1.8192528694046848,
+              "ess": 2.581809052727042,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -2.6567725145429257,
+              "mean_cost": -1.8914415409401726,
+              "ess": 9.800625319758913,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.16641956250215,
+              "mean_cost": -1.7684480882046993,
+              "ess": 13.819708974087224,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -1.983555426209839,
+              "mean_cost": -1.695989623308051,
+              "ess": 14.823435650840672,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_18",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.0035417939136676018,
+      "success": false,
+      "plan_elapsed_s": 41.66413067886606,
+      "total_elapsed_s": 41.676630042959005,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.0035417939136676018,
+          "plan_elapsed_s": 37.4890904140193,
+          "init_best_cost": -2.558709936994817,
+          "final_best_cost": -2.34825912939996,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -2.558709936994817,
+              "mean_cost": -1.5877351481200406,
+              "ess": 7.888464127637786,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.0766683944623257,
+              "mean_cost": -1.6126228802257518,
+              "ess": 12.037498844231497,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -2.276798594590054,
+              "mean_cost": -1.9063598615674957,
+              "ess": 12.931921421714101,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.436741042949476,
+              "mean_cost": -2.1590637111380317,
+              "ess": 14.58462108929791,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.34825912939996,
+              "mean_cost": -2.139209479744551,
+              "ess": 15.083774017607805,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_19",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.011719323779026061,
+      "success": false,
+      "plan_elapsed_s": 42.32139588193968,
+      "total_elapsed_s": 42.334788975073025,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.011719323779026061,
+          "plan_elapsed_s": 38.16354203899391,
+          "init_best_cost": -1.055912210674759,
+          "final_best_cost": -1.0267202811231406,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.055912210674759,
+              "mean_cost": -0.7013881851187367,
+              "ess": 14.329928628276308,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -1.2047810261805187,
+              "mean_cost": -0.6997206153621802,
+              "ess": 12.920517688266143,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -1.1484237512932753,
+              "mean_cost": -0.7887645590434362,
+              "ess": 13.877477110278488,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -1.0470965057252266,
+              "mean_cost": -0.7566870145350386,
+              "ess": 14.562691972223295,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -1.0267202811231406,
+              "mean_cost": -0.7091174024599278,
+              "ess": 14.713964545914283,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_19",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.007890964967142911,
+      "success": false,
+      "plan_elapsed_s": 43.51418844703585,
+      "total_elapsed_s": 43.52768285991624,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.007890964967142911,
+          "plan_elapsed_s": 39.26902762008831,
+          "init_best_cost": -1.029226539120322,
+          "final_best_cost": -0.5542988398057028,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -1.029226539120322,
+              "mean_cost": -0.5644991631602776,
+              "ess": 13.343237751279775,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -1.0153414412803754,
+              "mean_cost": -0.59629072857045,
+              "ess": 14.010511839669842,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -0.8175347379638843,
+              "mean_cost": -0.5406957933088572,
+              "ess": 15.0126779197434,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -0.7495578416295162,
+              "mean_cost": -0.5651413134630066,
+              "ess": 15.253461879118166,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.5542988398057028,
+              "mean_cost": -0.5134927063281346,
+              "ess": 15.957412908620036,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_19",
+      "rollout_idx": 2,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 0.30270210167271305,
+      "success": false,
+      "plan_elapsed_s": 43.321597539121285,
+      "total_elapsed_s": 43.341145153855905,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 0.30270210167271305,
+          "plan_elapsed_s": 39.16249023703858,
+          "init_best_cost": -3.1372677015308796,
+          "final_best_cost": -2.2974374912088527,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -3.1372677015308796,
+              "mean_cost": -1.9453068566598986,
+              "ess": 5.437282596828055,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -2.4163086655469157,
+              "mean_cost": -1.7272074755509643,
+              "ess": 10.14733615440667,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -2.231476571457199,
+              "mean_cost": -1.752113330181858,
+              "ess": 12.696134245695633,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -2.313176072945095,
+              "mean_cost": -1.9832317482180541,
+              "ess": 14.285698630609621,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -2.2974374912088527,
+              "mean_cost": -2.031628795708703,
+              "ess": 14.571021675143369,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

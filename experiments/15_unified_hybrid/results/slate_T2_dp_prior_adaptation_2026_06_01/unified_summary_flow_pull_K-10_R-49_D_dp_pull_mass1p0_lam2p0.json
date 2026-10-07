@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 10,
+  "R": 49,
+  "per_lambda": [
+    {
+      "lambda_prior": 2.0,
+      "n_total": 60,
+      "n_success": 39,
+      "success_rate": 0.65,
+      "wall_s": 10723.136500499997,
+      "output": "/private/tmp/HRTG-wt-dp/experiments/15_unified_hybrid/results/slate_T2_dp_prior_adaptation_2026_06_01/unified_flow_pull_lam-2.0_K-10_R-49_D_dp_pull_mass1p0_lam2p0.json"
+    }
+  ]
+}

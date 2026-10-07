@@ -1,0 +1,17 @@
+{
+  "_skip_marker": true,
+  "_reason": "Deferred to Mac B per user 'finish Mac A by noon' deadline.",
+  "_timestamp_pdt": "2026-06-02 01:55",
+  "_cell": "D_dp_pull_mass1p3_lam2p0",
+  "_handoff_branch": "feat/adapt-dp-prior-78x-replication",
+  "_macA_completed_cells": [
+    "D_dp_pull_mass1p0_lam0p5",
+    "D_dp_pull_mass1p0_lam1p0",
+    "D_dp_pull_mass1p0_lam2p0",
+    "D_dp_pull_mass1p3_lam0p5"
+  ],
+  "_macB_remaining_cells": [
+    "D_dp_pull_mass1p3_lam1p0",
+    "D_dp_pull_mass1p3_lam2p0"
+  ]
+}

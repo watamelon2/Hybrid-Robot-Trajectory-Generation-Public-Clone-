@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 5.0,
+      "n_total": 60,
+      "n_success": 18,
+      "success_rate": 0.3,
+      "wall_s": 2157.7282884999877,
+      "output": "/private/tmp/HRTG-dynamics-tmp/experiments/15_unified_hybrid/results/slate_dynamics_2026_05_26/unified_bc_lam-5.0_K-10_R-1_bc_m070.json"
+    }
+  ]
+}

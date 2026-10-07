@@ -1,0 +1,30 @@
+[combo] root=combo_rules_2026_06_14
+
+==============================================================================
+TASK = can  (ep0199, nominal, lambda=1, matched seeds)
+==============================================================================
+  rule                      succ    rate        Wilson95  gate_frac  ldem-lmod
+  additive(score)       20/30      66.7%  [48.8, 80.8]      0.001     -4.723
+  product(p=0)          23/30      76.7%  [59.1, 88.2]      0.000     -7.995
+  temper(p=1)           23/30      76.7%  [59.1, 88.2]      0.000     -8.516
+  max-gate(p=inf)       17/30      56.7%  [39.2, 72.6]      0.000     -8.553
+
+  matched-seed paired lift of ADDITIVE over each multiplicative rule:
+    additive - product(p=0)       n= 5 Delta=-10.0pp 95%CI[-23.3, +6.7] sign-p=0.625
+    additive - temper(p=1)        n= 5 Delta=-10.0pp 95%CI[-23.3, +6.7] sign-p=0.625
+    additive - max-gate(p=inf)    n= 5 Delta=+10.0pp 95%CI[ +0.0,+23.3] sign-p=0.500
+
+==============================================================================
+TASK = square  (ep0199, nominal, lambda=1, matched seeds)
+==============================================================================
+  rule                      succ    rate        Wilson95  gate_frac  ldem-lmod
+  additive(score)       23/30      76.7%  [59.1, 88.2]      0.002     -5.108
+  product(p=0)          20/30      66.7%  [48.8, 80.8]      0.001     -7.735
+  temper(p=1)           18/30      60.0%  [42.3, 75.4]      0.000     -8.543
+  max-gate(p=inf)       14/30      46.7%  [30.2, 63.9]      0.001     -8.652
+
+  matched-seed paired lift of ADDITIVE over each multiplicative rule:
+    additive - product(p=0)       n= 5 Delta=+10.0pp 95%CI[ -6.7,+30.0] sign-p=1.000
+    additive - temper(p=1)        n= 5 Delta=+16.7pp 95%CI[ -0.0,+30.0] sign-p=0.375
+    additive - max-gate(p=inf)    n= 5 Delta=+30.0pp 95%CI[ +3.3,+56.7] sign-p=0.250 ***
+

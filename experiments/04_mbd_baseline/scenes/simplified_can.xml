@@ -1,0 +1,153 @@
+<mujoco model="simplified_can">
+  <!--
+    Gate-1 simplified PickPlaceCan scene for MJX-batched rollouts.
+
+    Design notes (see docs/mjx_migration.md):
+      - Reuses the Menagerie pre-validated `mjx_panda.xml` for the
+        Franka arm + gripper. That file already substitutes
+        cylinder/mesh collisions with capsules and boxes wherever
+        MJX cannot model them, so we inherit a clean Franka
+        contact set without rewriting the arm ourselves.
+      - The "can" is a CAPSULE (h=0.10 m, r=0.025 m) rather than
+        robosuite's cylindrical mesh, because MJX silently drops
+        cylinder/mesh-with-mesh collision pairs. Capsule rolls and
+        grips qualitatively the same.
+      - The "bin" is built from BOX walls only (no cylinder legs),
+        matching robosuite's bin floor (0.4x0.5x0.04 m) and four
+        walls (0.42x0.02x0.10 m).
+      - The Franka base sits at z=0 in `mjx_panda.xml`. We do NOT
+        add a pedestal here; instead the bins are positioned so the
+        Franka EE can reach them at its natural workspace. Visual
+        fidelity with robosuite's pedestal-mounted layout is a
+        Gate-2 concern, not Gate-1.
+      - Actuators are <motor> (direct torque) on the 7 arm joints,
+        so the OSC controller in `jax_osc.py` can drive them. We
+        get this by including `mjx_panda_torque.xml` (our derived
+        variant) instead of the Menagerie's stock `mjx_panda.xml`.
+        The gripper actuator (actuator8) stays as a position
+        servo on finger_joint1.
+
+    Validation: `experiments/04_mbd_baseline/test_mjx_smoke.py`.
+  -->
+
+  <include file="mjx_panda_torque.xml"/>
+
+  <!-- Override meshdir AFTER the include. mjx_panda.xml ships with
+       `<compiler meshdir="assets"/>`, which resolves relative to
+       THIS scene file's directory (not the panda's) once it's
+       inlined. By restating meshdir after the include we point the
+       mesh loader at the Menagerie assets directly. Last
+       <compiler> element wins per MJCF compile rules. -->
+  <compiler angle="radian" autolimits="true"
+            meshdir="../../../third_party/mujoco_menagerie/franka_emika_panda/assets"/>
+
+  <statistic center="0.5 0 0.2" extent="1.2"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0"
+             width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge"
+             rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8"
+             width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true"
+              texrepeat="5 5" reflectance="0.2"/>
+    <material name="bin_wood" rgba="0.7 0.5 0.3 1"/>
+    <material name="bin_target" rgba="0.5 0.3 0.2 1"/>
+    <material name="can_red" rgba="0.85 0.15 0.15 1"/>
+  </asset>
+
+  <default>
+    <default class="bin">
+      <geom type="box" condim="3" friction="1 0.005 0.0001"
+            solimp="0.99 0.995 0.01" solref="0.01 1"
+            contype="1" conaffinity="1" group="0"/>
+    </default>
+    <default class="can">
+      <geom type="capsule" condim="4" density="100"
+            friction="0.95 0.3 0.1"
+            solimp="0.998 0.998 0.001" solref="0.001 1"
+            contype="1" conaffinity="1" group="0"
+            material="can_red"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+
+    <!-- Ground plane. Mostly cosmetic; bins sit on a table, not on
+         the floor. -->
+    <geom name="floor" type="plane" size="0 0 0.05"
+          pos="0 0 -0.4" material="groundplane"/>
+
+    <!-- Table surface so bins rest on something. A single large box. -->
+    <geom name="table" type="box" pos="0.5 0 -0.21" size="0.5 0.4 0.01"
+          material="bin_wood" condim="3" contype="1" conaffinity="1"/>
+
+    <!-- Source bin (where the can starts). Layout taken from
+         robosuite's bins_arena.xml bin1 but with cylinder legs
+         removed (those are visual-only there anyway). -->
+    <body name="bin_source" pos="0.5 -0.18 -0.18">
+      <geom class="bin" pos="0    0     0"     size="0.15 0.13 0.01"/>  <!-- floor -->
+      <geom class="bin" pos="0    0.13  0.05"  size="0.16 0.01 0.05"/>  <!-- +y wall -->
+      <geom class="bin" pos="0   -0.13  0.05"  size="0.16 0.01 0.05"/>  <!-- -y wall -->
+      <geom class="bin" pos="0.15  0    0.05"  size="0.01 0.13 0.05"/>  <!-- +x wall -->
+      <geom class="bin" pos="-0.15 0    0.05"  size="0.01 0.13 0.05"/>  <!-- -x wall -->
+      <site name="source_center" pos="0 0 0.02" size="0.01"
+            rgba="0 1 0 0.3"/>
+    </body>
+
+    <!-- Target bin (where the can must end). -->
+    <body name="bin_target" pos="0.5 0.18 -0.18">
+      <geom class="bin" pos="0    0     0"     size="0.15 0.13 0.01" material="bin_target"/>
+      <geom class="bin" pos="0    0.13  0.05"  size="0.16 0.01 0.05" material="bin_target"/>
+      <geom class="bin" pos="0   -0.13  0.05"  size="0.16 0.01 0.05" material="bin_target"/>
+      <geom class="bin" pos="0.15  0    0.05"  size="0.01 0.13 0.05" material="bin_target"/>
+      <geom class="bin" pos="-0.15 0    0.05"  size="0.01 0.13 0.05" material="bin_target"/>
+      <!-- Goal site: 10 cm above bin floor, centred. The reward's
+           "bin placement" term uses this to score xy distance and
+           the lift proxy uses this z to gate the bonus. -->
+      <site name="goal" pos="0 0 0.10" size="0.015" rgba="0 0.8 0 1"/>
+    </body>
+
+    <!-- The can. A capsule (h=0.10, r=0.025) with a free joint so
+         the planner can pick it up and move it. Spawned ~5 cm above
+         the source-bin floor so it settles cleanly under gravity in
+         the first few mj_steps. -->
+    <body name="can" pos="0.5 -0.18 -0.10">
+      <freejoint name="can_free"/>
+      <inertial pos="0 0 0" mass="0.05" diaginertia="2e-5 2e-5 2e-5"/>
+      <geom class="can" name="can_capsule" size="0.025 0.05"/>
+      <site name="can_center" pos="0 0 0" size="0.005" rgba="0 0 1 0"/>
+    </body>
+
+    <!-- Cameras matching robosuite's PickPlaceCan defaults for
+         qualitative comparison. -->
+    <camera name="agentview" mode="fixed"
+            pos="1.2 0 0.6" quat="0.5 0.5 0.5 0.5"/>
+    <camera name="birdview" mode="fixed"
+            pos="0.5 0 1.5" quat="0.7071 0 0 0.7071"/>
+  </worldbody>
+
+  <!-- Canonical init pose: arm in robosuite's PickPlaceCan default
+       "ready" configuration; fingers slightly open. qpos layout is
+       [j1..j7, finger1, finger2, can_free (7)] -->
+  <keyframe>
+    <!-- ctrl semantics (8-D total):
+           index 0..6 -> joint torque (Nm) for arm joints 1..7
+           index 7    -> finger_joint1 desired position (m)
+                         (gripper open = 0.04, closed = 0)
+         At rest, zero arm torque + qfrc_bias gravity comp from
+         the OSC controller holds the pose; here we just zero the
+         arm ctrl since the keyframe is also the initial pose. -->
+    <key name="home"
+         qpos="0  -0.785  0  -2.356  0  1.571  0.785  0.04  0.04
+               0.5 -0.18 -0.10  1 0 0 0"
+         ctrl="0  0  0  0  0  0  0  0.04"/>
+  </keyframe>
+</mujoco>

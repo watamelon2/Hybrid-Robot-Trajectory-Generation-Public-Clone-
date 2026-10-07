@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 1,
+  "R": 0,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 30,
+      "n_success": 20,
+      "success_rate": 0.6666666666666666,
+      "wall_s": 112.63502933399286,
+      "output": "experiments/08_flow_matching_prior/results/eval_dp_ema_e300/unified_flow_pull_lam-0.0_K-1_R-0_slateN1_nsteps50.json"
+    }
+  ]
+}

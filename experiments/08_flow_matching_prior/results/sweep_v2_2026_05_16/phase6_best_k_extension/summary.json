@@ -1,0 +1,10 @@
+[
+  {
+    "lambda_prior": 0.0,
+    "n_success": 2,
+    "n_total": 60,
+    "success_rate": 0.03333333333333333,
+    "wall_s": 1517.2092090419028,
+    "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/sweep_v2_2026_05_16/phase6_best_k_extension/lambda_0.0.json"
+  }
+]

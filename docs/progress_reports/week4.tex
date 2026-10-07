@@ -1,0 +1,300 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+\input{usepackage}
+
+\title{\LARGE \bf
+Week 4 Initial Results: Data-Driven Priors and Physics-Based
+Corrections \\ A Hybrid Flow Matching Approach to Safe Robot Motion
+Planning}
+
+\author{ \parbox{3 in}{\centering Zihao Sun}
+        \hspace*{ 0.1 in}
+        \parbox{2.5 in}{ \centering Charles Beck}
+\thanks{UCLA ECE M237 Spring 2026 Course Project Milestone Reports.
+Week 4---Initial Results.}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Main Idea}
+
+We investigate how to merge an \textbf{offline}-trained generative
+trajectory prior (learned from demonstration data) with an
+\textbf{online} model-based score correction (computed analytically
+from the known dynamics and cost) and study whether the resulting
+hybrid yields trajectories that are simultaneously diverse and
+physically feasible.
+
+\section{Related Work}
+\subsection{Overview}
+
+Our project sits at the intersection of \emph{model-based score
+computation} and \emph{generative trajectory planning}, with a
+secondary connection to \emph{safe generative control}.
+MBD~\cite{mbd} derives the score analytically from known dynamics
+and cost, guaranteeing feasibility without any learned component;
+its authors note data ``can be naturally integrated'' but leave
+this unformalized---the gap we address. Diffusion-based
+planners~\cite{janner2022} and flow-matching
+methods~\cite{flowmp} learn expressive multimodal priors from
+demonstrations but provide no feasibility guarantees out of
+distribution. For collision avoidance we plan to incorporate
+CBF-based score terms~\cite{safeflow}.
+
+\subsection{Highlighted Literature Review}
+
+Pan et al.~\cite{mbd} propose MBD, which replaces the learned
+score of standard diffusion planners with one computed analytically
+from $x_{k+1}=f(x_k,u_k)$ and $J(\tau)$ via Tweedie's formula and
+self-normalized importance sampling. MBD defines a Boltzmann
+trajectory distribution $p^{\mathrm{mod}}(\tau)\propto
+\exp(-J(\tau)/\lambda)$, noises it via a VP-SDE, and approximates
+the posterior mean by cost-reweighted rollouts; on Maze2D, Block
+Push, and Franka manipulation benchmarks it matches or outperforms
+Diffuser~\cite{janner2022} while requiring zero demonstration data.
+Its main limitations are that (i) it cannot capture multimodal,
+demonstration-informed behaviors, (ii) it assumes an accurate
+dynamics model, and (iii) its importance-sampling estimator
+suffers high variance when $\lambda$ is small or the horizon is
+long. Our work targets all three by anchoring the denoising process
+to a learned data prior and letting an adaptive $\lambda(x,t)$
+govern the trust between the two components.
+
+\section{Problem Formulation}
+
+Let $\tau=(x_0,u_0,\ldots,x_{H-1},u_{H-1},x_H)$ be a trajectory of
+the discrete-time system $x_{k+1}=f(x_k,u_k)$ with running cost
+$J(\tau)=\sum_{k=0}^{H-1}\ell(x_k,u_k)+\ell_H(x_H)$. Given a
+demonstration dataset
+$\mathcal{D}=\{\tau^{(i)}\}_{i=1}^{N}\!\sim\!p^{\mathrm{data}}$,
+our goal is to sample from the product-of-experts target
+$p^{\mathrm{target}}(\tau)\propto p^{\mathrm{data}}(\tau)\,
+[p^{\mathrm{model}}(\tau)]^{\lambda}$, where
+$p^{\mathrm{model}}(\tau)\propto\exp(-J(\tau)/\beta)$ is the
+Boltzmann distribution induced by the known dynamics and cost. At
+each diffusion time $t$ this is equivalent to denoising with the
+composite score
+\begin{equation}
+  \nabla\log p^{\mathrm{target}}_t \approx
+  \nabla\log p^{\mathrm{data}}_t
+  + \lambda(x,t)\,\nabla\log p^{\mathrm{model}}_t,
+  \label{eq:score}
+\end{equation}
+which is the central object our project formalizes and analyzes.
+
+\section{Sketch of Method}
+\subsection{Offline Component}
+
+Offline, we train a flow matching velocity field $v_\theta(\tau_t,t)$
+on $\mathcal{D}$ via conditional flow matching~\cite{lipman2023flow}
+with $\tau_t$ linearly interpolating Gaussian noise and a
+demonstration. The flow--score identity~\cite{song2021score} yields
+$s_\theta\!\approx\!\nabla\log p^{\mathrm{data}}_t$ at inference,
+in line with~\cite{flowmp,janner2022}. Amortizing the demonstrations
+into a network replaces $O(MH)$ rollouts with one
+$O(|\theta|)$ forward pass per denoising step---an offline analogue
+of fitted value iteration, paid once at
+$O(N\!\cdot\!\text{epochs}\!\cdot\!|\theta|)$. As a proxy until
+$v_\theta$ is trained, the present report uses a 5-layer MLP
+behavior-cloning policy $\pi_\phi(a\mid o)$ on the same data; this
+stand-in lets us measure the offline$\to$online gap ahead of the
+full generative model.
+
+\subsection{Online Component}
+
+At inference we evaluate
+$\nabla\log p^{\mathrm{model}}_t\!\approx\!
+\mathbb{E}_{w(\tau)}[\tau-\tau_t]/\sigma_t^2$ from self-normalized
+importance sampling of cost-weighted rollouts
+$w(\tau)\propto\exp(-J(\tau)/\beta)$, in the spirit of
+MBD~\cite{mbd}, and add it to $s_\theta$ at every step. The offline
+prior is blind to the deployed cost and degrades out of
+distribution; MBD has high estimator variance over long horizons
+and lacks a data prior. We mitigate both by anchoring rollouts at
+the flow-matching posterior mean and letting $\lambda(x,t)$ react
+to local data density. In the LQ case the correction reduces to
+$-P_t x_t$, an LQR-style sanity check we realized this milestone
+(\S\ref{sec:initial-results}).
+
+\section{Initial Results}
+\label{sec:initial-results}
+
+\subsection{Modeling \& Simulation}
+
+We instantiate the framework on a 7-DoF Franka Panda doing
+\texttt{PickPlaceCan} in \texttt{robosuite}/\texttt{MuJoCo}: the
+agent picks a cylindrical can and places it in a bin. The dataset's
+native action is 7-D operational-space control (3 translation, 3
+rotation, 1 gripper) over $H\!\approx\!120$ steps at 20\,Hz, and
+demonstrations come from \texttt{Robomimic}'s
+\texttt{can}/\texttt{ph} (proficient-human) split. Two pivots from
+the Week-3 plan simplified the testbed: we use the dataset's
+native OSC actions rather than retargeting to torque control (which
+avoids an extra source of distributional drift), and the offline
+component is the MLP-BC stand-in (\S IV-A) while $v_\theta$ is
+being engineered. As an analytical companion we use a 2D
+point-mass LQR with $x_{k+1}=Ax_k+Bu_k$; the discrete algebraic
+Riccati equation~\cite{lewis2012optimal} provides closed-form
+$K^{\star}$ for validating the online component in isolation.
+
+\subsection{Baseline methods}
+
+We compare five methods on a shared 20 init-states $\times$
+3-rollouts protocol (n=60) from the first 20
+\texttt{can}/\texttt{ph} demonstrations. \textit{Open-loop demo
+replay} replays the recorded action sequence and gives the
+empirical \emph{upper bound} (below 1.0 due to documented
+\texttt{robosuite}~1.4$\to$1.5 controller-config drift).
+\textit{Random} executes $a_t\!\sim\!\mathrm{Uniform}([-1,1]^7)$
+as the trivial lower bound. \textit{Behavior cloning} trains
+$\pi_\phi$ for 500 epochs (MSE, batch~64) and rolls it out
+closed-loop on each demo's native horizon. \textit{Online MBD,
+no prior} runs the denoising loop from a zero initial mean for
+$K\!=\!10$ iterations of $M\!=\!16$ perturbed rollouts each
+($H\!=\!120$, $\lambda\!=\!0.5$, cosine
+$\sigma\!:\!0.5\!\to\!0.05$), then executes the planned
+trajectory open-loop. \textit{Hybrid prior + MBD} (this
+milestone's first instantiation of our method) seeds the same
+denoising loop with a deterministic BC rollout instead of a
+zero initial mean, and halves $\sigma_{\max}$ to $0.25$ so the BC
+structure survives iteration~1. The middle three rows are
+stand-ins for the offline-only and online-only ablations of the
+eventual flow-matching hybrid; the last row is the actual
+product-of-experts pipeline (\S IV) with the MLP-BC stand-in for
+$v_\theta$.
+
+\subsection{Initial Results}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Success rate on \texttt{can}/\texttt{ph} over 20 init-states
+$\times$ 3 rollouts (n=60) unless noted. LQ companion is a separate
+analytical sanity check; bookend methods give the apples-to-apples
+ceiling and floor.}
+\label{tab:results}
+\begin{tabular}{l c l}
+\hline
+Method & Success rate & Role \\
+\hline
+Open-loop demo replay (Exp~01)        & 0.90 (n=20)        & upper bound \\
+Random actions (Exp~02)               & 0.00               & lower bound \\
+MLP behavior cloning (Exp~03)         & 0.067              & offline only \\
+Online MBD, no prior (Exp~04)         & 0.00               & online only \\
+\textbf{Hybrid BC + MBD (Exp~05)}     & \textbf{0.017}     & \textbf{our method} \\
+\hline
+LQ analytical companion               & 1.059$\times$ DARE & math sanity \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:results} summarizes the milestone numbers. Replay's
+\textbf{0.90} is the apples-to-apples closed-loop ceiling; random
+\textbf{0.00} confirms the task is contact-rich enough that
+uniform noise cannot solve it. The MLP-BC stand-in reaches
+\textbf{0.067} (4/60), a small but non-trivial step above the
+floor that quantifies what an imperfect offline prior buys.
+The same denoising loop applied to the 2D LQ companion converges
+to within \textbf{1.059} of the DARE optimum (5/5 seeds within
+10\%), confirming the score, schedule, and softmax weighting are
+implemented correctly; any failure on the can task is therefore
+attributable to sim coupling or weighting design rather than to
+MBD's algorithmic core.
+
+MBD-no-prior reaches \textbf{0.00} on the full 60-rollout protocol
+(78.5\,min wall): every rollout descends the planning cost by
+1--12 units, but the executed-reward distribution is dominated by
+``cannot reach'' starts (53\,\% with $r\!\le\!+0.5$); only 30\,\%
+produce a strong reach ($r\!>\!+3$) and none discover the grasp
+in the 7-D$\,\times\,$120-step open-loop search. This is the
+predicted failure mode and motivates the hybrid: MBD has no
+mechanism to localize the search around demonstration-shaped
+behavior.
+
+\textbf{Hybrid BC + MBD} (Exp~05) seeds each denoising trajectory
+with a deterministic BC rollout from the same Exp~03 checkpoint
+and otherwise uses the Exp~04 loop with a halved
+$\sigma_{\max}\!=\!0.25$. On the same 60-rollout protocol
+(81.3\,min wall) the headline binary success rate is
+\textbf{0.017} (1/60); we treat this as a precision-of-the-
+terminal-event artifact rather than as the substantive result,
+because Fisher's exact test against Exp~04's 0/60 gives
+$p\!=\!1.000$ and the Wilson 95\,\% CI for 1/60 is
+$[0.3\%,8.9\%]$, fully overlapping that for 0/60 ($[0\%,6.0\%]$).
+
+The substantive evidence is behavioural, and it is robustly
+significant. The ``no reach'' mass
+($r_{\mathrm{exec}}\!\le\!+0.5$) collapses from 53\,\% in Exp~04
+to \textbf{12\,\%} here ($p\!\approx\!10^{-6}$, Fisher), ``strong
+reach'' ($r_{\mathrm{exec}}\!>\!+3$) rises from 30\,\% to
+\textbf{53\,\%} ($p\!\approx\!10^{-2}$), and on
+\textbf{85\,\% of rollouts} (51/60) the MBD-refined trajectory
+executes a strictly higher reward than the BC rollout it was
+warm-started from (sign test against 50\,\%:
+$p\!\approx\!10^{-8}$). Paired mean executed dense reward rises
+from $+4.51$ (BC alone, same protocol) to $\mathbf{+8.25}$
+($\mu_{\text{final}}$ after MBD; Wilcoxon signed-rank one-sided
+$p\!\approx\!10^{-7}$); the cost descent is broadly positive
+(mean $+5.42$, median $+1.16$). These results validate the two
+mechanisms predicted by our formulation~\eqref{eq:score}.
+(i)~\emph{Reaching is solved by the prior, not by the planner}:
+the same MBD search that left 53\,\% of starts motionless from a
+zero initial mean leaves only 12\,\% motionless once anchored at
+a BC rollout. (ii)~\emph{The planner refines, it doesn't
+override}: the 85\,\% win-rate over BC alone shows the
+cost-weighted correction is consistently productive rather than
+averaging the BC trajectory back to zero. Strict success remains
+small because both BC and the hybrid stall on the
+millimetre-scale gripper-finger alignment that converts a reach
+into a lift; we expect this to close once the flow-matching prior
+$v_\theta$ (\S IV-A) replaces the deterministic MLP, since
+$v_\theta$ can represent the multimodal demonstration grasp
+configurations that the unimodal stand-in cannot.
+
+\section{Next Steps}
+
+In priority order: (i) replace the MLP-BC stand-in with $v_\theta$
+and re-run the Exp~05 protocol---the hybrid's bottleneck is the
+deterministic, unimodal grasp configuration baked into the MLP,
+which a flow-matching prior should fix without changing the
+online component; (ii) wire the explicit composite
+score~\eqref{eq:score} (Exp~05 currently uses the BC rollout
+only as an initial mean rather than as a per-step score term)
+and sweep $\lambda\in[0,\infty]$ to map the offline$\,\to\,$online
+tradeoff---endpoints should recover the Exp~03 and Exp~04 rows of
+Table~\ref{tab:results}; (iii) push $K$ from 10 to 20 and/or add
+one MPC-style replan at $t\!=\!60$ to attack the grasp-and-lift
+bottleneck that caps Exp~05 at 1/60; (iv) OOD test with novel
+goals and $\pm30\%$ mass/friction perturbations; and (v) an
+adaptive $\lambda(x,t)$ tied to local data density. We will
+revisit \texttt{mujoco-mjx} only if the parameter sweeps in
+(ii)--(iii) make the 80-min sequential wall a blocker.
+
+\section{Questions}
+
+We would value feedback on two scoping pivots from the Week-3 plan.
+\textbf{(Q1)} Is dropping torque retargeting in favor of the
+dataset's native OSC action space acceptable for the
+initial-results milestone, given that the apples-to-apples
+comparison with all five baselines is preserved? \textbf{(Q2)}
+For the hybrid pipeline, is the current ``BC rollout as
+$\tau_K$ initial mean'' instantiation a defensible stand-in for
+the composite score~\eqref{eq:score} at this milestone, or would
+you prefer we hold the headline number until the per-step score
+additive (the $\lambda\nabla\log p^{\mathrm{model}}$ term mixed
+into every denoising step rather than only at $t\!=\!K$) is in
+place?
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,references}
+
+\end{document}

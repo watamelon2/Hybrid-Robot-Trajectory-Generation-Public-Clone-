@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 5.0,
+      "n_total": 60,
+      "n_success": 13,
+      "success_rate": 0.21666666666666667,
+      "wall_s": 1624.5939692079555,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-slate/experiments/15_unified_hybrid/results/slate_costtime_2026_05_25/unified_bc_lam-5.0_K-10_R-1_bc_dx010.json"
+    }
+  ]
+}

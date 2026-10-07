@@ -1,0 +1,60 @@
+{
+  "config": {
+    "K": 10,
+    "R": 1,
+    "M": 16,
+    "H": 120,
+    "sigma_max": 0.25,
+    "sigma_min": 0.01,
+    "n_demos": 20,
+    "n_rollouts": 3,
+    "seed": 0,
+    "task": "can"
+  },
+  "cells": [
+    {
+      "label": "C1_bc_lam0",
+      "file": "unified_bc_lam-0.0_K-10_R-1_C1_bc_lam0.json",
+      "prior": "bc",
+      "lambda": 0.0,
+      "warm_start": true,
+      "deterministic_warmstart": true,
+      "n_success": 7,
+      "n_total": 60,
+      "success_rate": 0.11666666666666667,
+      "wall_s": 1579.6132974579996
+    },
+    {
+      "label": "C3_flow_lam0",
+      "file": "unified_flow_lam-0.0_K-10_R-1_C3_flow_lam0.json",
+      "prior": "flow",
+      "lambda": 0.0,
+      "warm_start": true,
+      "deterministic_warmstart": true,
+      "n_success": 0,
+      "n_total": 60,
+      "success_rate": 0.0,
+      "wall_s": 1620.690627666001
+    },
+    {
+      "label": "C4_flow_lam5",
+      "file": "unified_flow_lam-5.0_K-10_R-1_C4_flow_lam5.json",
+      "prior": "flow",
+      "lambda": 5.0,
+      "warm_start": true,
+      "deterministic_warmstart": true,
+      "n_success": 0,
+      "n_total": 60,
+      "success_rate": 0.0,
+      "wall_s": 1582.6040049580006
+    }
+  ],
+  "existing_headline_C0_pool": {
+    "config": "BC warm-start + BC score-bridge lambda=5, 4-seed pool",
+    "rate": 0.375,
+    "n_success": 90,
+    "n_total": 240,
+    "note": "From docs/results.md headline table (Phase-2 4-seed pool)"
+  },
+  "context": "Warm-start ablation 2026-05-16; exp 15 unified driver; flow runs use deterministic prior warm-start seeding from 2026-05-16 fix."
+}

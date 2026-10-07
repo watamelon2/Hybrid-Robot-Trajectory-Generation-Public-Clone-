@@ -1,0 +1,46 @@
+{
+  "raw_unique": 295,
+  "kept": 80,
+  "tag_counts": {
+    "contact_rich_insertion": 48,
+    "diffusion_policy_priors": 28,
+    "fast_adaptation_robustness": 40,
+    "long_horizon_subgoals": 43,
+    "mpc_trajectory_optimization": 59,
+    "retrieval_nonparametric": 4
+  },
+  "year_counts": {
+    "2015": 1,
+    "2018": 3,
+    "2019": 3,
+    "2020": 6,
+    "2021": 5,
+    "2022": 6,
+    "2023": 15,
+    "2024": 16,
+    "2025": 16,
+    "2026": 9
+  },
+  "top_titles": [
+    "M2Diffuser: Diffusion-based Trajectory Optimization for Mobile Manipulation in 3D Scenes",
+    "ARCH: Hierarchical Hybrid Learning for Long-Horizon Contact-Rich Robotic Assembly",
+    "Scaling Up and Distilling Down: Language-Guided Robot Skill Acquisition",
+    "MOSAIC: A Skill-Centric Algorithmic Framework for Long-Horizon Manipulation Planning",
+    "DmC: Nearest Neighbor Guidance Diffusion Model for Offline Cross-domain Reinforcement Learning",
+    "SPIRE: Synergistic Planning, Imitation, and Reinforcement Learning for Long-Horizon Manipulation",
+    "Diffusion Trajectory-Guided Policy for Long-Horizon Robot Manipulation",
+    "Learning compositional models of robot skills for task and motion planning",
+    "A Long Horizon Planning Framework for Manipulating Rigid Pointcloud Objects",
+    "Robotic disassembly for end-of-life products focusing on task and motion planning: A comprehensive survey",
+    "TrajGPT-R: Generating Urban Mobility Trajectory with Reinforcement Learning-Enhanced Generative Pre-trained Transformer",
+    "Contact-Rich Robotic Assembly in Construction via Diffusion Policy Learning",
+    "$\\texttt{SPIN}$: distilling $\\texttt{Skill-RRT}$ for long-horizon prehensile and non-prehensile manipulation",
+    "Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation",
+    "DRL Optimization Trajectory Generation via Wireless Network Intent-Guided Diffusion Models for Resource Allocation",
+    "IRL-DAL: Safe and Adaptive Trajectory Planning for Autonomous Driving via Energy-Guided Diffusion Models",
+    "GOPlan: Goal-conditioned Offline Reinforcement Learning by Planning with Learned Models",
+    "Diffusion Policy Policy Optimization",
+    "Learning Contact-Rich Manipulation Skills with Guided Policy Search",
+    "Learning and Retrieval from Prior Data for Skill-based Imitation Learning"
+  ]
+}

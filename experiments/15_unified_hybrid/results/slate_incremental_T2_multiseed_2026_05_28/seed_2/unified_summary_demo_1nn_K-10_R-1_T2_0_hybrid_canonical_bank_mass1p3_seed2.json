@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 22,
+      "success_rate": 0.7333333333333333,
+      "wall_s": 775.5051200410016,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-multiseed/experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_2/unified_demo_1nn_lam-1.0_K-10_R-1_T2_0_hybrid_canonical_bank_mass1p3_seed2.json"
+    }
+  ]
+}

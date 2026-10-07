@@ -1,0 +1,24 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 6,
+      "success_rate": 0.1,
+      "wall_s": 1566.2347638339852,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-slate/experiments/15_unified_hybrid/results/slate_costtime_2026_05_25/unified_demo_1nn_lam-0.0_K-10_R-1_demo1nn_dx010.json"
+    },
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 30,
+      "success_rate": 0.5,
+      "wall_s": 1603.5242415420362,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-slate/experiments/15_unified_hybrid/results/slate_costtime_2026_05_25/unified_demo_1nn_lam-1.0_K-10_R-1_demo1nn_dx010.json"
+    }
+  ]
+}

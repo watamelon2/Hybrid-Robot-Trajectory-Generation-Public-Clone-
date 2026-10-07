@@ -1,0 +1,560 @@
+{
+  "experiment": "standalone_dp",
+  "task": "can",
+  "prior_checkpoint": "experiments/08_flow_matching_prior/results/v_theta_v4_unet.pt",
+  "prior_arch": "karras_edm_v3",
+  "prior_backbone": "conv1d_unet",
+  "n_demos": 20,
+  "n_rollouts": 3,
+  "n_action_steps": 60,
+  "max_env_steps": 240,
+  "n_sample_steps": 18,
+  "sigma_min": 0.05,
+  "sigma_max": 0.25,
+  "n": 60,
+  "n_succ": 0,
+  "succ_rate": 0.0,
+  "wall_s": 944.3203362080094,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "final_reward": 0.03859185192720992,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 2.0437014999915846
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 1,
+      "final_reward": 2.0720266587781193,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 5.924387250008294
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 2,
+      "final_reward": 0.08835566018265886,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.488839416997507
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "final_reward": 0.022961041988880652,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.158813499991084
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 1,
+      "final_reward": 0.023230512002292453,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 11.886451166996267
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 2,
+      "final_reward": 2.396135519883112,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 20.64171399999759
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 0,
+      "final_reward": 0.7264015094301965,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 19.230494208983146
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 1,
+      "final_reward": 0.6020404603472668,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 22.157154375017853
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 2,
+      "final_reward": 0.08752801340278082,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.711335750005674
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 0,
+      "final_reward": 4.78513812722522,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.62460862498847
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 1,
+      "final_reward": 0.5076252096535144,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.161530583020067
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 2,
+      "final_reward": 1.1245416833744812,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.835085708007682
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 0,
+      "final_reward": 3.798680468649842,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.825729792006314
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 1,
+      "final_reward": 0.21452035671602424,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.195475249987794
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 2,
+      "final_reward": 1.0265137998154286,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 19.21534983298625
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 0,
+      "final_reward": 0.3694819094773479,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 19.87424658398959
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 1,
+      "final_reward": 0.03175297914183618,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.550970415992197
+    },
+    {
+      "demo": "demo_5",
+      "rollout_idx": 2,
+      "final_reward": 0.0034591670243158913,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.287293500005035
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 0,
+      "final_reward": 0.039392987839163535,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.60373216701555
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 1,
+      "final_reward": 0.0552220204980283,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.54977812501602
+    },
+    {
+      "demo": "demo_6",
+      "rollout_idx": 2,
+      "final_reward": 0.038399137838880014,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.6046317909786
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 0,
+      "final_reward": 0.031070805468378586,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.06592074999935
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 1,
+      "final_reward": 0.04118744979009649,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 10.891831416985951
+    },
+    {
+      "demo": "demo_7",
+      "rollout_idx": 2,
+      "final_reward": 0.027729265942972776,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.677728917013155
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 0,
+      "final_reward": 0.004594854763632547,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.154486332990928
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 1,
+      "final_reward": 0.0025121705498134623,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.022354499989888
+    },
+    {
+      "demo": "demo_8",
+      "rollout_idx": 2,
+      "final_reward": 0.06913817739438644,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 14.922666250000475
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 0,
+      "final_reward": 0.06935307509717893,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.43495766702108
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 1,
+      "final_reward": 0.21319979748828122,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.950099249981577
+    },
+    {
+      "demo": "demo_9",
+      "rollout_idx": 2,
+      "final_reward": 1.1313588653737132,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 13.382616791990586
+    },
+    {
+      "demo": "demo_10",
+      "rollout_idx": 0,
+      "final_reward": 0.07423331937083985,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.3918554999982
+    },
+    {
+      "demo": "demo_10",
+      "rollout_idx": 1,
+      "final_reward": 0.08343237861564554,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 13.72342633298831
+    },
+    {
+      "demo": "demo_10",
+      "rollout_idx": 2,
+      "final_reward": 0.02899582114403346,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.736523625004338
+    },
+    {
+      "demo": "demo_11",
+      "rollout_idx": 0,
+      "final_reward": 6.288170533770762,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.308255374984583
+    },
+    {
+      "demo": "demo_11",
+      "rollout_idx": 1,
+      "final_reward": 0.895348196427306,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.087612083007116
+    },
+    {
+      "demo": "demo_11",
+      "rollout_idx": 2,
+      "final_reward": 1.2481736192179977,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.09546629199758
+    },
+    {
+      "demo": "demo_12",
+      "rollout_idx": 0,
+      "final_reward": 0.15632062458533072,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.566511749988422
+    },
+    {
+      "demo": "demo_12",
+      "rollout_idx": 1,
+      "final_reward": 0.03207988573940608,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.822220417001517
+    },
+    {
+      "demo": "demo_12",
+      "rollout_idx": 2,
+      "final_reward": 0.024039538333715804,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.079757958999835
+    },
+    {
+      "demo": "demo_13",
+      "rollout_idx": 0,
+      "final_reward": 0.023846014607786528,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.8290698750061
+    },
+    {
+      "demo": "demo_13",
+      "rollout_idx": 1,
+      "final_reward": 0.17216475594680586,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.506049207993783
+    },
+    {
+      "demo": "demo_13",
+      "rollout_idx": 2,
+      "final_reward": 0.09772046365138416,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 10.255243667023024
+    },
+    {
+      "demo": "demo_14",
+      "rollout_idx": 0,
+      "final_reward": 0.5345687209603772,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 19.580273542000214
+    },
+    {
+      "demo": "demo_14",
+      "rollout_idx": 1,
+      "final_reward": 0.02197129224256298,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.60817683400819
+    },
+    {
+      "demo": "demo_14",
+      "rollout_idx": 2,
+      "final_reward": 2.225146081381061,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.8598881670041
+    },
+    {
+      "demo": "demo_15",
+      "rollout_idx": 0,
+      "final_reward": 0.05701248241418146,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.742422750015976
+    },
+    {
+      "demo": "demo_15",
+      "rollout_idx": 1,
+      "final_reward": 0.4384186091204735,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 19.18479387499974
+    },
+    {
+      "demo": "demo_15",
+      "rollout_idx": 2,
+      "final_reward": 0.1144472215766005,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.259388749982463
+    },
+    {
+      "demo": "demo_16",
+      "rollout_idx": 0,
+      "final_reward": 0.05221747156364827,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 15.94993454098585
+    },
+    {
+      "demo": "demo_16",
+      "rollout_idx": 1,
+      "final_reward": 0.44117507166131154,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.02089666601387
+    },
+    {
+      "demo": "demo_16",
+      "rollout_idx": 2,
+      "final_reward": 0.019630241951784946,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.234213457995793
+    },
+    {
+      "demo": "demo_17",
+      "rollout_idx": 0,
+      "final_reward": 0.03732846168203042,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.08837849998963
+    },
+    {
+      "demo": "demo_17",
+      "rollout_idx": 1,
+      "final_reward": 0.9819243593810779,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.666678582987515
+    },
+    {
+      "demo": "demo_17",
+      "rollout_idx": 2,
+      "final_reward": 0.01594639202843834,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 17.716590333002387
+    },
+    {
+      "demo": "demo_18",
+      "rollout_idx": 0,
+      "final_reward": 0.3234155917620937,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 12.797824083012529
+    },
+    {
+      "demo": "demo_18",
+      "rollout_idx": 1,
+      "final_reward": 2.382269862206575,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.43687245802721
+    },
+    {
+      "demo": "demo_18",
+      "rollout_idx": 2,
+      "final_reward": 0.30379181925162146,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.184312416997273
+    },
+    {
+      "demo": "demo_19",
+      "rollout_idx": 0,
+      "final_reward": 1.9744762570397065,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 16.12801783301984
+    },
+    {
+      "demo": "demo_19",
+      "rollout_idx": 1,
+      "final_reward": 0.41058008633774273,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 20.100709791004192
+    },
+    {
+      "demo": "demo_19",
+      "rollout_idx": 2,
+      "final_reward": 2.2318602521764177,
+      "success": false,
+      "n_steps": 240,
+      "n_chunks": 5,
+      "elapsed_s": 18.279459792014677
+    }
+  ]
+}

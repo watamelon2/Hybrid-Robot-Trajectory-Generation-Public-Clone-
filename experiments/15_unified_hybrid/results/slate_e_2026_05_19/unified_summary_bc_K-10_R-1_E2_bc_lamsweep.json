@@ -1,0 +1,48 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.5,
+      "n_total": 60,
+      "n_success": 13,
+      "success_rate": 0.21666666666666667,
+      "wall_s": 1638.216079750011,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_e_2026_05_19/unified_bc_lam-0.5_K-10_R-1_E2_bc_lamsweep.json"
+    },
+    {
+      "lambda_prior": 1.0,
+      "n_total": 60,
+      "n_success": 17,
+      "success_rate": 0.2833333333333333,
+      "wall_s": 1638.104211375001,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_e_2026_05_19/unified_bc_lam-1.0_K-10_R-1_E2_bc_lamsweep.json"
+    },
+    {
+      "lambda_prior": 2.0,
+      "n_total": 60,
+      "n_success": 22,
+      "success_rate": 0.36666666666666664,
+      "wall_s": 1623.5882629170083,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_e_2026_05_19/unified_bc_lam-2.0_K-10_R-1_E2_bc_lamsweep.json"
+    },
+    {
+      "lambda_prior": 10.0,
+      "n_total": 60,
+      "n_success": 23,
+      "success_rate": 0.38333333333333336,
+      "wall_s": 1628.406175207987,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_e_2026_05_19/unified_bc_lam-10.0_K-10_R-1_E2_bc_lamsweep.json"
+    },
+    {
+      "lambda_prior": 20.0,
+      "n_total": 60,
+      "n_success": 17,
+      "success_rate": 0.2833333333333333,
+      "wall_s": 1641.4811807909864,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/slate_e_2026_05_19/unified_bc_lam-20.0_K-10_R-1_E2_bc_lamsweep.json"
+    }
+  ]
+}

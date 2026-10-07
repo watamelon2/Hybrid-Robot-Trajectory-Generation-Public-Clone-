@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow_pull",
+  "K": 3,
+  "R": 29,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 3,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 506.5138811250217,
+      "output": "experiments/17_dp_hybrid/results/abl_D5_lam1_K3_smax10/unified_flow_pull_lam-1.0_K-3_R-29_D5_lam1_K3_smax10.json"
+    }
+  ]
+}

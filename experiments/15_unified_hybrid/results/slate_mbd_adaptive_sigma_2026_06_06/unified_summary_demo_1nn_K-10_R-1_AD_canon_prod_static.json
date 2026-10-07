@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 6,
+      "success_rate": 0.2,
+      "wall_s": 712.6076979999998,
+      "output": "/tmp/HRTG-wt-mbdexp/experiments/15_unified_hybrid/results/slate_mbd_adaptive_sigma_2026_06_06/unified_demo_1nn_lam-1.0_K-10_R-1_AD_canon_prod_static.json"
+    }
+  ]
+}

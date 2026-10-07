@@ -1,0 +1,132 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "bc",
+  "prior_checkpoint": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/03_bc_baseline/results/policy.pt",
+  "lambda_prior": 5.0,
+  "warm_start": true,
+  "mpc_replans": 0,
+  "mpc_chunk_steps": 120,
+  "deterministic_prior_warmstart": true,
+  "n_demos": 1,
+  "n_rollouts": 1,
+  "n_test_rollouts": 0,
+  "test_start_seed": 100000,
+  "train_n": 1,
+  "train_n_succ": 0,
+  "train_succ_rate": 0.0,
+  "test_n": 0,
+  "test_n_succ": 0,
+  "test_succ_rate": 0.0,
+  "n_total": 1,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "params": {
+    "H": 120,
+    "M": 16,
+    "K": 5,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.25,
+    "sigma_min": 0.05,
+    "lambda_schedule": "constant",
+    "score_mode": "learned",
+    "warmstart_noise_sigma": 0.0,
+    "retrieval_beta": 1.0,
+    "action_history_len": 0,
+    "contrastive_encoder_path": null,
+    "task": "can",
+    "prior_bank_size": 0,
+    "prior_bank_dataset": null,
+    "prior_bank_task": null,
+    "goal_perturbation_xyz": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mass_scale": 1.0,
+    "friction_scale": 1.0,
+    "combine_mode": "score",
+    "temper_p": 0.0,
+    "sigma_demo": 0.25,
+    "demo_sigma_mode": "const",
+    "demo_sigma_adapt_beta": 1.0,
+    "sigma_schedule": "decay",
+    "log_gate_diagnostic": false,
+    "save_step_trace": false,
+    "raw_sparse_reward": false,
+    "demo_phase_reward": false,
+    "demo_phase_scale": 10.0
+  },
+  "seed": 0,
+  "wall_s": 91.97878936305642,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 5.0,
+      "final_reward": 8.304506452119112,
+      "success": false,
+      "plan_elapsed_s": 91.96481356397271,
+      "total_elapsed_s": 91.97847340302542,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 1,
+          "steps_executed": 120,
+          "chunk_reward": 8.304506452119112,
+          "plan_elapsed_s": 89.66523120598868,
+          "init_best_cost": -7.2727707241490025,
+          "final_best_cost": -8.824597927464191,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -7.2727707241490025,
+              "mean_cost": -5.053712273534923,
+              "ess": 3.739164659836107,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 1,
+              "sigma": 0.22071067988872528,
+              "best_cost": -7.828950553689038,
+              "mean_cost": -5.401922411015928,
+              "ess": 1.600599971048671,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 2,
+              "sigma": 0.14999999105930328,
+              "best_cost": -7.861977950007397,
+              "mean_cost": -6.351774458818413,
+              "ess": 5.386512317862222,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 3,
+              "sigma": 0.07928932458162308,
+              "best_cost": -8.665136759669775,
+              "mean_cost": -7.918648988412345,
+              "ess": 11.74632834169731,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            },
+            {
+              "iter": 4,
+              "sigma": 0.05000000074505806,
+              "best_cost": -8.824597927464191,
+              "mean_cost": -8.347045228821766,
+              "ess": 12.326201357061016,
+              "gate_frac": NaN,
+              "ldem_minus_lmod": NaN
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "validation_root": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/vast_safe_validation_2026_06_10",
+  "dp_root": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/vast_safe_dp_2026_06_10",
+  "static_root": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/offload_chain_2026_06_10",
+  "dp_jobs": 140,
+  "static_jobs": 12,
+  "dp_max_total": 36,
+  "dp_max_per_gpu": 18,
+  "static_max_total": 4
+}

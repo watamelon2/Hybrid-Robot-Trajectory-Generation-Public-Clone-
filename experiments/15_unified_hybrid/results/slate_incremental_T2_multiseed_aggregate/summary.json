@@ -1,0 +1,172 @@
+{
+  "T2_0": {
+    "label": "T2.0  hybrid + canonical 200 bank @ mass=1.3",
+    "prior": "demo_1nn",
+    "per_seed": {
+      "0": {
+        "n_success": 21,
+        "n_total": 30,
+        "rate": 0.7,
+        "wall_s": 824.3274778750492,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_demo_1nn_K-10_R-1_T2_0_hybrid_canonical_bank_mass1p3.json"
+      },
+      "1": {
+        "n_success": 21,
+        "n_total": 30,
+        "rate": 0.7,
+        "wall_s": 783.3682487500009,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_1/unified_summary_demo_1nn_K-10_R-1_T2_0_hybrid_canonical_bank_mass1p3_seed1.json"
+      },
+      "2": {
+        "n_success": 22,
+        "n_total": 30,
+        "rate": 0.7333333333333333,
+        "wall_s": 775.5051200410016,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_2/unified_summary_demo_1nn_K-10_R-1_T2_0_hybrid_canonical_bank_mass1p3_seed2.json"
+      }
+    },
+    "pooled": {
+      "n_success": 64,
+      "n_total": 90,
+      "rate": 0.7111111111111111,
+      "wilson_lo": 0.6103576218490169,
+      "wilson_hi": 0.7945800603729402
+    }
+  },
+  "T2_1": {
+    "label": "T2.1  hybrid + 200 + 5 mass=1.3 demos (headline)",
+    "prior": "demo_1nn",
+    "per_seed": {
+      "0": {
+        "n_success": 22,
+        "n_total": 30,
+        "rate": 0.7333333333333333,
+        "wall_s": 849.4967049999395,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_5demo_adapted_mass1p3.json"
+      },
+      "1": {
+        "n_success": 19,
+        "n_total": 30,
+        "rate": 0.6333333333333333,
+        "wall_s": 787.2640579580002,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_1/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_5demo_adapted_mass1p3_seed1.json"
+      },
+      "2": {
+        "n_success": 20,
+        "n_total": 30,
+        "rate": 0.6666666666666666,
+        "wall_s": 781.3189587920024,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_2/unified_summary_demo_1nn_K-10_R-1_T2_1_hybrid_5demo_adapted_mass1p3_seed2.json"
+      }
+    },
+    "pooled": {
+      "n_success": 61,
+      "n_total": 90,
+      "rate": 0.6777777777777778,
+      "wilson_lo": 0.5756664407220551,
+      "wilson_hi": 0.765333712728014
+    }
+  },
+  "T2_2": {
+    "label": "T2.2  BC unadapted @ mass=1.3",
+    "prior": "bc",
+    "per_seed": {
+      "0": {
+        "n_success": 9,
+        "n_total": 30,
+        "rate": 0.3,
+        "wall_s": 853.2606408749707,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_bc_K-10_R-1_T2_2_bc_unadapted_mass1p3.json"
+      },
+      "1": {
+        "n_success": 9,
+        "n_total": 30,
+        "rate": 0.3,
+        "wall_s": 799.9514230419991,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_1/unified_summary_bc_K-10_R-1_T2_2_bc_unadapted_mass1p3_seed1.json"
+      },
+      "2": {
+        "n_success": 9,
+        "n_total": 30,
+        "rate": 0.3,
+        "wall_s": 794.3658875000001,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_2/unified_summary_bc_K-10_R-1_T2_2_bc_unadapted_mass1p3_seed2.json"
+      }
+    },
+    "pooled": {
+      "n_success": 27,
+      "n_total": 90,
+      "rate": 0.3,
+      "wilson_lo": 0.2151077805125653,
+      "wilson_hi": 0.4012670468561069
+    }
+  },
+  "T2_3": {
+    "label": "T2.3  BC retrained on 205 mass=1.3 demos",
+    "prior": "bc",
+    "per_seed": {
+      "0": {
+        "n_success": 0,
+        "n_total": 30,
+        "rate": 0.0,
+        "wall_s": 917.837147083017,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_bc_retrain_2026_05_26/unified_summary_bc_K-10_R-1_T2_3_bc_retrained_mass1p3.json"
+      },
+      "1": {
+        "n_success": 4,
+        "n_total": 30,
+        "rate": 0.13333333333333333,
+        "wall_s": 765.8571745420013,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_1/unified_summary_bc_K-10_R-1_T2_3_bc_retrained_205demos_mass1p3_seed1.json"
+      },
+      "2": {
+        "n_success": 2,
+        "n_total": 30,
+        "rate": 0.06666666666666667,
+        "wall_s": 740.7916922910008,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_2/unified_summary_bc_K-10_R-1_T2_3_bc_retrained_205demos_mass1p3_seed2.json"
+      }
+    },
+    "pooled": {
+      "n_success": 6,
+      "n_total": 90,
+      "rate": 0.06666666666666667,
+      "wilson_lo": 0.030909506550389258,
+      "wilson_hi": 0.1379026194150674
+    }
+  },
+  "T2_4": {
+    "label": "T2.4  hybrid + 200 + 20 mass=1.3 demos (saturation)",
+    "prior": "demo_1nn",
+    "per_seed": {
+      "0": {
+        "n_success": 21,
+        "n_total": 30,
+        "rate": 0.7,
+        "wall_s": 843.6898203749442,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_2026_05_26/unified_summary_demo_1nn_K-10_R-1_T2_4_hybrid_20demo_saturation_mass1p3.json"
+      },
+      "1": {
+        "n_success": 22,
+        "n_total": 30,
+        "rate": 0.7333333333333333,
+        "wall_s": 778.3061692919982,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_1/unified_summary_demo_1nn_K-10_R-1_T2_4_hybrid_20demo_saturation_mass1p3_seed1.json"
+      },
+      "2": {
+        "n_success": 21,
+        "n_total": 30,
+        "rate": 0.7,
+        "wall_s": 754.0523362919994,
+        "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_multiseed_2026_05_28/seed_2/unified_summary_demo_1nn_K-10_R-1_T2_4_hybrid_20demo_saturation_mass1p3_seed2.json"
+      }
+    },
+    "pooled": {
+      "n_success": 64,
+      "n_total": 90,
+      "rate": 0.7111111111111111,
+      "wilson_lo": 0.6103576218490169,
+      "wilson_hi": 0.7945800603729402
+    }
+  }
+}

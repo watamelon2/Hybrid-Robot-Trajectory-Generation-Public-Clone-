@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "slate": "Slate D",
+    "started_local": "2026-05-18T02:23:03-07:00",
+    "finished_local": "2026-05-18T07:47:20-07:00",
+    "wall_h": 5.40,
+    "branch": "feat/zero-train-priors",
+    "launcher": "experiments/15_unified_hybrid/slate_d_2026_05_18.sh",
+    "all_cells_n": 11,
+    "all_cells_done": 11,
+    "common_config": {
+      "task": "can",
+      "K": 10, "M": 16, "H": 120,
+      "mpc_replans": 1, "mpc_chunk_steps": 60,
+      "sigma_min": 0.01,
+      "n_demos": 20, "n_rollouts": 3, "n_workers": 10
+    }
+  },
+  "D1_bc_lam0_pool": {
+    "what": "BC, lambda_prior=0 (warm-start-only), K=10 R=1 sigma_max=0.25, 4-seed pool",
+    "per_seed": {
+      "0": {"n_success": 7,  "n_total": 60, "source": "warmstart_ablation_2026_05_16/C1"},
+      "1": {"n_success": 11, "n_total": 60, "source": "D1_bc_lam0_seed1"},
+      "2": {"n_success": 10, "n_total": 60, "source": "D1_bc_lam0_seed2"},
+      "3": {"n_success": 8,  "n_total": 60, "source": "D1_bc_lam0_seed3"}
+    },
+    "pool": {"n_success": 36, "n_total": 240, "rate": 0.150, "wilson_ci95": [0.110, 0.201]},
+    "comparison": {
+      "demo_1nn_lam0_pool_ref": "narrative_followup_2026_05_17/AGGREGATE.json: 28/240 = 11.7 %, CI [8.2, 16.3]",
+      "CI_overlap_lo_hi": [0.110, 0.163],
+      "verdict": "BC and demo_1nn lam=0 pools have overlapping 95 % CIs (BC pool centre 15.0 % vs 1-NN pool centre 11.7 %; CIs overlap by ~5 pp). The 'BC and 1-NN warm-starts are indistinguishable at lam=0' claim is substantiated, with BC running ~3 pp higher on average."
+    }
+  },
+  "D2_1nn_lamsweep_seed0": {
+    "what": "demo_1nn at K=10 R=1 sigma_max=0.25, lambda sweep at seed=0",
+    "by_lambda": {
+      "0":   {"n_success":  7, "n_total": 60, "rate": 0.117, "source": "narrative_followup_2026_05_17 Slate 1 seed=0"},
+      "0.5": {"n_success": 19, "n_total": 60, "rate": 0.317, "source": "D2"},
+      "1":   {"n_success": 45, "n_total": 60, "rate": 0.750, "source": "D2"},
+      "2":   {"n_success": 39, "n_total": 60, "rate": 0.650, "source": "D2"},
+      "5":   {"n_success": 38, "n_total": 60, "rate": 0.633, "source": "narrative_followup_2026_05_17 Slate 1 seed=0"},
+      "10":  {"n_success": 39, "n_total": 60, "rate": 0.650, "source": "D2"},
+      "20":  {"n_success": 38, "n_total": 60, "rate": 0.633, "source": "D2"}
+    },
+    "peak": {"lambda": 1.0, "n_success": 45, "n_total": 60, "rate": 0.750, "wilson_ci95": [0.628, 0.840]},
+    "verdict": "Sharp peak at lambda=1 (75.0 %) followed by a broad plateau at 63-65 % for lambda in [2, 20]. The previous canonical lambda=5 (from exp 07's BC sweep) was sub-optimal for demo_1nn; the per-step pull benefits from a *weaker* score-bridge when the target is in-distribution. Single seed -- warrants a 4-seed pool follow-up to put a CI on the 75.0 %."
+  },
+  "D3_1nn_sigma_tail_seed0": {
+    "what": "demo_1nn at K=10 R=1 lambda=5, sigma_max tail extension at seed=0",
+    "by_sigma": {
+      "0.05": {"n_success": 39, "n_total": 60, "rate": 0.650, "source": "narrative_followup_2026_05_17 Slate 3"},
+      "0.10": {"n_success": 39, "n_total": 60, "rate": 0.650, "source": "narrative_followup_2026_05_17 Slate 3"},
+      "0.15": {"n_success": 39, "n_total": 60, "rate": 0.650, "source": "narrative_followup_2026_05_17 Slate 3"},
+      "0.25": {"n_success": 38, "n_total": 60, "rate": 0.633, "source": "narrative_followup_2026_05_17 Slate 1 seed=0"},
+      "0.40": {"n_success": 40, "n_total": 60, "rate": 0.667, "source": "narrative_followup_2026_05_17 Slate 3"},
+      "0.50": {"n_success": 39, "n_total": 60, "rate": 0.650, "source": "D3"},
+      "0.75": {"n_success": 40, "n_total": 60, "rate": 0.667, "source": "D3"},
+      "1.00": {"n_success": 41, "n_total": 60, "rate": 0.683, "source": "D3"}
+    },
+    "verdict": "No cliff found. Full sigma sweep over [0.05, 1.00] (a 20x range) stays in [63.3 %, 68.3 %]. The success rate even drifts very slightly *upward* with sigma -- the bridge appears to benefit marginally from more aggressive noise when the target is in-distribution. The sigma-invariance claim is now substantiated across the full tested range, and the BC contrast becomes even sharper: BC drops from 40 % at sigma=0.03 to 0 % at sigma=0.40; 1-NN holds at ~66 % out to sigma=1.00."
+  }
+}

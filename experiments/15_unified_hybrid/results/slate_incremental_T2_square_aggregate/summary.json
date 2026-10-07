@@ -1,0 +1,50 @@
+{
+  "T2_0_sq": {
+    "label": "T2.0_square (canonical bank, slate bug: no --prior-bank-dataset passed)",
+    "tag": "T2_0_square_hybrid_canonical_bank_mass1p3",
+    "n_success": 1,
+    "n_total": 30,
+    "rate": 0.03333333333333333,
+    "wall_s": 1124.8196443749475,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_square_hybrid_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_0_square_hybrid_canonical_bank_mass1p3.json",
+    "rollout_params": {
+      "prior_bank_dataset": null,
+      "prior_bank_size": 0,
+      "prior_bank_task": null,
+      "task": "square",
+      "mass_scale": 1.3
+    }
+  },
+  "T2_1_sq": {
+    "label": "T2.1_square (5 perturbed mass=1.3 Square demos)",
+    "tag": "T2_1_square_hybrid_5demo_adapted_mass1p3",
+    "n_success": 1,
+    "n_total": 30,
+    "rate": 0.03333333333333333,
+    "wall_s": 1125.3479079160024,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_square_hybrid_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_1_square_hybrid_5demo_adapted_mass1p3.json",
+    "rollout_params": {
+      "prior_bank_dataset": "/Users/aaronwen/Documents/HRTG/HRTG-shared-data/square_mass1p3_205demos.hdf5",
+      "prior_bank_size": 0,
+      "prior_bank_task": "square",
+      "task": "square",
+      "mass_scale": 1.3
+    }
+  },
+  "T2_4_sq": {
+    "label": "T2.4_square (20 perturbed mass=1.3 Square demos, saturation)",
+    "tag": "T2_4_square_hybrid_20demo_saturation_mass1p3",
+    "n_success": 0,
+    "n_total": 30,
+    "rate": 0.0,
+    "wall_s": 1147.9291889169835,
+    "source": "experiments/15_unified_hybrid/results/slate_incremental_T2_square_hybrid_2026_05_28/unified_summary_demo_1nn_K-10_R-1_T2_4_square_hybrid_20demo_saturation_mass1p3.json",
+    "rollout_params": {
+      "prior_bank_dataset": "/Users/aaronwen/Documents/HRTG/HRTG-shared-data/square_mass1p3_220demos.hdf5",
+      "prior_bank_size": 0,
+      "prior_bank_task": "square",
+      "task": "square",
+      "mass_scale": 1.3
+    }
+  }
+}

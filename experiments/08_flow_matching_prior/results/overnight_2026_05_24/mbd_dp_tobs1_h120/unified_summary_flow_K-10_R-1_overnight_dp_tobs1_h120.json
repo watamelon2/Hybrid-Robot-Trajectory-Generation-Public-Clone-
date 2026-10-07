@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "flow",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 4,
+      "success_rate": 0.13333333333333333,
+      "wall_s": 4051.6300947080017,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/overnight_2026_05_24/mbd_dp_tobs1_h120/unified_flow_lam-1.0_K-10_R-1_overnight_dp_tobs1_h120.json"
+    }
+  ]
+}

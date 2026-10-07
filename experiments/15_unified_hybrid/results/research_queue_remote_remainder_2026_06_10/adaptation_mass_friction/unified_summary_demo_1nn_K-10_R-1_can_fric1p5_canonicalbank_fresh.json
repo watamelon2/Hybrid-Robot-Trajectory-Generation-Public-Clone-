@@ -1,0 +1,16 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 1.0,
+      "n_total": 30,
+      "n_success": 10,
+      "success_rate": 0.3333333333333333,
+      "wall_s": 8241.819473376963,
+      "output": "/workspace/hrtg-cloud/HRTG-square-dp-followup/experiments/15_unified_hybrid/results/research_queue_remote_remainder_2026_06_10/adaptation_mass_friction/unified_demo_1nn_lam-1.0_K-10_R-1_can_fric1p5_canonicalbank_fresh.json"
+    }
+  ]
+}

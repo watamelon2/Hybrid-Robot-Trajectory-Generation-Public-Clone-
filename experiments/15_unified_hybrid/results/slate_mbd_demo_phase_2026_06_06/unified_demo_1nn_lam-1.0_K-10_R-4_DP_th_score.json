@@ -1,0 +1,5282 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_1nn",
+  "prior_checkpoint": "<none:demo_1nn>",
+  "lambda_prior": 1.0,
+  "warm_start": true,
+  "mpc_replans": 4,
+  "mpc_chunk_steps": 75,
+  "deterministic_prior_warmstart": true,
+  "n_demos": 5,
+  "n_rollouts": 2,
+  "n_test_rollouts": 0,
+  "test_start_seed": 100000,
+  "train_n": 10,
+  "train_n_succ": 0,
+  "train_succ_rate": 0.0,
+  "test_n": 0,
+  "test_n_succ": 0,
+  "test_succ_rate": 0.0,
+  "n_total": 10,
+  "n_success": 0,
+  "success_rate": 0.0,
+  "params": {
+    "H": 300,
+    "M": 16,
+    "K": 10,
+    "lambda_softmax": 0.5,
+    "sigma_max": 0.25,
+    "sigma_min": 0.05,
+    "lambda_schedule": "constant",
+    "score_mode": "learned",
+    "warmstart_noise_sigma": 0.0,
+    "retrieval_beta": 1.0,
+    "action_history_len": 0,
+    "contrastive_encoder_path": null,
+    "task": "tool_hang",
+    "prior_bank_size": 0,
+    "prior_bank_dataset": null,
+    "prior_bank_task": null,
+    "goal_perturbation_xyz": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mass_scale": 1.0,
+    "friction_scale": 1.0,
+    "combine_mode": "score",
+    "temper_p": 0.0,
+    "sigma_demo": 0.25,
+    "demo_sigma_mode": "const",
+    "demo_sigma_adapt_beta": 1.0,
+    "sigma_schedule": "decay",
+    "log_gate_diagnostic": true,
+    "raw_sparse_reward": false,
+    "demo_phase_reward": true,
+    "demo_phase_scale": 10.0
+  },
+  "seed": 0,
+  "wall_s": 1385.4771288330012,
+  "per_rollout": [
+    {
+      "demo": "demo_0",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 928.8830995501485,
+      "success": false,
+      "plan_elapsed_s": 139.778550791998,
+      "total_elapsed_s": 139.8539667920013,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 40.92343441559933,
+          "plan_elapsed_s": 28.478518292002263,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -968.5253486633301
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -915.1540603637695
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -785.2953224182129
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -629.2056159973145
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.4521713256836
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.96240615844727
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.4063196182251
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.63172483444214
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.6675033569336
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.82050848007202
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 144.99073900282383,
+          "plan_elapsed_s": 27.908056125001167,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -960.4168739318848
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -924.9556846618652
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -795.8709602355957
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -618.3186416625977
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -444.5307807922363
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.31558418273926
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.01850128173828
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.68275451660156
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -82.65439462661743
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -74.20306205749512
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 236.48011207580566,
+          "plan_elapsed_s": 27.371607249999215,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -966.7116050720215
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -924.6083221435547
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -788.6937065124512
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -631.3925704956055
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -447.0540599822998
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.3932514190674
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.59245491027832
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.04752826690674
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.3735761642456
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.14727544784546
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 264.0791729092598,
+          "plan_elapsed_s": 26.90338625000004,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -956.876049041748
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -916.8819236755371
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -791.9192657470703
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -630.6396675109863
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.84646224975586
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.87241554260254
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -181.75925159454346
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.7227144241333
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -81.4505467414856
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.8810772895813
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 242.40964114665985,
+          "plan_elapsed_s": 27.195468417001393,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.4478416442871
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -921.7931976318359
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -796.7176475524902
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -624.231876373291
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -443.0114631652832
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.35000228881836
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -176.9306240081787
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.13395023345947
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.25883531570435
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.74499988555908
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_0",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1074.1542268556077,
+      "success": false,
+      "plan_elapsed_s": 141.96474087499882,
+      "total_elapsed_s": 141.9892234580002,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 41.72619797405787,
+          "plan_elapsed_s": 29.032284249999066,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -955.674560546875
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -914.8083877563477
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -800.8226432800293
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -634.5016326904297
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -443.44469451904297
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.49202156066895
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.25171566009521
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.59589862823486
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.60041046142578
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -70.38968896865845
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 121.1834691464901,
+          "plan_elapsed_s": 28.093541082998854,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.5629615783691
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -934.8856430053711
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -797.811092376709
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -620.2417640686035
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.9303092956543
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -295.2058963775635
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -182.0014362335205
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.69099140167236
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.56479167938232
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.25430536270142
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 206.29411652684212,
+          "plan_elapsed_s": 27.864001291000022,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -975.7629852294922
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -929.9872703552246
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -808.5785179138184
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -631.5348587036133
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -450.31922149658203
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -289.7307434082031
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.90542030334473
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.32773876190186
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.04926824569702
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.19745826721191
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 310.2794098854065,
+          "plan_elapsed_s": 27.4781202080012,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -960.9536628723145
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -926.816764831543
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -791.5565452575684
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -623.061222076416
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -443.39575576782227
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.81683349609375
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -182.15622806549072
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -114.251305103302
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -81.22313451766968
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.28572654724121
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 394.6710333228111,
+          "plan_elapsed_s": 27.534308375001274,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -972.8585968017578
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -907.5448265075684
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -799.057933807373
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -619.6331634521484
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -441.27392387390137
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -289.97142219543457
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.79923629760742
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.68018054962158
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.53534126281738
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.74218273162842
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1569.2645506106783,
+      "success": false,
+      "plan_elapsed_s": 137.5127720419987,
+      "total_elapsed_s": 137.53770754200013,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 46.455121143953875,
+          "plan_elapsed_s": 29.040783707998344,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -977.1935768127441
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -903.6265754699707
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -799.7732315063477
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -632.2161827087402
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -440.67185974121094
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -287.40508460998535
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -181.4117078781128
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.8704743385315
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.34200477600098
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.77610492706299
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 138.59477415680885,
+          "plan_elapsed_s": 28.16160362500159,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -962.4251441955566
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -920.6846771240234
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -803.912654876709
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -626.3794021606445
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.5122814178467
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.55519104003906
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.34709644317627
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.87310934066772
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.82329750061035
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.07511043548584
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 233.44771549105644,
+          "plan_elapsed_s": 26.839307957998244,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.2189483642578
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -917.821346282959
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -801.1735687255859
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -616.0383453369141
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -454.3077812194824
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -294.956579208374
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.3349733352661
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.9488172531128
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.22818183898926
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.03480958938599
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 496.64929300546646,
+          "plan_elapsed_s": 25.968181208001624,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -978.513988494873
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -913.4327697753906
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -787.7844085693359
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -623.3329162597656
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -449.17516136169434
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.1858825683594
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.67984580993652
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.5979061126709
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.32249784469604
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.71499586105347
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 654.1176468133926,
+          "plan_elapsed_s": 25.588594042001205,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -959.4597587585449
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -915.2335014343262
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -790.7677917480469
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -622.0463447570801
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -446.8966941833496
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -288.38164138793945
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.2142677307129
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.51824951171875
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.23204183578491
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.38071489334106
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_1",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1275.952617060393,
+      "success": false,
+      "plan_elapsed_s": 139.6376042919983,
+      "total_elapsed_s": 139.66295004100175,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 46.63888981565833,
+          "plan_elapsed_s": 29.248095666000154,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.9663429260254
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -915.404167175293
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -791.3590888977051
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -629.0995178222656
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -444.2346878051758
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.41394996643066
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.06275749206543
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.90378141403198
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.13606262207031
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.42265367507935
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 138.0555584281683,
+          "plan_elapsed_s": 27.88559079100014,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -958.1815605163574
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -928.0181617736816
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -802.8898735046387
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -630.8368530273438
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.7306728363037
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.3003807067871
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.1661958694458
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.99036455154419
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.54139041900635
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.59159469604492
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 234.2810493707657,
+          "plan_elapsed_s": 27.176305457996932,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.7873497009277
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -926.173942565918
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -799.1562080383301
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -614.0279388427734
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.56120109558105
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.2524929046631
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.08624172210693
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.28796052932739
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.8519082069397
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.37370252609253
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 314.82026010751724,
+          "plan_elapsed_s": 26.65308337500028,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -975.1901168823242
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -919.4523429870605
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -801.4184646606445
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -630.9216003417969
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -446.93766593933105
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.68774604797363
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -181.96256923675537
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -115.04541254043579
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.98297262191772
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.72179746627808
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 542.1568593382835,
+          "plan_elapsed_s": 26.756640083000093,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.3234481811523
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -906.4686965942383
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -798.1517868041992
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -615.0970191955566
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -442.49587059020996
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.78782081604004
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.1725149154663
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.76018905639648
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.66770458221436
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.09747219085693
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 930.408239858225,
+      "success": false,
+      "plan_elapsed_s": 148.43758058399908,
+      "total_elapsed_s": 148.46179454199955,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 38.302589328959584,
+          "plan_elapsed_s": 29.565437290999398,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -971.8048095703125
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -915.779052734375
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -796.1435317993164
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -619.3211135864258
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -450.1656684875488
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -288.15894317626953
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -182.16412925720215
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.74473285675049
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.02333927154541
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.44601154327393
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 119.45652239024639,
+          "plan_elapsed_s": 29.41310662500109,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -980.4349365234375
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -930.1473770141602
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -798.7539024353027
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -623.8074760437012
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -451.7002601623535
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.74707412719727
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.88013744354248
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.83857345581055
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.33557796478271
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -70.80084800720215
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 216.1413049697876,
+          "plan_elapsed_s": 29.744023041999753,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -966.6198806762695
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -928.7791023254395
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -789.3763999938965
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -630.2858772277832
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -453.60437393188477
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.7646255493164
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.97082233428955
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.22494602203369
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -78.99496507644653
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -70.89788341522217
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 234.60597693920135,
+          "plan_elapsed_s": 29.53055362500163,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -987.0800399780273
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -918.5968132019043
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -805.1874351501465
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -627.8094024658203
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -447.8759346008301
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -294.020788192749
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -181.12091541290283
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.48943758010864
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -78.97361755371094
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -70.84804248809814
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 321.90184623003006,
+          "plan_elapsed_s": 28.22639129199888,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -977.152400970459
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -936.686954498291
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -797.9712715148926
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -622.5083923339844
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -452.546422958374
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -287.835599899292
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.7158432006836
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.2189679145813
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.08159446716309
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.5687460899353
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_2",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1576.1413349583745,
+      "success": false,
+      "plan_elapsed_s": 134.0109263330014,
+      "total_elapsed_s": 134.03532283299865,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 41.63002584129572,
+          "plan_elapsed_s": 27.8831902919992,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -955.9010162353516
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -919.5581398010254
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -800.177806854248
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -618.0940322875977
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -454.3342399597168
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.0982551574707
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -177.90623950958252
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.41177558898926
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -78.66812896728516
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -70.56393718719482
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 171.7039592564106,
+          "plan_elapsed_s": 26.87517066700093,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -975.9890518188477
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -934.0651168823242
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -795.0144729614258
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -620.7815093994141
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.2523937225342
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.8520088195801
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.085693359375
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -114.68056201934814
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -81.12143516540527
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -73.92532730102539
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 257.0275887846947,
+          "plan_elapsed_s": 26.109526790998643,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -968.228515625
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -918.8023567199707
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -808.2939605712891
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -620.4825668334961
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -442.49958992004395
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.9534969329834
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.93046760559082
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.105384349823
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.79689931869507
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.7284140586853
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 507.11962938308716,
+          "plan_elapsed_s": 25.286261958997784,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -973.6000061035156
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -926.6520004272461
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -795.1962089538574
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -620.7738571166992
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -442.3488464355469
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.8198871612549
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -182.40957355499268
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.96575355529785
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.08180856704712
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -73.00825691223145
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 598.6601316928864,
+          "plan_elapsed_s": 25.971147416999884,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -964.2476692199707
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -921.1430053710938
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -794.4110794067383
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -616.3035736083984
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -441.5124912261963
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -294.9088821411133
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.36702060699463
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -113.10455465316772
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -81.60750389099121
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -73.92065191268921
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1013.7192774971481,
+      "success": false,
+      "plan_elapsed_s": 135.94347158299934,
+      "total_elapsed_s": 135.9659395000017,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 49.86230623326264,
+          "plan_elapsed_s": 27.403214833000675,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -952.3381004333496
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -917.6890335083008
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -800.1039695739746
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -621.9572639465332
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -444.88522720336914
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -289.21797370910645
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.10929203033447
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.59276008605957
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.06644201278687
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.05819034576416
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 147.2633397579193,
+          "plan_elapsed_s": 27.196430040999985,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -977.2497062683105
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -929.2811851501465
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -797.8636932373047
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -625.9022483825684
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -453.4171619415283
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.1622123718262
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.37569904327393
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.49395561218262
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -78.57873725891113
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -70.77876949310303
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 228.1067168712616,
+          "plan_elapsed_s": 26.923944457998005,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -977.606258392334
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -925.7168846130371
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -792.8471832275391
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -628.8114395141602
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -443.0942859649658
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -294.3108654022217
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -182.7007007598877
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.12519931793213
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.32958269119263
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.85115671157837
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 355.8347663283348,
+          "plan_elapsed_s": 26.255287833002512,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -977.8890762329102
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -929.6132698059082
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -806.7208938598633
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -626.7629852294922
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -444.126989364624
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.7541103363037
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.97160530090332
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.9942078590393
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.71684646606445
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.97166967391968
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 232.65214830636978,
+          "plan_elapsed_s": 26.278373417000694,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -961.8640213012695
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -923.5524978637695
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -799.2425193786621
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -627.2743072509766
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -442.67027282714844
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -289.53029441833496
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.14942455291748
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.71445941925049
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -81.5650954246521
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.37707138061523
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_3",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1218.923257010756,
+      "success": false,
+      "plan_elapsed_s": 140.88295529199968,
+      "total_elapsed_s": 140.90624054100044,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 46.60854386049323,
+          "plan_elapsed_s": 27.64425283300079,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -965.2342987060547
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -928.6033668518066
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -804.3831977844238
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -623.6477432250977
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -442.930456161499
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.1353569030762
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -179.36576080322266
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -110.4732027053833
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.45927619934082
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.07745695114136
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 145.69707408547401,
+          "plan_elapsed_s": 27.07217241699982,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -957.8971557617188
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -922.9723815917969
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -796.8705635070801
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -626.6651573181152
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.97974014282227
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.43381690979004
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.9327268600464
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.88217210769653
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -81.0579605102539
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.02373456954956
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 251.39414757490158,
+          "plan_elapsed_s": 26.430818000000727,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -982.1783485412598
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -925.0365715026855
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -790.677562713623
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -622.7252655029297
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -444.7396240234375
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -287.1092281341553
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.96483421325684
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.01083374023438
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.52114963531494
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.48602628707886
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 335.38726180791855,
+          "plan_elapsed_s": 26.48786233300052,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -964.7084045410156
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -924.579833984375
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -805.5419235229492
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -621.7808609008789
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -448.2615509033203
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.94666290283203
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.89744567871094
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.68168592453003
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -77.76969289779663
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.2423768043518
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 439.8362296819687,
+          "plan_elapsed_s": 31.239420249999966,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -972.3161163330078
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -925.1324424743652
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -796.6846809387207
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -626.2981643676758
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -445.0790958404541
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.3494758605957
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.81375789642334
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.74394464492798
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.34454393386841
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.55482959747314
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 0,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1426.4972761576064,
+      "success": false,
+      "plan_elapsed_s": 130.9662917079986,
+      "total_elapsed_s": 130.99006437499702,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 50.74410158442333,
+          "plan_elapsed_s": 27.65836612500061,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -970.9295959472656
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -919.9854583740234
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -799.6858139038086
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -625.7548942565918
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -447.3386650085449
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.93359375
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.0611972808838
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.3113522529602
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.97990226745605
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.45198678970337
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 167.20508232712746,
+          "plan_elapsed_s": 25.425574458000483,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -967.440731048584
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -914.8924560546875
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -801.5083770751953
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -623.7699356079102
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -452.9190502166748
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.3948631286621
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -177.99787616729736
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.69221925735474
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.16405582427979
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.86870241165161
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 287.45916455984116,
+          "plan_elapsed_s": 25.68085483300092,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -969.1688957214355
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -933.4024963378906
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -803.6602630615234
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -628.5145645141602
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -450.13573837280273
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.2860679626465
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.72886085510254
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.50509214401245
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.54418897628784
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.23480749130249
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 416.8965521454811,
+          "plan_elapsed_s": 25.150047708000784,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -965.3866729736328
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -925.494457244873
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -803.1875610351562
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -632.4617347717285
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -445.8054790496826
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -290.6596508026123
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.82415008544922
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.98640775680542
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.11074590682983
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.61131238937378
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 504.19237554073334,
+          "plan_elapsed_s": 25.17445662499813,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -976.6852645874023
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -934.688533782959
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -807.7037010192871
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -622.2963485717773
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -449.3766613006592
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.8940734863281
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.11297607421875
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.06094980239868
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.95029211044312
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -72.83404588699341
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "demo": "demo_4",
+      "rollout_idx": 1,
+      "rollout_kind": "train",
+      "lambda_prior": 1.0,
+      "final_reward": 1236.8602543929592,
+      "success": false,
+      "plan_elapsed_s": 136.04841749999832,
+      "total_elapsed_s": 136.07309533399894,
+      "chunks": [
+        {
+          "chunk_idx": 0,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 50.85299460683018,
+          "plan_elapsed_s": 29.256496334000985,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -958.2678337097168
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -909.5219764709473
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -792.3326873779297
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -631.5580596923828
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -444.63199043273926
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -288.6918525695801
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -181.63477039337158
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.1652364730835
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.22277736663818
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.6708517074585
+            }
+          ]
+        },
+        {
+          "chunk_idx": 1,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 149.96370255947113,
+          "plan_elapsed_s": 27.32643045799705,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -964.6976318359375
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -919.6929931640625
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -790.1336975097656
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -633.7611274719238
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -446.95629119873047
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -291.50235748291016
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.94514846801758
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.456552028656
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -79.30150842666626
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.18855714797974
+            }
+          ]
+        },
+        {
+          "chunk_idx": 2,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 252.37749487161636,
+          "plan_elapsed_s": 25.941702416002954,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -978.0243835449219
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -913.7514381408691
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -804.5734748840332
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -624.5977058410645
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -450.4181594848633
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -292.6195812225342
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -178.41223812103271
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -112.37057304382324
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -78.6109070777893
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -71.43468427658081
+            }
+          ]
+        },
+        {
+          "chunk_idx": 3,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 366.38838678598404,
+          "plan_elapsed_s": 26.280801458000496,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -963.8131637573242
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -920.7013320922852
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -793.7168731689453
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -627.9153213500977
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -449.0320816040039
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -295.8853950500488
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -180.81178665161133
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -114.25610542297363
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -80.93182229995728
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -73.7872633934021
+            }
+          ]
+        },
+        {
+          "chunk_idx": 4,
+          "n_chunks": 5,
+          "steps_executed": 75,
+          "chunk_reward": 417.27767556905746,
+          "plan_elapsed_s": 25.316480583998782,
+          "init_best_cost": -0.0,
+          "final_best_cost": -0.0,
+          "used_score_fn": true,
+          "iter_curve": [
+            {
+              "iter": 0,
+              "sigma": 0.25,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -971.2726860046387
+            },
+            {
+              "iter": 1,
+              "sigma": 0.24396926164627075,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -923.8135948181152
+            },
+            {
+              "iter": 2,
+              "sigma": 0.2266044318675995,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -804.6156044006348
+            },
+            {
+              "iter": 3,
+              "sigma": 0.20000000298023224,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -625.8549194335938
+            },
+            {
+              "iter": 4,
+              "sigma": 0.16736482083797455,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -446.0083923339844
+            },
+            {
+              "iter": 5,
+              "sigma": 0.1326351910829544,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -293.3812065124512
+            },
+            {
+              "iter": 6,
+              "sigma": 0.09999999403953552,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -175.37897968292236
+            },
+            {
+              "iter": 7,
+              "sigma": 0.07339555770158768,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -111.33121871948242
+            },
+            {
+              "iter": 8,
+              "sigma": 0.05603073909878731,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -78.66620779037476
+            },
+            {
+              "iter": 9,
+              "sigma": 0.05000000074505806,
+              "best_cost": -0.0,
+              "mean_cost": 0.0,
+              "ess": 16.0,
+              "gate_frac": 0.0,
+              "ldem_minus_lmod": -69.57541990280151
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

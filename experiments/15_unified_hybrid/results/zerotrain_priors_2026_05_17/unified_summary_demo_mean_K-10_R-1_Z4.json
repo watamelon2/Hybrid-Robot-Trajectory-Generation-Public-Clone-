@@ -1,0 +1,24 @@
+{
+  "experiment": "15_unified_hybrid/run_can",
+  "prior": "demo_mean",
+  "K": 10,
+  "R": 1,
+  "per_lambda": [
+    {
+      "lambda_prior": 0.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 1558.0121557910024,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/zerotrain_priors_2026_05_17/unified_demo_mean_lam-0.0_K-10_R-1_Z4.json"
+    },
+    {
+      "lambda_prior": 5.0,
+      "n_total": 60,
+      "n_success": 0,
+      "success_rate": 0.0,
+      "wall_s": 1563.1649882499987,
+      "output": "/Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/15_unified_hybrid/results/zerotrain_priors_2026_05_17/unified_demo_mean_lam-5.0_K-10_R-1_Z4.json"
+    }
+  ]
+}

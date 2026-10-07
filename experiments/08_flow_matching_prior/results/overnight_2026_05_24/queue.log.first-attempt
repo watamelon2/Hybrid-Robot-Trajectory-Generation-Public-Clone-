@@ -1,0 +1,91 @@
+[01:26:11] [stage-1 v6_cfm_xl] STARTING  -> /Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/v_theta_v6_unet_xl.pt
+[exp08-v6] loaded 200 demos -> 23207 chunks  X=(23207, 120, 7)  S=(23207, 46)  mean_demo_len=116.0  (0.1s)
+[exp08-v6] arch=cfm_v6  params=82,702,599  backbone=conv1d_unet  config={'obs_dim': 46, 'action_dim': 7, 'horizon': 120, 'hidden': 1536, 'n_blocks': 4, 'cond_hidden': 256, 't_embed_dim': 64, 't_eps': 0.001, 'arch': 'cfm_v6', 'backbone': 'conv1d_unet'}
+[exp08-v6] dataloader: n=23207 chunks  batch_size=256  n_batches/epoch=91
+[exp08-v6] device=mps  amp=False
+[exp08-v6] grad_clip=1.0
+[exp08-v6] epoch     0/50  loss=0.6714  lr=6.00e-05  max_gn=7.70  clipped=89/91
+[exp08-v6] epoch     1/50  loss=0.1486  lr=1.20e-04  max_gn=2.28  clipped=39/91
+[exp08-v6] epoch     2/50  loss=0.1141  lr=1.80e-04  max_gn=1.65  clipped=14/91
+[exp08-v6] epoch     3/50  loss=0.1040  lr=2.40e-04  max_gn=1.61  clipped=9/91
+[exp08-v6] epoch     4/50  loss=0.0979  lr=3.00e-04  max_gn=1.23  clipped=1/91
+[exp08-v6] epoch     5/50  loss=0.0874  lr=3.00e-04  max_gn=0.79  clipped=0/91
+[exp08-v6] epoch     6/50  loss=0.0835  lr=3.00e-04  max_gn=0.72  clipped=0/91
+[exp08-v6] epoch     7/50  loss=0.0800  lr=2.99e-04  max_gn=0.63  clipped=0/91
+[exp08-v6] epoch     8/50  loss=0.0787  lr=2.97e-04  max_gn=0.79  clipped=0/91
+[exp08-v6] epoch     9/50  loss=0.0755  lr=2.94e-04  max_gn=0.61  clipped=0/91
+[exp08-v6] epoch    10/50  loss=0.0735  lr=2.91e-04  max_gn=0.56  clipped=0/91
+[exp08-v6] epoch    11/50  loss=0.0713  lr=2.87e-04  max_gn=0.51  clipped=0/91
+[exp08-v6] epoch    12/50  loss=0.0683  lr=2.82e-04  max_gn=0.48  clipped=0/91
+[exp08-v6] epoch    13/50  loss=0.0671  lr=2.77e-04  max_gn=0.48  clipped=0/91
+[exp08-v6] epoch    14/50  loss=0.0634  lr=2.71e-04  max_gn=0.46  clipped=0/91
+[exp08-v6] epoch    15/50  loss=0.0608  lr=2.65e-04  max_gn=0.44  clipped=0/91
+[exp08-v6] epoch    16/50  loss=0.0585  lr=2.58e-04  max_gn=0.59  clipped=0/91
+[exp08-v6] epoch    17/50  loss=0.0556  lr=2.50e-04  max_gn=0.46  clipped=0/91
+[exp08-v6] epoch    18/50  loss=0.0527  lr=2.42e-04  max_gn=0.49  clipped=0/91
+[exp08-v6] epoch    19/50  loss=0.0510  lr=2.34e-04  max_gn=0.45  clipped=0/91
+[exp08-v6] epoch    20/50  loss=0.0473  lr=2.25e-04  max_gn=0.41  clipped=0/91
+[exp08-v6] epoch    21/50  loss=0.0444  lr=2.16e-04  max_gn=0.38  clipped=0/91
+[exp08-v6] epoch    22/50  loss=0.0423  lr=2.06e-04  max_gn=0.38  clipped=0/91
+[exp08-v6] epoch    23/50  loss=0.0415  lr=1.96e-04  max_gn=0.52  clipped=0/91
+[exp08-v6] epoch    24/50  loss=0.0400  lr=1.86e-04  max_gn=0.50  clipped=0/91
+[exp08-v6] epoch    25/50  loss=0.0367  lr=1.76e-04  max_gn=0.40  clipped=0/91
+[exp08-v6] epoch    26/50  loss=0.0359  lr=1.66e-04  max_gn=0.35  clipped=0/91
+[exp08-v6] epoch    27/50  loss=0.0335  lr=1.55e-04  max_gn=0.29  clipped=0/91
+[exp08-v6] epoch    28/50  loss=0.0323  lr=1.45e-04  max_gn=0.38  clipped=0/91
+[exp08-v6] epoch    29/50  loss=0.0315  lr=1.34e-04  max_gn=0.31  clipped=0/91
+[exp08-v6] epoch    30/50  loss=0.0300  lr=1.24e-04  max_gn=0.39  clipped=0/91
+[exp08-v6] epoch    31/50  loss=0.0285  lr=1.14e-04  max_gn=0.45  clipped=0/91
+[exp08-v6] epoch    32/50  loss=0.0279  lr=1.04e-04  max_gn=0.30  clipped=0/91
+[exp08-v6] epoch    33/50  loss=0.0269  lr=9.38e-05  max_gn=0.41  clipped=0/91
+[exp08-v6] epoch    34/50  loss=0.0256  lr=8.42e-05  max_gn=0.36  clipped=0/91
+[exp08-v6] epoch    35/50  loss=0.0240  lr=7.50e-05  max_gn=0.29  clipped=0/91
+[exp08-v6] epoch    36/50  loss=0.0230  lr=6.61e-05  max_gn=0.41  clipped=0/91
+[exp08-v6] epoch    37/50  loss=0.0229  lr=5.77e-05  max_gn=0.40  clipped=0/91
+[exp08-v6] epoch    38/50  loss=0.0221  lr=4.96e-05  max_gn=0.39  clipped=0/91
+[exp08-v6] epoch    39/50  loss=0.0211  lr=4.21e-05  max_gn=0.44  clipped=0/91
+[exp08-v6] epoch    40/50  loss=0.0201  lr=3.51e-05  max_gn=0.41  clipped=0/91
+[exp08-v6] epoch    41/50  loss=0.0196  lr=2.86e-05  max_gn=0.27  clipped=0/91
+[exp08-v6] epoch    42/50  loss=0.0196  lr=2.28e-05  max_gn=0.58  clipped=0/91
+[exp08-v6] epoch    43/50  loss=0.0182  lr=1.76e-05  max_gn=0.31  clipped=0/91
+[exp08-v6] epoch    44/50  loss=0.0184  lr=1.30e-05  max_gn=0.36  clipped=0/91
+[exp08-v6] epoch    45/50  loss=0.0176  lr=9.05e-06  max_gn=0.32  clipped=0/91
+[exp08-v6] epoch    46/50  loss=0.0175  lr=5.81e-06  max_gn=0.40  clipped=0/91
+[exp08-v6] epoch    47/50  loss=0.0170  lr=3.28e-06  max_gn=0.28  clipped=0/91
+[exp08-v6] epoch    48/50  loss=0.0174  lr=1.46e-06  max_gn=0.22  clipped=0/91
+[exp08-v6] epoch    49/50  loss=0.0174  lr=3.65e-07  max_gn=0.20  clipped=0/91
+[exp08-v6] wrote /Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/v_theta_v6_unet_xl.pt  final_loss=0.0174  wall=4648.3s
+[02:43:41] [stage-1 v6_cfm_xl] DONE in 4650s -> /Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/v_theta_v6_unet_xl.pt
+[feat/flow-v3-karras 369ce75] exp08: v6_cfm_xl trained (4650 s on MPS) [overnight queue]
+ 23 files changed, 77219 insertions(+)
+ create mode 100644 experiments/08_flow_matching_prior/results/overnight_2026_05_24/sanity.txt
+ create mode 100644 experiments/08_flow_matching_prior/results/train_log_v3.json
+ create mode 100644 experiments/08_flow_matching_prior/results/train_log_v4_transformer.json
+ create mode 100644 experiments/08_flow_matching_prior/results/train_log_v4_unet.json
+ create mode 100644 experiments/08_flow_matching_prior/results/train_log_v5_unet_xl.json
+ create mode 100644 experiments/08_flow_matching_prior/results/train_v3.pid
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/eval.pid
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-0.0_K-10_R-0.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-0.0_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-1.0_K-10_R-0.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-1.0_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-5.0_K-10_R-0.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_flow_v3_lam-5.0_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_summary_flow_v3_K-10_R-0.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v3_eval_first/unified_summary_flow_v3_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_transformer_eval/unified_flow_v3_lam-1.0_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_transformer_eval/unified_summary_flow_v3_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_transformer_standalone/standalone.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_unet_eval/unified_flow_v3_lam-1.0_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_unet_eval/unified_summary_flow_v3_K-10_R-1.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_unet_standalone/standalone.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v4_unet_standalone_dp8/standalone_dp8.json
+ create mode 100644 experiments/08_flow_matching_prior/results/v_theta_v6_unet_xl.log.json
+[02:43:41] [git] commit: exp08: v6_cfm_xl trained (4650 s on MPS) [overnight queue]
+[02:43:41] [stage-1 v7_dp_tobs1_h120] STARTING  -> /Users/szh/Documents/SZH/Courseworks/ECE M237/Project/Hybrid-Robot-Trajectory-Generation/experiments/08_flow_matching_prior/results/v_theta_dp_tobs1_h120.pt
+Fatal Python error: init_sys_streams: can't initialize sys standard streams
+Python runtime state: core initialized
+OSError: [Errno 9] Bad file descriptor
+
+Current thread 0x0000000209dca240 (most recent call first):
+  <no Python frame>
